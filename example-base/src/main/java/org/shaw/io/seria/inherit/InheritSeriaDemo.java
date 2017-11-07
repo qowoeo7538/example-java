@@ -1,11 +1,18 @@
-package org.shaw.io.seria;
+package org.shaw.io.seria.inherit;
 
-import java.io.*;
+import org.shaw.io.seria.single.Car;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
- * Created by joy on 17-2-8.
+ * @create: 2017-11-07
+ * @description:
  */
-public class ObjectSeriaDome {
+public class InheritSeriaDemo {
+
     public static void main(String[] args) throws Exception {
         /*Student student = new Student("id4300","张三",22);
         objectSeria("/home/joy/桌面/object.dat",student);
@@ -44,44 +51,5 @@ public class ObjectSeriaDome {
         T obj = (T) objectInputStream.readObject();
         objectInputStream.close();
         return obj;
-    }
-}
-
-/*
- *   一个类实现了序列化接口，那么其子类都可以进行序列化
- */
-class Foo implements Serializable {
-    public Foo() {
-        System.out.println("foo...");
-    }
-}
-
-class Foo1 extends Foo {
-    public Foo1() {
-        System.out.println("foo1...");
-    }
-}
-
-class Foo2 extends Foo1 {
-    public Foo2() {
-        System.out.println("foo2...");
-    }
-}
-
-class Bar {
-    public Bar() {
-        System.out.println("bar");
-    }
-}
-
-class Bar1 extends Bar {
-    public Bar1() {
-        System.out.println("bar1..");
-    }
-}
-
-class Bar2 extends Bar1 implements Serializable {
-    public Bar2() {
-        System.out.println("bar2...");
     }
 }

@@ -1,4 +1,4 @@
-package org.shaw.io.seria;
+package org.shaw.io.seria.invalid;
 
 import java.io.Externalizable;
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class User implements Externalizable {
 
     private String passWord;
 
-    /*
+    /**
      * 读取对象时，会调用被序列化类的无参构造器去创建一个新的对象，
      * 然后再将被保存对象的字段的值分别填充到新对象中
      */

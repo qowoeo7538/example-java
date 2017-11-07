@@ -1,4 +1,4 @@
-package org.shaw.io.seria;
+package org.shaw.io.seria.single;
 
 import java.io.ObjectStreamException;
 import java.io.Serializable;
@@ -20,12 +20,12 @@ public class Car implements Serializable {
         this.tyre = tyre;
     }
 
-    private static class InstanceCar{
-        private static final Car instatnce = new Car("方向盘","轮胎");
+    private static class InstanceCar {
+        private static final Car INSTATNCE = new Car("方向盘", "轮胎");
     }
 
-    public static Car getCar(){
-        return InstanceCar.instatnce;
+    public static Car getCar() {
+        return InstanceCar.INSTATNCE;
     }
 
     @Override
@@ -36,8 +36,13 @@ public class Car implements Serializable {
                 '}';
     }
 
-    // 直接返回对象替代序列化对象
+    /**
+     * 直接返回对象替代序列化对象
+     *
+     * @return Object
+     * @throws ObjectStreamException
+     */
     private Object readResolve() throws ObjectStreamException {
-        return InstanceCar.instatnce;
+        return InstanceCar.INSTATNCE;
     }
 }

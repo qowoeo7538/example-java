@@ -3,7 +3,7 @@ package org.shaw.enums;
 /**
  * Created by joy on 17-6-11.
  */
-public class EnumDome {
+public class EnumDemo {
 
     public static void main(String[] args) {
         EnumSingleton spring = EnumSingleton.spring;
