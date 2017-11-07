@@ -1,7 +1,5 @@
 package org.shaw.thread.concurrent.countdownlatch;
 
-import org.springframework.util.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -20,7 +18,7 @@ public class ApplicationStartupUtil {
 
     public static boolean checkExternalServices() throws Exception {
         _latch = new CountDownLatch(3);
-        _service = new ArrayList<>(3);
+        _service = new ArrayList(3);
         _service.add(new NetworkHealthChecker("一号线程", _latch));
         _service.add(new NetworkHealthChecker("二号线程", _latch));
         _service.add(new NetworkHealthChecker("三号线程", _latch));

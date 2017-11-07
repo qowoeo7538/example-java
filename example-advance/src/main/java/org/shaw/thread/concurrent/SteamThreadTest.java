@@ -12,7 +12,7 @@ public class SteamThreadTest {
         listSteam();
     }
 
-    public static void listSteam(){
+    public static void listSteam() {
         List<String> list = new ArrayList<String>();
 
         list.add("cbc");
