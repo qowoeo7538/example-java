@@ -5,9 +5,9 @@ import sun.misc.Launcher;
 import java.net.URL;
 
 /**
- * Created by joy on 17-2-27.
+ *
  */
-public class BootStrapTest {
+public class BootStrapDemo {
     public static void main(String[] args) {
         URL[] urls = Launcher.getBootstrapClassPath().getURLs();
         for (int i = 0; i < urls.length; i++) {

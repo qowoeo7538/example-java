@@ -22,10 +22,14 @@ public class IOUtil {
      */
     public static byte[] getChartoBytes(char chars, String encode) {
         Charset cs = Charset.forName(encode);
-        CharBuffer cb = CharBuffer.allocate(1);  //分配缓冲区
-        cb.put(chars); //放入缓冲区
-        cb.flip();  //为一系列通道写入或相对获取 操作做好准备
-        ByteBuffer bb = cs.encode(cb); //将此 charset 中的字符串编码成字节的便捷方法。
+        //分配缓冲区
+        CharBuffer cb = CharBuffer.allocate(1);
+        //放入缓冲区
+        cb.put(chars);
+        //为一系列通道写入或相对获取 操作做好准备
+        cb.flip();
+        //将此 charset 中的字符串编码成字节的便捷方法。
+        ByteBuffer bb = cs.encode(cb);
         return bb.array();
     }
 
@@ -37,16 +41,18 @@ public class IOUtil {
         File file = new File(fileName);
         FileInputStream fileInputStream = new FileInputStream(file);
         FileChannel fileChannel = fileInputStream.getChannel();
-        return fileChannel.size();  // return file.length();
+        // return file.length();
+        return fileChannel.size();
     }
 
     /**
      * 计算文件的哈希值
+     *
      * @param file
-     * @param hashType  "MD5"，"SHA1","SHA-1"，"SHA-256"，"SHA-384"，"SHA-512"
+     * @param hashType "MD5"，"SHA1","SHA-1"，"SHA-256"，"SHA-384"，"SHA-512"
      * @return
      */
-    public static String getFileMD5(File file,String hashType) {
+    public static String getFileMD5(File file, String hashType) {
         if (!file.isFile()) {
             return null;
         }
