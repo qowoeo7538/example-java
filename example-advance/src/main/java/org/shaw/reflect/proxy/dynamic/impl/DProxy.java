@@ -1,23 +1,13 @@
-package org.shaw.reflect.proxy;
+package org.shaw.reflect.proxy.dynamic.impl;
 
 import javassist.*;
 import org.aopalliance.intercept.Interceptor;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 /**
- * 基于Javassist动态生成字节码实现简单的动态代理
+ * @create: 2017-11-08
+ * @description:
  */
-public class ClassLoadProxy {
-    public static void main(String[] args) {
-        clazz c = new clazz();
-        Interface inf = (Interface) DProxy.createProxy(clazz.class, new MyInterceptor(c));
-        inf.Action(123);
-    }
-}
-
-class DProxy {
+public class DProxy {
     /**
      * 动态生成的代理类名前缀
      * prefix name for Proxy
@@ -120,39 +110,5 @@ class DProxy {
         } catch (NotFoundException e) {
             e.printStackTrace();
         }
-    }
-}
-
-interface Interface {
-    void Action(int a);
-}
-
-class clazz implements Interface {
-    public void Action(int a) {
-        System.out.println("do Action" + a);
-    }
-}
-
-class MyInterceptor implements Interceptor {
-
-    Object proxyed;
-
-    public MyInterceptor(Object i) {
-        proxyed = i;
-    }
-
-    public int intercept(Object instance, Method method, Object[] Args) {
-        try {
-            System.out.println("before action");
-            method.invoke(this.proxyed, Args);
-            System.out.println("after action");
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        return 0;
     }
 }
