@@ -1,4 +1,4 @@
-package org.shaw.load.clazz;
+package org.shaw.load.clazz.impl;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

@@ -1,5 +1,7 @@
 package org.shaw.load.clazz;
 
+import org.shaw.load.clazz.impl.MyClassLoader;
+
 /**
  * class loader 是一个负责加载 classes 的对象
  * ClassLoader 类是一个抽象类，需要给出类的二进制名称，class loader 尝试定位或者产生一个 class 的数据,一个典型的策略是把二进制名字转换成文件名然后到文件系统中找到该文件。
@@ -23,7 +25,7 @@ public class ClassLoaderDemo {
         classLoaderRelation();
 
         // 使用ClassLoaderTest的类加载器加载本类
-        Object obj1 = ClassLoaderDemo.class.getClassLoader().loadClass("com.myweb.reflect.classloader.ClassLoaderTest").newInstance();
+        Object obj1 = ClassLoaderDemo.class.getClassLoader().loadClass("org.shaw.load.clazz.ClassLoaderDemo").newInstance();
         System.out.println("默认类加载器：" + obj1.getClass().getClassLoader());
 
         // 自定义类加载器加载
