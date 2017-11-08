@@ -1,6 +1,5 @@
 package org.shaw.util.file.impl;
 
-import org.shaw.io.IOUtil;
 import org.shaw.util.exception.Exceptions;
 
 import java.io.RandomAccessFile;
