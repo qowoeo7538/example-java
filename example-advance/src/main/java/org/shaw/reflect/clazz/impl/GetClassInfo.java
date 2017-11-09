@@ -11,6 +11,13 @@ import java.lang.reflect.Modifier;
  */
 public class GetClassInfo {
 
+    /**
+     * 内部类
+     */
+    public static class GetClassInfoInternal {
+        public static final String FQCN = GetClassInfoInternal.class.getName();
+    }
+
     public void classType() {
         //String的类类型 ===>String类的字节码;
         Class StringClass = String.class;
