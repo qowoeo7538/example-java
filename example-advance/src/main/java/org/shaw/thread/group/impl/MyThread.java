@@ -1,4 +1,4 @@
-package org.shaw.thread.threadgroup.impl;
+package org.shaw.thread.group.impl;
 
 /**
  * @create: 2017-11-08

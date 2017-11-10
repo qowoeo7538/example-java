@@ -1,6 +1,6 @@
-package org.shaw.thread.threadgroup;
+package org.shaw.thread.group;
 
-import org.shaw.thread.threadgroup.impl.MyThread;
+import org.shaw.thread.group.impl.MyThread;
 
 /**
  * 线程组

@@ -9,6 +9,6 @@ public class GetClazzInfoDemo {
 
     public static void main(String[] args) throws Exception {
         System.out.println(GetClassInfo.GetClassInfoInternal.FQCN);
-        GetClassInfo.printClassMethodMessage("sssssssssss");
+        GetClassInfo.printClassMethodMessage(new GetClassInfo());
     }
 }

@@ -24,13 +24,13 @@ public class ClassLoaderDemo {
         // 验证类加载器与类加载器间的父子关系
         classLoaderRelation();
 
-        // 使用ClassLoaderTest的类加载器加载本类
-        Object obj1 = ClassLoaderDemo.class.getClassLoader().loadClass("org.shaw.load.clazz.ClassLoaderDemo").newInstance();
+        // 使用MyClassLoader的类加载器加载本类(默认加载器:sun.misc.Launcher$AppClassLoader)
+        Object obj1 = ClassLoaderDemo.class.getClassLoader().loadClass("org.shaw.load.clazz.impl.MyClassLoader").newInstance();
         System.out.println("默认类加载器：" + obj1.getClass().getClassLoader());
 
         // 自定义类加载器加载
-        MyClassLoader myClassLoader = new MyClassLoader("/home/joy/桌面/");
-        Class<?> c = Class.forName("com.myweb.annotation.User", true, myClassLoader);
+        MyClassLoader myClassLoader = new MyClassLoader("C:\\Users\\john\\Desktop\\");
+        Class<?> c = Class.forName("org.shaw.annotation.User", true, myClassLoader);
         Object object = c.newInstance();
         System.out.println(object.getClass());
         System.out.println(object.getClass().getClassLoader());
