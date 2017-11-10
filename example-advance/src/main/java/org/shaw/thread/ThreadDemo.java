@@ -78,6 +78,7 @@ class ArmyRunnable implements Runnable {
     //该变量在不变式中有其它volatile变量不能使用。
     volatile boolean keepRunning = true; //每次写这个变量时会将该变量工作内存的值写入主内存中。读取时，会将主内存中的变量读取到工作内存中
 
+    @Override
     public void run() {
         while (keepRunning) {
             for (int i = 1; i <= 5; i++) {

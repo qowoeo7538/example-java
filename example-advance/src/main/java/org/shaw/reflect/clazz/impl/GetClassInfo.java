@@ -18,6 +18,18 @@ public class GetClassInfo {
         public static final String FQCN = GetClassInfoInternal.class.getName();
     }
 
+    public static String getShortName(Class<?> clzz) {
+        String className = clzz.getTypeName();
+        int lastDotIndex = className.lastIndexOf('.');
+        int nameEndIndex = className.indexOf("$$");
+        if (nameEndIndex == -1) {
+            nameEndIndex = className.length();
+        }
+        String shortName = className.substring(lastDotIndex + 1, nameEndIndex);
+        shortName = shortName.replace('$', '.');
+        return shortName;
+    }
+
     public void classType() {
         //String的类类型 ===>String类的字节码;
         Class StringClass = String.class;
