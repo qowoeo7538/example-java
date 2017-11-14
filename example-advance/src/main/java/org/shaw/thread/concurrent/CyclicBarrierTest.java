@@ -31,6 +31,7 @@ class BarrierThread implements Runnable{
         this.cyclicBarrier = cyclicBarrier;
     }
 
+    @Override
     public void run() {
         try {
             Thread.currentThread().setName(name);
