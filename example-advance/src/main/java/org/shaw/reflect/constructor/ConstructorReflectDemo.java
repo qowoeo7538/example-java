@@ -1,5 +1,7 @@
 package org.shaw.reflect.constructor;
 
+import org.shaw.reflect.constructor.impl.ConstructorReflectClass;
+
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.List;
  */
 public class ConstructorReflectDemo {
     public static void main(String[] args) throws Exception {
-        Class constructorReflectClass = Class.forName("com.myweb.reflect.ConstructorReflectClass");
+        Class constructorReflectClass = Class.forName("org.shaw.reflect.constructor.impl.ConstructorReflectClass");
 
         /**
          *  调用无参构造函数创建对象

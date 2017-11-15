@@ -1,6 +1,9 @@
 package org.shaw.pattern.observer.method1;
 
 
+import org.shaw.pattern.observer.method1.impl.Watched;
+import org.shaw.pattern.observer.method1.impl.Watcher;
+
 /**
  * <p>
  * 推模型是假定主题对象知道观察者需要的数据；
