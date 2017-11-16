@@ -5,18 +5,19 @@ import org.shaw.thread.concurrent.cyclicbarrier.impl.PriorThread;
 import org.shaw.util.DefaultThreadFactory;
 
 import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.ExecutorService;
 
 /**
- * @create: 2017-11-15
- * @description: CyclicBarrier可以用于多线程计算数据，最后合并计算结果的应用场景。
+ * CyclicBarrier可以用于多线程计算数据，
+ * 最后合并计算结果的应用场景。
  */
 public class CyclicBarrierDemo {
+
+    private final static int COUNT = 3;
+
     public static void main(String[] args) {
-        CyclicBarrier cyclicBarrier = new CyclicBarrier(3, new PriorThread());
-        ExecutorService service = DefaultThreadFactory.getThreadPoolExecutor();
-        for (int i = 0; i < 3; i++) {
-            service.execute(new BarrierThread("线程" + (i + 1), cyclicBarrier));
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(COUNT, new PriorThread());
+        for (int i = 0; i < COUNT; i++) {
+            DefaultThreadFactory.securityExecute(new BarrierThread("线程" + (i + 1), cyclicBarrier));
         }
         DefaultThreadFactory.destroy();
     }

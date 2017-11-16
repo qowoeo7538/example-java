@@ -1,16 +1,16 @@
 package org.shaw.util;
 
-import org.shaw.util.Assert;
+import org.shaw.base.thread.SecurityTask;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @create: 2017-11-06
  * @description: 线程池
  */
 public class DefaultThreadFactory {
-
     /**
      * 核心线程池大小
      * <p>
@@ -34,6 +34,11 @@ public class DefaultThreadFactory {
      */
     private static int queueCapacity = 15;
 
+    /**
+     * 需要安全关闭的线程数量
+     */
+    private static AtomicInteger latch = new AtomicInteger(0);
+
     private static ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
 
     static {
@@ -50,6 +55,22 @@ public class DefaultThreadFactory {
 
     public static void destroy() {
         Assert.state(threadPoolTaskExecutor != null, "线程池没有初始化");
+        while (latch.get() != 0) {
+            Thread.yield();
+        }
         threadPoolTaskExecutor.destroy();
+    }
+
+    public static void execute(Runnable task) {
+        threadPoolTaskExecutor.execute(task);
+    }
+
+    public static void securityExecute(SecurityTask securityTask) {
+        latch.getAndIncrement();
+        threadPoolTaskExecutor.execute(securityTask);
+    }
+
+    public static void latchDecrement() {
+        latch.getAndDecrement();
     }
 }
