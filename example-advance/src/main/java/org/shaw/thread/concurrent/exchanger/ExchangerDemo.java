@@ -15,13 +15,11 @@ public class ExchangerDemo {
     public static Boolean isDone = false;
 
     public static void main(String[] args) {
-        ExecutorService executorService = DefaultThreadFactory.getThreadPoolExecutor();
         Exchanger<Integer> exchanger = new Exchanger<>();
         ExchangerProducer exchangerProducer = new ExchangerProducer(exchanger, isDone);
         ExchangerConsumer exchangerConsumer = new ExchangerConsumer(exchanger, isDone);
-
-        executorService.execute(exchangerProducer);
-        executorService.execute(exchangerConsumer);
+        DefaultThreadFactory.securityExecute(exchangerProducer);
+        DefaultThreadFactory.securityExecute(exchangerConsumer);
         DefaultThreadFactory.destroy();
     }
 }

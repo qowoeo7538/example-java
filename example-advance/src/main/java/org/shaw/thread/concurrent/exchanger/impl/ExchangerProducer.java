@@ -1,5 +1,7 @@
 package org.shaw.thread.concurrent.exchanger.impl;
 
+import org.shaw.base.thread.SecurityTask;
+
 import java.util.concurrent.Exchanger;
 import java.util.concurrent.TimeUnit;
 
@@ -7,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  * @create: 2017-11-16
  * @description:
  */
-public class ExchangerProducer implements Runnable {
+public class ExchangerProducer extends SecurityTask {
 
     private volatile boolean isDone;
 
@@ -21,7 +23,7 @@ public class ExchangerProducer implements Runnable {
     }
 
     @Override
-    public void run() {
+    protected void runTask() {
         while (!Thread.interrupted() && !isDone) {
             for (int i = 1; i <= 3; i++) {
                 try {

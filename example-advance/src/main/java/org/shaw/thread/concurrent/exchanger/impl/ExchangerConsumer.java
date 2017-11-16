@@ -1,5 +1,7 @@
 package org.shaw.thread.concurrent.exchanger.impl;
 
+import org.shaw.base.thread.SecurityTask;
+
 import java.util.concurrent.Exchanger;
 import java.util.concurrent.TimeUnit;
 
@@ -7,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  * @create: 2017-11-16
  * @description:
  */
-public class ExchangerConsumer implements Runnable {
+public class ExchangerConsumer extends SecurityTask {
 
     private Exchanger<Integer> exchanger;
 
@@ -21,7 +23,7 @@ public class ExchangerConsumer implements Runnable {
     }
 
     @Override
-    public void run() {
+    protected void runTask() {
         while (!Thread.interrupted() && !isDone) {
             data = 0;
             System.out.println("consumer change before : " + data);
@@ -34,4 +36,6 @@ public class ExchangerConsumer implements Runnable {
             }
         }
     }
+
+
 }
