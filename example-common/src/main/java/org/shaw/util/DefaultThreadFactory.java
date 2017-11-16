@@ -1,4 +1,4 @@
-package org.shaw.util.thread;
+package org.shaw.util;
 
 import org.shaw.util.Assert;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -48,7 +48,7 @@ public class DefaultThreadFactory {
         return threadPoolTaskExecutor.getThreadPoolExecutor();
     }
 
-    public static void destroyExecutor() {
+    public static void destroy() {
         Assert.state(threadPoolTaskExecutor != null, "线程池没有初始化");
         threadPoolTaskExecutor.destroy();
     }

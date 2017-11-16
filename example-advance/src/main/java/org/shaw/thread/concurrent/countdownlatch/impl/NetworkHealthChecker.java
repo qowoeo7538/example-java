@@ -1,7 +1,8 @@
 package org.shaw.thread.concurrent.countdownlatch.impl;
 
-import org.shaw.thread.concurrent.countdownlatch.impl.BaseHealthChecker;
+import org.shaw.util.DataProducer;
 
+import java.util.Date;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -16,12 +17,12 @@ public class NetworkHealthChecker extends BaseHealthChecker {
 
     @Override
     public void verifyService() {
-        System.out.println(getserviceName() + "准备！");
+        System.out.println(getserviceName() + "时间:" + new Date() + "准备！");
         try {
-            Thread.sleep((int) Math.random() * 10000);
+            Thread.sleep(DataProducer.nextInt(1000, 10000));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(getserviceName() + "完成！");
+        System.out.println(getserviceName() + "时间:" + new Date() + "完成！");
     }
 }

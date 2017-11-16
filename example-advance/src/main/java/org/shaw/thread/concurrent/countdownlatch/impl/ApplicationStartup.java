@@ -1,6 +1,6 @@
 package org.shaw.thread.concurrent.countdownlatch.impl;
 
-import org.shaw.util.thread.DefaultThreadFactory;
+import org.shaw.util.DefaultThreadFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class ApplicationStartup {
             executor.execute(task);
         }
         latch.await();
-        DefaultThreadFactory.destroyExecutor();
+        DefaultThreadFactory.destroy();
         for (final BaseHealthChecker v : service) {
             if (!v.isServiceUp()) {
                 return false;

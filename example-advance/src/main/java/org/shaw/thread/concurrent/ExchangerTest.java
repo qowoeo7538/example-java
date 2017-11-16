@@ -6,7 +6,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by joy on 17-2-24.
+ *
  */
 public class ExchangerTest {
     private static volatile boolean _isDone = false;

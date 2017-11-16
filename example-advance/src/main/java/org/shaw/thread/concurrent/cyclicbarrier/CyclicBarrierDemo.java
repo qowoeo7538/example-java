@@ -2,7 +2,7 @@ package org.shaw.thread.concurrent.cyclicbarrier;
 
 import org.shaw.thread.concurrent.cyclicbarrier.impl.BarrierThread;
 import org.shaw.thread.concurrent.cyclicbarrier.impl.PriorThread;
-import org.shaw.util.thread.DefaultThreadFactory;
+import org.shaw.util.DefaultThreadFactory;
 
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
@@ -18,6 +18,6 @@ public class CyclicBarrierDemo {
         for (int i = 0; i < 3; i++) {
             service.execute(new BarrierThread("线程" + (i + 1), cyclicBarrier));
         }
-        DefaultThreadFactory.destroyExecutor();
+        DefaultThreadFactory.destroy();
     }
 }
