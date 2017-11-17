@@ -1,43 +1,28 @@
-package org.shaw.thread.concurrent;
+package org.shaw.thread.concurrent.exchanger.impl;
+
+import org.shaw.base.thread.SecurityTask;
 
 import java.util.concurrent.Exchanger;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
+ * @create: 2017-11-17
+ * @description:
  */
-public class ExchangerTest {
+public class ExchangerImpl {
+
     private static volatile boolean _isDone = false;
 
-    public static void main(String[] args) {
-        ExecutorService executorService = Executors.newCachedThreadPool();
-        Exchanger<Integer> exchanger = new Exchanger<Integer>();
-        ExchangerProducer exchangerProducer = new ExchangerProducer(exchanger);
-        ExchangerConsumer exchangerConsumer = new ExchangerConsumer(exchanger);
-
-        executorService.execute(exchangerProducer);
-        executorService.execute(exchangerConsumer);
-        executorService.shutdown();
-        try {
-            executorService.awaitTermination(30, TimeUnit.SECONDS);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    static class ExchangerProducer implements Runnable {
+    public class ExchangerProducer extends SecurityTask {
         private Exchanger<Integer> exchanger;
-        private static int data = 1;
+        private int data = 1;
 
-        ExchangerProducer(Exchanger<Integer> exchanger) {
+        public ExchangerProducer(Exchanger<Integer> exchanger) {
             this.exchanger = exchanger;
         }
 
         @Override
-        public void run() {
+        protected void runTask() {
             while (!Thread.interrupted() && !_isDone) {
                 for (int i = 1; i <= 3; i++) {
                     try {
@@ -55,16 +40,17 @@ public class ExchangerTest {
         }
     }
 
-    static class ExchangerConsumer implements Runnable {
+    public class ExchangerConsumer extends SecurityTask {
         private Exchanger<Integer> exchanger;
-        private static int data = 0;
+        private int data = 0;
 
-        ExchangerConsumer(Exchanger<Integer> exchanger) {
+        public ExchangerConsumer(Exchanger<Integer> exchanger) {
             this.exchanger = exchanger;
         }
 
+
         @Override
-        public void run() {
+        protected void runTask() {
             while (!Thread.interrupted() && !_isDone) {
                 data = 0;
                 System.out.println("consumer change before : " + data);
@@ -79,4 +65,3 @@ public class ExchangerTest {
         }
     }
 }
-
