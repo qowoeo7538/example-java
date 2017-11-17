@@ -1,4 +1,4 @@
-package org.shaw.util.thread.impl;
+package org.shaw.base.thread;
 
 import org.shaw.util.thread.DefaultThreadFactory;
 

@@ -1,6 +1,6 @@
 package org.shaw.thread.concurrent.cyclicbarrier.impl;
 
-import org.shaw.util.thread.impl.SecurityTask;
+import org.shaw.base.thread.SecurityTask;
 import org.shaw.util.DataProducer;
 
 import java.util.concurrent.CyclicBarrier;

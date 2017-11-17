@@ -1,6 +1,6 @@
 package org.shaw.util.thread;
 
-import org.shaw.util.thread.impl.SecurityTask;
+import org.shaw.base.thread.SecurityTask;
 import org.shaw.util.Assert;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
