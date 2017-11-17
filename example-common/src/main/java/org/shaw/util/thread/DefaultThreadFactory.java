@@ -1,9 +1,10 @@
-package org.shaw.util;
+package org.shaw.util.thread;
 
-import org.shaw.base.thread.SecurityTask;
+import org.shaw.util.thread.impl.SecurityTask;
+import org.shaw.util.Assert;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -40,6 +41,8 @@ public class DefaultThreadFactory {
     private static AtomicInteger latch = new AtomicInteger(0);
 
     private static ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
+
+    private static ScheduledThreadPoolExecutor scheduledThreadPoolExecutor;
 
     static {
         threadPoolTaskExecutor.setCorePoolSize(corePoolSize);

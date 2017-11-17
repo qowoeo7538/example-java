@@ -1,6 +1,6 @@
 package org.shaw.thread.concurrent.exchanger.impl;
 
-import org.shaw.base.thread.SecurityTask;
+import org.shaw.util.thread.impl.SecurityTask;
 
 import java.util.concurrent.Exchanger;
 import java.util.concurrent.TimeUnit;

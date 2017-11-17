@@ -1,7 +1,7 @@
 package org.shaw.thread.concurrent.exchanger;
 
 import org.shaw.thread.concurrent.exchanger.impl.ExchangerImpl;
-import org.shaw.util.DefaultThreadFactory;
+import org.shaw.util.thread.DefaultThreadFactory;
 
 import java.util.concurrent.Exchanger;
 

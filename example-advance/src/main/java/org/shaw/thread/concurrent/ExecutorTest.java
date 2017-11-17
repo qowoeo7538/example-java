@@ -20,12 +20,13 @@ public class ExecutorTest {
     public static void scheduledTest() {
         ScheduledThreadPoolExecutor service = (ScheduledThreadPoolExecutor) Executors.newScheduledThreadPool(1);
         for (int i = 0; i < 5; i++) {
-            service.schedule(new Task(1,100),i,TimeUnit.SECONDS);
+            service.schedule(new Task(1, 100), i, TimeUnit.SECONDS);
         }
         service.shutdown();
         try {
-            service.awaitTermination(30,TimeUnit.SECONDS);
-        }catch (Exception e){ }
+            service.awaitTermination(30, TimeUnit.SECONDS);
+        } catch (Exception e) {
+        }
     }
 
     /**
@@ -56,8 +57,9 @@ public class ExecutorTest {
             this.end = end;
         }
 
+        @Override
         public Integer call() throws Exception {
-            System.out.println(new  Date());
+            System.out.println(new Date());
             int returnData = 0;
             for (int i = start; i < end; i++) {
                 returnData += i;

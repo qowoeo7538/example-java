@@ -1,6 +1,8 @@
 package org.shaw.thread.concurrent.queue.blocking.impl;
 
-import java.util.Random;
+import org.shaw.util.thread.impl.SecurityTask;
+import org.shaw.util.DataProducer;
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -9,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @create: 2017-11-10
  * @description: 模拟生产者
  */
-public class Producer implements Runnable {
+public class Producer extends SecurityTask {
 
     /**
      * 控制线程是否停止
@@ -18,8 +20,6 @@ public class Producer implements Runnable {
 
     private static AtomicInteger count = new AtomicInteger();
 
-    private static final int DEFAULT_RANGE_FOR_SLEEP = 1000;
-
     private BlockingQueue<String> queue;
 
     public Producer(BlockingQueue<String> queue) {
@@ -27,15 +27,14 @@ public class Producer implements Runnable {
     }
 
     @Override
-    public void run() {
+    protected void runTask() {
         String data;
-        Random random = new Random();
         System.out.println("启动生产者线程！");
         while (isRunning) {
             System.out.println("正在生产数据...");
             try {
                 // 随机睡眠时间
-                Thread.sleep(random.nextInt(DEFAULT_RANGE_FOR_SLEEP));
+                Thread.sleep(DataProducer.nextInt(1000));
                 data = "data:" + count.incrementAndGet();
                 System.out.println("将数据：" + data + "放入队列...");
 

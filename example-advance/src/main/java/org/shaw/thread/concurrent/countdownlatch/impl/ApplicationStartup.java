@@ -1,6 +1,6 @@
 package org.shaw.thread.concurrent.countdownlatch.impl;
 
-import org.shaw.util.DefaultThreadFactory;
+import org.shaw.util.thread.DefaultThreadFactory;
 
 import java.util.ArrayList;
 import java.util.List;

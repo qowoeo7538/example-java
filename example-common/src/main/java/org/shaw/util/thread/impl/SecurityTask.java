@@ -1,6 +1,6 @@
-package org.shaw.base.thread;
+package org.shaw.util.thread.impl;
 
-import org.shaw.util.DefaultThreadFactory;
+import org.shaw.util.thread.DefaultThreadFactory;
 
 /**
  * 使用该类实现线程任务,保证线程池关闭时等待该线程正常关闭

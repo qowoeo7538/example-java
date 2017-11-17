@@ -2,8 +2,10 @@ package org.shaw.thread.concurrent.queue.blocking;
 
 import org.shaw.thread.concurrent.queue.blocking.impl.Consumer;
 import org.shaw.thread.concurrent.queue.blocking.impl.Producer;
+import org.shaw.util.thread.DefaultThreadFactory;
 
-import java.util.concurrent.*;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * 阻塞队列
@@ -16,19 +18,14 @@ public class BlockingQueueDemo {
     public static void main(String[] args) {
         // 声明一个容量为10的缓存队列
         BlockingQueue<String> queue = new LinkedBlockingQueue<>(10);
-
         Producer producer1 = new Producer(queue);
         Producer producer2 = new Producer(queue);
         Producer producer3 = new Producer(queue);
         Consumer consumer = new Consumer(queue);
-
-        // 借助Executors
-        ExecutorService service = Executors.newCachedThreadPool();
-        // 启动线程
-        service.execute(producer1);
-        service.execute(producer2);
-        service.execute(producer3);
-        service.execute(consumer);
+        DefaultThreadFactory.securityExecute(producer1);
+        DefaultThreadFactory.securityExecute(producer2);
+        DefaultThreadFactory.securityExecute(producer3);
+        DefaultThreadFactory.securityExecute(consumer);
         try {
             // 执行10s
             Thread.sleep(10 * 1000);
@@ -40,14 +37,7 @@ public class BlockingQueueDemo {
             e.printStackTrace();
             Thread.currentThread().interrupt();
         } finally {
-            // 退出Executor
-            service.shutdown();
-            try {
-                service.awaitTermination(2, TimeUnit.SECONDS);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                Thread.currentThread().interrupt();
-            }
+            DefaultThreadFactory.destroy();
         }
     }
 }
