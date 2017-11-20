@@ -4,7 +4,8 @@ import org.shaw.base.thread.SecurityTask;
 import org.shaw.util.Assert;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import java.util.concurrent.*;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -19,6 +20,8 @@ public class DefaultThreadFactory {
      * 即使此时线程池中存在空闲线程。
      * <p>
      * 当线程池达到corePoolSize时，新提交任务将被放入任务队列中.
+     *
+     * @see ThreadPoolTaskExecutor#corePoolSize
      */
     private static int corePoolSize = 10;
 
@@ -27,17 +30,19 @@ public class DefaultThreadFactory {
      * <p>
      * 如果任务队列已满,将创建最大线程池的数量执行任务,如果超出最大线程池的大小,
      * 将提交给RejectedExecutionHandler处理
+     *
+     * @see ThreadPoolTaskExecutor#maxPoolSize
      */
     private static int maxPoolSize = 10;
 
     /**
      * 阻塞任务队列容量(默认为int的最大值)
+     *
+     * @see ThreadPoolTaskExecutor#queueCapacity
      */
     private static int queueCapacity = 15;
 
-    /**
-     * 需要安全关闭的线程数量
-     */
+    /** 需要安全关闭的线程数量 */
     private static AtomicInteger latch = new AtomicInteger(0);
 
     private static ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
@@ -75,5 +80,23 @@ public class DefaultThreadFactory {
 
     public static void latchDecrement() {
         latch.getAndDecrement();
+    }
+
+    private class ThreadFactoryRunnable implements Runnable {
+
+        private final Runnable target;
+
+        ThreadFactoryRunnable(Runnable target) {
+            this.target = target;
+        }
+
+        @Override
+        public void run() {
+            try {
+                target.run();
+            } finally {
+                DefaultThreadFactory.latchDecrement();
+            }
+        }
     }
 }
