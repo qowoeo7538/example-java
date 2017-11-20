@@ -4,7 +4,6 @@ import org.shaw.base.thread.SecurityTask;
 import org.shaw.util.Assert;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -45,9 +44,8 @@ public class DefaultThreadFactory {
     /** 需要安全关闭的线程数量 */
     private static AtomicInteger latch = new AtomicInteger(0);
 
+    /** 线程池对象 */
     private static ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
-
-    private static ScheduledThreadPoolExecutor scheduledThreadPoolExecutor;
 
     static {
         threadPoolTaskExecutor.setCorePoolSize(corePoolSize);
@@ -70,33 +68,17 @@ public class DefaultThreadFactory {
     }
 
     public static void execute(Runnable task) {
-        threadPoolTaskExecutor.execute(task);
-    }
-
-    public static void securityExecute(SecurityTask securityTask) {
         latch.getAndIncrement();
-        threadPoolTaskExecutor.execute(securityTask);
+        threadPoolTaskExecutor.execute(new SecurityTask(task));
     }
 
+    /**
+     * 实际线程递减
+     *
+     * @see #latch
+     */
     public static void latchDecrement() {
         latch.getAndDecrement();
     }
 
-    private class ThreadFactoryRunnable implements Runnable {
-
-        private final Runnable target;
-
-        ThreadFactoryRunnable(Runnable target) {
-            this.target = target;
-        }
-
-        @Override
-        public void run() {
-            try {
-                target.run();
-            } finally {
-                DefaultThreadFactory.latchDecrement();
-            }
-        }
-    }
 }
