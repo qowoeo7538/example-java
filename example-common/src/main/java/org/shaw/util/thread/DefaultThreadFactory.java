@@ -1,11 +1,11 @@
 package org.shaw.util.thread;
 
-import org.shaw.base.thread.SecurityTask;
 import org.shaw.util.Assert;
+import org.shaw.util.thread.impl.SecurityTask;
+import org.shaw.util.thread.impl.ThrottleSupport;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @create: 2017-11-06
@@ -35,18 +35,21 @@ public class DefaultThreadFactory {
     private static int maxPoolSize = 10;
 
     /**
+     * 线程处理控制
+     */
+    private static ThrottleSupport throttleSupport = new ThrottleSupport();
+
+    /**
      * 阻塞任务队列容量(默认为int的最大值)
      *
      * @see ThreadPoolTaskExecutor#queueCapacity
      */
     private static int queueCapacity = 15;
 
-    /** 需要安全关闭的线程数量 */
-    private static AtomicInteger latch = new AtomicInteger(0);
-
     /** 线程池对象 */
     private static ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
 
+    // 初始化线程对象
     static {
         threadPoolTaskExecutor.setCorePoolSize(corePoolSize);
         threadPoolTaskExecutor.setMaxPoolSize(maxPoolSize);
@@ -54,31 +57,20 @@ public class DefaultThreadFactory {
         threadPoolTaskExecutor.initialize();
     }
 
-    public static ThreadPoolExecutor getThreadPoolExecutor() throws IllegalStateException {
-        Assert.state(threadPoolTaskExecutor != null, "线程池没有初始化");
-        return threadPoolTaskExecutor.getThreadPoolExecutor();
-    }
-
     public static void destroy() {
         Assert.state(threadPoolTaskExecutor != null, "线程池没有初始化");
-        while (latch.get() != 0) {
-            Thread.yield();
-        }
+        throttleSupport.awaitFinish();
         threadPoolTaskExecutor.destroy();
     }
 
     public static void execute(Runnable task) {
-        latch.getAndIncrement();
-        threadPoolTaskExecutor.execute(new SecurityTask(task));
+        Assert.state(threadPoolTaskExecutor != null, "线程池没有初始化");
+        throttleSupport.beforeAccess();
+        threadPoolTaskExecutor.execute(new SecurityTask(task, throttleSupport));
     }
 
-    /**
-     * 实际线程递减
-     *
-     * @see #latch
-     */
-    public static void latchDecrement() {
-        latch.getAndDecrement();
+    public static ThreadPoolExecutor getThreadPoolExecutor() throws IllegalStateException {
+        Assert.state(threadPoolTaskExecutor != null, "线程池没有初始化");
+        return threadPoolTaskExecutor.getThreadPoolExecutor();
     }
-
 }

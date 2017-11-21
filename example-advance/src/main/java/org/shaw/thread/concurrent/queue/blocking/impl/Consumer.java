@@ -1,7 +1,5 @@
 package org.shaw.thread.concurrent.queue.blocking.impl;
 
-import org.shaw.base.thread.SecurityTask;
-
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -10,7 +8,7 @@ import java.util.concurrent.TimeUnit;
  * @create: 2017-11-10
  * @description: 模拟消费端
  */
-public class Consumer extends SecurityTask {
+public class Consumer implements Runnable {
 
     private static final int DEFAULT_RANGE_FOR_SLEEP = 1000;
 
@@ -21,11 +19,10 @@ public class Consumer extends SecurityTask {
     }
 
     @Override
-    protected void runTask() {
+    public void run() {
         System.out.println("启动消费者线程！");
         Random random = new Random();
         boolean isRunning = true;
-
         while (isRunning) {
             try {
                 System.out.println("正从队列获取数据...");

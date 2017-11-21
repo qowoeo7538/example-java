@@ -15,8 +15,8 @@ public class ExchangerDemo {
         ExchangerImpl.ExchangerProducer exchangerProducer = new ExchangerImpl().new ExchangerProducer(exchanger);
         ExchangerImpl.ExchangerConsumer exchangerConsumer = new ExchangerImpl().new ExchangerConsumer(exchanger);
 
-        DefaultThreadFactory.securityExecute(exchangerProducer);
-        DefaultThreadFactory.securityExecute(exchangerConsumer);
+        DefaultThreadFactory.execute(exchangerProducer);
+        DefaultThreadFactory.execute(exchangerConsumer);
         DefaultThreadFactory.destroy();
     }
 }

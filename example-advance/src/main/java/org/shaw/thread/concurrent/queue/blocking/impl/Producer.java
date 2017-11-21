@@ -1,6 +1,5 @@
 package org.shaw.thread.concurrent.queue.blocking.impl;
 
-import org.shaw.base.thread.SecurityTask;
 import org.shaw.util.DataProducer;
 
 import java.util.concurrent.BlockingQueue;
@@ -11,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @create: 2017-11-10
  * @description: 模拟生产者
  */
-public class Producer extends SecurityTask {
+public class Producer implements Runnable {
 
     /**
      * 控制线程是否停止
@@ -27,7 +26,7 @@ public class Producer extends SecurityTask {
     }
 
     @Override
-    protected void runTask() {
+    public void run() {
         String data;
         System.out.println("启动生产者线程！");
         while (isRunning) {

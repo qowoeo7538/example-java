@@ -1,7 +1,5 @@
 package org.shaw.thread.concurrent.exchanger.impl;
 
-import org.shaw.base.thread.SecurityTask;
-
 import java.util.concurrent.Exchanger;
 import java.util.concurrent.TimeUnit;
 
@@ -13,7 +11,7 @@ public class ExchangerImpl {
 
     private static volatile boolean _isDone = false;
 
-    public class ExchangerProducer extends SecurityTask {
+    public class ExchangerProducer implements Runnable {
         private Exchanger<Integer> exchanger;
         private int data = 1;
 
@@ -22,7 +20,7 @@ public class ExchangerImpl {
         }
 
         @Override
-        protected void runTask() {
+        public void run() {
             while (!Thread.interrupted() && !_isDone) {
                 for (int i = 1; i <= 3; i++) {
                     try {
@@ -40,7 +38,7 @@ public class ExchangerImpl {
         }
     }
 
-    public class ExchangerConsumer extends SecurityTask {
+    public class ExchangerConsumer implements Runnable {
         private Exchanger<Integer> exchanger;
         private int data = 0;
 
@@ -48,9 +46,8 @@ public class ExchangerImpl {
             this.exchanger = exchanger;
         }
 
-
         @Override
-        protected void runTask() {
+        public void run() {
             while (!Thread.interrupted() && !_isDone) {
                 data = 0;
                 System.out.println("consumer change before : " + data);

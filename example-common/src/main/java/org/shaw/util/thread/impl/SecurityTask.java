@@ -1,6 +1,4 @@
-package org.shaw.base.thread;
-
-import org.shaw.util.thread.DefaultThreadFactory;
+package org.shaw.util.thread.impl;
 
 /**
  * 使用该类实现线程任务,保证线程池关闭时等待该线程正常关闭
@@ -12,16 +10,22 @@ public class SecurityTask implements Runnable {
 
     private final Runnable target;
 
-    public SecurityTask(Runnable target) {
+    private ThrottleSupport throttleSupport;
+
+    public SecurityTask(Runnable target, ThrottleSupport throttleSupport) {
         this.target = target;
+        this.throttleSupport = throttleSupport;
     }
 
+    /**
+     * 结束后通过{@link ThrottleSupport#afterAccess()}减少运行线程
+     */
     @Override
     public void run() {
         try {
             target.run();
         } finally {
-            DefaultThreadFactory.latchDecrement();
+            throttleSupport.afterAccess();
         }
     }
 

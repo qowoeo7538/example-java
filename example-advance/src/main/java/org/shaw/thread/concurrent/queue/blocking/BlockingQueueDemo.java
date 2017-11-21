@@ -22,10 +22,10 @@ public class BlockingQueueDemo {
         Producer producer2 = new Producer(queue);
         Producer producer3 = new Producer(queue);
         Consumer consumer = new Consumer(queue);
-        DefaultThreadFactory.securityExecute(producer1);
-        DefaultThreadFactory.securityExecute(producer2);
-        DefaultThreadFactory.securityExecute(producer3);
-        DefaultThreadFactory.securityExecute(consumer);
+        DefaultThreadFactory.execute(producer1);
+        DefaultThreadFactory.execute(producer2);
+        DefaultThreadFactory.execute(producer3);
+        DefaultThreadFactory.execute(consumer);
         try {
             // 执行10s
             Thread.sleep(10 * 1000);

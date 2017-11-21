@@ -13,8 +13,6 @@ import java.util.concurrent.ExecutorService;
  */
 public class ApplicationStartup {
 
-    private static ExecutorService executor = DefaultThreadFactory.getThreadPoolExecutor();
-
     private static CountDownLatch latch;
 
     private static List<BaseHealthChecker> service;
@@ -26,7 +24,7 @@ public class ApplicationStartup {
         service.add(new NetworkHealthChecker("二号线程", latch));
         service.add(new NetworkHealthChecker("三号线程", latch));
         for (final BaseHealthChecker task : service) {
-            executor.execute(task);
+            DefaultThreadFactory.execute(task);
         }
         latch.await();
         DefaultThreadFactory.destroy();

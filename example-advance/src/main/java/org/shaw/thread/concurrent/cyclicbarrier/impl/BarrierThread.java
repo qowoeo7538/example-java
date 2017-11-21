@@ -1,6 +1,5 @@
 package org.shaw.thread.concurrent.cyclicbarrier.impl;
 
-import org.shaw.base.thread.SecurityTask;
 import org.shaw.util.DataProducer;
 
 import java.util.concurrent.CyclicBarrier;
@@ -9,20 +8,20 @@ import java.util.concurrent.CyclicBarrier;
  * @create: 2017-11-15
  * @description:
  */
-public class BarrierThread extends SecurityTask {
+public class BarrierThread implements Runnable {
 
     CyclicBarrier cyclicBarrier;
 
     String name;
 
     public BarrierThread(String name, CyclicBarrier cyclicBarrier) {
-        // 一个线程作用范围是整个方法
+        // 一个线程作用范围是整个调用链
         this.name = name;
         this.cyclicBarrier = cyclicBarrier;
     }
 
     @Override
-    protected void runTask() {
+    public void run() {
         try {
             Thread.currentThread().setName(name);
             Thread.sleep(DataProducer.nextInt(0, 10000));

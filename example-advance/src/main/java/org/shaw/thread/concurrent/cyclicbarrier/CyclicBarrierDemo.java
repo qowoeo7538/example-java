@@ -17,7 +17,7 @@ public class CyclicBarrierDemo {
     public static void main(String[] args) {
         CyclicBarrier cyclicBarrier = new CyclicBarrier(COUNT, new PriorThread());
         for (int i = 0; i < COUNT; i++) {
-            DefaultThreadFactory.securityExecute(new BarrierThread("线程" + (i + 1), cyclicBarrier));
+            DefaultThreadFactory.execute(new BarrierThread("线程" + (i + 1), cyclicBarrier));
         }
         DefaultThreadFactory.destroy();
     }
