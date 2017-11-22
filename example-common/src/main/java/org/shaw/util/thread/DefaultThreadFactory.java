@@ -1,7 +1,6 @@
 package org.shaw.util.thread;
 
 import org.shaw.util.Assert;
-import org.shaw.util.thread.impl.SecurityTask;
 import org.shaw.util.thread.impl.ThrottleSupport;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
@@ -66,7 +65,13 @@ public class DefaultThreadFactory {
     public static void execute(Runnable task) {
         Assert.state(threadPoolTaskExecutor != null, "线程池没有初始化");
         throttleSupport.beforeAccess();
-        threadPoolTaskExecutor.execute(new SecurityTask(task, throttleSupport));
+        threadPoolTaskExecutor.execute(() -> {
+            try {
+                task.run();
+            } finally {
+                throttleSupport.afterAccess();
+            }
+        });
     }
 
     public static ThreadPoolExecutor getThreadPoolExecutor() throws IllegalStateException {
