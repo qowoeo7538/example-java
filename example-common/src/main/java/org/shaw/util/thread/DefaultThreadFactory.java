@@ -34,11 +34,6 @@ public class DefaultThreadFactory {
     private static int maxPoolSize = 10;
 
     /**
-     * 线程处理控制
-     */
-    private static ThrottleSupport throttleSupport = new ThrottleSupport();
-
-    /**
      * 阻塞任务队列容量(默认为int的最大值)
      *
      * @see ThreadPoolTaskExecutor#queueCapacity
@@ -46,7 +41,12 @@ public class DefaultThreadFactory {
     private static int queueCapacity = 15;
 
     /** 线程池对象 */
-    private static ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
+    private final static ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
+
+    /**
+     * 线程处理控制
+     */
+    private final static ThrottleSupport throttleSupport = new ThrottleSupport();
 
     // 初始化线程对象
     static {
