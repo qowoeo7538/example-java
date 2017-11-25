@@ -1,4 +1,4 @@
-package org.shaw.thread.executor.future;
+package org.shaw.pattern.functional;
 
 import org.shaw.util.DataProducer;
 import org.springframework.core.task.support.TaskExecutorAdapter;
