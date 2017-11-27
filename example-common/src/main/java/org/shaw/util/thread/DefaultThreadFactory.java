@@ -11,6 +11,10 @@ import java.util.concurrent.ThreadPoolExecutor;
  * @description: 线程池
  */
 public class DefaultThreadFactory {
+
+    private DefaultThreadFactory() {
+    }
+
     /**
      * 核心线程池大小
      * <p>
