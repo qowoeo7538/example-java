@@ -21,7 +21,7 @@ public class DefaultThreadFactory {
      *
      * @see ThreadPoolTaskExecutor#corePoolSize
      */
-    private static int corePoolSize = 10;
+    private static int corePoolSize = 4;
 
     /**
      * 最大线程池大小
@@ -31,7 +31,7 @@ public class DefaultThreadFactory {
      *
      * @see ThreadPoolTaskExecutor#maxPoolSize
      */
-    private static int maxPoolSize = 10;
+    private static int maxPoolSize = 4;
 
     /**
      * 阻塞任务队列容量(默认为int的最大值)
