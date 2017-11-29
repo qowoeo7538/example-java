@@ -1,4 +1,4 @@
-package org.shaw.socket.rmi.impl;
+package org.shaw.io.socket.rmi.impl;
 
 import java.io.IOException;
 import java.io.Serializable;
