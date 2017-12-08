@@ -21,7 +21,7 @@ public class FileChannelDemo {
             // 通道中的数据读到缓冲区中
             while ((bytesRead = inChannel.read(buf)) != -1) {
                 System.out.println("Read " + bytesRead);
-                // 将写模式切换读取模式,将缓存区position会被置为0,从头开始读取
+                // 将缓存区position会被置为0,从头开始读取
                 buf.flip();
                 // 当前位置至结束是否还有其它元素
                 while (buf.hasRemaining()) {
