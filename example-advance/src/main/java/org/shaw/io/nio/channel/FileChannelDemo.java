@@ -7,10 +7,16 @@ import org.shaw.io.nio.channel.impl.FileChannelImpl;
  */
 public class FileChannelDemo {
     public static void main(String[] args) {
+        String from = "C:\\Users\\john\\Desktop\\from.txt";
+        String to = "C:\\Users\\john\\Desktop\\to.txt";
+
         // 将通道数据写入缓存
-        // FileChannelImpl.channeToBuffer("C:\\Users\\john\\Desktop\\SQL测试.plain");
+        // FileChannelImpl.channeToBuffer(to);
 
         // 通道数据交换
-        FileChannelImpl.channelTransferFrom("C:\\Users\\john\\Desktop\\新建文本文档.txt","C:\\Users\\john\\Desktop\\SQL测试.plain");
+        // A.TransferFrom(B) :: A <- B
+        FileChannelImpl.channelTransferFrom(from, to);
+        // A.TransferTo(B) :: A -> B
+        // FileChannelImpl.channelTransferTo(from, to);
     }
 }
