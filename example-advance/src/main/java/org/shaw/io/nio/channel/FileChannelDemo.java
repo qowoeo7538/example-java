@@ -4,6 +4,8 @@ import org.shaw.io.nio.channel.impl.FileChannelImpl;
 
 /**
  * FileChannel 从文件中读写数据。
+ * <p>
+ * 1）不能修改为非阻塞模式
  */
 public class FileChannelDemo {
     public static void main(String[] args) {
