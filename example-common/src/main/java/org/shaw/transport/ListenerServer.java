@@ -1,10 +1,12 @@
 package org.shaw.transport;
 
+import org.shaw.transport.support.SelectorProcess;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.nio.ByteBuffer;
-import java.nio.channels.SelectionKey;
+import java.nio.channels.ByteChannel;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
@@ -54,7 +56,11 @@ public class ListenerServer {
             while (true) {
                 SocketChannel conn = serverSocketChannel.accept();
                 conn.configureBlocking(false);
-                SelectionKey key = conn.register(sel, operation);
+                conn.register(sel, operation);
+                SelectorProcess selectorProcess = new SelectorProcess(sel);
+                selectorProcess.readyProcess((channel) -> {
+                    channel.read();
+                });
                 for (int nread = 0; nread != -1; ) {
                     try {
                         // 将连接中的数据读取到缓冲区

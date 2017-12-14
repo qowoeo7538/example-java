@@ -5,9 +5,9 @@ package org.shaw.transport.support;
  * @description:
  */
 @FunctionalInterface
-public interface WritableCallback {
+public interface WritableCallback<T> {
     /**
      * 写入就绪
      */
-    void onWritable();
+    T onWritable();
 }

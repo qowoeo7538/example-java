@@ -5,10 +5,10 @@ package org.shaw.transport.support;
  * @description:
  */
 @FunctionalInterface
-public interface AcceptableCallback {
+public interface AcceptableCallback<T> {
 
     /**
      * 接收就绪
      */
-    void onAcceptable();
+    T onAcceptable();
 }

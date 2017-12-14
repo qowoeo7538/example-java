@@ -2,6 +2,7 @@ package org.shaw.io.socket.transport;
 
 import org.shaw.io.socket.transport.impl.TransferToClient;
 import org.shaw.io.socket.transport.impl.TransferToServer;
+import org.shaw.transport.ListenerServer;
 
 import java.io.IOException;
 
@@ -22,6 +23,19 @@ public class ZeroCopyDemo {
     public static void zeroCopyTest(String srcFile) {
         TransferToServer dns = new TransferToServer();
         dns.mySetup();
+        TransferToClient sfc = new TransferToClient(srcFile);
+        sfc.testSendfile();
+        dns.readData();
+    }
+
+    /**
+     * zeroCopy测试
+     *
+     * @param srcFile 传输文件
+     */
+    public static void zeroCopyTest1(String srcFile) {
+        ListenerServer listenerServer = new ListenerServer();
+        listenerServer.setup();
         TransferToClient sfc = new TransferToClient(srcFile);
         sfc.testSendfile();
         dns.readData();

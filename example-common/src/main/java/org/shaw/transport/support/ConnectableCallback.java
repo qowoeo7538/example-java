@@ -5,9 +5,9 @@ package org.shaw.transport.support;
  * @description:
  */
 @FunctionalInterface
-public interface ConnectableCallback {
+public interface ConnectableCallback<T> {
     /**
      * 连接就绪
      */
-    void onConnect();
+    T onConnect();
 }
