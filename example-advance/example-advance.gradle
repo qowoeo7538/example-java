@@ -1,0 +1,17 @@
+description = "Example Advance"
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework:spring-framework-bom:${springVersion}"
+    }
+    resolutionStrategy {
+        cacheChangingModulesFor 0, 'seconds'
+    }
+    applyMavenExclusions = false
+}
+
+dependencies {
+    compile(project(":example-common"))
+    compile(project(":example-base"))
+    compile("org.springframework:spring-aop")
+}

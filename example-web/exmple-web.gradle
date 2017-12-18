@@ -1,0 +1,5 @@
+description = "Spring Context"
+
+dependencies {
+    compile("javax.servlet:javax.servlet-api:${servletVersion}")
+}
