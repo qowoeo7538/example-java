@@ -1,5 +1,7 @@
 description = "Example Advance"
 
+apply plugin: "io.spring.dependency-management"
+
 dependencyManagement {
     imports {
         mavenBom "org.springframework:spring-framework-bom:${springVersion}"
