@@ -27,17 +27,4 @@ public class ZeroCopyDemo {
         sfc.testSendfile();
         dns.readData();
     }
-
-    /**
-     * zeroCopy测试
-     *
-     * @param srcFile 传输文件
-     */
-    public static void zeroCopyTest1(String srcFile) {
-        ListenerServer listenerServer = new ListenerServer();
-        listenerServer.setup();
-        TransferToClient sfc = new TransferToClient(srcFile);
-        sfc.testSendfile();
-        dns.readData();
-    }
 }

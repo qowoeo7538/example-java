@@ -27,7 +27,7 @@ compact()方法只会清除已经读过的数据,任何未读的数据都被移�
     // 从Buffer读取数据到Channe
     int bytesWritten = inChannel.write(buf);
 
-    // 使用get()方法从Buffer中读取数据
+    // 使用get()方法从Buffer中读取数据,同时position加一
     byte aByte = buf.get();
 ```
 

@@ -5,10 +5,14 @@ package org.shaw.transport.support;
  * @description:
  */
 @FunctionalInterface
-public interface AcceptableCallback<T> {
+public interface AcceptableCallback {
+
+    default void onAcceptable(Readable r){
+
+    }
 
     /**
      * 接收就绪
      */
-    T onAcceptable();
+    void onAcceptable();
 }
