@@ -27,7 +27,7 @@ configure(allprojects) { project ->
 
     ext {
         springVersion = "5.0.1.RELEASE"
-        javassistVersion = "3.12.1.GA"
+        javassistVersion = "3.22.0-GA"
         junitVersion = "4.12"
         mockitoVersion = "2.12.0"
         hamcrestVersion = "1.3"

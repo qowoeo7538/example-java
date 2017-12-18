@@ -16,4 +16,5 @@ dependencies {
     compile(project(":example-common"))
     compile(project(":example-base"))
     compile("org.springframework:spring-aop")
+    compile("org.javassist:javassist:${javassistVersion}")
 }

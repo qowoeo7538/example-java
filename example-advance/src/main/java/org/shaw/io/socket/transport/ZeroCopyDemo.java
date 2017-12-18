@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public class ZeroCopyDemo {
     public static void main(String[] args) throws IOException {
-        String srcFile = "C:\\Users\\john\\Desktop\\新建文本文档.txt";
+        String srcFile = "C:\\Users\\john\\Desktop\\to.txt";
         zeroCopyTest(srcFile);
     }
 
