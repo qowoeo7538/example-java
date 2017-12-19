@@ -26,9 +26,6 @@ public class NioClient {
         this.srcfile = srcfile;
     }
 
-    /**
-     * @see #fileToChannel(String, WritableByteChannel)
-     */
     public void Sendfile() {
         SocketChannel socketChannel = null;
         try {
@@ -54,31 +51,5 @@ public class NioClient {
                 }
             }
         }
-    }
-
-    /**
-     * 将目标文件输出到目标通道
-     *
-     * @param srcFile 目标文件
-     * @param channel 目标通道
-     */
-    private void fileToChannel(String srcFile, WritableByteChannel channel) {
-        FileInputStream fileInputStream = null;
-        try {
-            fileInputStream = new FileInputStream(srcFile);
-            FileChannel srcChannel = fileInputStream.getChannel();
-            srcChannel.transferTo(0, srcChannel.size(), channel);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fileInputStream != null) {
-                try {
-                    fileInputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
     }
 }
