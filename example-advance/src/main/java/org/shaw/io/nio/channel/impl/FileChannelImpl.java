@@ -1,6 +1,6 @@
 package org.shaw.io.nio.channel.impl;
 
-import org.shaw.util.io.ChannelUtils;
+import org.shaw.util.io.NioUtils;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -23,7 +23,10 @@ public class FileChannelImpl {
             // 获取流通道
             FileChannel inChannel = randomAccessFile.getChannel();
             // 通道中的数据读到缓冲区中
-            ChannelUtils.channelRead(inChannel);
+            NioUtils.channelRead(inChannel, (buffer) -> {
+                System.out.print((char) buffer.get());
+                return null;
+            });
         } catch (IOException ex) {
             ex.getStackTrace();
         } finally {
@@ -55,9 +58,13 @@ public class FileChannelImpl {
 
             long position = 0;
             long count = fromChannel.size();
-            //通道数据交换
+            // 通道数据交换
             toChannel.transferFrom(fromChannel, position, count);
-            ChannelUtils.channelRead(toChannel);
+            // 通道处理
+            NioUtils.channelRead(toChannel, (buffer) -> {
+                System.out.print((char) buffer.get());
+                return null;
+            });
         } catch (IOException ex) {
             ex.printStackTrace();
         } finally {
@@ -97,7 +104,11 @@ public class FileChannelImpl {
             long position = 0;
             long count = fromChannel.size();
             fromChannel.transferTo(position, count, toChannel);
-            ChannelUtils.channelRead(fromChannel);
+            // 通道处理
+            NioUtils.channelRead(fromChannel, (buffer) -> {
+                System.out.print((char) buffer.get());
+                return null;
+            });
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

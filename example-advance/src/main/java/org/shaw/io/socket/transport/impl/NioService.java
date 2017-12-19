@@ -12,13 +12,18 @@ import java.util.Set;
 
 /**
  * @create: 2017-12-15
- * @description:
+ * @description: NIO服务端
  */
 public class NioService {
 
     private String hostname;
 
     private int port;
+
+    public NioService(String hostname, int port) {
+        this.hostname = hostname;
+        this.port = port;
+    }
 
     /**
      * 测试服务

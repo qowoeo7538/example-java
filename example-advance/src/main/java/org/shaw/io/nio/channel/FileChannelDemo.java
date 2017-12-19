@@ -8,16 +8,20 @@ import org.shaw.io.nio.channel.impl.FileChannelImpl;
  * 1）不能修改为非阻塞模式
  */
 public class FileChannelDemo {
-    public static void main(String[] args) {
-        String from = "C:\\Users\\john\\Desktop\\from.txt";
-        String to = "C:\\Users\\john\\Desktop\\to.txt";
 
+    /** 源文件 */
+    private final static String to = "C:\\Users\\john\\Desktop\\to.txt";
+
+    /** 目标文件 */
+    private final static String from = "C:\\Users\\john\\Desktop\\from.txt";
+
+    public static void main(String[] args) {
         // 将通道数据写入缓存
-        // FileChannelImpl.channeToBuffer(to);
+        FileChannelImpl.channeToBuffer(to);
 
         // 通道数据交换
         // A.TransferFrom(B) :: A <- B
-        FileChannelImpl.channelTransferFrom(from, to);
+        // FileChannelImpl.channelTransferFrom(from, to);
         // A.TransferTo(B) :: A -> B
         // FileChannelImpl.channelTransferTo(from, to);
     }
