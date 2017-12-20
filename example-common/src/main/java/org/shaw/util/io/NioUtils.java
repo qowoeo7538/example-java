@@ -31,8 +31,8 @@ public class NioUtils {
     }
 
     /**
-     * @param buffer
-     * @param readProcess
+     * @param buffer      缓冲区
+     * @param readProcess 处理对象
      */
     public static void bufferProcess(ByteBuffer buffer, ReadProcess readProcess) {
 
