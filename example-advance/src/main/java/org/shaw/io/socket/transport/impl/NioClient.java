@@ -45,7 +45,7 @@ public class NioClient {
                 });
 
                 NioUtils.channelRead(socketChannel, (buffer) -> {
-                    System.out.println("服务端返回数据：" + (char) buffer.get() + ",剩余长度：" + buffer.remaining());
+                    System.out.print((char) buffer.get());
                 });
             }
         } catch (IOException e) {

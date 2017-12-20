@@ -26,7 +26,7 @@ public class NioDemo {
             nioService.mySetup();
         });
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 1; i++) {
             DefaultThreadFactory.execute(() -> {
                 nioClient.Sendfile();
             });

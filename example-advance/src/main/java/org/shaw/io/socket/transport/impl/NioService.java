@@ -62,7 +62,7 @@ public class NioService {
                     } else if (key.isWritable()) {
                         returnData.rewind();
                         returnData.put("received".getBytes());
-                        System.out.println(returnData.remaining());
+                        returnData.flip();
                         SocketChannel socketChannel = (SocketChannel) key.channel();
                         socketChannel.write(returnData);
                         key.interestOps(SelectionKey.OP_READ);
