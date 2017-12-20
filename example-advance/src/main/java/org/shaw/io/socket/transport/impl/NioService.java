@@ -1,5 +1,7 @@
 package org.shaw.io.socket.transport.impl;
 
+import org.shaw.util.io.NioUtils;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -57,14 +59,17 @@ public class NioService {
                         socketChannel.register(selector, SelectionKey.OP_READ);
                     } else if (key.isReadable()) {
                         SocketChannel socketChannel = (SocketChannel) key.channel();
-                        readBuff.clear();
-                        socketChannel.read(readBuff);
-                        readBuff.flip();
-                        System.out.println(new String(readBuff.array()));
+                        // readBuff.clear();
+                        // socketChannel.read(readBuff);
+                        // readBuff.flip();
+                        // System.out.println(new String(readBuff.array()));
+                        NioUtils.channelRead(socketChannel,(buffer)->{
+                            System.out.print((char) buffer.get());
+                        });
                         key.interestOps(SelectionKey.OP_WRITE);
                     } else if (key.isWritable()) {
                         returnData.rewind();
-                        returnData.put("received\n".getBytes());
+                        returnData.put("\nreceived\n".getBytes());
                         returnData.flip();
                         SocketChannel socketChannel = (SocketChannel) key.channel();
                         socketChannel.write(returnData);

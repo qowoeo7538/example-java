@@ -26,10 +26,10 @@ public class NioDemo {
             nioService.mySetup();
         });
 
-        for (int i = 0; i < 1; i++) {
-            DefaultThreadFactory.execute(() -> {
-                nioClient.sendFile(srcFile);
-            });
-        }
+
+        DefaultThreadFactory.execute(() -> {
+            nioClient.sendFile(srcFile);
+        });
+
     }
 }
