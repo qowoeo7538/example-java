@@ -42,7 +42,10 @@ public class NioService {
 
             // writeBuff.flip(); // make buffer ready for reading
             while (true) {
-                selector.select();
+                int readyChannels = selector.select();
+                if (readyChannels == 0) {
+                    continue;
+                }
                 Set<SelectionKey> keys = selector.selectedKeys();
                 Iterator<SelectionKey> it = keys.iterator();
                 while (it.hasNext()) {
@@ -61,7 +64,7 @@ public class NioService {
                         key.interestOps(SelectionKey.OP_WRITE);
                     } else if (key.isWritable()) {
                         returnData.rewind();
-                        returnData.put("received".getBytes());
+                        returnData.put("received\n".getBytes());
                         returnData.flip();
                         SocketChannel socketChannel = (SocketChannel) key.channel();
                         socketChannel.write(returnData);

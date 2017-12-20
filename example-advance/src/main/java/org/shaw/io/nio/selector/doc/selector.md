@@ -90,13 +90,16 @@ Selector selector = Selector.open();
 一旦向Selector注册了一或多个通道，可以调用几个重载的select()方法。
 这些方法返回你所感兴趣的事件（如连接、接受、读或写）已经准备就绪的那些通道。
 
-select()方法：
+### 等待就绪：
 
-- int select() ： 阻塞到至少有一个通道在你注册的事件上就绪了。
-- int select(long timeout) ：阻塞到至少有一个通道在你注册的事件上就绪或者timeout毫秒超时。
-- int selectNow() ：不会阻塞，不管什么通道就绪都立刻返回（此方法执行非阻塞的选择操作。如果自从前一次选择操作后，没有通道变成可选择的，则此方法直接返回零。）。
+- 阻塞
+  - int select() ： 阻塞到至少有一个通道在你注册的事件上就绪了。
+  - int select(long timeout) ：阻塞到至少有一个通道在你注册的事件上就绪或者timeout毫秒超时。
+  - int selectNow() ：不会阻塞，不管什么通道就绪都立刻返回（此方法执行非阻塞的选择操作。如果自从前一次选择操作后，没有通道变成可选择的，则此方法直接返回零。）。
+- 唤醒
+  - wakeUp()：让其它线程在那个对象上调用Selector.wakeup()方法即可。阻塞在select()方法上的线程会立马返回。
 
-#### selectedKeys()
+### 获取就绪通道
 通过调用selector的selectedKeys()方法，访问“已选择键集（selected key set）”中的就绪通道。
 
 ```java
@@ -115,3 +118,6 @@ select()方法：
 	    keyIterator.remove();
 	}
 ```
+
+### 关闭 selector
+使注册到该Selector上的所有SelectionKey实例无效，通道本身并不会关闭。

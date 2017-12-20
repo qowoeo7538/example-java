@@ -18,15 +18,12 @@ public class NioClient {
 
     private int port;
 
-    private String srcFile;
-
-    public NioClient(String hostname, int port, String srcFile) {
+    public NioClient(String hostname, int port) {
         this.hostname = hostname;
         this.port = port;
-        this.srcFile = srcFile;
     }
 
-    public void Sendfile() {
+    public void sendFile(String srcFile) {
         FileInputStream fileInputStream = null;
         try {
             final SocketChannel socketChannel = SocketChannel.open();

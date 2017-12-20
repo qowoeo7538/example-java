@@ -21,14 +21,14 @@ public class NioDemo {
 
     public static void main(String[] args) {
         NioService nioService = new NioService(hostname, port);
-        NioClient nioClient = new NioClient(hostname, port, srcFile);
+        NioClient nioClient = new NioClient(hostname, port);
         DefaultThreadFactory.execute(() -> {
             nioService.mySetup();
         });
 
         for (int i = 0; i < 1; i++) {
             DefaultThreadFactory.execute(() -> {
-                nioClient.Sendfile();
+                nioClient.sendFile(srcFile);
             });
         }
     }
