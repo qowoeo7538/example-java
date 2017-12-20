@@ -7,13 +7,12 @@ import java.nio.ByteBuffer;
  * @description: 缓存读取处理
  */
 @FunctionalInterface
-public interface ReadProcess<T> {
+public interface ReadProcess {
 
     /**
      * 缓存读取处理
      *
      * @param buffer 处理缓存
-     * @return
      */
-    T onProcess(ByteBuffer buffer);
+    void onProcess(ByteBuffer buffer);
 }

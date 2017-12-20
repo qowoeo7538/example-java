@@ -2,6 +2,7 @@ package org.shaw.io.socket.transport;
 
 import org.shaw.io.socket.transport.impl.NioClient;
 import org.shaw.io.socket.transport.impl.NioService;
+import org.shaw.util.thread.DefaultThreadFactory;
 
 /**
  * @create: 2017-12-15
@@ -16,13 +17,19 @@ public class NioDemo {
     private final static int port = 9092;
 
     /** 传输文件 */
-    private final static String srcFile = "";
+    private final static String srcFile = "C:\\Users\\john\\Desktop\\to.txt";
 
     public static void main(String[] args) {
         NioService nioService = new NioService(hostname, port);
         NioClient nioClient = new NioClient(hostname, port, srcFile);
+        DefaultThreadFactory.execute(() -> {
+            nioService.mySetup();
+        });
 
-        nioService.mySetup();
-
+        for (int i = 0; i < 5; i++) {
+            DefaultThreadFactory.execute(() -> {
+                nioClient.Sendfile();
+            });
+        }
     }
 }

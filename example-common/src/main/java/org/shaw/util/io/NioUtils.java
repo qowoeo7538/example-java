@@ -22,11 +22,20 @@ public class NioUtils {
     public static void channelRead(ScatteringByteChannel channel, ReadProcess readProcess) throws IOException {
         ByteBuffer buffer = ByteBuffer.allocate(4096);
         while (channel.read(buffer) != -1) {
+
             buffer.flip();
             while (buffer.hasRemaining()) {
                 readProcess.onProcess(buffer);
             }
             buffer.clear();
         }
+    }
+
+    /**
+     * @param buffer
+     * @param readProcess
+     */
+    public static void bufferProcess(ByteBuffer buffer, ReadProcess readProcess) {
+
     }
 }

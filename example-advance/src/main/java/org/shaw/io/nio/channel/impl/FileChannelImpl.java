@@ -25,7 +25,6 @@ public class FileChannelImpl {
             // 通道中的数据读到缓冲区中
             NioUtils.channelRead(inChannel, (buffer) -> {
                 System.out.print((char) buffer.get());
-                return null;
             });
         } catch (IOException ex) {
             ex.getStackTrace();
@@ -63,7 +62,6 @@ public class FileChannelImpl {
             // 通道处理
             NioUtils.channelRead(toChannel, (buffer) -> {
                 System.out.print((char) buffer.get());
-                return null;
             });
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -107,7 +105,6 @@ public class FileChannelImpl {
             // 通道处理
             NioUtils.channelRead(fromChannel, (buffer) -> {
                 System.out.print((char) buffer.get());
-                return null;
             });
         } catch (IOException e) {
             e.printStackTrace();

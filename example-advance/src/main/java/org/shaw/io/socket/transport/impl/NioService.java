@@ -31,15 +31,16 @@ public class NioService {
     public void mySetup() {
         ServerSocketChannel ssc = null;
         try {
+            int index = 0;
             ssc = ServerSocketChannel.open();
             ssc.socket().bind(new InetSocketAddress(hostname, port));
             ssc.configureBlocking(false);
             Selector selector = Selector.open();
             ssc.register(selector, SelectionKey.OP_ACCEPT);
             ByteBuffer readBuff = ByteBuffer.allocate(128);
-            ByteBuffer writeBuff = ByteBuffer.allocate(128);
-            writeBuff.put("received".getBytes());
-            writeBuff.flip(); // make buffer ready for reading
+            ByteBuffer returnData = ByteBuffer.allocate(128);
+
+            // writeBuff.flip(); // make buffer ready for reading
             while (true) {
                 selector.select();
                 Set<SelectionKey> keys = selector.selectedKeys();
@@ -59,9 +60,11 @@ public class NioService {
                         System.out.println(new String(readBuff.array()));
                         key.interestOps(SelectionKey.OP_WRITE);
                     } else if (key.isWritable()) {
-                        writeBuff.rewind();
+                        returnData.rewind();
+                        returnData.put("received".getBytes());
+                        System.out.println(returnData.remaining());
                         SocketChannel socketChannel = (SocketChannel) key.channel();
-                        socketChannel.write(writeBuff);
+                        socketChannel.write(returnData);
                         key.interestOps(SelectionKey.OP_READ);
                     }
                 }
