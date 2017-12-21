@@ -17,7 +17,7 @@ public class NioDemo {
     private final static int port = 9092;
 
     /** 传输文件 */
-    private final static String srcFile = "C:\\Users\\john\\Desktop\\to.txt";
+    private final static String srcFile = "C:\\Users\\john\\Desktop\\coverage-error.log";
 
     public static void main(String[] args) {
         NioService nioService = new NioService(hostname, port);
