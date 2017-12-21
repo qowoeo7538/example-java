@@ -1,4 +1,4 @@
-description = "Spring Context"
+description = "Example Common"
 
 apply plugin: "io.spring.dependency-management"
 

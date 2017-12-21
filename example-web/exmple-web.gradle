@@ -1,4 +1,4 @@
-description = "Spring Context"
+description = "Exmple Web"
 
 dependencies {
     providedCompile("javax.servlet:javax.servlet-api:${servletVersion}")
