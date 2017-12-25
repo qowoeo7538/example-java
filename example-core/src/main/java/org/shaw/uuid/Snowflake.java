@@ -1,4 +1,4 @@
-package org.shaw.util.uuid;
+package org.shaw.uuid;
 
 /**
  * @create: 2017-11-07

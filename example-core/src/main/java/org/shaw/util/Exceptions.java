@@ -1,4 +1,4 @@
-package org.shaw.util.exception;
+package org.shaw.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

@@ -1,4 +1,4 @@
-package org.shaw.util.uuid;
+package org.shaw.uuid;
 
 import java.math.BigInteger;
 
