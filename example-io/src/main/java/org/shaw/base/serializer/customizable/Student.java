@@ -1,4 +1,4 @@
-package org.shaw.base.serializer.manual;
+package org.shaw.base.serializer.customizable;
 
 import java.io.Serializable;
 import java.util.Objects;
