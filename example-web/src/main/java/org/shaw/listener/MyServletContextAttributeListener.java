@@ -1,4 +1,4 @@
-package org.shaw.nio.listener;
+package org.shaw.listener;
 
 import javax.servlet.ServletContextAttributeEvent;
 import javax.servlet.ServletContextAttributeListener;

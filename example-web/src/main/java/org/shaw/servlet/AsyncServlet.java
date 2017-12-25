@@ -1,4 +1,4 @@
-package org.shaw.nio.servlet;
+package org.shaw.servlet;
 
 import javax.servlet.AsyncContext;
 import javax.servlet.ServletException;

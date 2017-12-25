@@ -1,4 +1,4 @@
-package org.shaw.nio.listener;
+package org.shaw.listener;
 
 import javax.servlet.http.HttpSessionActivationListener;
 import javax.servlet.http.HttpSessionBindingEvent;

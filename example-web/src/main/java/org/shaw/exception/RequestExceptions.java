@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2005-2012 springside.org.cn
  */
-package org.shaw.nio.exception;
+package org.shaw.exception;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -1,4 +1,4 @@
-package org.shaw.nio.filter;
+package org.shaw.filter;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
