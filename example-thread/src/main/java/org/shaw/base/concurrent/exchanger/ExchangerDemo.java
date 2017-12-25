@@ -1,6 +1,6 @@
 package org.shaw.base.concurrent.exchanger;
 
-import org.shaw.core.task.DefaultThreadFactory;
+import org.shaw.core.task.DefaultThreadPoolExecutor;
 import org.shaw.concurrent.exchanger.impl.ExchangerImpl;
 
 import java.util.concurrent.Exchanger;
@@ -15,8 +15,8 @@ public class ExchangerDemo {
         ExchangerImpl.ExchangerProducer exchangerProducer = new ExchangerImpl().new ExchangerProducer(exchanger);
         ExchangerImpl.ExchangerConsumer exchangerConsumer = new ExchangerImpl().new ExchangerConsumer(exchanger);
 
-        DefaultThreadFactory.execute(exchangerProducer);
-        DefaultThreadFactory.execute(exchangerConsumer);
-        DefaultThreadFactory.destroy();
+        DefaultThreadPoolExecutor.execute(exchangerProducer);
+        DefaultThreadPoolExecutor.execute(exchangerConsumer);
+        DefaultThreadPoolExecutor.destroy();
     }
 }

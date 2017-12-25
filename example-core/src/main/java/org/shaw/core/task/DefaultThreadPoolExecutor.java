@@ -10,9 +10,9 @@ import java.util.concurrent.ThreadPoolExecutor;
  * @create: 2017-11-06
  * @description: 线程池
  */
-public class DefaultThreadFactory {
+public class DefaultThreadPoolExecutor {
 
-    private DefaultThreadFactory() {
+    private DefaultThreadPoolExecutor() {
     }
 
     /**

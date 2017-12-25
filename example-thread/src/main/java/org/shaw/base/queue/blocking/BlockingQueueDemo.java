@@ -2,7 +2,7 @@ package org.shaw.base.queue.blocking;
 
 import org.shaw.base.queue.blocking.impl.Consumer;
 import org.shaw.base.queue.blocking.impl.Producer;
-import org.shaw.core.task.DefaultThreadFactory;
+import org.shaw.core.task.DefaultThreadPoolExecutor;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -22,10 +22,10 @@ public class BlockingQueueDemo {
         Producer producer2 = new Producer(queue);
         Producer producer3 = new Producer(queue);
         Consumer consumer = new Consumer(queue);
-        DefaultThreadFactory.execute(producer1);
-        DefaultThreadFactory.execute(producer2);
-        DefaultThreadFactory.execute(producer3);
-        DefaultThreadFactory.execute(consumer);
+        DefaultThreadPoolExecutor.execute(producer1);
+        DefaultThreadPoolExecutor.execute(producer2);
+        DefaultThreadPoolExecutor.execute(producer3);
+        DefaultThreadPoolExecutor.execute(consumer);
         try {
             // 执行10s
             Thread.sleep(10 * 1000);
@@ -37,7 +37,7 @@ public class BlockingQueueDemo {
             e.printStackTrace();
             Thread.currentThread().interrupt();
         } finally {
-            DefaultThreadFactory.destroy();
+            DefaultThreadPoolExecutor.destroy();
         }
     }
 }

@@ -1,4 +1,4 @@
-package org.shaw.concurrent.countdownlatch.impl;
+package org.shaw.base.concurrent.countdownlatch.impl;
 
 import org.shaw.util.DataProducer;
 

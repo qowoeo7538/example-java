@@ -1,6 +1,6 @@
 package org.shaw.transport;
 
-import org.shaw.core.task.DefaultThreadFactory;
+import org.shaw.core.task.DefaultThreadPoolExecutor;
 import org.shaw.transport.impl.NioClient;
 import org.shaw.transport.impl.NioService;
 
@@ -22,12 +22,12 @@ public class NioDemo {
     public static void main(String[] args) {
         NioService nioService = new NioService(hostname, port);
         NioClient nioClient = new NioClient(hostname, port);
-        DefaultThreadFactory.execute(() -> {
+        DefaultThreadPoolExecutor.execute(() -> {
             nioService.mySetup();
         });
 
 
-        DefaultThreadFactory.execute(() -> {
+        DefaultThreadPoolExecutor.execute(() -> {
             nioClient.sendFile(srcFile);
         });
 
