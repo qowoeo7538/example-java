@@ -31,18 +31,22 @@ public class UserListener implements HttpSessionBindingListener ,HttpSessionActi
         this.passWord = passWord;
     }
 
+    @Override
     public void valueBound(HttpSessionBindingEvent httpSessionBindingEvent) {
         System.out.println("User valueBound:"+httpSessionBindingEvent.getName());
     }
 
+    @Override
     public void valueUnbound(HttpSessionBindingEvent httpSessionBindingEvent) {
         System.out.println("User valueUnbound:"+httpSessionBindingEvent.getName());
     }
 
+    @Override
     public void sessionWillPassivate(HttpSessionEvent httpSessionEvent) {
         System.out.println("sessionWillPassivate:"+httpSessionEvent.getSource());
     }
 
+    @Override
     public void sessionDidActivate(HttpSessionEvent httpSessionEvent) {
         System.out.println("sessionDidActivate:"+httpSessionEvent.getSource());
     }

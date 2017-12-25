@@ -1,5 +1,0 @@
-description = "Exmple Web"
-
-dependencies {
-    compile("javax.servlet:javax.servlet-api:${servletVersion}")
-}

@@ -1,0 +1,5 @@
+description = "Exmple Web"
+
+dependencies {
+    compileOnly("javax.servlet:javax.servlet-api:${servletVersion}")
+}
