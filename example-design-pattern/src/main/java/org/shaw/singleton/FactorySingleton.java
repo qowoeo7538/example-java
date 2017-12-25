@@ -1,4 +1,4 @@
-package org.shaw.pattern.singleton;
+package org.shaw.singleton;
 
 /**
  * @create: 2017-11-07

@@ -1,4 +1,4 @@
-package org.shaw.pattern.observer.method1.impl;
+package org.shaw.observer.method1.impl;
 
 import java.util.Observable;
 

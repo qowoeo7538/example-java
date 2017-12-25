@@ -5,6 +5,7 @@ include ':example-base'
 include ':example-core'
 include ':example-web'
 include ':example-io'
+include ':example-design-pattern'
 
 rootProject.children.each {project ->
     project.buildFileName = "${project.name}.gradle"

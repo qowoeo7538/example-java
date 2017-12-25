@@ -1,11 +1,8 @@
-package org.shaw.pattern.observer.method2;
+package org.shaw.observer.method2;
 
-import org.shaw.pattern.observer.method2.impl.ConcreteObserver1;
-import org.shaw.pattern.observer.method2.impl.ConcreteSubject1;
-import org.shaw.pattern.observer.method2.impl.Observer1;
-import org.shaw.pattern.observer.method2.impl.ConcreteObserver1;
-import org.shaw.pattern.observer.method2.impl.ConcreteSubject1;
-import org.shaw.pattern.observer.method2.impl.Observer1;
+import org.shaw.observer.method2.impl.ConcreteObserver1;
+import org.shaw.observer.method2.impl.ConcreteSubject1;
+import org.shaw.observer.method2.impl.Observer1;
 
 /**
  * @create: 2017-11-07

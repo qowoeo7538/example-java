@@ -1,4 +1,4 @@
-package org.shaw.pattern.observer.method2.impl;
+package org.shaw.observer.method2.impl;
 
 /**
  * 具体观察者角色类:存储与主题的状态自恰的状态。

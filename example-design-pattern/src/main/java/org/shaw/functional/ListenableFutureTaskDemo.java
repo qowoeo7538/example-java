@@ -1,4 +1,4 @@
-package org.shaw.pattern.functional;
+package org.shaw.functional;
 
 import org.shaw.util.DataProducer;
 import org.springframework.core.task.support.TaskExecutorAdapter;

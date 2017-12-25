@@ -26,6 +26,7 @@ public class AsyncServlet extends HttpServlet {
             this.asyncContext = asyncContext;
         }
 
+        @Override
         public void run() {
             //...
         }

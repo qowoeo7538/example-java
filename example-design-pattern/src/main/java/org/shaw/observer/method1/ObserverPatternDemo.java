@@ -1,10 +1,8 @@
-package org.shaw.pattern.observer.method1;
+package org.shaw.observer.method1;
 
 
-import org.shaw.pattern.observer.method1.impl.Watched;
-import org.shaw.pattern.observer.method1.impl.Watcher;
-import org.shaw.pattern.observer.method1.impl.Watched;
-import org.shaw.pattern.observer.method1.impl.Watcher;
+import org.shaw.observer.method1.impl.Watched;
+import org.shaw.observer.method1.impl.Watcher;
 
 /**
  * <p>

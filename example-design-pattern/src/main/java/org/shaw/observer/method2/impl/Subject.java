@@ -1,4 +1,4 @@
-package org.shaw.pattern.observer.method2.impl;
+package org.shaw.observer.method2.impl;
 
 import java.util.ArrayList;
 import java.util.List;

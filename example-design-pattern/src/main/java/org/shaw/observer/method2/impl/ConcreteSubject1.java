@@ -1,4 +1,4 @@
-package org.shaw.pattern.observer.method2.impl;
+package org.shaw.observer.method2.impl;
 
 /**
  * 具体主题角色类：将有关状态存入具体观察者对象;在具体主题的内部状态改变时，给所有登记过的观察者发出通知。
