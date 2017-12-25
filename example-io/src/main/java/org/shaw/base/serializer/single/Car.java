@@ -1,4 +1,4 @@
-package org.shaw.base.seria.single;
+package org.shaw.base.serializer.single;
 
 import java.io.ObjectStreamException;
 import java.io.Serializable;

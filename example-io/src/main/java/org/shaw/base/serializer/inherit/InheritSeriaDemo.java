@@ -1,4 +1,4 @@
-package org.shaw.base.seria.inherit;
+package org.shaw.base.serializer.inherit;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
