@@ -13,7 +13,7 @@ dependencyManagement {
 }
 
 dependencies {
-    compile(project(":example-common"))
+    compile(project(":example-core"))
     compile(project(":example-base"))
     compile("org.springframework:spring-aop")
     compile("org.javassist:javassist:${javassistVersion}")
