@@ -1,6 +1,7 @@
 package org.shaw.core.task;
 
 import org.shaw.core.task.support.ThrottleSupport;
+import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.util.Assert;
 
@@ -74,8 +75,8 @@ public class StandardThreadExecutor {
         threadPoolTaskExecutor.setCorePoolSize(CORE_POOL_SIZE);
         threadPoolTaskExecutor.setMaxPoolSize(MAX_POOL_SIZE);
         threadPoolTaskExecutor.setKeepAliveSeconds(DEFAULT_KEEP_ALIVE_SECONDS);
-        threadPoolTaskExecutor.setThreadFactory(threadPoolTaskExecutor.getThreadPoolExecutor().getThreadFactory());
-        threadPoolTaskExecutor.setRejectedExecutionHandler(threadPoolTaskExecutor.getThreadPoolExecutor().getRejectedExecutionHandler());
+        threadPoolTaskExecutor.setThreadFactory(new CustomizableThreadFactory());
+        threadPoolTaskExecutor.setRejectedExecutionHandler(new ThreadPoolExecutor.AbortPolicy());
         // 设置最大并发数 maxPoolSize + queueCapacity
         throttleSupport.setConcurrencyLimit(MAX_POOL_SIZE + QUEUE_CAPACITY);
         threadPoolTaskExecutor.initialize();
@@ -100,7 +101,8 @@ public class StandardThreadExecutor {
 
     public static void destroy() {
         Assert.state(threadPoolTaskExecutor != null, "线程池没有初始化");
-        throttleSupport.setDestroy(true);
+        throttleSupport.waitFinish();
+        threadPoolTaskExecutor.destroy();
     }
 
     public static ThreadPoolExecutor getThreadPoolExecutor() throws IllegalStateException {
@@ -110,13 +112,16 @@ public class StandardThreadExecutor {
 
     private static class ConcurrencyThrottleAdapter extends ThrottleSupport {
 
+        private Object monitor = new Object();
+
+        /** 是否异常 */
+        private boolean interrupted = false;
+
         /** 并发量设置 */
         private int concurrencyLimit;
 
-        /** Executor */
-        private ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
-
-        private boolean isDestroy = false;
+        /** 是否等待完成 */
+        private boolean isWait = false;
 
         /**
          * 运行前
@@ -133,7 +138,7 @@ public class StandardThreadExecutor {
                 /**
                  * @see java.util.concurrent.ThreadPoolExecutor.AbortPolicy#rejectedExecution(Runnable, ThreadPoolExecutor)
                  */
-                threadPoolExecutor.getRejectedExecutionHandler().rejectedExecution(task, threadPoolExecutor);
+                getThreadPoolExecutor().getRejectedExecutionHandler().rejectedExecution(task, getThreadPoolExecutor());
             }
         }
 
@@ -144,18 +149,25 @@ public class StandardThreadExecutor {
          */
         protected void after() {
             int count = super.afterAccess();
-            if (isDestroy == true && count == 0) {
-                threadPoolTaskExecutor.destroy();
+            if (isWait == true && count == 0) {
+                synchronized (this.monitor) {
+                    monitor.notify();
+                }
             }
         }
 
-        /**
-         * 设置销毁
-         *
-         * @param destroy
-         */
-        public void setDestroy(boolean destroy) {
-            isDestroy = destroy;
+        protected void waitFinish() {
+            isWait = true;
+            while (this.getConcurrencyCount().get() >= this.concurrencyLimit) {
+                synchronized (this.monitor) {
+                    try {
+                        monitor.wait();
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        interrupted = true;
+                    }
+                }
+            }
         }
 
         /**

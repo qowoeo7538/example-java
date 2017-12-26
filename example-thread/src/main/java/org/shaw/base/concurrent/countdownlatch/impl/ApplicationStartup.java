@@ -1,8 +1,6 @@
 package org.shaw.base.concurrent.countdownlatch.impl;
 
-import org.shaw.base.concurrent.countdownlatch.impl.BaseHealthChecker;
-import org.shaw.base.concurrent.countdownlatch.impl.NetworkHealthChecker;
-import org.shaw.core.task.DefaultThreadPoolExecutor;
+import org.shaw.core.task.StandardThreadExecutor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +23,10 @@ public class ApplicationStartup {
         service.add(new NetworkHealthChecker("二号线程", latch));
         service.add(new NetworkHealthChecker("三号线程", latch));
         for (final BaseHealthChecker task : service) {
-            DefaultThreadPoolExecutor.execute(task);
+            StandardThreadExecutor.execute(task);
         }
         latch.await();
-        DefaultThreadPoolExecutor.destroy();
+        StandardThreadExecutor.destroy();
         for (final BaseHealthChecker v : service) {
             if (!v.isServiceUp()) {
                 return false;
