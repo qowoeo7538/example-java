@@ -11,22 +11,19 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * 当一个资源被多个线程调用时，就会产生线程不安全问题。
  */
-public class Counter {
+public class CounterDemo {
     private AtomicInteger atomicI = new AtomicInteger(0);
     private int i = 0;
 
     public static void main(String[] args) {
-        final Counter cas = new Counter();
+        final CounterDemo cas = new CounterDemo();
         List<Thread> ts = new ArrayList<Thread>(600);
         long start = System.currentTimeMillis();
         for (int j = 0; j < 100; j++) {
-            Thread t = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    for (int i = 0; i < 10000; i++) {
-                        cas.count();
-                        cas.safeCount();
-                    }
+            Thread t = new Thread(() -> {
+                for (int i = 0; i < 10000; i++) {
+                    cas.count();
+                    cas.safeCount();
                 }
             });
             ts.add(t);

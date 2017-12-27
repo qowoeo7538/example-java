@@ -84,7 +84,7 @@ public class StandardThreadExecutor {
 
     public static void execute(Runnable task) {
         Assert.state(threadPoolTaskExecutor != null, "线程池没有初始化");
-        throttleSupport.before(task);
+        throttleSupport.beforeAccess(task);
         threadPoolTaskExecutor.execute(() -> {
             try {
                 task.run();
@@ -94,7 +94,7 @@ public class StandardThreadExecutor {
                     getThreadPoolExecutor().getRejectedExecutionHandler().rejectedExecution(task, getThreadPoolExecutor());
                 }
             } finally {
-                throttleSupport.after();
+                throttleSupport.afterAccess();
             }
         });
     }
@@ -128,12 +128,12 @@ public class StandardThreadExecutor {
          * <p>
          * 默认队列没有长度限制，因此这里进行控制
          *
-         * @see ThrottleSupport#beforeAccess()
+         * @see ThrottleSupport#beforeAccess(Runnable)
          */
-        protected void before(Runnable task) {
-            int count = super.beforeAccess();
+        @Override
+        protected void beforeProcess(Runnable task, int concurrencyCount) {
             // 因为队列没有长度，所以在这里进行并发控制
-            if (count > concurrencyLimit) {
+            if (concurrencyCount > concurrencyLimit) {
                 getConcurrencyCount().decrementAndGet();
                 /**
                  * @see java.util.concurrent.ThreadPoolExecutor.AbortPolicy#rejectedExecution(Runnable, ThreadPoolExecutor)
@@ -147,19 +147,20 @@ public class StandardThreadExecutor {
          *
          * @see ThrottleSupport#afterAccess()
          */
-        protected void after() {
-            int count = super.afterAccess();
-            if (isWait == true && count == 0) {
+        @Override
+        protected void afterProcess(int concurrencyCount) {
+            if (isWait == true && concurrencyCount == 0) {
                 synchronized (this.monitor) {
                     monitor.notify();
                 }
             }
         }
 
+        /** 等待完成 */
         protected void waitFinish() {
             isWait = true;
-            while (this.getConcurrencyCount().get() >= this.concurrencyLimit) {
-                synchronized (this.monitor) {
+            synchronized (this.monitor) {
+                while (this.getConcurrencyCount().get() > 0) {
                     try {
                         monitor.wait();
                     } catch (InterruptedException e) {
