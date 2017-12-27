@@ -1,4 +1,4 @@
-package org.shaw.base.concurrent.exchanger;
+package org.shaw.concurrent.exchanger;
 
 import org.shaw.concurrent.exchanger.impl.ExchangerImpl;
 import org.shaw.core.task.StandardThreadExecutor;

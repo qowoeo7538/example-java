@@ -1,4 +1,4 @@
-package org.shaw.base.concurrent.countdownlatch.impl;
+package org.shaw.concurrent.countdownlatch.impl;
 
 import org.shaw.core.task.StandardThreadExecutor;
 

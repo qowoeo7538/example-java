@@ -1,4 +1,4 @@
-package org.shaw.base.concurrent;
+package org.shaw.concurrent;
 
 import java.util.ArrayList;
 import java.util.List;

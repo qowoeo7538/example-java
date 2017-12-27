@@ -1,4 +1,4 @@
-package org.shaw.base.concurrent.threadfactory;
+package org.shaw.concurrent.threadfactory;
 
 import org.shaw.concurrent.threadfactory.impl.CustomThreadFactory;
 import org.shaw.concurrent.threadfactory.impl.Task;

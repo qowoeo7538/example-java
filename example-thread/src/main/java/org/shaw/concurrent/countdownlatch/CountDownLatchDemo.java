@@ -1,7 +1,7 @@
-package org.shaw.base.concurrent.countdownlatch;
+package org.shaw.concurrent.countdownlatch;
 
 
-import org.shaw.base.concurrent.countdownlatch.impl.ApplicationStartup;
+import org.shaw.concurrent.countdownlatch.impl.ApplicationStartup;
 
 /**
  * 完成一组正在其他线程中执行的操作之前，它允许一个或多个线程一直等待。

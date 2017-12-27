@@ -1,4 +1,4 @@
-package org.shaw.base.concurrent.executor;
+package org.shaw.executor;
 
 /**
  * @create: 2017-11-17

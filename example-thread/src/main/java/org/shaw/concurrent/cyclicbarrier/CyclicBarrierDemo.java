@@ -1,4 +1,4 @@
-package org.shaw.base.concurrent.cyclicbarrier;
+package org.shaw.concurrent.cyclicbarrier;
 
 import org.shaw.concurrent.cyclicbarrier.impl.BarrierThread;
 import org.shaw.concurrent.cyclicbarrier.impl.PriorThread;
