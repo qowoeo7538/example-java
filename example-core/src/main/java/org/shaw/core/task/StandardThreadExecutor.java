@@ -17,9 +17,8 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 public class StandardThreadExecutor {
 
-    private StandardThreadExecutor() {
-
-    }
+    /** 核心数量 */
+    public static final int CORE_SIZE = Runtime.getRuntime().availableProcessors();
 
     /**
      * 核心线程池大小
@@ -31,7 +30,7 @@ public class StandardThreadExecutor {
      *
      * @see ThreadPoolTaskExecutor#corePoolSize
      */
-    private static int CORE_POOL_SIZE = 4;
+    private static int CORE_POOL_SIZE = CORE_SIZE + 1;
 
     /**
      * 最大线程池大小
@@ -41,7 +40,7 @@ public class StandardThreadExecutor {
      *
      * @see ThreadPoolTaskExecutor#maxPoolSize
      */
-    private static int MAX_POOL_SIZE = 4;
+    private static int MAX_POOL_SIZE = 2 * CORE_SIZE + 1;
 
     /**
      * 阻塞任务队列容量(默认为int的最大值)
@@ -73,13 +72,16 @@ public class StandardThreadExecutor {
     // 初始化线程对象
     static {
         threadPoolTaskExecutor.setCorePoolSize(CORE_POOL_SIZE);
-        threadPoolTaskExecutor.setMaxPoolSize(MAX_POOL_SIZE);
+        threadPoolTaskExecutor.setMaxPoolSize(MAX_POOL_SIZE > CORE_POOL_SIZE ? MAX_POOL_SIZE : CORE_POOL_SIZE);
         threadPoolTaskExecutor.setKeepAliveSeconds(DEFAULT_KEEP_ALIVE_SECONDS);
         threadPoolTaskExecutor.setThreadFactory(new CustomizableThreadFactory());
         threadPoolTaskExecutor.setRejectedExecutionHandler(new ThreadPoolExecutor.AbortPolicy());
         // 设置最大并发数 maxPoolSize + queueCapacity
         throttleSupport.setConcurrencyLimit(MAX_POOL_SIZE + QUEUE_CAPACITY);
         threadPoolTaskExecutor.initialize();
+    }
+
+    private StandardThreadExecutor() {
     }
 
     public static void execute(Runnable task) {
