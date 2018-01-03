@@ -21,9 +21,12 @@ public class ExecutorServiceDemo {
             for (int i = 0; i < returnDatas.size(); i++) {
                 System.out.println("第[" + i + "]个线程: " + returnDatas.get(i).get());
             }
-            service.shutdown(); // 尝试按顺序关闭，不接受新的执行任务
-            service.awaitTermination(30, TimeUnit.SECONDS); //设置超时时间
+            // 尝试按顺序关闭，不接受新的执行任务
+            service.shutdown();
+            // 设置超时时间
+            service.awaitTermination(30, TimeUnit.SECONDS);
         } catch (InterruptedException | ExecutionException e) {
+            Thread.currentThread().interrupt();
         }
     }
 }
