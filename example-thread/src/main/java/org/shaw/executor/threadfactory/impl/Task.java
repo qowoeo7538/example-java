@@ -1,4 +1,4 @@
-package org.shaw.concurrent.threadfactory.impl;
+package org.shaw.executor.threadfactory.impl;
 
 import java.util.concurrent.TimeUnit;
 

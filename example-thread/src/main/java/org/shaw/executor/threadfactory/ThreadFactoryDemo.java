@@ -1,7 +1,7 @@
-package org.shaw.concurrent.threadfactory;
+package org.shaw.executor.threadfactory;
 
-import org.shaw.concurrent.threadfactory.impl.CustomThreadFactory;
-import org.shaw.concurrent.threadfactory.impl.Task;
+import org.shaw.executor.threadfactory.impl.CustomThreadFactory;
+import org.shaw.executor.threadfactory.impl.Task;
 
 /**
  * @create: 2017-11-08
