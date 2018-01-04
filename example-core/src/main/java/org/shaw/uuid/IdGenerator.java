@@ -5,5 +5,10 @@ package org.shaw.uuid;
  * @description:
  */
 public interface IdGenerator {
+    /**
+     * 获取下一个ID
+     *
+     * @return {@code long} ID
+     */
     long nextId();
 }
