@@ -1,4 +1,4 @@
-package org.shaw.nio.server;
+package org.shaw.nio.server.impl;
 
 /**
  * 原理：以块的形式读写数据，可以在面向流的系统中，处理速度也会变快。

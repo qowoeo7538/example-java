@@ -1,7 +1,9 @@
-package org.shaw.nio.server;
+package org.shaw.nio.server.impl;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.shaw.nio.server.impl.Message;
+import org.shaw.nio.server.impl.MessageBuffer;
 
 /**
  * @create: 2017-12-23
@@ -11,6 +13,7 @@ public class MessageBufferTest {
 
     @Test
     public void testExpandMessage() {
+
         MessageBuffer messageBuffer = new MessageBuffer();
 
         Message message = messageBuffer.getMessage();

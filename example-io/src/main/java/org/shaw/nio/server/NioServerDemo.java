@@ -1,7 +1,7 @@
-package org.shaw.nio.server.demo;
+package org.shaw.nio.server;
 
-import org.shaw.nio.server.IMessageProcessor;
-import org.shaw.nio.server.Message;
+import org.shaw.nio.server.impl.IMessageProcessor;
+import org.shaw.nio.server.impl.Message;
 
 import java.io.UnsupportedEncodingException;
 
@@ -9,7 +9,7 @@ import java.io.UnsupportedEncodingException;
  * @create: 2017-12-21
  * @description:
  */
-public class Main {
+public class NioServerDemo {
     public static void main(String[] args) throws UnsupportedEncodingException {
         String httpResponse = "HTTP/1.1 200 OK\r\n" +
                 "Content-Length: 38\r\n" +
@@ -24,6 +24,8 @@ public class Main {
             Message response = writeProxy.getMessage();
             response.socketId = request.socketId;
             response.writeToMessage(httpResponseBytes);
+
+            writeProxy.enqueue(response);
         };
     }
 }

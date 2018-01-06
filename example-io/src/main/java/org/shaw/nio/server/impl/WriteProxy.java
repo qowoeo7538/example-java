@@ -1,4 +1,4 @@
-package org.shaw.nio.server;
+package org.shaw.nio.server.impl;
 
 import java.util.Queue;
 
@@ -8,6 +8,7 @@ import java.util.Queue;
  */
 public class WriteProxy {
 
+    /** 消息缓存 */
     private MessageBuffer messageBuffer;
 
     private Queue writeQueue;
@@ -19,5 +20,9 @@ public class WriteProxy {
 
     public Message getMessage() {
         return this.messageBuffer.getMessage();
+    }
+
+    public boolean enqueue(Message message) {
+        return this.writeQueue.offer(message);
     }
 }
