@@ -5,4 +5,7 @@ package org.shaw.nio.server.impl;
  * @description:
  */
 public class MessageTest {
+    public static void main(String[] args) {
+        System.out.println(System.getProperty("user.dir"));
+    }
 }

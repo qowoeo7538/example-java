@@ -9,6 +9,7 @@ include ':example-design-pattern'
 include ':example-thread'
 include ':example-jni'
 include ':example-jvm'
+include ':example-system'
 
 rootProject.children.each {project ->
     project.buildFileName = "${project.name}.gradle"
