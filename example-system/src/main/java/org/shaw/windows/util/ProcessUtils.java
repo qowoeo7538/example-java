@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
  * @description:
  */
 public class ProcessUtils {
+
     /**
      * 获取进程PID
      *
@@ -46,5 +47,18 @@ public class ProcessUtils {
             }
         }
         return processId;
+    }
+
+    /**
+     * 根据PID杀死进程
+     *
+     * @param pid
+     */
+    private static void killProc(String pid) {
+        try {
+            Runtime.getRuntime().exec("taskkill /F /PID " + pid);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
