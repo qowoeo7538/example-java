@@ -5,7 +5,7 @@ import java.lang.reflect.Array;
 /**
  * 数组反射
  */
-public class ArrayReflect {
+public class ArrayReflection {
     public static void main(String[] args) {
         /**
          * 单维数组

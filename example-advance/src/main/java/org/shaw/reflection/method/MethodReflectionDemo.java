@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
  * @create: 2017-11-08
  * @description:
  */
-public class MethodReflectDemo {
+public class MethodReflectionDemo {
     public static void main(String[] args) throws Exception {
         TestClass methodReflectDemo = new TestClass();
 

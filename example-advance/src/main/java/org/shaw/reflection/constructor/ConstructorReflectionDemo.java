@@ -10,7 +10,7 @@ import java.util.List;
  * @create: 2017-11-08
  * @description: 构造方法反射
  */
-public class ConstructorReflectDemo {
+public class ConstructorReflectionDemo {
     public static void main(String[] args) throws Exception {
         Class constructorReflectClass = Class.forName("org.shaw.reflection.constructor.impl.ConstructorReflectClass");
 
