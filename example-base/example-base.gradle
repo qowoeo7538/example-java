@@ -1,5 +1,5 @@
 description = "Example Base"
 
 dependencies {
-
+    compile(project(":example-core"))
 }

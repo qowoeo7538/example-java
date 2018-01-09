@@ -1,17 +1,5 @@
 description = "Example IO"
 
-apply plugin: "io.spring.dependency-management"
-
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework:spring-framework-bom:${springVersion}"
-    }
-    resolutionStrategy {
-        cacheChangingModulesFor 0, 'seconds'
-    }
-    applyMavenExclusions = false
-}
-
 dependencies{
     compile(project(":example-core"))
 }

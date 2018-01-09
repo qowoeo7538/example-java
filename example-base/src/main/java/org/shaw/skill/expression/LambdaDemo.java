@@ -1,10 +1,15 @@
 package org.shaw.skill.expression;
 
+import org.shaw.core.task.StandardThreadExecutor;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -14,20 +19,23 @@ import java.util.function.Supplier;
  */
 public class LambdaDemo {
 
-    Runnable r1 = () -> {
-        System.out.println(this);
-    };
+    Runnable r1 = () -> System.out.println(this);
 
-    Runnable r2 = () -> {
-        System.out.println(toString());
-    };
-
-    @Override
-    public String toString() {
-        return "Hello, world";
-    }
+    private static final Runnable r2 = () -> System.out.println("Hello, world");
 
     public static void main(String[] args) {
+
+        StandardThreadExecutor.execute(r2);
+
+        final String s = "Hello World";
+        Callable<String> callable = () -> s;
+        Future<String> future = StandardThreadExecutor.submit(callable);
+        try {
+            System.out.println(future.get());
+        } catch (InterruptedException | ExecutionException ie) {
+            Thread.currentThread().interrupt();
+        }
+
         // 为自己的函数体提供目标类型
         Supplier<Runnable> a = () -> () -> {
             System.out.println("hi");
@@ -49,18 +57,9 @@ public class LambdaDemo {
         Set<String> knownNames = new HashSet();
         Predicate<String> isKnown = knownNames::contains;
     }
-}
 
-interface Iterator<E> {
-    boolean hasNext();
-
-    E next();
-
-    void remove();
-
-    default void skip(int i) {
-        for (; i > 0 && hasNext(); i -= 1) {
-            next();
-        }
+    @Override
+    public String toString() {
+        return "Hello, world";
     }
 }

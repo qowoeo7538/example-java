@@ -6,7 +6,7 @@ import org.shaw.reflection.clazz.impl.Foo;
  * @create: 2017-11-08
  * @description:
  */
-public class ClazzReflectionDemo {
+public class ClassReflectionDemo {
     public static void main(String[] args) throws Exception {
         /**
          * 任何一个类都是Class的实例对象

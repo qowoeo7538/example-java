@@ -5,10 +5,7 @@ import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.util.Assert;
 
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedTransferQueue;
-import java.util.concurrent.RejectedExecutionException;
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.*;
 
 /**
  * StandardThreadExecutor execute执行策略：	优先扩充线程到maxThread，再offer到queue，如果满了就reject
@@ -99,6 +96,17 @@ public class StandardThreadExecutor {
                 throttleSupport.afterAccess();
             }
         });
+    }
+
+    /**
+     * 回调任务执行
+     *
+     * @param task {@code Callable}
+     * @param <T>  {@code Object}
+     * @return {@code Future}
+     */
+    public static  <T> Future<T> submit(Callable<T> task) {
+        return threadPoolTaskExecutor.submit(task);
     }
 
     public static void destroy() {
