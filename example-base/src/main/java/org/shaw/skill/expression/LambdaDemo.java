@@ -1,7 +1,6 @@
 package org.shaw.skill.expression;
 
 import org.shaw.core.task.StandardThreadExecutor;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -10,6 +9,7 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -28,13 +28,17 @@ public class LambdaDemo {
         StandardThreadExecutor.execute(r2);
 
         final String s = "Hello World";
-        Callable<String> callable = () -> s;
+        Callable<String> callable = () -> {
+            TimeUnit.SECONDS.sleep(10);
+            return s;
+        };
         Future<String> future = StandardThreadExecutor.submit(callable);
         try {
             System.out.println(future.get());
         } catch (InterruptedException | ExecutionException ie) {
             Thread.currentThread().interrupt();
         }
+        StandardThreadExecutor.destroy();
 
         // 为自己的函数体提供目标类型
         Supplier<Runnable> a = () -> () -> {

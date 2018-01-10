@@ -98,15 +98,21 @@ public class StandardThreadExecutor {
         });
     }
 
-    /**
-     * 回调任务执行
-     *
-     * @param task {@code Callable}
-     * @param <T>  {@code Object}
-     * @return {@code Future}
-     */
-    public static  <T> Future<T> submit(Callable<T> task) {
-        return threadPoolTaskExecutor.submit(task);
+    public static <T> Future<T> submit(Callable<T> task) {
+        Assert.state(threadPoolTaskExecutor != null, "线程池没有初始化");
+        FutureTask<T> futureTask = new FutureTask<>(task);
+        throttleSupport.beforeAccess(futureTask);
+        try {
+            threadPoolTaskExecutor.execute(futureTask);
+        } catch (RejectedExecutionException rx) {
+            // 尝试放入队列，失败则直接使用失败策略
+            if (!((ExecutorQueue) getThreadPoolExecutor().getQueue()).force(futureTask)) {
+                getThreadPoolExecutor().getRejectedExecutionHandler().rejectedExecution(futureTask, getThreadPoolExecutor());
+            }
+        } finally {
+            throttleSupport.afterAccess();
+        }
+        return futureTask;
     }
 
     public static void destroy() {
