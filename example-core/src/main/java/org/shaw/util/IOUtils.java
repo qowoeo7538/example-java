@@ -20,7 +20,7 @@ import java.security.MessageDigest;
  * @create: 2017-12-12
  * @description: Nio工具类
  */
-public class IOUtils {
+public abstract class IOUtils {
 
     /**
      * 通道处理工具类

@@ -9,7 +9,7 @@ import java.io.StringWriter;
  * @author calvin
  * @version 2013-01-15
  */
-public class Exceptions {
+public abstract class Exceptions {
 
     /**
      * 将CheckedException转换为UncheckedException.

@@ -1,6 +1,5 @@
 package org.shaw.util;
 
-import org.shaw.util.Exceptions;
 import org.shaw.util.support.CopyFile;
 
 import java.io.File;
@@ -11,7 +10,7 @@ import java.io.FileOutputStream;
  * @create: 2017-11-07
  * @description: 文件处理工具类
  */
-public class FileUtils {
+public abstract class FileUtils {
 
     public static void copyFile(String src, String copySrc) {
         CopyFile copyFile = new CopyFile(src, copySrc, 10);

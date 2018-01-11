@@ -6,7 +6,7 @@ import java.util.Random;
  * @create: 2017-11-16
  * @description: 测试数据生产
  */
-public class DataProducer {
+public abstract class DataProducer {
 
     private static Random random = new Random();
 
