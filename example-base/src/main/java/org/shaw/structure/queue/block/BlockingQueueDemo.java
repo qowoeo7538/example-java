@@ -1,11 +1,12 @@
-package org.shaw.base.queue.blocking;
+package org.shaw.structure.queue.block;
 
-import org.shaw.base.queue.blocking.impl.Consumer;
-import org.shaw.base.queue.blocking.impl.Producer;
 import org.shaw.core.task.StandardThreadExecutor;
+import org.shaw.structure.queue.block.impl.Consumer;
+import org.shaw.structure.queue.block.impl.Producer;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+
 
 /**
  * 阻塞队列
