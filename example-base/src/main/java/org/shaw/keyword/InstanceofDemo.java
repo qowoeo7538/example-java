@@ -13,6 +13,7 @@ public class InstanceofDemo {
     private static Cat cat = new Cat();
 
     public static void main(String[] args) {
+        instanceofTest();
         isInstanceTest();
     }
 
@@ -34,7 +35,6 @@ public class InstanceofDemo {
      */
     private static void isInstanceTest(){
         System.out.println("=========== isInstance() ===========");
-        System.out.println(Animal.class.isInstance(new Cat()));
         System.out.println(Animal.class.isInstance(new Cat()));
         System.out.println(Cat.class.isInstance(new Animal()));
         System.out.println(Cat.class.isInstance(null));
