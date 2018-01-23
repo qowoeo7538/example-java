@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * register()：这个方法将一个新的参与者注册到phaser中，这个新的参与者将被当成没有执行完本阶段的线程。返回到达的阶段数。
  * bulkRegister(int Parties):这个方法将指定数目的参与者注册到Phaser中，所有的这些参与者都讲被当成没有执行完本阶段的线程。
  */
-public class PhaserTest {
+public class PhaserDemo {
     private static final int TASK_PER_PHASER = 5;  //Task执行时间很短的场景（也就是竞争相对激烈），可以考虑使用较小的值。
 
     public static void main(String[] args) {

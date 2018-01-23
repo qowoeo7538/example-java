@@ -1,4 +1,4 @@
-package org.shaw.base;
+package org.shaw.concurrent.countdownlatch;
 
 import java.util.ArrayList;
 import java.util.List;

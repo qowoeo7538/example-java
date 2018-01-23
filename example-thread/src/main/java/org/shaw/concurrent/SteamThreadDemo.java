@@ -7,7 +7,7 @@ import java.util.Optional;
 /**
  * Created by joy on 17-3-17.
  */
-public class SteamThreadTest {
+public class SteamThreadDemo {
     public static void main(String[] args) {
         listSteam();
     }
