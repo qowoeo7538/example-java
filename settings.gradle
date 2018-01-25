@@ -1,15 +1,15 @@
 rootProject.name = 'Example'
 
-include ':example-advance'
-include ':example-base'
-include ':example-core'
-include ':example-web'
-include ':example-io'
-include ':example-design-pattern'
-include ':example-thread'
-include ':example-jni'
-include ':example-jvm'
-include ':example-system'
+include 'example-advance'
+include 'example-base'
+include 'example-core'
+include 'example-web'
+include 'example-io'
+include 'example-design-pattern'
+include 'example-thread'
+include 'example-jni'
+include 'example-jvm'
+include 'example-system'
 
 rootProject.children.each {project ->
     project.buildFileName = "${project.name}.gradle"
