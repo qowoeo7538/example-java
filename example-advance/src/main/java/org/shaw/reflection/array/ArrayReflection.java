@@ -7,9 +7,13 @@ import java.lang.reflect.Array;
  */
 public class ArrayReflection {
     public static void main(String[] args) {
-        /**
-         * 单维数组
-         */
+        single();
+    }
+
+    /**
+     * 单维数组
+     */
+    private static void single() {
         //创建int数组对象;
         String[] strings = (String[]) Array.newInstance(String.class, 3);
         Array.set(strings, 2, "第三个数");
@@ -21,10 +25,12 @@ public class ArrayReflection {
         System.out.println(Array.get(strings, 0));
         System.out.println(Array.get(strings, 1));
         System.out.println(Array.get(strings, 2));
+    }
 
-        /**
-         * 多维数组
-         */
+    /**
+     * 多维数组
+     */
+    private static void multi() {
         //为一个三维数组指定长度
         int[] dims = {5, 10, 15};
         Object array = Array.newInstance(String.class, dims);
