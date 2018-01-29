@@ -1,5 +1,6 @@
 package org.shaw.structure.set;
 
+import java.util.AbstractCollection;
 import java.util.LinkedHashSet;
 
 /**
@@ -13,6 +14,8 @@ public class LinkedHashSetDemo {
 
     /**
      * AbstractCollection 对 toString 方法进行的重写
+     *
+     * @see AbstractCollection#toString()
      */
     private static void strShow() {
         LinkedHashSet<String> set = new LinkedHashSet<>();
