@@ -1,11 +1,10 @@
 package org.shaw.nio.server.impl;
 
-/**
- * @create: 2017-12-22
- * @description:
- */
+import org.junit.Test;
+
 public class MessageTest {
-    public static void main(String[] args) {
-        System.out.println(System.getProperty("user.dir"));
+    @Test
+    public void testWriteToMessage() {
+        MessageBuffer messageBuffer = new MessageBuffer();
     }
 }
