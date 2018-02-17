@@ -1,7 +1,5 @@
 package org.shaw.base.info.method;
 
-import org.shaw.base.info.method.impl.TestClass;
-
 import java.lang.reflect.Method;
 
 /**
@@ -9,28 +7,52 @@ import java.lang.reflect.Method;
  * @description:
  */
 public class MethodReflectionDemo {
+
+    private final static String CLASS_NAME = "org.shaw.base.info.method.impl.MethodTests";
+
     public static void main(String[] args) throws Exception {
-        TestClass methodReflectDemo = new TestClass();
+        Class clazz = Class.forName(CLASS_NAME);
+        Object obj = clazz.getConstructor().newInstance();
 
-        Class methodReflectDemoClass = Class.forName("org.shaw.reflection.MethodReflectDemo");
+        // 获取方法
+        Method method = getMethod(clazz, "print");
+        Method method1 = getMethod(clazz, "print", String.class, String.class);
+        Method method2 = getMethod(clazz, "print", new Class[]{int.class, int.class});
 
-        /**
-         * getMethod获取的是public的方法
-         * getDelcaredMethod自己声明的方法
-         */
-        Method method = methodReflectDemoClass.getMethod("print", new Class[]{int.class, int.class});
+        // 调用 obj 对象的 print() 方法
+        callMethod(obj, method);
+        // 调用 obj 对象的 print(int, int) 方法，参数是(10,20)
+        callMethod(obj, method1, "hello", "world");
+        // 调用 obj 对象的 print(String, String) 方法，参数是("hello", "world")
+        callMethod(obj, method2, 10, 20);
+    }
 
-        /**
-         * 方法的反射操作是用method对象来进行方法调用和methodReflectDemo.print调用的效果完全相同
-         * 方法如果没有返回值返回null,有返回值返回具体的返回值
-         */
-        Object object = method.invoke(methodReflectDemo, 10, 20);
+    /**
+     * 获取方法对象
+     * 1) getMethod() 获取的是public的方法
+     * 2) getDelcaredMethod() 获取自己声明的方法
+     *
+     * @param clazz      类类型
+     * @param methodName 方法名字
+     * @return {@code Method}
+     * @throws Exception
+     */
+    private static Method getMethod(Class clazz, String methodName, Class<?>... parameterTypes) throws Exception {
+        Method method = clazz.getMethod(methodName, parameterTypes);
+        return method;
+    }
 
-        /**
-         * 获取print(String ,String )方法
-         */
-        Method method2 = methodReflectDemoClass.getMethod("print", String.class, String.class);
-        method2.invoke(methodReflectDemo, "hello", "world");
-
+    /**
+     * 方法的反射操作是通过 method 对象进行方法调用，和 methodReflectDemo.print() 调用的效果相同
+     *
+     * @param obj    被调用方法的对象
+     * @param method 方法对象
+     * @param args   方法参数列表
+     * @return 方法如果没有返回值返回 null,有返回值返回具体的返回值
+     * @throws Exception
+     */
+    private static Object callMethod(Object obj, Method method, Object... args) throws Exception {
+        Object object = method.invoke(obj, args);
+        return object;
     }
 }

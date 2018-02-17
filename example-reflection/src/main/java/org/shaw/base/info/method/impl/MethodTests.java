@@ -4,7 +4,7 @@ package org.shaw.base.info.method.impl;
  * @create: 2017-11-08
  * @description:
  */
-public class TestClass {
+public class MethodTests {
     public void print() {
         System.out.println("helloworld");
     }
