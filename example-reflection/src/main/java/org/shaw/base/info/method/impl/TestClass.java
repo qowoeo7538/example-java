@@ -1,4 +1,4 @@
-package org.shaw.base.method.impl;
+package org.shaw.base.info.method.impl;
 
 /**
  * @create: 2017-11-08

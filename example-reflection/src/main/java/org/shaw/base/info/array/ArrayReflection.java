@@ -1,4 +1,4 @@
-package org.shaw.base.array;
+package org.shaw.base.info.array;
 
 import java.lang.reflect.Array;
 

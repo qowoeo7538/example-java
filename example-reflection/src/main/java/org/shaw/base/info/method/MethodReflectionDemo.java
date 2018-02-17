@@ -1,6 +1,6 @@
-package org.shaw.base.method;
+package org.shaw.base.info.method;
 
-import org.shaw.base.method.impl.TestClass;
+import org.shaw.base.info.method.impl.TestClass;
 
 import java.lang.reflect.Method;
 

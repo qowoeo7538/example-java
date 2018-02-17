@@ -1,4 +1,4 @@
-package org.shaw.base.constructor.impl;
+package org.shaw.base.info.constructor.impl;
 
 import java.util.List;
 

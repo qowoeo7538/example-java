@@ -1,6 +1,6 @@
-package org.shaw.base.clazz;
+package org.shaw.base.info.clazz;
 
-import org.shaw.base.clazz.impl.GetClassInfo;
+import org.shaw.base.info.clazz.impl.GetClassInfo;
 
 /**
  * 通过反射获取类信息

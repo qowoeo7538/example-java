@@ -1,4 +1,4 @@
-package org.shaw.base.clazz;
+package org.shaw.base.info.clazz;
 
 /**
  * @create: 2018-01-08

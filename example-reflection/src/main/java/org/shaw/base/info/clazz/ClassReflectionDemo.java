@@ -1,6 +1,6 @@
-package org.shaw.base.clazz;
+package org.shaw.base.info.clazz;
 
-import org.shaw.base.clazz.impl.Foo;
+import org.shaw.base.info.clazz.impl.Foo;
 
 /**
  * @create: 2017-11-08

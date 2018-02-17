@@ -1,4 +1,4 @@
-package org.shaw.base.clazz.impl;
+package org.shaw.base.info.clazz.impl;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
