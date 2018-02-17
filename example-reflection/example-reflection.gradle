@@ -1,5 +1,6 @@
 description = "Example Reflection"
 
 dependencies {
-
+    compile("org.javassist:javassist:3.22.0-GA")
+    compile("org.springframework:spring-aop")
 }
