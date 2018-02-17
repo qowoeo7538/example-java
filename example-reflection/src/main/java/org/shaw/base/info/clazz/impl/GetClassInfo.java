@@ -31,16 +31,16 @@ public class GetClassInfo {
     }
 
     public void classType() {
-        //String的类类型 ===>String类的字节码;
+        // String的类类型 ===>String类的字节码;
         Class StringClass = String.class;
 
-        //类里的关键字都会有自己的类类型;
+        // 类里的关键字都会有自己的类类型;
         Class voidClass = void.class;
 
-        //以 String 的形式返回此 Class 对象所表示的实体名称;
+        // 以 String 的形式返回此 Class 对象所表示的实体名称;
         System.out.println(StringClass.getName());
 
-        //返回源代码中给出的底层类的简称;
+        // 返回源代码中给出的底层类的简称;
         System.out.println(StringClass.getSimpleName());
     }
 
