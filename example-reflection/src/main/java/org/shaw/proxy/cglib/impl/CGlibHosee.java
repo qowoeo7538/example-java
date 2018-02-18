@@ -1,4 +1,4 @@
-package org.shaw.base.proxy.cglib.impl;
+package org.shaw.proxy.cglib.impl;
 
 /**
  * @create: 2017-11-08

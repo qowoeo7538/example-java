@@ -1,4 +1,4 @@
-package org.shaw.base.info.method;
+package org.shaw.base.operation.call;
 
 import java.lang.reflect.Method;
 
@@ -6,9 +6,9 @@ import java.lang.reflect.Method;
  * @create: 2017-11-08
  * @description:
  */
-public class MethodReflectionDemo {
+public class CallMethodDemo {
 
-    private final static String CLASS_NAME = "org.shaw.base.info.method.impl.MethodTests";
+    private final static String CLASS_NAME = "org.shaw.base.operation.call.impl.MethodTests";
 
     public static void main(String[] args) throws Exception {
         Class clazz = Class.forName(CLASS_NAME);

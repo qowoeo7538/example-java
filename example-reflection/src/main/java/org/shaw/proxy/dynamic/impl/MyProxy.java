@@ -1,4 +1,4 @@
-package org.shaw.base.proxy.dynamic.impl;
+package org.shaw.proxy.dynamic.impl;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

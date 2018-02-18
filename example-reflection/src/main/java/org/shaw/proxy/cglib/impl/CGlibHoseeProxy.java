@@ -1,4 +1,4 @@
-package org.shaw.base.proxy.cglib.impl;
+package org.shaw.proxy.cglib.impl;
 
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;

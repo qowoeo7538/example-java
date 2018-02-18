@@ -1,7 +1,7 @@
-package org.shaw.base.proxy.cglib;
+package org.shaw.proxy.cglib;
 
-import org.shaw.base.proxy.cglib.impl.CGlibHosee;
-import org.shaw.base.proxy.cglib.impl.CGlibHoseeProxy;
+import org.shaw.proxy.cglib.impl.CGlibHosee;
+import org.shaw.proxy.cglib.impl.CGlibHoseeProxy;
 
 /**
  * 指定的目标类生成一个子类，并覆盖其中方法实现增强，但因为采用的是继承，所以不能对final修饰的类进行代理。

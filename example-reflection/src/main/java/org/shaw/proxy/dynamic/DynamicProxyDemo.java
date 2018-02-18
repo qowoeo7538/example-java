@@ -1,8 +1,8 @@
-package org.shaw.base.proxy.dynamic;
+package org.shaw.proxy.dynamic;
 
-import org.shaw.base.proxy.dynamic.impl.HoseeDynamicImpl;
-import org.shaw.base.proxy.dynamic.impl.HoseeDynamic;
-import org.shaw.base.proxy.dynamic.impl.MyProxy;
+import org.shaw.proxy.dynamic.impl.HoseeDynamicImpl;
+import org.shaw.proxy.dynamic.impl.HoseeDynamic;
+import org.shaw.proxy.dynamic.impl.MyProxy;
 
 /**
  * 动态代理

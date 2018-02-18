@@ -1,9 +1,9 @@
-package org.shaw.base.proxy.dynamic;
+package org.shaw.proxy.dynamic;
 
-import org.shaw.base.proxy.dynamic.impl.DProxy;
-import org.shaw.base.proxy.dynamic.impl.Interface;
-import org.shaw.base.proxy.dynamic.impl.MyInterceptor;
-import org.shaw.base.proxy.dynamic.impl.clazz;
+import org.shaw.proxy.dynamic.impl.DProxy;
+import org.shaw.proxy.dynamic.impl.Interface;
+import org.shaw.proxy.dynamic.impl.MyInterceptor;
+import org.shaw.proxy.dynamic.impl.clazz;
 
 /**
  * 基于Javassist动态生成字节码实现简单的动态代理

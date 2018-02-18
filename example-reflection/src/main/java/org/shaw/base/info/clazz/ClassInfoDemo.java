@@ -1,4 +1,6 @@
-package org.shaw.base.info.clazz.impl;
+package org.shaw.base.info.clazz;
+
+import org.shaw.base.info.clazz.impl.Foo;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -6,50 +8,27 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
 /**
- * @create: 2017-11-08
- * @description:
+ * 通过反射获取类信息
  */
-public class GetClassInfo {
+public class ClassInfoDemo {
 
-    /**
-     * 内部类
-     */
-    public static class GetClassInfoInternal {
-        public static final String FQCN = GetClassInfoInternal.class.getName();
-    }
+    public static void main(String[] args) throws Exception {
+        // 打印类的信息，包括类的成员函数、只获取成员函数名
+        // printClassMethodMessage(new Foo());
 
-    public static String getShortName(Class<?> clzz) {
-        String className = clzz.getTypeName();
-        int lastDotIndex = className.lastIndexOf('.');
-        int nameEndIndex = className.indexOf("$$");
-        if (nameEndIndex == -1) {
-            nameEndIndex = className.length();
-        }
-        String shortName = className.substring(lastDotIndex + 1, nameEndIndex);
-        shortName = shortName.replace('$', '.');
-        return shortName;
-    }
+        // 获取成员变量的信息
+        // printFieldMessage(new Foo());
 
-    public void classType() {
-        // String的类类型 ===>String类的字节码;
-        Class StringClass = String.class;
-
-        // 类里的关键字都会有自己的类类型;
-        Class voidClass = void.class;
-
-        // 以 String 的形式返回此 Class 对象所表示的实体名称;
-        System.out.println(StringClass.getName());
-
-        // 返回源代码中给出的底层类的简称;
-        System.out.println(StringClass.getSimpleName());
+        // 打印对象的构造函数的信息
+        printConMessage(new Foo());
     }
 
     /**
-     * 打印类的信息，包括类的成员函数、只获取成员函数名
+     * 打印类的信息，类的成员函数
      *
      * @param obj 该对象所属类的信息
      */
-    public static void printClassMethodMessage(Object obj) {
+    private static void printClassMethodMessage(Object obj) {
         Class objClass = obj.getClass();
         System.out.println(objClass.getName());
 
@@ -61,13 +40,13 @@ public class GetClassInfo {
          */
         Method[] methods = objClass.getMethods();
         for (Method method : methods) {
-            //获取方法修饰符
+            // 获取方法修饰符
             System.out.print(Modifier.toString(method.getModifiers()) + " ");
-            //获取方法返回类型
+            // 获取方法返回类型
             Class returnClass = method.getReturnType();
             System.out.print(returnClass.getSimpleName() + " ");
 
-            //获取方法名
+            // 获取方法名
             System.out.print(method.getName() + " (");
 
             //获取方法参数列表
@@ -84,7 +63,7 @@ public class GetClassInfo {
      *
      * @param obj
      */
-    public static void printFieldMessage(Object obj) throws Exception {
+    private static void printFieldMessage(Object obj) throws Exception {
         /**
          * 成员变量也是对象
          * java.lang.reflect.Field
@@ -100,11 +79,11 @@ public class GetClassInfo {
             Class fieldClass = field.getType();
             // 对私有属性开启强制访问
             field.setAccessible(true);
-            //field.get(obj) 获取该属性在对象中的值
-            System.out.print(fieldClass.getSimpleName() + ":" + field.get(obj));
             //得到成员变量的名称
             String filedName = field.getName();
-            System.out.println(filedName);
+            //field.get(obj) 获取该属性在对象中的值
+            Object value = field.get(obj);
+            System.out.print(fieldClass.getSimpleName() + ":" + filedName + "=" + value);
         }
     }
 
@@ -113,7 +92,7 @@ public class GetClassInfo {
      *
      * @param obj
      */
-    public static void printConMessage(Object obj) {
+    private static void printConMessage(Object obj) {
         Class objClass = obj.getClass();
         /**
          * 构造函数也是对象

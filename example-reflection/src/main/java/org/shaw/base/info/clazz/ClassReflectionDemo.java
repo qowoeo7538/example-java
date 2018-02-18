@@ -12,31 +12,30 @@ public class ClassReflectionDemo {
          * 任何一个类都是Class的实例对象
          * 反射是将字节文件加载到内存里面
          */
-        //第一种表示方式--->实际在告诉我们任何一个类都有一个隐含的静态成员变量class
+        // 任何一个类都有一个隐含的静态成员变量 Class
         Class foo1 = Foo.class;
 
-        //第二中表达方式,已经知道该类的对象通过getClass方法
+        // 该类的对象通过 getClass() 获取 Class.
         Foo foo = new Foo();
         Class foo2 = foo.getClass();
 
-        //第三种方式
-        Class foo3 = Class.forName("com.myweb.reflect.Foo");
+        // 通过类全名获取 Class 对象
+        Class foo3 = Class.forName("org.shaw.base.info.clazz.impl.Foo");
 
         /**
-         * 官网 c1 ,c2 表示了Foo类的类类型(class type)
-         * 万事万物皆对象，
-         * 类也是对象，是Class类的实例对象
-         * 这个对象我们称为该类的类类型
+         * foo1, foo2, foo3 表示了Foo类的类类型(class type)
+         * 万事万物皆对象，类也是对象，是Class类的实例对象,这个对象我们称为该类的类类型
          */
-        //不管foo1  or foo2 or foo3都代表了Foo类的类类型，一个类只可能是Class类的一个实例对象
         System.out.println(foo1 == foo2);
         System.out.println(foo1 == foo3);
 
         /**
          * 通过类的类类型创建该类的对象实例
          */
-        //实际调用该类的无参构造方法
+        // 实际调用该类的无参构造方法
         Foo foo4 = (Foo) foo1.newInstance();
         foo4.print();
+        // 通过有参构造方法创建实例
+        Foo foo5 = (Foo) foo1.getConstructor(String.class).newInstance();
     }
 }

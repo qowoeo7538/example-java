@@ -1,4 +1,4 @@
-package org.shaw.base.proxy.dynamic.impl;
+package org.shaw.proxy.dynamic.impl;
 
 /**
  * @create: 2017-11-08
