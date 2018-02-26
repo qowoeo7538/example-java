@@ -23,6 +23,17 @@ public class User {
     @Column("user_email")
     private String email;
 
+    public User() {
+    }
+
+    public User(String id, Date createTime, Date updateTime, String userName, String email) {
+        this.id = id;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+        this.userName = userName;
+        this.email = email;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -61,5 +72,12 @@ public class User {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    /**
+     * 内部类
+     */
+    public static class UserInfoInternal {
+        public static final String FQCN = UserInfoInternal.class.getName();
     }
 }

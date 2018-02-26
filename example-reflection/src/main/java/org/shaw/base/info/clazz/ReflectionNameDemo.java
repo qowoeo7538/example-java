@@ -1,6 +1,6 @@
 package org.shaw.base.info.clazz;
 
-import org.shaw.base.info.clazz.impl.Foo;
+import org.shaw.base.info.clazz.impl.User;
 
 /**
  * @create: 2018-01-08
@@ -9,12 +9,15 @@ import org.shaw.base.info.clazz.impl.Foo;
 public class ReflectionNameDemo {
     public static void main(String[] args) {
         // 获取类全名
-        System.out.println(Foo.class.getName());
-        System.out.println(Foo.FooInfoInternal.FQCN);
+        System.out.println("============" + "获取类全名" + "============");
+        System.out.println(User.class.getName());
+        System.out.println(User.UserInfoInternal.FQCN);
         // 获取底层类的简称
+        System.out.println("============" + "获取底层类的简称" + "============");
         System.out.println(getShortName(ClassInfoDemo.class));
-        System.out.println(getShortName(Foo.FooInfoInternal.class));
+        System.out.println(getShortName(User.UserInfoInternal.class));
         // 部分基本类类型
+        System.out.println("============" + "部分基本类类型" + "============");
         commonClassType();
     }
 
