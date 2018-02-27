@@ -31,10 +31,8 @@ public class NioService {
      * 测试服务
      */
     public void mySetup() {
-        ServerSocketChannel ssc = null;
-        try {
+        try (ServerSocketChannel ssc = ServerSocketChannel.open()) {
             int index = 0;
-            ssc = ServerSocketChannel.open();
             ssc.socket().bind(new InetSocketAddress(hostname, port));
             ssc.configureBlocking(false);
             Selector selector = Selector.open();
@@ -79,14 +77,6 @@ public class NioService {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (ssc != null) {
-                try {
-                    ssc.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 }

@@ -87,8 +87,9 @@ public class CopyFile {
 
         @Override
         public void run() {
-            try {
-                RandomAccessFile randomAccessFileRead = new RandomAccessFile(this.srcName, "r");
+            try (RandomAccessFile randomAccessFileRead = new RandomAccessFile(this.srcName, "r");
+                 RandomAccessFile randomAccessFileWrite = new RandomAccessFile(this.copyName, "rw")
+            ) {
                 byte[] bytes;
                 randomAccessFileRead.seek((this.block - 1) * this.writeSize);
                 if (this.block <= this.count) {
@@ -97,12 +98,8 @@ public class CopyFile {
                     bytes = new byte[(int) this.fileSize % this.count];
                 }
                 randomAccessFileRead.read(bytes, 0, bytes.length);
-                randomAccessFileRead.close();
-
-                RandomAccessFile randomAccessFileWrite = new RandomAccessFile(this.copyName, "rw");
                 randomAccessFileWrite.seek((this.block - 1) * this.writeSize);
                 randomAccessFileWrite.write(bytes);
-                randomAccessFileWrite.close();
             } catch (Exception e) {
                 throw Exceptions.unchecked(e);
             }

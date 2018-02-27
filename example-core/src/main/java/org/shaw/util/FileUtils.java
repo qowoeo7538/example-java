@@ -29,16 +29,16 @@ public abstract class FileUtils {
      * @throws Exception
      */
     public static void saveTempFile(File sourceFile, File tempFile) throws Exception {
-        FileInputStream inputStream = new FileInputStream(sourceFile);
-        FileOutputStream fileOutputStream = new FileOutputStream(tempFile);
-        byte[] buf = new byte[10 * 1024];
-        int readLeng = 0;
-        while ((readLeng = inputStream.read(buf)) != -1) {
-            fileOutputStream.write(buf, 0, readLeng);
-            fileOutputStream.flush();
+        try (FileInputStream inputStream = new FileInputStream(sourceFile);
+             FileOutputStream fileOutputStream = new FileOutputStream(tempFile)
+        ) {
+            byte[] buf = new byte[10 * 1024];
+            int readLength;
+            while ((readLength = inputStream.read(buf)) != -1) {
+                fileOutputStream.write(buf, 0, readLength);
+                fileOutputStream.flush();
+            }
         }
-        fileOutputStream.close();
-        inputStream.close();
     }
 
 }

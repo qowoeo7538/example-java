@@ -1,9 +1,6 @@
 package org.shaw.base.bytes;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.*;
 
 /**
  * 或读取操作时，都会加上缓冲，这种流模式提高了IO的性能
@@ -27,15 +24,15 @@ public class BufferedStreamTest {
     /**
      * 利用缓冲区拷贝文件
      */
-    public static void copyFileByBuffer(String srcData, String copyData) throws Exception {
-        BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(srcData));
-        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(copyData));
-        int bte;
-        while ((bte = bufferedInputStream.read()) != -1) {
-            bufferedOutputStream.write(bte);
-            bufferedOutputStream.flush(); //刷新缓冲区
+    public static void copyFileByBuffer(String srcData, String copyData) throws IOException {
+        try (BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(srcData));
+             BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(copyData))) {
+            int bte;
+            while ((bte = bufferedInputStream.read()) != -1) {
+                bufferedOutputStream.write(bte);
+                //刷新缓冲区
+                bufferedOutputStream.flush();
+            }
         }
-        bufferedInputStream.close();
-        bufferedOutputStream.close();
     }
 }

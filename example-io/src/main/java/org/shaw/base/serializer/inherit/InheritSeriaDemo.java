@@ -33,10 +33,10 @@ public class InheritSeriaDemo {
      * 对象序列化(继承类，只要一个类实现序列化接口，将会递归全部序列化)
      */
     public static <T> void objectSeria(String fileName, T t) throws Exception {
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName));
-        objectOutputStream.writeObject(t);
-        objectOutputStream.flush();
-        objectOutputStream.close();
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
+            objectOutputStream.writeObject(t);
+            objectOutputStream.flush();
+        }
     }
 
     /**
@@ -45,9 +45,11 @@ public class InheritSeriaDemo {
      * 对子类对象进行反序列化操作时，如果其父类没有实现序列化接口,那么其父类的构造函数会被调用
      */
     public static <T> T objectDeseria(String fileName) throws Exception {
-        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fileName));
-        T obj = (T) objectInputStream.readObject();
-        objectInputStream.close();
-        return obj;
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fileName))) {
+            T obj = (T) objectInputStream.readObject();
+            return obj;
+        } catch (Exception e) {
+            throw e;
+        }
     }
 }

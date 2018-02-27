@@ -24,10 +24,8 @@ public class NioClient {
     }
 
     public void sendFile(String srcFile) {
-        FileInputStream fileInputStream = null;
-        try {
+        try (FileInputStream fileInputStream = new FileInputStream(srcFile)) {
             final SocketChannel socketChannel = SocketChannel.open();
-            fileInputStream = new FileInputStream(srcFile);
             FileChannel fileChannel = fileInputStream.getChannel();
 
             InetSocketAddress listener = new InetSocketAddress(hostname, port);
@@ -47,14 +45,6 @@ public class NioClient {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (fileInputStream != null) {
-                try {
-                    fileInputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 }

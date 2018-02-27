@@ -1,6 +1,7 @@
 package org.shaw.windows.util;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
@@ -17,11 +18,10 @@ public class ProcessUtils {
      */
     public static String getPid(String processName) {
         String processId = "";
-        BufferedReader bufferedReader = null;
-        try {
-            Process proc = Runtime.getRuntime().exec(
-                    "tasklist /nh /FI \"IMAGENAME eq " + processName + "\"");
-            bufferedReader = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
+                Runtime.getRuntime()
+                        .exec("tasklist /nh /FI \"IMAGENAME eq " + processName + "\"")
+                        .getInputStream()))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 if (line.contains(processName)) {
@@ -35,16 +35,8 @@ public class ProcessUtils {
                     }
                 }
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             return "";
-        } finally {
-            if (bufferedReader != null) {
-                try {
-                    bufferedReader.close();
-                } catch (Exception e) {
-                    return "";
-                }
-            }
         }
         return processId;
     }

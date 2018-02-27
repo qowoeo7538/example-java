@@ -92,12 +92,10 @@ public abstract class IOUtils {
             return null;
         }
         MessageDigest digest = null;
-        FileInputStream in = null;
         byte buffer[] = new byte[8192];
         int len;
-        try {
+        try (FileInputStream in = new FileInputStream(file)) {
             digest = MessageDigest.getInstance(hashType);
-            in = new FileInputStream(file);
             while ((len = in.read(buffer)) != -1) {
                 digest.update(buffer, 0, len);
             }
@@ -106,12 +104,6 @@ public abstract class IOUtils {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
-        } finally {
-            try {
-                in.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -122,20 +114,20 @@ public abstract class IOUtils {
      * @return
      * @throws Exception
      */
-    public static String byteToString(File file) throws Exception {
+    public static String byteToString(File file) throws IOException {
         StringBuilder returnDatas = new StringBuilder();
-        FileInputStream fileInputStream = new FileInputStream(file);
-        BASE64Encoder base64 = new BASE64Encoder();
-        byte[] buf = new byte[10 * 1024];
-        int readLenth = 0;
-        while ((readLenth = fileInputStream.read(buf)) != -1) {
-            byte[] copyByte = new byte[readLenth - 1];
-            for (int i = 0; i < copyByte.length; i++) {
-                copyByte[i] = buf[i];
+        try (FileInputStream fileInputStream = new FileInputStream(file)) {
+            BASE64Encoder base64 = new BASE64Encoder();
+            byte[] buf = new byte[10 * 1024];
+            int readLenth = 0;
+            while ((readLenth = fileInputStream.read(buf)) != -1) {
+                byte[] copyByte = new byte[readLenth - 1];
+                for (int i = 0; i < copyByte.length; i++) {
+                    copyByte[i] = buf[i];
+                }
+                returnDatas.append(base64.encode(copyByte));
             }
-            returnDatas.append(base64.encode(copyByte));
         }
-        fileInputStream.close();
         return returnDatas.toString();
     }
 
@@ -146,10 +138,10 @@ public abstract class IOUtils {
      * @param file
      * @throws Exception
      */
-    public static void StringTobyte(String str, File file) throws Exception {
-        FileOutputStream fileOutputStream = new FileOutputStream(file);
-        BASE64Decoder base64 = new BASE64Decoder();
-        fileOutputStream.write(base64.decodeBuffer(str));
-        fileOutputStream.close();
+    public static void StringTobyte(String str, File file) throws IOException {
+        try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
+            BASE64Decoder base64 = new BASE64Decoder();
+            fileOutputStream.write(base64.decodeBuffer(str));
+        }
     }
 }

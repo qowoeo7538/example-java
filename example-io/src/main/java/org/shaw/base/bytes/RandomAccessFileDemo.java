@@ -3,6 +3,7 @@ package org.shaw.base.bytes;
 import org.shaw.util.IOUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.RandomAccessFile;
 
 /**
@@ -21,27 +22,26 @@ public class RandomAccessFileDemo {
      * @param i
      * @throws Exception
      */
-    public static long intWrite(File file, int i) throws Exception {
+    public static long intWrite(File file, int i) throws IOException {
         if (!file.exists()) {
             throw new IllegalArgumentException("当前文件不存在！");
         }
         if (!file.isFile()) {
             throw new IllegalArgumentException(file + "不是文件！");
         }
-        RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw");
-        // 序列化
-
-        // 右移24位，&0xff 屏蔽高24位;
-        randomAccessFile.write((i >>> 24) & 0xFF);
-        // 右移16位，&0xff 屏蔽高24位;
-        randomAccessFile.write((i >>> 16) & 0xFF);
-        // 右移8位，&0xff 屏蔽高24位;
-        randomAccessFile.write((i >>> 8) & 0xFF);
-        // 右移0位，&0xff 屏蔽高24位;
-        randomAccessFile.write((i >>> 0) & 0xFF);
-        // randomAccessFile.writeInt(i); 直接写入
-        long pointer = randomAccessFile.getFilePointer();
-        randomAccessFile.close();
+        long pointer;
+        try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw")) {
+            // 右移24位，&0xff 屏蔽高24位;
+            randomAccessFile.write((i >>> 24) & 0xFF);
+            // 右移16位，&0xff 屏蔽高24位;
+            randomAccessFile.write((i >>> 16) & 0xFF);
+            // 右移8位，&0xff 屏蔽高24位;
+            randomAccessFile.write((i >>> 8) & 0xFF);
+            // 右移0位，&0xff 屏蔽高24位;
+            randomAccessFile.write((i >>> 0) & 0xFF);
+            // randomAccessFile.writeInt(i); 直接写入
+            pointer = randomAccessFile.getFilePointer();
+        }
         return pointer;
     }
 
@@ -54,18 +54,19 @@ public class RandomAccessFileDemo {
      * @return
      * @throws Exception
      */
-    public static long charWrite(File file, Character c, String encode) throws Exception {
+    public static long charWrite(File file, Character c, String encode) throws IOException {
         if (!file.exists()) {
             throw new IllegalArgumentException("当前文件不存在！");
         }
         if (!file.isFile()) {
             throw new IllegalArgumentException(file + "不是文件！");
         }
-        RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw");
-        byte[] bytes = IOUtils.getChartoBytes(c, encode);
-        randomAccessFile.write(bytes);
-        long pointer = randomAccessFile.getFilePointer();
-        randomAccessFile.close();
+        long pointer;
+        try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw")) {
+            byte[] bytes = IOUtils.getChartoBytes(c, encode);
+            randomAccessFile.write(bytes);
+            pointer = randomAccessFile.getFilePointer();
+        }
         return pointer;
     }
 
@@ -83,14 +84,15 @@ public class RandomAccessFileDemo {
         if (!file.isFile()) {
             throw new IllegalArgumentException(file + "不是文件！");
         }
-        RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw");
-        //读文件，必须把指针移到头部
-        randomAccessFile.seek(0);
-        byte[] bytes = new byte[(int) (randomAccessFile.length())];
-        randomAccessFile.read(bytes);
-        String str = new String(bytes, "utf-8");
-        System.out.println(str);
-        randomAccessFile.close();
+        byte[] bytes;
+        try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw")) {
+            //读文件，必须把指针移到头部
+            randomAccessFile.seek(0);
+            bytes = new byte[(int) (randomAccessFile.length())];
+            randomAccessFile.read(bytes);
+            String str = new String(bytes, "utf-8");
+            System.out.println(str);
+        }
         return bytes;
     }
 }
