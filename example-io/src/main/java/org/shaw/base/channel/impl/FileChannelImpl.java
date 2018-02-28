@@ -17,25 +17,15 @@ public class FileChannelImpl {
      * @param filePath 文件路径
      */
     public static void channeToBuffer(String filePath) {
-        RandomAccessFile randomAccessFile = null;
-        try {
-            randomAccessFile = new RandomAccessFile(filePath, "rw");
+        try (RandomAccessFile randomAccessFile = new RandomAccessFile(filePath, "rw")) {
             // 获取流通道
             FileChannel inChannel = randomAccessFile.getChannel();
             // 通道中的数据读到缓冲区中
             IOUtils.channelRead(inChannel, (buffer) -> {
                 System.out.print((char) buffer.get());
             });
-        } catch (IOException ex) {
-            ex.getStackTrace();
-        } finally {
-            if (randomAccessFile != null) {
-                try {
-                    randomAccessFile.close();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
+        } catch (IOException e) {
+            e.getStackTrace();
         }
     }
 
@@ -45,14 +35,11 @@ public class FileChannelImpl {
      * @param fromPath 源文件
      * @param toPath   目标文件
      */
-    public static void channelTransferFrom(String fromPath, String toPath) {
-        RandomAccessFile fromFile = null;
-        RandomAccessFile toFile = null;
-        try {
-            fromFile = new RandomAccessFile(fromPath, "rw");
-            FileChannel fromChannel = fromFile.getChannel();
+    public static void channelTransferFrom(String fromPath, String toPath) throws IOException {
+        try (RandomAccessFile fromFile = new RandomAccessFile(fromPath, "rw");
+             RandomAccessFile toFile = new RandomAccessFile(toPath, "rw")) {
 
-            toFile = new RandomAccessFile(toPath, "rw");
+            FileChannel fromChannel = fromFile.getChannel();
             FileChannel toChannel = toFile.getChannel();
 
             long position = 0;
@@ -63,23 +50,6 @@ public class FileChannelImpl {
             IOUtils.channelRead(toChannel, (buffer) -> {
                 System.out.print((char) buffer.get());
             });
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } finally {
-            if (fromFile != null) {
-                try {
-                    fromFile.close();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
-            if (toFile != null) {
-                try {
-                    toFile.close();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
         }
     }
 
@@ -89,14 +59,11 @@ public class FileChannelImpl {
      * @param fromPath 源文件
      * @param toPath   目标文件
      */
-    public static void channelTransferTo(String fromPath, String toPath) {
-        RandomAccessFile fromFile = null;
-        RandomAccessFile toFile = null;
-        try {
-            fromFile = new RandomAccessFile(fromPath, "rw");
-            FileChannel fromChannel = fromFile.getChannel();
+    public static void channelTransferTo(String fromPath, String toPath) throws IOException {
+        try (RandomAccessFile fromFile = new RandomAccessFile(fromPath, "rw");
+             RandomAccessFile toFile = new RandomAccessFile(toPath, "rw")) {
 
-            toFile = new RandomAccessFile(toPath, "rw");
+            FileChannel fromChannel = fromFile.getChannel();
             FileChannel toChannel = toFile.getChannel();
 
             long position = 0;
@@ -106,23 +73,6 @@ public class FileChannelImpl {
             IOUtils.channelRead(fromChannel, (buffer) -> {
                 System.out.print((char) buffer.get());
             });
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fromFile != null) {
-                try {
-                    fromFile.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (toFile != null) {
-                try {
-                    toFile.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 }

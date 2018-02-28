@@ -10,36 +10,24 @@ import java.io.FileWriter;
 public class DaemonThread implements Runnable {
     String fileName;
 
-    public DaemonThread(String fileName){
+    public DaemonThread(String fileName) {
         this.fileName = fileName;
     }
 
     @Override
     public void run() {
-        System.out.println("进入守护线程"+Thread.currentThread().getId());
-        BufferedWriter bufferedWriter = null;
-        try {
-            bufferedWriter = new BufferedWriter(new FileWriter(fileName,true));
+        System.out.println("进入守护线程" + Thread.currentThread().getId());
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName, true))) {
             int i = 1;
-            while (true){
-                bufferedWriter.write(Thread.currentThread().getId()+"第["+i+"]次输入;");
-                System.out.println(Thread.currentThread().getId()+"第["+i+"]次输入;");
+            while (true) {
+                bufferedWriter.write(Thread.currentThread().getId() + "第[" + i + "]次输入;");
+                System.out.println(Thread.currentThread().getId() + "第[" + i + "]次输入;");
                 i++;
                 bufferedWriter.flush();
                 Thread.sleep(1000);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            if (bufferedWriter!=null){
-                try {
-                    bufferedWriter.close();
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-            System.out.println("退出守护线程"+Thread.currentThread().getId());
         }
     }
 }

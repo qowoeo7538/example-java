@@ -55,13 +55,12 @@ public class MyClassLoader extends ClassLoader {
      * @throws IOException
      */
     public byte[] getClassToBytes(File file) throws IOException {
-        try {
-            FileInputStream fis = new FileInputStream(file);
-            FileChannel fc = fis.getChannel();
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            WritableByteChannel wbc = Channels.newChannel(baos);
+        try (FileInputStream fis = new FileInputStream(file);
+             FileChannel fc = fis.getChannel();
+             ByteArrayOutputStream baos = new ByteArrayOutputStream();
+             WritableByteChannel wbc = Channels.newChannel(baos)
+        ) {
             ByteBuffer by = ByteBuffer.allocate(1024);
-
             while (true) {
                 int i = fc.read(by);
                 if (i == 0 || i == -1) {
@@ -71,15 +70,11 @@ public class MyClassLoader extends ClassLoader {
                 wbc.write(by);
                 by.clear();
             }
-            fc.close();
-            fis.close();
-            wbc.close();
-            baos.close();
             return baos.toByteArray();
         } catch (IOException e) {
+            e.printStackTrace();
             throw new IOException();
         }
-
     }
 
     public void set_filePath(String filePath) {

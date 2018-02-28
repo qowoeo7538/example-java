@@ -30,16 +30,14 @@ public class TransferToClient {
     }
 
     public void testSendfile() {
-        SocketChannel sc = null;
-        FileChannel fc = null;
-        try {
+        try (SocketChannel sc = SocketChannel.open();
+             FileChannel fc = new FileInputStream(srcFile).getChannel()) {
             SocketAddress sad = new InetSocketAddress(host, port);
-            sc = SocketChannel.open();
             // 关联这个通道的socket。
             sc.connect(sad);
             // 将连接改变为阻塞模型,该方法会将通道上锁
             sc.configureBlocking(true);
-            fc = new FileInputStream(srcFile).getChannel();
+
             long start = System.nanoTime();
             long curnset = 0;
             curnset = fc.transferTo(0, fc.size(), sc);
@@ -48,22 +46,6 @@ public class TransferToClient {
                     + (System.nanoTime() - start));
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (sc != null) {
-                try {
-                    sc.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (fc != null) {
-                try {
-                    fc.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
-
     }
 }
