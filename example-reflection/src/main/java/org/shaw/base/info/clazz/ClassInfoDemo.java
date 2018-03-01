@@ -1,5 +1,7 @@
 package org.shaw.base.info.clazz;
 
+import org.shaw.base.info.clazz.impl.Column;
+import org.shaw.base.info.clazz.impl.InheritedAnnotation;
 import org.shaw.base.info.clazz.impl.Table;
 import org.shaw.base.info.clazz.impl.User;
 
@@ -32,6 +34,14 @@ public class ClassInfoDemo {
         // 打印类的成员函数信息
         System.out.println("===========" + "打印类的成员函数信息" + "===========");
         methodMessage(new User());
+
+        // 打印类的注解信息
+        System.out.println("===========" + "打印类的注解信息" + "===========");
+        getClassAnnotationMessage(new User());
+
+        // 打印成员属性的注解信息
+        System.out.println("===========" + "打印成员属性的注解信息" + "===========");
+        getFieldAnnotationMessage(new User());
 
         // 打印类的注解信息
         System.out.println("===========" + "打印类的注解信息" + "===========");
@@ -135,8 +145,48 @@ public class ClassInfoDemo {
         }
     }
 
-    private static <A extends Annotation> void annotationMessage(Object obj, Class<A>... annotationClass) throws Exception {
-        Class objClass = obj.getClass();
+    /**
+     * 获取类的注解信息
+     *
+     * @param obj
+     */
+    private static void getClassAnnotationMessage(Object obj) {
+        Class<?> objClass = obj.getClass();
+        if (!objClass.isAnnotationPresent(InheritedAnnotation.class)) {
+            System.out.println("该对象不含" + InheritedAnnotation.class + "注解");
+        }
+        InheritedAnnotation inheritedAnnotationObj = objClass.getAnnotation(InheritedAnnotation.class);
+        System.out.println("InheritedAnnotation : value = " + inheritedAnnotationObj.value());
+
+        Table tableObj = objClass.getAnnotation(Table.class);
+        System.out.println("Table : value = " + tableObj.value());
+    }
+
+    /**
+     * 获取成员属性注解信息
+     */
+    private static void getFieldAnnotationMessage(Object obj) {
+        Class<?> objClass = obj.getClass();
+        Field[] fields = objClass.getDeclaredFields();
+        for (Field field : fields) {
+            field.setAccessible(true);
+            if (field.isAnnotationPresent(Column.class)) {
+                Column columnObj = field.getAnnotation(Column.class);
+                System.out.println("Column : value = " + columnObj.value());
+            }
+        }
+    }
+
+    /**
+     * TODO 获取所有注解信息
+     *
+     * @param obj
+     * @param annotationClass
+     * @param <A>
+     * @throws Exception
+     */
+    private static <A extends Annotation> void annotationMessage(Object obj, Class<A>... annotationClass) {
+        Class<?> objClass = obj.getClass();
         if (annotationClass != null && annotationClass.length != 0) {
             for (Class<A> clazz : annotationClass) {
                 if (!objClass.isAnnotationPresent(clazz)) {
@@ -156,20 +206,19 @@ public class ClassInfoDemo {
     }
 
     /**
-     * 通过反射获取对象的成员属性值
+     * TODO 通过反射获取对象的成员属性值
      *
      * @param obj {@code Object}
      * @return
      */
     private static Map<String, Object> getFieldValue(Object obj) {
         Map<String, Object> returnData = new HashMap<>();
-        // Field[] fields = obj.getClass().getFields();
-        Method[] methods = obj.getClass().getMethods();
-        for (Method field : methods) {
+        Field[] fields = obj.getClass().getFields();
+        for (Field field : fields) {
             try {
                 field.setAccessible(true);
                 // 得到此属性的值
-                returnData.put(field.getName(), 1);
+                returnData.put(field.getName(), field.get(obj));
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -2,7 +2,7 @@ package org.shaw.base.info.clazz.impl;
 
 import java.util.Date;
 
-@InheritedAnnotation("parent")
+@InheritedAnnotation("base")
 public class BaseEntity {
 
     @Column("gmt_create")
