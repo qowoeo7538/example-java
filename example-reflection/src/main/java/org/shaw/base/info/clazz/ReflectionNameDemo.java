@@ -11,7 +11,7 @@ public class ReflectionNameDemo {
         // 获取类全名
         System.out.println("============" + "获取类全名" + "============");
         System.out.println(User.class.getName());
-        System.out.println(User.UserInfoInternal.FQCN);
+        System.out.println(User.UserInfoInternal.USER_INFO_INTERNAL);
         // 获取底层类的简称
         System.out.println("============" + "获取底层类的简称" + "============");
         System.out.println(getShortName(ClassInfoDemo.class));

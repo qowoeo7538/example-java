@@ -3,11 +3,7 @@ package org.shaw.base.info.clazz.impl;
 import java.util.Date;
 
 @InheritedAnnotation("parent")
-@Table(value = "common_user")
-public class CommonUser {
-
-    @Column("id")
-    private String id;
+public class BaseEntity {
 
     @Column("gmt_create")
     private Date createTime;
@@ -15,21 +11,12 @@ public class CommonUser {
     @Column("gmt_modified")
     private Date updateTime;
 
-    public CommonUser() {
+    public BaseEntity() {
     }
 
-    public CommonUser(String id, Date createTime, Date updateTime) {
-        this.id = id;
+    public BaseEntity(String id, Date createTime, Date updateTime) {
         this.createTime = createTime;
         this.updateTime = updateTime;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public Date getCreateTime() {

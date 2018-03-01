@@ -1,9 +1,7 @@
 package org.shaw.base.info.clazz.impl;
 
-import java.util.Date;
-
 @Table(value = "user")
-public class User extends CommonUser {
+public class User extends BaseEntity {
 
     @Column("user_name")
     private String userName;
@@ -51,6 +49,6 @@ public class User extends CommonUser {
      * 内部类
      */
     public static class UserInfoInternal {
-        public static final String FQCN = UserInfoInternal.class.getName();
+        public static final String USER_INFO_INTERNAL = UserInfoInternal.class.getName();
     }
 }
