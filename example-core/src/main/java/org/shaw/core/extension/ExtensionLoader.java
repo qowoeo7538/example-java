@@ -2,27 +2,49 @@ package org.shaw.core.extension;
 
 import org.shaw.util.Holder;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.regex.Pattern;
 
 public class ExtensionLoader<T> {
 
+    private static final Pattern NAME_SEPARATOR = Pattern.compile("\\s*[,]+\\s*");
+
+    /**
+     * key: Class<?> 类类型对象
+     * value: ExtensionLoader<?> 通过 Class 构建的 {@code ExtensionLoader} 对象
+     */
     private static final ConcurrentMap<Class<?>, ExtensionLoader<?>> EXTENSION_LOADERS = new ConcurrentHashMap<>();
 
     private final ExtensionFactory objectFactory;
 
+    /** 维护一个 Object 对象 */
     private final Holder<Object> cachedAdaptiveInstance = new Holder<>();
+
+    /** 维护一个 Map<String, Class> 对象 */
+    private final Holder<Map<String, Class<?>>> cachedClasses = new Holder<>();
 
     private final Class<?> type;
 
+    /**
+     * 为保证错误及时获取，通过 volatile 每次获取主内存的值
+     */
+    private volatile Throwable createAdaptiveInstanceError;
+
     private ExtensionLoader(Class<?> type) {
         this.type = type;
-        objectFactory = (type == ExtensionFactory.class ? null : ExtensionLoader.getExtensionLoader(ExtensionFactory.class).getAdaptiveExtension());
+        objectFactory = (type == ExtensionFactory.class ? null : ExtensionLoader
+                // 获取 ExtensionFactory 的 ExtensionLoader 对象
+                .getExtensionLoader(ExtensionFactory.class)
+                .getAdaptiveExtension());
     }
 
     /**
-     * 尝试从 {@link #EXTENSION_LOADERS} 获取 type 的 {@code ExtensionLoader}，否则
-     * 将 {@code new ExtensionLoader<T>(type)} 放入 {@link #EXTENSION_LOADERS}
+     * 尝试从 {@link #EXTENSION_LOADERS} 获取 type 的 {@code ExtensionLoader}，
+     * 如果为空, 将 {@code new ExtensionLoader<T>(type)} 放入 {@link #EXTENSION_LOADERS}
      *
      * @param type 类类型对象
      * @param <T>
@@ -49,8 +71,28 @@ public class ExtensionLoader<T> {
         return loader;
     }
 
+    /**
+     * 设计模式: 单例双重检查
+     *
+     * @return
+     */
     public T getAdaptiveExtension() {
         Object instance = cachedAdaptiveInstance.get();
+        if (instance == null) {
+            if (createAdaptiveInstanceError == null) {
+                synchronized (cachedAdaptiveInstance) {
+                    instance = cachedAdaptiveInstance.get();
+                    if (instance == null) {
+                        try {
+                            instance = createAdaptiveExtension();
+                        } catch () {
+
+                        }
+                    }
+                }
+            }
+        }
+        return (T) instance;
     }
 
     /**
@@ -62,5 +104,85 @@ public class ExtensionLoader<T> {
      */
     private static <T> boolean withExtensionAnnotation(Class<T> type) {
         return type.isAnnotationPresent(SPI.class);
+    }
+
+    private T createAdaptiveExtension() {
+        try {
+            /**
+             * 注意：通过 {@link Class#newInstance()} 创建实例，会绕过编译时的异常检查。
+             *      如果不希望如此，建议通过反射构造函数来创建实例 {@link java.lang.reflect.Constructor#newInstance(Object...)}
+             */
+            return injectExtension((T) getAdaptiveExtensionClass().newInstance());
+        } catch (Exception e) {
+            throw new IllegalStateException("Can not create adaptive extension " + type + ", cause: " + e.getMessage(), e);
+        }
+    }
+
+    private Class<?> getAdaptiveExtensionClass() {
+        getExtensionClasses();
+    }
+
+    /**
+     * 设计模式: 双重检查保证单例
+     *
+     * @return
+     */
+    private Map<String, Class<?>> getExtensionClasses() {
+        Map<String, Class<?>> classes = cachedClasses.get();
+        if (classes == null) {
+            synchronized (cachedClasses) {
+                classes = cachedClasses.get();
+                if (classes == null) {
+                    classes = loadExtensionClasses();
+                    cachedClasses.set(classes);
+                }
+            }
+        }
+    }
+
+    private Map<String, Class<?>> loadExtensionClasses() {
+        final SPI defaultAnnotation = type.getAnnotation(SPI.class);
+        if (defaultAnnotation != null) {
+            // 获取类的注解信息
+            String value = defaultAnnotation.value();
+            if (value != null && (value = value.trim()).length() > 0) {
+                String[] names = NAME_SEPARATOR.split(value);
+            }
+        }
+    }
+
+    private T injectExtension(T instance) {
+        try {
+            if (objectFactory != null) {
+                // 遍历 instance 所有的 public 方法
+                for (Method method : instance.getClass().getMethods()) {
+                    /**
+                     * 条件：
+                     * 1) 方法名以 set 开头
+                     * 2) 方法只有一个参数
+                     * 3) 方法的修饰符为 public
+                     */
+                    if (method.getName().startsWith("set")
+                            && method.getParameterTypes().length == 1
+                            && Modifier.isPublic(method.getModifiers())) {
+                        Class<?> pt = method.getParameterTypes()[0];
+                        try {
+                            String property = method.getName().length() > 3 ? method.getName().substring(3, 4).toLowerCase() + method.getName().substring(4) : "";
+                            Object object = objectFactory.getExtension(pt, property);
+                            if (object != null) {
+                                method.invoke(instance, object);
+                            }
+                        } catch (Exception e) {
+                            //TODO 日志
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            //TODO 日志
+            e.printStackTrace();
+        }
+        return instance;
     }
 }

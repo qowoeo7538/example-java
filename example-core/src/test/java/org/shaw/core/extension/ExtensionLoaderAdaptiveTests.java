@@ -1,6 +1,8 @@
 package org.shaw.core.extension;
 
 import org.junit.Test;
+import org.shaw.core.extension.adaptive.HasAdaptiveExt;
+import org.shaw.core.extension.adaptive.impl.HasAdaptiveExtManualAdaptive;
 
 import static org.junit.Assert.assertTrue;
 
@@ -10,9 +12,9 @@ import static org.junit.Assert.assertTrue;
  */
 public class ExtensionLoaderAdaptiveTests {
     @Test
-    public void test_useAdaptiveClass() throws Exception {
+    public void testUseAdaptiveClass() throws Exception {
         ExtensionLoader<HasAdaptiveExt> loader = ExtensionLoader.getExtensionLoader(HasAdaptiveExt.class);
         HasAdaptiveExt ext = loader.getAdaptiveExtension();
-        assertTrue(ext instanceof HasAdaptiveExt_ManualAdaptive);
+        assertTrue(ext instanceof HasAdaptiveExtManualAdaptive);
     }
 }

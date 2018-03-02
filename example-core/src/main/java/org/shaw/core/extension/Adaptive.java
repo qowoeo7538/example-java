@@ -6,10 +6,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 标记 SPI 接口
+ * @create: 2018-03-01
+ * @description:
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE})
-public @interface SPI {
-    String value() default "";
+@Target({ElementType.TYPE, ElementType.METHOD})
+public @interface Adaptive {
+    String[] value() default {};
 }
