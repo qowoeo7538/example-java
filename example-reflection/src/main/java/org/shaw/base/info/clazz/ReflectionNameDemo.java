@@ -50,10 +50,16 @@ public class ReflectionNameDemo {
          * 类类型(class) ===> 类的字节码
          */
         System.out.println(String[].class.getName());
+        System.out.println(String[].class.getCanonicalName());
         System.out.println(Short.class.getName());
+        System.out.println(Short.class.getCanonicalName());
         System.out.println(short[].class.getName());
+        System.out.println(short[].class.getCanonicalName());
         System.out.println(short.class.getName());
+        System.out.println(short.class.getCanonicalName());
         System.out.println(Void.class.getName());
+        System.out.println(Void.class.getCanonicalName());
         System.out.println(void.class.getName());
+        System.out.println(void.class.getCanonicalName());
     }
 }
