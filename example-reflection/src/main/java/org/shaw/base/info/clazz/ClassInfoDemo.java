@@ -29,11 +29,11 @@ public class ClassInfoDemo {
 
         // 打印类的成员变量的信息
         System.out.println("===========" + "打印类的成员变量的信息" + "===========");
-        fieldMessage(new User());
+        fieldMessage(new User("张三", "40"));
 
         // 打印类的成员函数信息
         System.out.println("===========" + "打印类的成员函数信息" + "===========");
-        methodMessage(new User());
+        methodMessage(new User("张三", "40"));
 
         // 打印类的注解信息
         System.out.println("===========" + "打印类的注解信息" + "===========");
@@ -130,18 +130,31 @@ public class ClassInfoDemo {
             // 获取方法修饰符
             System.out.print(Modifier.toString(method.getModifiers()) + " ");
             // 获取方法返回类型
-            Class returnClass = method.getReturnType();
+            Class<?> returnClass = method.getReturnType();
             System.out.print(returnClass.getSimpleName() + " ");
 
             // 获取方法名
             System.out.print(method.getName() + " (");
 
-            //获取方法参数列表
-            Class[] parameterTypes = method.getParameterTypes();
+            // 获取方法参数列表
+            Class<?>[] parameterTypes = method.getParameterTypes();
             for (Class parameterType : parameterTypes) {
                 System.out.print(parameterType.getSimpleName() + " ");
             }
-            System.out.println(")");
+            System.out.print(") ");
+
+            // 获取方法异常信息
+            Class<?>[] exceptionTypes = method.getExceptionTypes();
+            for (int i = 0, length = exceptionTypes.length; i < length; i++) {
+                if (i == 0) {
+                    System.out.print("throws ");
+                }
+                System.out.print(exceptionTypes[i].getSimpleName());
+                if (i < length - 1) {
+                    System.out.print(",");
+                }
+            }
+            System.out.println();
         }
     }
 
