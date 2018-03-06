@@ -12,7 +12,7 @@ import java.io.StringWriter;
 public abstract class Exceptions {
 
     /**
-     * 将CheckedException转换为UncheckedException.
+     * 将 CheckedException 转换为 UncheckedException.
      */
     public static RuntimeException unchecked(Exception e) {
         if (e instanceof RuntimeException) {
@@ -23,7 +23,7 @@ public abstract class Exceptions {
     }
 
     /**
-     * 将ErrorStack转化为String.
+     * 将 ErrorStack 转化为String.
      */
     public static String getStackTraceAsString(Throwable e) {
         if (e == null) {
