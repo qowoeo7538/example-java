@@ -1,4 +1,4 @@
-package org.shaw.util.support;
+package org.shaw.io.support;
 
 import org.shaw.util.Exceptions;
 import org.shaw.util.IOUtils;

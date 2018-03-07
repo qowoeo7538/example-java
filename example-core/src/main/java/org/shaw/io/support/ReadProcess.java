@@ -1,4 +1,4 @@
-package org.shaw.util.support;
+package org.shaw.io.support;
 
 import java.nio.ByteBuffer;
 

@@ -1,6 +1,6 @@
 package org.shaw.util;
 
-import org.shaw.util.support.CopyFile;
+import org.shaw.io.support.CopyFile;
 
 import java.io.File;
 import java.io.FileInputStream;

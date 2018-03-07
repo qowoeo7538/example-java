@@ -1,6 +1,7 @@
 package org.shaw.core.extension;
 
 import org.shaw.common.Constants;
+import org.shaw.util.ClassUtils;
 import org.shaw.util.ConcurrentHashSet;
 import org.shaw.util.Holder;
 import org.shaw.util.StringUtils;
@@ -72,11 +73,12 @@ public class ExtensionLoader<T> {
      */
     private ExtensionLoader(Class<?> type) {
         this.type = type;
-        // ExtensionFactory 属于该类的工厂类, 忽略掉
-        objectFactory = (type == ExtensionFactory.class ? null : ExtensionLoader
-                // 获取 ExtensionFactory 的 ExtensionLoader 对象
-                .getExtensionLoader(ExtensionFactory.class)
-                .getAdaptiveExtension());
+        // 创建 SPI 的工厂类,忽略掉本身就是工厂的 ExtensionFactory 类
+        objectFactory = (type == ExtensionFactory.class ? null :
+                ExtensionLoader
+                        // 获取 ExtensionFactory 的 ExtensionLoader 对象
+                        .getExtensionLoader(ExtensionFactory.class)
+                        .getAdaptiveExtension());
     }
 
     /**
@@ -233,15 +235,18 @@ public class ExtensionLoader<T> {
     private T createAdaptiveExtension() {
         try {
             /**
-             * 注意：通过 {@link Class#newInstance()} 创建实例，会绕过编译时的异常检查。
-             *      如果不希望如此，建议通过反射构造函数来创建实例 {@link java.lang.reflect.Constructor#newInstance(Object...)}
+             * 注意：通过 {@link Class#newInstance()} 创建实例，会绕过编译时的异常检查。如果不希望如此，
+             *      建议通过反射构造函数来创建实例 {@link java.lang.reflect.Constructor#newInstance(Object...)}
              */
             return injectExtension((T) getAdaptiveExtensionClass().getConstructor().newInstance());
         } catch (Exception e) {
-            throw new IllegalStateException("Can not create adaptive extension " + type + ", cause: " + e.getMessage(), e);
+            throw new IllegalStateException("不能创建 adaptive extension: " + type + ", 原因: " + e.getMessage(), e);
         }
     }
 
+    /**
+     * @see #getExtensionClasses()
+     */
     private Class<?> getAdaptiveExtensionClass() {
         getExtensionClasses();
         if (cachedAdaptiveClass != null) {
@@ -252,7 +257,7 @@ public class ExtensionLoader<T> {
 
     private Class<?> createAdaptiveExtensionClass() {
         String code = createAdaptiveExtensionClassCode();
-        ClassLoader classLoader = findClassLoader();
+        ClassLoader classLoader = ClassUtils.getDefaultClassLoader();
         org.shaw.compiler.Compiler compiler = ExtensionLoader.getExtensionLoader(org.shaw.compiler.Compiler.class)
                 .getAdaptiveExtension();
         return compiler.compile(code, classLoader);
@@ -370,6 +375,7 @@ public class ExtensionLoader<T> {
      * 设计模式: 双重检查保证单例
      *
      * @return
+     * @see #loadExtensionClasses()
      */
     private Map<String, Class<?>> getExtensionClasses() {
         Map<String, Class<?>> classes = cachedClasses.get();
@@ -385,14 +391,10 @@ public class ExtensionLoader<T> {
         return classes;
     }
 
-    private static ClassLoader findClassLoader() {
-        return ExtensionLoader.class.getClassLoader();
-    }
-
     private Map<String, Class<?>> loadExtensionClasses() {
+        // 获取 SPI 接口的注解信息
         final SPI defaultAnnotation = type.getAnnotation(SPI.class);
         if (defaultAnnotation != null) {
-            // 获取类的注解信息
             String value = defaultAnnotation.value();
             if (value != null && (value = value.trim()).length() > 0) {
                 String[] names = NAME_SEPARATOR.split(value);
@@ -412,11 +414,18 @@ public class ExtensionLoader<T> {
         return extensionClasses;
     }
 
+    /**
+     * 加载 class 文件
+     *
+     * @param extensionClasses
+     * @param dir
+     */
     private void loadFile(Map<String, Class<?>> extensionClasses, String dir) {
+        // 获取 SPI 接口描述文件
         String fileName = dir + type.getName();
         try {
             Enumeration<URL> urls;
-            ClassLoader classLoader = findClassLoader();
+            ClassLoader classLoader = ClassUtils.getDefaultClassLoader();
             if (classLoader != null) {
                 urls = classLoader.getResources(fileName);
             } else {

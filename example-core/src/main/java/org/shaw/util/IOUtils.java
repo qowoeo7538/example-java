@@ -1,6 +1,6 @@
 package org.shaw.util;
 
-import org.shaw.util.support.ReadProcess;
+import org.shaw.io.support.ReadProcess;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
