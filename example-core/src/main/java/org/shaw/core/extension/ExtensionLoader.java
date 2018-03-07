@@ -418,7 +418,7 @@ public class ExtensionLoader<T> {
      * 加载 class 文件
      *
      * @param extensionClasses
-     * @param dir
+     * @param dir              servers 文件目录
      */
     private void loadFile(Map<String, Class<?>> extensionClasses, String dir) {
         // 获取 SPI 接口描述文件
@@ -426,6 +426,7 @@ public class ExtensionLoader<T> {
         try {
             Enumeration<URL> urls;
             ClassLoader classLoader = ClassUtils.getDefaultClassLoader();
+            // 加载 SPI 接口描述文件
             if (classLoader != null) {
                 urls = classLoader.getResources(fileName);
             } else {
@@ -438,7 +439,9 @@ public class ExtensionLoader<T> {
                         try (BufferedReader reader = new BufferedReader(
                                 new InputStreamReader(url.openStream(), "utf-8"))) {
                             String line;
+                            // 获取文件每行信息
                             while ((line = reader.readLine()) != null) {
+                                // 截取 "#" 之前的信息
                                 final int ci = line.indexOf('#');
                                 if (ci >= 0) {
                                     line = line.substring(0, ci);
@@ -455,11 +458,11 @@ public class ExtensionLoader<T> {
                                             line = line.substring(i + 1).trim();
                                         }
                                         if (line.length() > 0) {
+                                            // 加载 SPI 实现类
                                             Class<?> clazz = Class.forName(line, true, classLoader);
                                             if (!type.isAssignableFrom(clazz)) {
-                                                throw new IllegalStateException("Error when load extension class(interface: " +
-                                                        type + ", class line: " + clazz.getName() + "), class "
-                                                        + clazz.getName() + "is not subtype of interface.");
+                                                throw new IllegalStateException("加载的类 " + clazz.getName()
+                                                        + " 不是 " + type + " 的子类或实现类");
                                             }
                                             if (clazz.isAnnotationPresent(Adaptive.class)) {
                                                 if (cachedAdaptiveClass == null) {

@@ -9,10 +9,10 @@ import org.shaw.base.info.clazz.impl.User;
 public class ClassReflectionDemo {
     public static void main(String[] args) throws Exception {
         // 获取 class 对象
-        getObjectClass();
+        // getObjectClass();
 
         // 通过 class 创建对象
-        // createObject();
+        createObject();
     }
 
     /**
