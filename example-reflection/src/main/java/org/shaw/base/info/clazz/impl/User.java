@@ -10,11 +10,13 @@ public class User extends BaseEntity {
     private String password;
 
     public User() {
+        System.out.println("无参构造函数");
     }
 
     public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
+        System.out.println("有参构造函数");
     }
 
     public String getUserName() {

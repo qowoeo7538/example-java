@@ -1,6 +1,7 @@
 package org.shaw.base.info.clazz;
 
 import org.shaw.base.info.clazz.impl.User;
+import org.springframework.util.ClassUtils;
 
 /**
  * @create: 2017-11-08
@@ -9,10 +10,10 @@ import org.shaw.base.info.clazz.impl.User;
 public class ClassReflectionDemo {
     public static void main(String[] args) throws Exception {
         // 获取 class 对象
-        // getObjectClass();
+        getObjectClass();
 
         // 通过 class 创建对象
-        createObject();
+        // createObject();
     }
 
     /**
@@ -21,7 +22,7 @@ public class ClassReflectionDemo {
      *
      * @throws ClassNotFoundException
      */
-    private static void getObjectClass() throws ClassNotFoundException {
+    private static void getObjectClass() throws Exception {
         // 通过隐含的静态成员变量 Class 获取
         Class userClass1 = User.class;
 
@@ -31,10 +32,11 @@ public class ClassReflectionDemo {
 
         /**
          * name:       类全名
-         * initialize: 是否进行初始化
+         * initialize: true 如果没有被初始化过,那么会被初始化.
          * loader:     类加载器
          */
-        Class userClass3 = Class.forName("org.shaw.base.info.clazz.impl.User", true, ClassReflectionDemo.class.getClassLoader());
+        Class userClass3 = Class.forName("org.shaw.base.info.clazz.impl.User", true,
+                ClassUtils.getDefaultClassLoader());
 
         // userClass1, userClass2, userClass3 表示了 User 类的类类型(class type)
         System.out.println(userClass1 == userClass2);

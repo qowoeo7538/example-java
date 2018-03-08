@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
 
 public class ExtensionLoader<T> {
 
+    /** 将字符串按 "," 分割 */
     private static final Pattern NAME_SEPARATOR = Pattern.compile("\\s*[,]+\\s*");
 
     /** 构建过的对象, 将保存到该对象中进行缓存 */
@@ -32,6 +33,10 @@ public class ExtensionLoader<T> {
     /** 自定义 SPI 目录 */
     private static final String INTERNAL_DIRECTORY = DIRECTORY + "internal/";
 
+    /**
+     * key:   实现类 Class 对象
+     * value: Class 对象的实例
+     */
     private static final ConcurrentMap<Class<?>, Object> EXTENSION_INSTANCES = new ConcurrentHashMap<>();
 
     private final Map<String, Activate> cachedActivates = new ConcurrentHashMap<>();
@@ -45,10 +50,15 @@ public class ExtensionLoader<T> {
     /** 维护一个 Object 对象 */
     private final Holder<Object> cachedAdaptiveInstance = new Holder<>();
 
-    /** 维护一个 Map<String, Class> 对象 */
+    /**
+     * 该变量维护一个 HashMap 对象
+     * <p>
+     * key:   该 type 实现类的别名
+     * value: 实现类的 Class
+     */
     private final Holder<Map<String, Class<?>>> cachedClasses = new Holder<>();
 
-    /** SPI 接口 */
+    /** SPI 接口类 */
     private final Class<?> type;
 
     /** SPI 实现类 */
@@ -63,6 +73,7 @@ public class ExtensionLoader<T> {
 
     private Set<Class<?>> cachedWrapperClasses;
 
+    /** SPI 接口的 value 信息 */
     private String cachedDefaultName;
 
     /**
@@ -173,6 +184,12 @@ public class ExtensionLoader<T> {
         return Collections.unmodifiableSet(new TreeSet<>(clazzes.keySet()));
     }
 
+    /**
+     * 根据扩展类别名获取实例对象
+     *
+     * @param name 扩展类别名
+     * @see #getExtensionClasses()
+     */
     private T createExtension(String name) {
         Class<?> clazz = getExtensionClasses().get(name);
         if (clazz == null) {
@@ -180,8 +197,9 @@ public class ExtensionLoader<T> {
         }
         try {
             T instance = (T) EXTENSION_INSTANCES.get(clazz);
+            // 因为 ConcurrentMap 原子操作的特性, 此处也能像双重检查一样保证单例
             if (instance == null) {
-                EXTENSION_INSTANCES.putIfAbsent(clazz, clazz.newInstance());
+                EXTENSION_INSTANCES.putIfAbsent(clazz, clazz.getConstructor().newInstance());
                 instance = (T) EXTENSION_INSTANCES.get(clazz);
             }
             injectExtension(instance);
@@ -372,9 +390,9 @@ public class ExtensionLoader<T> {
     }
 
     /**
-     * 设计模式: 双重检查保证单例
+     * 双重检查
+     * 获取 {@link #cachedClasses}
      *
-     * @return
      * @see #loadExtensionClasses()
      */
     private Map<String, Class<?>> getExtensionClasses() {
@@ -391,12 +409,19 @@ public class ExtensionLoader<T> {
         return classes;
     }
 
+    /**
+     * 获取 {@link #type} 的 SPI 注解信息赋值给 {@link #cachedDefaultName},
+     * 并加载相关的 Class
+     *
+     * @see #loadFile(Map, String)
+     */
     private Map<String, Class<?>> loadExtensionClasses() {
         // 获取 SPI 接口的注解信息
         final SPI defaultAnnotation = type.getAnnotation(SPI.class);
         if (defaultAnnotation != null) {
             String value = defaultAnnotation.value();
             if (value != null && (value = value.trim()).length() > 0) {
+                // 将 SPI 注解信息的 value 按照 "," 进行切割
                 String[] names = NAME_SEPARATOR.split(value);
                 if (names.length > 1) {
                     throw new IllegalStateException("more than 1 default extension name on extension " + type.getName()
@@ -415,9 +440,9 @@ public class ExtensionLoader<T> {
     }
 
     /**
-     * 加载 class 文件
+     * 根据 {@link #type} 找到 SPI 目录的描述文件,加载相关的 Class
      *
-     * @param extensionClasses
+     * @param extensionClasses kay: 扩展类别名 value: 扩展类具体 Class
      * @param dir              servers 文件目录
      */
     private void loadFile(Map<String, Class<?>> extensionClasses, String dir) {
@@ -474,27 +499,32 @@ public class ExtensionLoader<T> {
                                                 }
                                             } else {
                                                 try {
-                                                    // 获取指定参数的构造函数
+                                                    // 获取对象指定参数的构造函数
                                                     clazz.getConstructor(type);
                                                     Set<Class<?>> wrappers = cachedWrapperClasses;
                                                     if (wrappers == null) {
                                                         cachedWrapperClasses = new ConcurrentHashSet<>();
                                                         wrappers = cachedWrapperClasses;
                                                     }
+                                                    wrappers.add(clazz);
                                                 } catch (NoSuchMethodException e) {
+                                                    // 获取对象无参构造函数
                                                     clazz.getConstructor();
                                                     if (name == null || name.length() == 0) {
                                                         if (clazz.getSimpleName().length() > type.getSimpleName().length()
                                                                 && clazz.getSimpleName().endsWith(type.getSimpleName())) {
+                                                            // 如果没有 SPI 别名,默认别名
                                                             name = clazz.getSimpleName().substring(0, clazz.getSimpleName().length() - type.getSimpleName().length()).toLowerCase();
                                                         } else {
-                                                            throw new IllegalStateException("No such extension name for the class " + clazz.getName() + " in the config " + url);
+                                                            throw new IllegalStateException("没有类的扩展名: " + clazz.getName() + ", 配置文件: " + url);
                                                         }
                                                     }
+                                                    // 用 "," 号进行隔分
                                                     String[] names = NAME_SEPARATOR.split(name);
                                                     if (names != null && names.length > 0) {
                                                         Activate activate = clazz.getAnnotation(Activate.class);
                                                         if (activate != null) {
+                                                            // 将 Activate 注解信息绑定在第一个别名
                                                             cachedActivates.put(names[0], activate);
                                                         }
                                                         for (String n : names) {
@@ -503,6 +533,7 @@ public class ExtensionLoader<T> {
                                                             }
                                                             Class<?> c = extensionClasses.get(n);
                                                             if (c == null) {
+                                                                // key: 别名 == value: 实现类 Class
                                                                 extensionClasses.put(n, clazz);
                                                             } else if (c != clazz) {
                                                                 throw new IllegalStateException("Duplicate extension " + type.getName() + " name " + n + " on " + c.getName() + " and " + clazz.getName());
