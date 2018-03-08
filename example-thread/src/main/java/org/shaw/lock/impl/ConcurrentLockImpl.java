@@ -20,7 +20,7 @@ public class ConcurrentLockImpl {
             signal = cacheTimestamp.get(name);
             try {
                 if (!cachedLock.contains(name)) {
-                    // TODO doCache(file);
+                    // 具体实现
                     process.process();
                     cachedLock.add(name);
                 }
