@@ -20,7 +20,7 @@ public class ConcurrentLockImpl {
             signal = cacheTimestamp.get(name);
             try {
                 if (!cachedLock.contains(name)) {
-                    // 具体实现
+                    // 具体业务
                     process.process();
                     cachedLock.add(name);
                 }
