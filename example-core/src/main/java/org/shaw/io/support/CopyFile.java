@@ -1,7 +1,7 @@
 package org.shaw.io.support;
 
-import org.shaw.util.Exceptions;
-import org.shaw.util.IOUtils;
+import org.shaw.util.ExceptionUtils;
+import org.shaw.util.StreamUtils;
 
 import java.io.RandomAccessFile;
 
@@ -29,9 +29,9 @@ public class CopyFile {
 
     public CopyFile(String srcName, String copyName, int count) {
         try {
-            this.fileSize = IOUtils.getFileSize(CopyFile.this.srcName);
+            this.fileSize = StreamUtils.getFileSize(CopyFile.this.srcName);
         } catch (Exception e) {
-            throw Exceptions.unchecked(e);
+            throw ExceptionUtils.unchecked(e);
         }
         this.srcName = srcName;
         this.copyName = copyName;
@@ -101,7 +101,7 @@ public class CopyFile {
                 randomAccessFileWrite.seek((this.block - 1) * this.writeSize);
                 randomAccessFileWrite.write(bytes);
             } catch (Exception e) {
-                throw Exceptions.unchecked(e);
+                throw ExceptionUtils.unchecked(e);
             }
         }
 

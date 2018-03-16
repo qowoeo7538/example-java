@@ -5,10 +5,9 @@ import org.shaw.io.UnsafeStringWriter;
 import java.io.PrintWriter;
 
 /**
- * @create: 2018-03-05
- * @description:
+ * String 工具类
  */
-public abstract class StringUtils {
+public abstract class StringUtils extends org.springframework.util.StringUtils {
     /**
      * 异常打印
      *

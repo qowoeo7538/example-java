@@ -1,6 +1,6 @@
 package org.shaw.functional;
 
-import org.shaw.util.DataProducer;
+import org.shaw.util.DataProducerHelper;
 import org.springframework.core.task.support.TaskExecutorAdapter;
 import org.springframework.util.concurrent.ListenableFuture;
 
@@ -18,7 +18,7 @@ public class ListenableFutureTaskDemo {
             ListenableFuture listenableFuture = taskExecutorAdapter.submitListenable(() -> {
                 System.out.println("任务开始");
                 try {
-                    TimeUnit.SECONDS.sleep(DataProducer.nextInt(10));
+                    TimeUnit.SECONDS.sleep(DataProducerHelper.nextInt(10));
                 } catch (InterruptedException ex) {
                     Thread.currentThread().interrupt();
                 }

@@ -1,7 +1,7 @@
 package org.shaw.concurrent.semaphore;
 
 import org.shaw.core.task.StandardThreadExecutor;
-import org.shaw.util.DataProducer;
+import org.shaw.util.DataProducerHelper;
 
 import java.util.concurrent.Semaphore;
 
@@ -22,7 +22,7 @@ public class SemaphoreDemo {
                     System.out.println("[" + Thread.currentThread().getId() + "]等待获取许可！");
                     semaphore.acquire();
                     System.out.println("[" + Thread.currentThread().getId() + "]已经获取许可！");
-                    Thread.sleep((long) DataProducer.nextInt(1, 10000));
+                    Thread.sleep((long) DataProducerHelper.nextInt(1, 10000));
                     semaphore.release();
                     System.out.println("[" + Thread.currentThread().getId() + "]完成业务！");
                 } catch (InterruptedException ix) {

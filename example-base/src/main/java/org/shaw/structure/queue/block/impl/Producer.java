@@ -1,6 +1,6 @@
 package org.shaw.structure.queue.block.impl;
 
-import org.shaw.util.DataProducer;
+import org.shaw.util.DataProducerHelper;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -33,7 +33,7 @@ public class Producer implements Runnable {
             System.out.println("正在生产数据...");
             try {
                 // 随机睡眠时间
-                Thread.sleep(DataProducer.nextInt(1000));
+                Thread.sleep(DataProducerHelper.nextInt(1000));
                 data = "data:" + count.incrementAndGet();
                 System.out.println("将数据：" + data + "放入队列...");
 

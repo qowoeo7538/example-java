@@ -1,4 +1,4 @@
-package org.shaw.load.boot;
+package org.shaw.load;
 
 import sun.misc.Launcher;
 

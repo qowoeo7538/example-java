@@ -1,6 +1,7 @@
 package org.shaw.core.extension.entity;
 
 import org.shaw.common.Constants;
+import org.shaw.util.CollectionUtils;
 
 import java.io.Serializable;
 import java.util.Collections;
@@ -13,13 +14,76 @@ import java.util.Map;
  */
 public final class URL implements Serializable {
 
+    private final String protocol;
+
+    private final String username;
+
+    private final String password;
+
+    private final String host;
+
+    private final int port;
+
+    private final String path;
+
     private final Map<String, String> parameters;
 
-    public URL() {
-        this(null);
+    protected URL() {
+        this.protocol = null;
+        this.username = null;
+        this.password = null;
+        this.host = null;
+        this.port = 0;
+        this.path = null;
+        this.parameters = null;
     }
 
-    public URL(Map<String, String> parameters) {
+    public URL(String protocol, String host, int port) {
+        this(protocol, null, null, host, port, null, (Map<String, String>) null);
+    }
+
+    public URL(String protocol, String host, int port, String[] pairs) { // varargs ... confilict with the following path argument, use array instead.
+        this(protocol, null, null, host, port, null, CollectionUtils.toStringMap(pairs));
+    }
+
+    public URL(String protocol, String host, int port, Map<String, String> parameters) {
+        this(protocol, null, null, host, port, null, parameters);
+    }
+
+    public URL(String protocol, String host, int port, String path) {
+        this(protocol, null, null, host, port, path, (Map<String, String>) null);
+    }
+
+    public URL(String protocol, String host, int port, String path, String... pairs) {
+        this(protocol, null, null, host, port, path, CollectionUtils.toStringMap(pairs));
+    }
+
+    public URL(String protocol, String host, int port, String path, Map<String, String> parameters) {
+        this(protocol, null, null, host, port, path, parameters);
+    }
+
+    public URL(String protocol, String username, String password, String host, int port, String path) {
+        this(protocol, username, password, host, port, path, (Map<String, String>) null);
+    }
+
+    public URL(String protocol, String username, String password, String host, int port, String path, String... pairs) {
+        this(protocol, username, password, host, port, path, CollectionUtils.toStringMap(pairs));
+    }
+
+    public URL(String protocol, String username, String password, String host, int port, String path, Map<String, String> parameters) {
+        if ((username == null || username.length() == 0) && password != null && password.length() > 0) {
+            throw new IllegalArgumentException("URL初始化中,密码缺失用户!");
+        }
+        this.protocol = protocol;
+        this.username = username;
+        this.password = password;
+        this.host = host;
+        this.port = (port < 0 ? 0 : port);
+        // 如果 "/" 开头,截取掉 "/"
+        while (path != null && path.startsWith("/")) {
+            path = path.substring(1);
+        }
+        this.path = path;
         if (parameters == null) {
             parameters = new HashMap<>();
         } else {

@@ -1,6 +1,6 @@
-package org.shaw.load.clazz;
+package org.shaw.load;
 
-import org.shaw.load.clazz.impl.MyClassLoader;
+import org.shaw.load.impl.MyClassLoader;
 
 /**
  * class loader 是一个负责加载 classes 的对象
@@ -25,7 +25,7 @@ public class ClassLoaderDemo {
         classLoaderRelation();
 
         // 使用MyClassLoader的类加载器加载本类(默认加载器:sun.misc.Launcher$AppClassLoader)
-        Object obj1 = ClassLoaderDemo.class.getClassLoader().loadClass("org.shaw.load.clazz.impl.MyClassLoader").newInstance();
+        Object obj1 = ClassLoaderDemo.class.getClassLoader().loadClass("org.shaw.load.impl.MyClassLoader").newInstance();
         System.out.println("默认类加载器：" + obj1.getClass().getClassLoader());
 
         // 自定义类加载器加载

@@ -17,10 +17,9 @@ import java.nio.charset.Charset;
 import java.security.MessageDigest;
 
 /**
- * @create: 2017-12-12
- * @description: Nio工具类
+ * io工具类
  */
-public abstract class IOUtils {
+public abstract class StreamUtils extends org.springframework.util.StreamUtils {
 
     /**
      * 通道处理工具类

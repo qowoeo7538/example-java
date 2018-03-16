@@ -1,6 +1,6 @@
 package org.shaw.concurrent.countdownlatch.impl;
 
-import org.shaw.util.DataProducer;
+import org.shaw.util.DataProducerHelper;
 
 import java.util.Date;
 import java.util.concurrent.CountDownLatch;
@@ -19,7 +19,7 @@ public class NetworkHealthChecker extends BaseHealthChecker {
     public void verifyService() {
         System.out.println(getserviceName() + "时间:" + new Date() + "准备！");
         try {
-            Thread.sleep(DataProducer.nextInt(1000, 10000));
+            Thread.sleep(DataProducerHelper.nextInt(1000, 10000));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

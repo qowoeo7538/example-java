@@ -3,10 +3,9 @@ package org.shaw.util;
 import java.util.Random;
 
 /**
- * @create: 2017-11-16
- * @description: 测试数据生产
+ * 测试数据生产
  */
-public abstract class DataProducer {
+public abstract class DataProducerHelper {
 
     private static Random random = new Random();
 

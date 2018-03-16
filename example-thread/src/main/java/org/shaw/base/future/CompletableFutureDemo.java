@@ -1,6 +1,6 @@
 package org.shaw.base.future;
 
-import org.shaw.util.DataProducer;
+import org.shaw.util.DataProducerHelper;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -31,12 +31,12 @@ public class CompletableFutureDemo {
             System.out.println("task doing...");
             try {
                 // int i = 1 / 0; 当发生无法捕获的异常,get()方法会进行阻塞
-                Thread.sleep(DataProducer.nextInt(1000, 5000));
+                Thread.sleep(DataProducerHelper.nextInt(1000, 5000));
                 // 当获取到数据之后,主线程调用方法会立即收到信息
                 completableFuture.complete("success");
-                Thread.sleep(DataProducer.nextInt(1000, 5000));
+                Thread.sleep(DataProducerHelper.nextInt(1000, 5000));
                 System.out.println("释放资源");
-                Thread.sleep(DataProducer.nextInt(1000, 5000));
+                Thread.sleep(DataProducerHelper.nextInt(1000, 5000));
                 System.out.println("释放完毕");
             } catch (Exception e) {
                 completableFuture.completeExceptionally(e);

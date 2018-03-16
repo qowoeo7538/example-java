@@ -8,5 +8,10 @@ import org.shaw.core.extension.SPI;
  */
 @SPI("javassist")
 public interface Compiler {
+    /**
+     * @param code        源代码
+     * @param classLoader 类加载器
+     * @return Class
+     */
     Class<?> compile(String code, ClassLoader classLoader);
 }

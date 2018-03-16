@@ -1,6 +1,7 @@
 package org.shaw.core.extension;
 
 import org.shaw.common.Constants;
+import org.shaw.compiler.Compiler;
 import org.shaw.util.ClassUtils;
 import org.shaw.util.ConcurrentHashSet;
 import org.shaw.util.Holder;
@@ -130,10 +131,10 @@ public class ExtensionLoader<T> {
             throw new IllegalArgumentException("type 不能为 null!");
         }
         if (!type.isInterface()) {
-            throw new IllegalArgumentException(type + "不是一个接口类!");
+            throw new IllegalArgumentException(type + " 不是一个接口类!");
         }
         if (!withExtensionAnnotation(type)) {
-            throw new IllegalArgumentException(type + "不是一个扩展接口, 没有 " + SPI.class.getSimpleName() + " 注解!");
+            throw new IllegalArgumentException(type + " 不是一个扩展接口, 没有 " + SPI.class.getSimpleName() + " 注解!");
         }
         // 尝试获取该 type 的 ExtensionLoader 对象
         ExtensionLoader<T> loader = (ExtensionLoader<T>) EXTENSION_LOADERS.get(type);
@@ -275,12 +276,17 @@ public class ExtensionLoader<T> {
 
     private Class<?> createAdaptiveExtensionClass() {
         String code = createAdaptiveExtensionClassCode();
-        ClassLoader classLoader = ClassUtils.getDefaultClassLoader();
-        org.shaw.compiler.Compiler compiler = ExtensionLoader.getExtensionLoader(org.shaw.compiler.Compiler.class)
+        ClassLoader classLoader = findClassLoader();
+        Compiler compiler = ExtensionLoader.getExtensionLoader(Compiler.class)
                 .getAdaptiveExtension();
         return compiler.compile(code, classLoader);
     }
 
+    /**
+     * 通过反射获取 {@link #type} 的源代码
+     *
+     * @return Source code
+     */
     private String createAdaptiveExtensionClassCode() {
         StringBuilder codeBuidler = new StringBuilder();
         Method[] methods = type.getMethods();
@@ -450,7 +456,7 @@ public class ExtensionLoader<T> {
         String fileName = dir + type.getName();
         try {
             Enumeration<URL> urls;
-            ClassLoader classLoader = ClassUtils.getDefaultClassLoader();
+            ClassLoader classLoader = findClassLoader();
             // 加载 SPI 接口描述文件
             if (classLoader != null) {
                 urls = classLoader.getResources(fileName);
@@ -576,7 +582,8 @@ public class ExtensionLoader<T> {
                             && Modifier.isPublic(method.getModifiers())) {
                         Class<?> pt = method.getParameterTypes()[0];
                         try {
-                            String property = method.getName().length() > 3 ? method.getName().substring(3, 4).toLowerCase() + method.getName().substring(4) : "";
+                            String property = method.getName().length() > 3 ? method.getName().substring(3, 4).toLowerCase()
+                                    + method.getName().substring(4) : "";
                             Object object = objectFactory.getExtension(pt, property);
                             if (object != null) {
                                 method.invoke(instance, object);
@@ -593,5 +600,9 @@ public class ExtensionLoader<T> {
             e.printStackTrace();
         }
         return instance;
+    }
+
+    private static ClassLoader findClassLoader() {
+        return ClassUtils.getCallerClassLoader(ExtensionLoader.class);
     }
 }

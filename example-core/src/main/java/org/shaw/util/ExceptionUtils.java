@@ -9,7 +9,7 @@ import java.io.StringWriter;
  * @author calvin
  * @version 2013-01-15
  */
-public abstract class Exceptions {
+public abstract class ExceptionUtils {
 
     /**
      * 将 CheckedException 转换为 UncheckedException.
@@ -23,15 +23,19 @@ public abstract class Exceptions {
     }
 
     /**
-     * 将 ErrorStack 转化为String.
+     * 将信息转化为 toString
      */
-    public static String getStackTraceAsString(Throwable e) {
-        if (e == null) {
-            return "";
+    public static String toString(Throwable e) {
+        StringWriter w = new StringWriter();
+        try (PrintWriter p = new PrintWriter(w)) {
+            p.print(e.getClass().getName() + ": ");
+            if (e.getMessage() != null) {
+                p.print(e.getMessage() + "\n");
+            }
+            p.println();
+            e.printStackTrace(p);
+            return w.toString();
         }
-        StringWriter stringWriter = new StringWriter();
-        e.printStackTrace(new PrintWriter(stringWriter));
-        return stringWriter.toString();
     }
 
     /**

@@ -7,8 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 /**
- * @create: 2017-11-07
- * @description: 文件处理工具类
+ * 文件处理工具类
  */
 public abstract class FileUtils {
 
@@ -17,7 +16,7 @@ public abstract class FileUtils {
         try {
             copyFile.copyFile();
         } catch (Exception e) {
-            throw Exceptions.unchecked(e);
+            throw ExceptionUtils.unchecked(e);
         }
     }
 

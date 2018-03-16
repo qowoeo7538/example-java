@@ -1,6 +1,6 @@
 package org.shaw.concurrent.cyclicbarrier.impl;
 
-import org.shaw.util.DataProducer;
+import org.shaw.util.DataProducerHelper;
 
 import java.util.concurrent.CyclicBarrier;
 
@@ -24,13 +24,13 @@ public class BarrierThread implements Runnable {
     public void run() {
         try {
             Thread.currentThread().setName(name);
-            Thread.sleep(DataProducer.nextInt(0, 10000));
+            Thread.sleep(DataProducerHelper.nextInt(0, 10000));
             System.out.println(Thread.currentThread().getName() + "即将到达集合地点1，当前已有" + cyclicBarrier.getNumberWaiting() + "个已经到达，正在等候");
             cyclicBarrier.await();
-            Thread.sleep(DataProducer.nextInt(0, 10000));
+            Thread.sleep(DataProducerHelper.nextInt(0, 10000));
             System.out.println(Thread.currentThread().getName() + "即将到达集合地点2，当前已有" + cyclicBarrier.getNumberWaiting() + "个已经到达，正在等候");
             cyclicBarrier.await();
-            Thread.sleep(DataProducer.nextInt(0, 10000));
+            Thread.sleep(DataProducerHelper.nextInt(0, 10000));
             System.out.println(Thread.currentThread().getName() + "即将到达集合地点3，当前已有" + cyclicBarrier.getNumberWaiting() + "个已经到达，正在等候");
             cyclicBarrier.await();
         } catch (Exception e) {
