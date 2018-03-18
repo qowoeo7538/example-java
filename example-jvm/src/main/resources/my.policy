@@ -1,0 +1,4 @@
+grant codebase "file:D:/workspace/learn/example-project/example-jvm/*"
+{
+    permission java.security.AllPermission;
+};
