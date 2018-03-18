@@ -2,7 +2,6 @@ package org.shaw.core.extension;
 
 import org.shaw.common.Constants;
 import org.shaw.compiler.Compiler;
-import org.shaw.util.ClassUtils;
 import org.shaw.util.ConcurrentHashSet;
 import org.shaw.util.Holder;
 import org.shaw.util.StringUtils;
@@ -603,6 +602,6 @@ public class ExtensionLoader<T> {
     }
 
     private static ClassLoader findClassLoader() {
-        return ClassUtils.getCallerClassLoader(ExtensionLoader.class);
+        return ExtensionLoader.class.getClassLoader();
     }
 }

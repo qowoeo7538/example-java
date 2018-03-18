@@ -5,12 +5,6 @@ package org.shaw.util;
  */
 public abstract class ClassUtils extends org.springframework.util.ClassUtils {
 
-    /**
-     * 获取 Class 的类加载器
-     *
-     * @param caller Class
-     */
-    public static ClassLoader getCallerClassLoader(Class<?> caller) {
-        return caller.getClassLoader();
-    }
+    public static final String JAVA_FILE_SUFFIX = ".java";
+
 }

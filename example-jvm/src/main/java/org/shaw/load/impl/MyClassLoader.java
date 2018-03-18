@@ -30,7 +30,7 @@ public class MyClassLoader extends ClassLoader {
     }
 
     @Override
-    public Class<?> loadClass(String name) throws ClassNotFoundException {
+    public synchronized Class<?> loadClass(String name) throws ClassNotFoundException {
         _name = name;
         File file = getClassFile();
         try {

@@ -1,7 +1,6 @@
 package org.shaw.compiler.support;
 
 import org.shaw.compiler.Compiler;
-import org.shaw.util.ClassUtils;
 import org.shaw.util.ExceptionUtils;
 
 import java.util.regex.Matcher;
@@ -56,7 +55,7 @@ public abstract class AbstractCompiler implements Compiler {
         String className = pkg != null && pkg.length() > 0 ? pkg + "." + cls : cls;
         try {
             // 尝试加载 class 文件到内存
-            return Class.forName(className, true, ClassUtils.getCallerClassLoader(getClass()));
+            return Class.forName(className, true, getClass().getClassLoader());
         } catch (ClassNotFoundException e) {
             if (!code.endsWith(CODE_ENDS_WITH)) {
                 throw new IllegalStateException("java code 应该以 \"}\" 结尾, code: \n" + code + "\n");
