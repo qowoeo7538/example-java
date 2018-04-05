@@ -1,6 +1,6 @@
 package org.shaw.transport.impl;
 
-import org.shaw.util.IOUtils;
+import org.shaw.util.StreamUtils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -31,7 +31,7 @@ public class NioClient {
             InetSocketAddress listener = new InetSocketAddress(hostname, port);
             socketChannel.connect(listener);
             while (true) {
-                IOUtils.channelRead(fileChannel, (buffer) -> {
+                StreamUtils.channelRead(fileChannel, (buffer) -> {
                     try {
                         socketChannel.write(buffer);
                     } catch (IOException e) {
@@ -39,7 +39,7 @@ public class NioClient {
                     }
                 });
 
-                IOUtils.channelRead(socketChannel, (buffer) -> {
+                StreamUtils.channelRead(socketChannel, (buffer) -> {
                     System.out.print((char) buffer.get());
                 });
             }
