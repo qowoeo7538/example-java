@@ -3,6 +3,10 @@ package org.shaw.base.bytes;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 /**
  * Created by joy on 17-2-5.
@@ -37,6 +41,16 @@ public class IOTest {
                     buf = new byte[fileInputStream.available()];
                 }
             }
+        }
+    }
+
+    public static void systemCopyFile(String copyFileName, String srcFileName) {
+        try {
+            Path targetPath = Paths.get(copyFileName);
+            Path sourcePath = Paths.get(srcFileName);
+            Files.copy(sourcePath, targetPath, StandardCopyOption.REPLACE_EXISTING);
+        } catch (final IOException e) {
+            e.printStackTrace();
         }
     }
 
