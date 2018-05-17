@@ -29,9 +29,10 @@ public class Singleton {
     }
 
     /**
-     * 一旦你实现了序列化接口，那么它们不再保持单例了
-     * 因为readObject()方法一直返回一个新的对象就像java的构造方法一样
-     * 可以通过使用readResolve()方法来避免此事发生
+     * 一旦你实现了序列化接口，那么它们不再保
+     * 持单例了因为readObject()方法一直返回
+     * 一个新的对象就像java的构造方法一样可以
+     * 通过使用readResolve()方法来避免此事发生
      */
     private Object readResolve() {
         return getInstance();
