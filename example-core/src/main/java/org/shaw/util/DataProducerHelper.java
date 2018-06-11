@@ -31,8 +31,4 @@ public abstract class DataProducerHelper {
         int results = random.nextInt(max);
         return results;
     }
-
-    public static void main(String[] args) {
-        System.out.println(nextInt(1000));
-    }
 }

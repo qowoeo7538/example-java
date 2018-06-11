@@ -1,6 +1,6 @@
 package org.shaw.base.bytes;
 
-import org.shaw.util.StreamHelper;
+import org.shaw.util.StreamUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,7 +63,7 @@ public class RandomAccessFileDemo {
         }
         long pointer;
         try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw")) {
-            byte[] bytes = StreamHelper.getChartoBytes(c, encode);
+            byte[] bytes = StreamUtils.getChartoBytes(c, encode);
             randomAccessFile.write(bytes);
             pointer = randomAccessFile.getFilePointer();
         }

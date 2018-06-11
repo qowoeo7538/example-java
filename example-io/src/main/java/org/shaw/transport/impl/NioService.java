@@ -1,6 +1,6 @@
 package org.shaw.transport.impl;
 
-import org.shaw.util.StreamHelper;
+import org.shaw.util.StreamUtils;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -61,7 +61,7 @@ public class NioService {
                         // socketChannel.read(readBuff);
                         // readBuff.flip();
                         // System.out.println(new String(readBuff.array()));
-                        StreamHelper.channelRead(socketChannel, (buffer) -> {
+                        StreamUtils.channelRead(socketChannel, (buffer) -> {
                             System.out.print((char) buffer.get());
                         });
                         key.interestOps(SelectionKey.OP_WRITE);
