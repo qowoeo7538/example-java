@@ -1,5 +1,7 @@
-package org.shaw.skill.expression;
+package org.shaw.skill.function;
 
+import org.junit.Assert;
+import org.junit.Test;
 import org.shaw.core.task.StandardThreadExecutor;
 
 import java.util.ArrayList;
@@ -19,17 +21,19 @@ import java.util.function.Supplier;
  */
 public class LambdaDemo {
 
-    Runnable r1 = () -> System.out.println(this);
-
     private static final Runnable r2 = () -> System.out.println("Hello, world");
 
-    public static void main(String[] args) {
-
+    @Test
+    public void lambda0Test() {
         StandardThreadExecutor.execute(r2);
+    }
 
+    @Test
+    public void lambda1Test() {
         final String s = "Hello World";
         Callable<String> callable = () -> {
             TimeUnit.SECONDS.sleep(10);
+            // s必须为不可变对象
             return s;
         };
         Future<String> future = StandardThreadExecutor.submit(callable);
@@ -39,7 +43,10 @@ public class LambdaDemo {
             Thread.currentThread().interrupt();
         }
         StandardThreadExecutor.destroy();
+    }
 
+    @Test
+    public void lambda2Test() {
         // 为自己的函数体提供目标类型
         Supplier<Runnable> a = () -> () -> {
             System.out.println("hi");
@@ -47,19 +54,25 @@ public class LambdaDemo {
         Callable<Integer> b = true ? (() -> 23) : (() -> 42);
 
         // 显式提供表达式的类型，这个特性在无法确认目标类型时非常有用
-        Object o = (Runnable) () -> {
-            System.out.println("hi");
-        };
+        Object o = (Runnable) () -> System.out.println("hi");
+    }
 
+    @Test
+    public void lambda3Test() {
         // 规约处理聚合操作
         List<List> list = new ArrayList();
         int sum = list.stream()
-                .mapToInt(e -> e.size())
+                .mapToInt(List::size)
                 .sum();
+    }
 
+    @Test
+    public void methodReferTest() {
         // 方法引用
         Set<String> knownNames = new HashSet();
+        knownNames.add("ttt");
         Predicate<String> isKnown = knownNames::contains;
+        Assert.assertTrue(isKnown.test("ttt"));
     }
 
     @Override

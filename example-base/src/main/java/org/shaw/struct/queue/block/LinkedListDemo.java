@@ -1,4 +1,4 @@
-package org.shaw.structure.queue.block;
+package org.shaw.struct.queue.block;
 
 import java.util.LinkedList;
 

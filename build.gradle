@@ -69,16 +69,15 @@ configure(moduleProjects) { subproject ->
     }
 
     dependencies {
-        testCompile("junit:junit:${junitVersion}") {
+        compileOnly("junit:junit:${junitVersion}") {
             exclude group: 'org.hamcrest', module: 'hamcrest-core'
         }
+        compileOnly("org.hamcrest:hamcrest-all:${hamcrestVersion}")
+        compileOnly("com.google.code.findbugs:jsr305:3.0.2")
         testCompile("org.mockito:mockito-core:${mockitoVersion}") {
             exclude group: 'org.hamcrest', module: 'hamcrest-core'
         }
 
-        testCompile("org.hamcrest:hamcrest-all:${hamcrestVersion}")
-
-        compileOnly("com.google.code.findbugs:jsr305:3.0.2")
     }
 }
 

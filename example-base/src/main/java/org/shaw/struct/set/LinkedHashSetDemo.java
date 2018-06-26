@@ -1,4 +1,4 @@
-package org.shaw.structure.set;
+package org.shaw.struct.set;
 
 import java.util.AbstractCollection;
 import java.util.LinkedHashSet;

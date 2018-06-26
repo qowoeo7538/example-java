@@ -1,8 +1,8 @@
-package org.shaw.structure.queue.block;
+package org.shaw.struct.queue.block;
 
 import org.shaw.core.task.StandardThreadExecutor;
-import org.shaw.structure.queue.block.impl.Consumer;
-import org.shaw.structure.queue.block.impl.Producer;
+import org.shaw.struct.queue.block.impl.Consumer;
+import org.shaw.struct.queue.block.impl.Producer;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;

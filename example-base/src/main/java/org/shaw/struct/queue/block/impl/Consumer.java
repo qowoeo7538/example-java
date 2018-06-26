@@ -1,4 +1,4 @@
-package org.shaw.structure.queue.block.impl;
+package org.shaw.struct.queue.block.impl;
 
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;

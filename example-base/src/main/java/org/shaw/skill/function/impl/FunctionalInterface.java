@@ -1,4 +1,4 @@
-package org.shaw.skill.expression.impl;
+package org.shaw.skill.function.impl;
 
 /**
  * @create: 2018-01-09

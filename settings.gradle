@@ -1,4 +1,4 @@
-rootProject.name = 'Example'
+rootProject.name = 'example'
 
 include 'example-advance'
 include 'example-base'
