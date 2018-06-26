@@ -13,6 +13,6 @@ import org.shaw.base.thread.impl.Stage;
 public class ThreadDemo {
     public static void main(String[] args) {
         Thread stageThread = new Stage();
-        stageThread.start();
+        new Thread(stageThread::run).start();
     }
 }
