@@ -1,5 +1,6 @@
 package org.shaw.fj;
 
+import org.junit.Test;
 import org.shaw.fj.impl.ComputeTask;
 
 import java.util.concurrent.ExecutionException;
@@ -13,24 +14,25 @@ import java.util.concurrent.TimeUnit;
  * RecursiveAction:ForkJoinTask子类，描述无返回值的任务;
  * RecursiveTask<V>:ForkJoinTask子类，描述有返回值的任务;
  * <p>
- * 学习心得：类似执行器 Executor,比执行器多了对任务更小单元的拆分功能
+ * 类似执行器 Executor,比执行器多了对任务更小单元的拆分功能,将任务进行分片并行处理.
  **/
-public class ForkJoinTest {
-    public static void main(String[] args) {
-        fjDemo();
-    }
+public class ForkJoinDemo {
 
-    public static void fjDemo() {
+    @Test
+    public void forkJoinTest() {
         ForkJoinPool forkJoinPool = new ForkJoinPool();
-
-        Future<Long> result = forkJoinPool.submit(new ComputeTask(0, 1000001));
+        ComputeTask task = new ComputeTask(0, 1000001);
+        Future<Long> result = forkJoinPool.submit(task);
         try {
+            if (task.isCompletedAbnormally()) {
+                // 如果任务抛出异常或取消
+                System.out.println(task.getException());
+            }
             System.out.println("result: " + result.get());
-
             forkJoinPool.shutdown();
-
             forkJoinPool.awaitTermination(30, TimeUnit.SECONDS);
         } catch (InterruptedException | ExecutionException e) {
+            Thread.currentThread().interrupt();
         }
     }
 
