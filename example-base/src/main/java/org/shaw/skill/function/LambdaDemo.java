@@ -48,9 +48,8 @@ public class LambdaDemo {
     @Test
     public void lambda2Test() {
         // 为自己的函数体提供目标类型
-        Supplier<Runnable> a = () -> () -> {
-            System.out.println("hi");
-        };
+        Supplier<Runnable> a = () -> () -> System.out.println("hi");
+
         Callable<Integer> b = true ? (() -> 23) : (() -> 42);
 
         // 显式提供表达式的类型，这个特性在无法确认目标类型时非常有用
@@ -64,15 +63,6 @@ public class LambdaDemo {
         int sum = list.stream()
                 .mapToInt(List::size)
                 .sum();
-    }
-
-    @Test
-    public void methodReferTest() {
-        // 方法引用
-        Set<String> knownNames = new HashSet();
-        knownNames.add("ttt");
-        Predicate<String> isKnown = knownNames::contains;
-        Assert.assertTrue(isKnown.test("ttt"));
     }
 
     @Override
