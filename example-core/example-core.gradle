@@ -3,5 +3,5 @@ description = "Example Core"
 dependencies {
     compile("org.springframework:spring-core")
     compile("org.springframework:spring-context")
-    compileOnly("org.shaw:component-common:1.0-SNAPSHOT")
+    compile("org.shaw:component-common:1.0-SNAPSHOT")
 }
