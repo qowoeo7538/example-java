@@ -48,8 +48,4 @@ public class LambdaDemo {
                 .sum();
     }
 
-    @Override
-    public String toString() {
-        return "Hello, world";
-    }
 }

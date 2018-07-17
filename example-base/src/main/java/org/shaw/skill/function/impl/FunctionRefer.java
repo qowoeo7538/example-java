@@ -2,7 +2,7 @@ package org.shaw.skill.function.impl;
 
 public class FunctionRefer {
 
-    public String concat(String a, String b) {
+    public String concat(String a, Integer b) {
         return a + b;
     }
 

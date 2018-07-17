@@ -3,6 +3,7 @@ package org.shaw.skill.function;
 import org.junit.Assert;
 import org.junit.Test;
 import org.shaw.skill.function.impl.Function;
+import org.shaw.skill.function.impl.Function2;
 import org.shaw.skill.function.impl.FunctionRefer;
 
 import java.util.HashSet;
@@ -59,21 +60,35 @@ public class MethodReferDemo {
      * 类型上的实例方法引用
      * <p>
      * 方法引用条件：
-     * 只支持对无参的方法进行引用
+     * 函数接口的参数列表 = ClassName+类型列表
      */
     @Test
     public void typeReferenceTest() {
-        /**
-         * final java.util.function.Function<FunctionRefer, String> function = new java.util.function.Function() {
-         *             @Override
-         *             public Object apply(Object o) {
-         *                 FunctionRefer function = (FunctionRefer) o;
-         *                 return function.messge();
-         *             }
-         *         };
-         */
-        final java.util.function.Function<FunctionRefer, String> function = FunctionRefer::messge;
-        System.out.println(function.apply(new FunctionRefer()));
+        {
+            /**
+             * final java.util.function.Function<FunctionRefer, String> function = new java.util.function.Function() {
+             *             @Override
+             *             public Object apply(Object o) {
+             *                 FunctionRefer function = (FunctionRefer) o;
+             *                 return function.messge();
+             *             }
+             *         };
+             */
+            final java.util.function.Function<FunctionRefer, String> function = FunctionRefer::messge;
+            System.out.println(function.apply(new FunctionRefer()));
+        }
+        {
+            /**
+             * final Function2<FunctionRefer, String, Integer, String> function = new Function2<FunctionRefer, String, Integer, String>() {
+             *                 @Override
+             *                 public String apply(FunctionRefer a, String b, Integer c) {
+             *                     return a.concat(b, c);
+             *                 }
+             *             };
+             */
+            final Function2<FunctionRefer, String, Integer, String> function = FunctionRefer::concat;
+            System.out.println(function.apply(new FunctionRefer(), "A", 1));
+        }
     }
 
 }
