@@ -60,7 +60,7 @@ public class MethodReferDemo {
      * 类型上的实例方法引用
      * <p>
      * 方法引用条件：
-     * 函数接口的参数列表 = ClassName+类型列表
+     * 函数接口的参数列表 = ClassName + 参数类型列表
      */
     @Test
     public void typeReferenceTest() {
