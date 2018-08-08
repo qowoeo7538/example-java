@@ -4,4 +4,5 @@ dependencies {
     compile("org.springframework:spring-core")
     compile("org.springframework:spring-context")
     compile("org.shaw:component-common:1.0-SNAPSHOT")
+    compile("org.shaw:component-thread:1.0-SNAPSHOT")
 }

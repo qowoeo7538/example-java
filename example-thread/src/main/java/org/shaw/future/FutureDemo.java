@@ -1,6 +1,8 @@
-package org.shaw.base.future;
+package org.shaw.future;
 
-import org.shaw.base.future.impl.RealService;
+import org.junit.Test;
+import org.shaw.core.task.ExampleThreadExecutor;
+import org.shaw.future.impl.RealService;
 
 import java.util.concurrent.*;
 
@@ -9,7 +11,9 @@ import java.util.concurrent.*;
  * @description:
  */
 public class FutureDemo {
-    public static void main(String[] args) {
+
+    @Test
+    public void testFuture(){
         Long start = System.currentTimeMillis();
         /**
          * FutureTask对象继承Runnable和Future
@@ -18,8 +22,7 @@ public class FutureDemo {
          * Runnable对象没有返回结果,需要指定特定的返回结果
          */
         FutureTask<String> futureTask = new FutureTask<>(new RealService("hello,world"));
-        ExecutorService newFixedThreadPool = Executors.newFixedThreadPool(1);
-        newFixedThreadPool.submit(futureTask);
+        ExampleThreadExecutor.submit(futureTask);
         // 表示正在处理其他逻辑,或者业务
         try {
             Thread.sleep(1000);
@@ -30,12 +33,7 @@ public class FutureDemo {
         Long end = System.currentTimeMillis();
         Long useTime = end - start;
         System.out.println("程序运行了-->" + useTime + "毫秒");
-        newFixedThreadPool.shutdownNow();
-        try {
-            // 尝试等待5秒关闭线程池
-            newFixedThreadPool.awaitTermination(5, TimeUnit.SECONDS);
-        } catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
+
+        ExampleThreadExecutor.destroy();
     }
 }

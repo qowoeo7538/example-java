@@ -1,7 +1,7 @@
-package org.shaw.base.future;
+package org.shaw.future;
 
-import org.shaw.base.future.impl.FutureClient;
-import org.shaw.base.future.impl.Data;
+import org.shaw.future.impl.FutureClient;
+import org.shaw.future.impl.Data;
 
 /**
  * @create: 2017-11-13

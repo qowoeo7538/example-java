@@ -1,4 +1,4 @@
-package org.shaw.base.future.impl;
+package org.shaw.future.impl;
 
 import java.util.concurrent.Callable;
 

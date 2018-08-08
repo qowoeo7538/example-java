@@ -2,7 +2,7 @@ package org.shaw.concurrent.cyclicbarrier;
 
 import org.shaw.concurrent.cyclicbarrier.impl.BarrierThread;
 import org.shaw.concurrent.cyclicbarrier.impl.PriorThread;
-import org.shaw.core.task.StandardThreadExecutor;
+import org.shaw.core.task.ExampleThreadExecutor;
 
 import java.util.concurrent.CyclicBarrier;
 
@@ -17,8 +17,8 @@ public class CyclicBarrierDemo {
     public static void main(String[] args) {
         CyclicBarrier cyclicBarrier = new CyclicBarrier(COUNT, new PriorThread());
         for (int i = 0; i < COUNT; i++) {
-            StandardThreadExecutor.execute(new BarrierThread("线程" + (i + 1), cyclicBarrier));
+            ExampleThreadExecutor.execute(new BarrierThread("线程" + (i + 1), cyclicBarrier));
         }
-        StandardThreadExecutor.destroy();
+        ExampleThreadExecutor.destroy();
     }
 }

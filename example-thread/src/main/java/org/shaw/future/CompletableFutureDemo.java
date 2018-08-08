@@ -1,33 +1,21 @@
-package org.shaw.base.future;
+package org.shaw.future;
 
+import org.junit.Test;
+import org.shaw.core.task.ExampleThreadExecutor;
 import org.shaw.util.DataProducerHelper;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 /**
  * CompletableFuture不依赖线程池完成任务之后获取结果
  * CompletableFuture可以立即获得结果,不必等待整个线程完成任务
  */
 public class CompletableFutureDemo {
-    public static void main(String[] args) {
-        try {
-            CompletableFuture<String> completableFuture = test1();
-            System.out.println(completableFuture.get());
-        } catch (ExecutionException | InterruptedException ex) {
-            ex.printStackTrace();
-            Thread.currentThread().interrupt();
-        }
-    }
 
-    /**
-     * 异步任务模拟
-     *
-     * @return CompletableFuture 执行结果
-     */
-    public static CompletableFuture test1() {
+    @Test
+    public void testCompletableFuture() throws Exception {
         CompletableFuture<String> completableFuture = new CompletableFuture();
-        new Thread(() -> {
+        ExampleThreadExecutor.submit(() -> {
             System.out.println("task doing...");
             try {
                 // int i = 1 / 0; 当发生无法捕获的异常,get()方法会进行阻塞
@@ -41,7 +29,9 @@ public class CompletableFutureDemo {
             } catch (Exception e) {
                 completableFuture.completeExceptionally(e);
             }
-        }).start();
-        return completableFuture;
+        });
+        System.out.println(completableFuture.get());
+
+        ExampleThreadExecutor.destroy();
     }
 }

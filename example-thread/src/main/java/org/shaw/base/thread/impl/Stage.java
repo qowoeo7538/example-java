@@ -41,7 +41,7 @@ public class Stage extends Thread {
         //关键任人物线程开始执行
         mrCheng.start();
         try {
-            //等待该工作线程终止,才继续运行=====>”战争结束“
+            //等待该工作线程终止,主线程才继续运行=====>”战争结束“
             mrCheng.join();
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,6 +1,6 @@
 package org.shaw.concurrent.semaphore;
 
-import org.shaw.core.task.StandardThreadExecutor;
+import org.shaw.core.task.ExampleThreadExecutor;
 import org.shaw.util.DataProducerHelper;
 
 import java.util.concurrent.Semaphore;
@@ -17,7 +17,7 @@ public class SemaphoreDemo {
     public static void main(String[] args) {
         Semaphore semaphore = new Semaphore(concurrent);
         for (int i = 0; i < 10; i++) {
-            StandardThreadExecutor.execute(() -> {
+            ExampleThreadExecutor.execute(() -> {
                 try {
                     System.out.println("[" + Thread.currentThread().getId() + "]等待获取许可！");
                     semaphore.acquire();
@@ -30,6 +30,6 @@ public class SemaphoreDemo {
                 }
             });
         }
-        StandardThreadExecutor.destroy();
+        ExampleThreadExecutor.destroy();
     }
 }

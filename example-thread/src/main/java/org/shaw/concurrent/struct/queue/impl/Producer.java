@@ -1,4 +1,4 @@
-package org.shaw.struct.queue.block.impl;
+package org.shaw.concurrent.struct.queue.impl;
 
 import org.shaw.util.DataProducerHelper;
 
