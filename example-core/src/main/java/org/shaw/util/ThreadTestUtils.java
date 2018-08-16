@@ -1,38 +1,23 @@
 package org.shaw.util;
 
-import org.shaw.core.task.StandardThreadExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class ThreadTestUtils {
 
     /**
      * 等待子线程运行完成.
      * 否则 junit 主线程完成将会完成，导致无法捕获子线程异常。
-     *
-     * @param threads 线程组
      */
-    public static void test(Thread... threads) {
+    public static void complete(final Thread... threads) {
         for (Thread thread : threads) {
-            thread.start();
-        }
-
-        while (isAlive(threads)) {
-            Thread.yield();
-        }
-
-    }
-
-    /**
-     * 至少一个线程存活
-     *
-     * @param threads 线程组
-     * @return 如果一个线程存活返回 true.
-     */
-    private static boolean isAlive(Thread... threads) {
-        for (Thread thread : threads) {
-            if (thread.isAlive()) {
-                return true;
+            while (thread.isAlive()) {
+                Thread.yield();
+                try {
+                    TimeUnit.MILLISECONDS.sleep(100);
+                } catch (final InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
             }
         }
-        return false;
     }
 }

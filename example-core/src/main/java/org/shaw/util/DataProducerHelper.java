@@ -1,5 +1,6 @@
 package org.shaw.util;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Random;
  */
 public abstract class DataProducerHelper {
 
-    private static Random random = new Random();
+    private static SecureRandom random = new SecureRandom();
 
     /**
      * 生成min-max范围整形
