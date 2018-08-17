@@ -204,6 +204,8 @@ public class CompletableFutureDemo {
 
     /**
      * applyToEither
+     * <p>
+     * 当任意一个 CompletionStage 完成的时候，fn会被执行，它的返回值会当作新的 CompletableFuture<U> 的计算结果
      */
     @Test
     public void testApplyEither() {
@@ -223,5 +225,32 @@ public class CompletableFutureDemo {
             return "second";
         }), i -> "result: " + i).join();
         System.out.println(f);
+    }
+
+    /**
+     * allOf方法是当所有的CompletableFuture都执行完后执行计算。
+     * anyOf方法是当任意一个CompletableFuture执行完后就会执行计算，计算的结果相同。
+     */
+    @Test
+    public void testAnyAll() {
+        CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> {
+            try {
+                Thread.sleep(100 + DataProducerHelper.nextInt(100));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "first";
+        });
+        CompletableFuture<String> future2 = CompletableFuture.supplyAsync(() -> {
+            try {
+                Thread.sleep(100 + DataProducerHelper.nextInt(100));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "second";
+        });
+        // CompletableFuture.allOf(future1, future2).join();
+        Object cf = CompletableFuture.anyOf(future1, future2).join();
+        System.out.println(cf);
     }
 }
