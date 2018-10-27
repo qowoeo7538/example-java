@@ -1,18 +1,12 @@
 package org.shaw.core.task;
 
 import org.shaw.core.Constants;
-import org.shaw.task.StandardThreadExecutor;
+import org.shaw.task.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 
-
-/**
- * StandardThreadExecutor execute执行策略：	优先扩充线程到maxThread，再offer到queue，如果满了就reject
- * <p>
- * 适应场景：  比较适合于业务处理需要远程资源的场景
- */
 public class ExampleThreadExecutor {
 
     private static final int DEFAULT_CORE_POOL_SIZE = Constants.CORE_SIZE + 1;
@@ -20,21 +14,26 @@ public class ExampleThreadExecutor {
     private static final int DEFAULT_KEEP_ALIVE_SECONDS = 60;
     private static final int DEFAULT_QUEUE_CAPACITY = Integer.MAX_VALUE - DEFAULT_MAX_POOL_SIZE;
 
-    private static final StandardThreadExecutor threadPoolExecutor =
-            new StandardThreadExecutor(DEFAULT_CORE_POOL_SIZE,
+    private static final ThreadPoolTaskExecutor threadPoolExecutor =
+            new ThreadPoolTaskExecutor(DEFAULT_CORE_POOL_SIZE,
                     DEFAULT_MAX_POOL_SIZE,
                     DEFAULT_KEEP_ALIVE_SECONDS,
                     DEFAULT_QUEUE_CAPACITY);
 
     /**
-     * 是否需要所有任务完成
+     * 是否需要所有任务完成.
      */
     private static boolean isWait = false;
+
+    /**
+     * 是否需要立即关闭.
+     */
+    private static boolean waitForTasksToCompleteOnShutdown = false;
 
     private static final Object monitor = new Object();
 
     static {
-        threadPoolExecutor.setWaitForTasksToCompleteOnShutdown(true);
+        setWaitForTasksToCompleteOnShutdown(true);
         threadPoolExecutor.setAfter(((runnable, throwable) -> {
             if (isWait && threadPoolExecutor.getTaskCount() == 0) {
                 synchronized (monitor) {
@@ -45,6 +44,10 @@ public class ExampleThreadExecutor {
     }
 
     private ExampleThreadExecutor() {
+    }
+
+    public static void setWaitForTasksToCompleteOnShutdown(final boolean waitForJobsToCompleteOnShutdown) {
+        waitForTasksToCompleteOnShutdown = waitForJobsToCompleteOnShutdown;
     }
 
     public static void execute(Runnable task) {
@@ -65,7 +68,11 @@ public class ExampleThreadExecutor {
 
     public static void destroy() {
         waitFinish();
-        threadPoolExecutor.destroy();
+        if (waitForTasksToCompleteOnShutdown) {
+            threadPoolExecutor.shutdown();
+        } else {
+            threadPoolExecutor.shutdownNow();
+        }
     }
 
     public static ThreadPoolExecutor getThreadPoolExecutor() throws IllegalStateException {

@@ -2,7 +2,7 @@ package org.shaw.api.future;
 
 import org.junit.Test;
 import org.shaw.core.task.ExampleThreadExecutor;
-import org.shaw.task.StandardThreadExecutor;
+import org.shaw.task.ThreadPoolTaskExecutor;
 import org.shaw.util.DataProducerHelper;
 
 import java.text.SimpleDateFormat;
@@ -54,7 +54,7 @@ public class CompletableFutureDemo {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         CompletableFuture<String> future = CompletableFuture.supplyAsync(() ->
                         dateFormat.format(new Date()),
-                new StandardThreadExecutor()
+                new ThreadPoolTaskExecutor()
         ).thenApply(result ->
                 "当前时间: " + result
         ).handleAsync((v, e) ->
@@ -81,7 +81,6 @@ public class CompletableFutureDemo {
             return null;
         }).whenComplete((t, u) ->
                 System.out.println("complete")
-
         )// 在完成时返回结果值，或在异常时抛出(未检查的)异常。
                 .join();
     }
@@ -253,4 +252,5 @@ public class CompletableFutureDemo {
         Object cf = CompletableFuture.anyOf(future1, future2).join();
         System.out.println(cf);
     }
+
 }
