@@ -1,4 +1,4 @@
-package org.shaw.lock.impl;
+package org.shaw.lock.demo.impl;
 
 /**
  * @create: 2018-03-09

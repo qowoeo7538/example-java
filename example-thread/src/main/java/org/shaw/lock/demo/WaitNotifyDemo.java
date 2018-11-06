@@ -1,7 +1,7 @@
-package org.shaw.lock;
+package org.shaw.lock.demo;
 
-import org.shaw.lock.impl.DoSomething;
-import org.shaw.lock.impl.NotifyAllTest;
+import org.shaw.lock.demo.impl.DoSomething;
+import org.shaw.lock.demo.impl.NotifyAllTest;
 
 /**
  * synchronized
