@@ -1,4 +1,4 @@
-package org.shaw.lock.impl;
+package org.shaw.lock.demo.impl;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

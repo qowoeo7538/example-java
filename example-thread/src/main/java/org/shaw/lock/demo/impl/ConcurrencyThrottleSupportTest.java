@@ -1,4 +1,4 @@
-package org.shaw.lock.impl;
+package org.shaw.lock.demo.impl;
 
 /**
  * 关于Spring源码中的并发量控制测试

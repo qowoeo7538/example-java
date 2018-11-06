@@ -1,4 +1,4 @@
-package org.shaw.lock;
+package org.shaw.lock.demo;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
