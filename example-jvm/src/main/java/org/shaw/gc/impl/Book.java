@@ -2,7 +2,7 @@ package org.shaw.gc.impl;
 
 public class Book {
 
-    private boolean checkedOut = false;
+    private boolean checkedOut;
 
     public Book(boolean checkOut) {
         this.checkedOut = checkOut;
