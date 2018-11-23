@@ -1,4 +1,4 @@
-package org.shaw.transport.impl;
+package org.shaw.kata.transport.impl;
 
 import java.io.FileInputStream;
 import java.io.IOException;

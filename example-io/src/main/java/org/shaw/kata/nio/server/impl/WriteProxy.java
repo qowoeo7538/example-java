@@ -1,4 +1,4 @@
-package org.shaw.nio.server.impl;
+package org.shaw.kata.nio.server.impl;
 
 import java.util.Queue;
 

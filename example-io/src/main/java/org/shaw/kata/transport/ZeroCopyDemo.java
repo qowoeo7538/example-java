@@ -1,7 +1,7 @@
-package org.shaw.transport;
+package org.shaw.kata.transport;
 
-import org.shaw.transport.impl.TransferToClient;
-import org.shaw.transport.impl.TransferToServer;
+import org.shaw.kata.transport.impl.TransferToClient;
+import org.shaw.kata.transport.impl.TransferToServer;
 
 import java.io.IOException;
 

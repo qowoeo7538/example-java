@@ -1,4 +1,4 @@
-package org.shaw.base.serializer.invalid;
+package org.shaw.demo.serializer.invalid;
 
 import java.io.Externalizable;
 import java.io.IOException;
