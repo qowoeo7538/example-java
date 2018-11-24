@@ -7,7 +7,7 @@ import java.util.Properties;
 /**
  * Created by joy on 17-2-1.
  */
-public class PropertiesIO {
+public class PropertiesDemo {
     public static void main(String[] args) {
         try {
             //读取属性文件

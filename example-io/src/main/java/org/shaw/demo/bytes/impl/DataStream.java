@@ -1,29 +1,23 @@
-package org.shaw.demo.bytes;
+package org.shaw.demo.bytes.impl;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
-/**
- * Created by joy on 17-2-5.
- */
-public class DataIO {
-
-    private final static String FILE_NAME = "/home/joy/桌面/a.properties";
-
-    public static void main(String[] args) throws Exception {
-        dataOutSteamTest(FILE_NAME, "31231");
-
-        dataInputSteamTest(FILE_NAME);
-    }
+public class DataStream {
 
     /**
-     * FileOutputStream演示
-     *
-     * @param fileName
-     * @param content
-     * @param <T>
+     * @param fileName 文件全名
+     * @param content  内容
+     * @param <T>      输出类型
      * @throws IOException
      */
-    public static <T> void dataOutSteamTest(String fileName, T content) throws IOException {
+    public static <T> void dataOut(String fileName, T content) throws IOException {
         try (FileOutputStream fileOutputStream = new FileOutputStream(fileName);
              DataOutputStream dataOutputStream = new DataOutputStream(fileOutputStream)
         ) {
@@ -42,7 +36,11 @@ public class DataIO {
         }
     }
 
-    public static void dataInputSteamTest(String fileName) throws IOException {
+    /**
+     * @param fileName 文件全名
+     * @throws IOException
+     */
+    public static void dataInputSteam(String fileName) throws IOException {
         try (FileInputStream fileInputStream = new FileInputStream(fileName);
              InputStream dataInputStream = new DataInputStream(fileInputStream);
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(dataInputStream))) {
@@ -50,4 +48,3 @@ public class DataIO {
         }
     }
 }
-
