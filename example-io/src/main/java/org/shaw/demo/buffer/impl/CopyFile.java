@@ -8,9 +8,9 @@ import java.io.IOException;
 
 public class CopyFile {
 
-    public static void copyFileByBuffer(String srcFile, String copyFile) throws IOException {
-        try (BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(srcFile));
-             BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(copyFile))) {
+    public static void copyFileByBuffer(final String source, final String target) throws IOException {
+        try (BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(source));
+             BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(target))) {
             int bte;
             while ((bte = bufferedInputStream.read()) != -1) {
                 bufferedOutputStream.write(bte);

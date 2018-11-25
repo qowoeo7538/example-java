@@ -6,6 +6,10 @@ import org.shaw.demo.file.impl.DirOperation;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 /**
  * Created by joy on 17-2-3.
@@ -26,6 +30,16 @@ public class FileDemo {
      * 文件
      */
     private static final File FILE = new File("/home/shaw/桌面/FileTest");
+
+    /**
+     * 拷贝源文件
+     */
+    private static final String SOURCE = "/home/shaw/桌面/FileTest";
+
+    /**
+     * 拷贝目标文件
+     */
+    private static final String TARGET = "/home/shaw/桌面/FileTest";
 
     /**
      * 获取文件信息
@@ -89,5 +103,24 @@ public class FileDemo {
         DirOperation.listDirectory(DIRECTORY);
     }
 
+    /**
+     * 文件拷贝(API方式)
+     *
+     * @throws IOException
+     */
+    @Test
+    public void systemCopyFile() {
+        try {
+            Path sourcePath = Paths.get(SOURCE);
+            Path targetPath = Paths.get(TARGET);
+            /**
+             * @param target 目标文件
+             * @param source 源文件
+             */
+            Files.copy(sourcePath, targetPath, StandardCopyOption.REPLACE_EXISTING);
+        } catch (final IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
