@@ -14,17 +14,17 @@ import java.io.IOException;
  * <p>
  * Created by joy on 17-2-7.
  */
-public class StreamDemo {
+public class StreamBufferDemo {
 
-    private final static String SRC_FILE = "/home/shaw/桌面/in.sh";
+    private final static String SOURCE = "/home/shaw/桌面/in.sh";
 
-    private final static String COPY_FROM = "/home/shaw/桌面/wwwwwww.sh";
+    private final static String TARGET = "/home/shaw/桌面/wwwwwww.sh";
 
     /**
      * 利用缓冲区拷贝文件
      */
     @Test
     public void copyFileByBuffer() throws IOException {
-        CopyFile.copyFileByBuffer(SRC_FILE, COPY_FROM);
+        CopyFile.copyFileByBuffer(SOURCE, TARGET);
     }
 }
