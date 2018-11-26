@@ -86,12 +86,16 @@ public class FileDemo {
     }
 
     /**
-     * 读取文件
+     * 读取文件所有的字节
      */
     @Test
     public void classLoaderFile() throws IOException {
+        // 读取当前执行文件目录下的文件
         try (InputStream in = this.getClass().getClassLoader().getResourceAsStream("logging.properties")) {
-
+            // 获取输入流的所有字节
+            byte[] bytes = in.readAllBytes();
+            String str = new String(bytes, "utf-8");
+            System.out.println(str);
         }
     }
 

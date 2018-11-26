@@ -11,9 +11,6 @@ import java.io.RandomAccessFile;
  * @description:
  */
 public class RandomAccessFileDemo {
-    public static void main(String[] args) throws Exception {
-        IOTest.copyFile("/home/joy/桌面/15-反向代理实现nginx+apache动静分离.wmv", "/home/joy/桌面/dddddddd.wmv");
-    }
 
     /**
      * int类型写入
