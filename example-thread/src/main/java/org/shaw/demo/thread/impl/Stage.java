@@ -1,4 +1,4 @@
-package org.shaw.base.thread.impl;
+package org.shaw.demo.thread.impl;
 
 /**
  * @create: 2018-01-23

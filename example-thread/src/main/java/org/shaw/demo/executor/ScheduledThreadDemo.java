@@ -1,6 +1,6 @@
-package org.shaw.executor.scheduledthread;
+package org.shaw.demo.executor;
 
-import org.shaw.executor.scheduledthread.impl.Task;
+import org.shaw.demo.executor.impl.ScheduledTask;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -14,7 +14,7 @@ public class ScheduledThreadDemo {
     public static void main(String[] args) {
         ScheduledThreadPoolExecutor service = (ScheduledThreadPoolExecutor) Executors.newScheduledThreadPool(1);
         for (int i = 0; i < 5; i++) {
-            service.schedule(new Task(1, 100), i, TimeUnit.SECONDS);
+            service.schedule(new ScheduledTask(1, 100), i, TimeUnit.SECONDS);
         }
         service.shutdown();
         try {

@@ -1,7 +1,7 @@
-package org.shaw.executor.threadfactory;
+package org.shaw.demo.executor;
 
-import org.shaw.executor.threadfactory.impl.CustomThreadFactory;
-import org.shaw.executor.threadfactory.impl.Task;
+import org.shaw.demo.executor.impl.CustomThreadFactory;
+import org.shaw.demo.executor.impl.FactoryTask;
 
 /**
  * @create: 2017-11-08
@@ -12,7 +12,7 @@ public class ThreadFactoryDemo {
         // 创建线程工厂
         CustomThreadFactory factory = new CustomThreadFactory("CustomThreadFactory");
         // Runnable对象
-        Task task = new Task();
+        FactoryTask task = new FactoryTask();
         Thread thread;
         System.out.printf("Starting the Threads\n\n");
         for (int i = 1; i <= 10; i++) {

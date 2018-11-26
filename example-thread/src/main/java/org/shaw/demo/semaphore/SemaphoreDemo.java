@@ -1,4 +1,4 @@
-package org.shaw.api.semaphore;
+package org.shaw.demo.semaphore;
 
 import org.shaw.core.task.ExampleThreadExecutor;
 import org.shaw.util.DataProducerHelper;

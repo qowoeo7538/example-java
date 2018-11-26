@@ -1,7 +1,7 @@
-package org.shaw.base.thread;
+package org.shaw.demo.thread;
 
-import org.shaw.base.thread.impl.EnergySystem;
-import org.shaw.base.thread.impl.EnergyTransferTask;
+import org.shaw.demo.thread.impl.EnergySystem;
+import org.shaw.demo.thread.impl.EnergyTransferTask;
 
 /**
  * @create: 2018-01-23

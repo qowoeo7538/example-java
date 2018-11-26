@@ -1,13 +1,13 @@
-package org.shaw.concurrent.safe;
+package org.shaw.kata.safe;
 
 import org.junit.Test;
-import org.shaw.concurrent.safe.impl.TestSync;
+import org.shaw.kata.safe.impl.TestSync;
 import org.shaw.util.ThreadTestUtils;
 
 /**
  * 线程的几个状态:new,runnable(Thread.start()),running,blocking(Thread.Sleep())
  */
-public class SyncDemo {
+public class SynchronizedKata {
 
     @Test
     public void testSync() throws InterruptedException {

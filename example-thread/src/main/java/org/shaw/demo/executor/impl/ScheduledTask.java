@@ -1,4 +1,4 @@
-package org.shaw.executor.scheduledthread.impl;
+package org.shaw.demo.executor.impl;
 
 import java.util.Date;
 import java.util.concurrent.Callable;
@@ -7,12 +7,12 @@ import java.util.concurrent.Callable;
  * @create: 2018-01-03
  * @description:
  */
-public class Task implements Callable<Integer> {
+public class ScheduledTask implements Callable<Integer> {
 
     private int start;
     private int end;
 
-    public Task(int start, int end) {
+    public ScheduledTask(int start, int end) {
         this.start = start;
         this.end = end;
     }

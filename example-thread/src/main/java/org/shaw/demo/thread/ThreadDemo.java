@@ -1,6 +1,6 @@
-package org.shaw.base.thread;
+package org.shaw.demo.thread;
 
-import org.shaw.base.thread.impl.Stage;
+import org.shaw.demo.thread.impl.Stage;
 
 /**
  * 重排序：

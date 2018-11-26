@@ -1,4 +1,4 @@
-package org.shaw.api.phaser.impl;
+package org.shaw.demo.phaser.impl;
 
 import java.util.concurrent.Phaser;
 

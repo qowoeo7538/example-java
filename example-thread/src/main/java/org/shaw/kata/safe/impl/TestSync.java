@@ -1,4 +1,4 @@
-package org.shaw.concurrent.safe.impl;
+package org.shaw.kata.safe.impl;
 
 public class TestSync implements Runnable {
 
