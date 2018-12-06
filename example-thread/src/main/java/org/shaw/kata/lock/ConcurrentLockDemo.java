@@ -1,6 +1,6 @@
-package org.shaw.demo.lock;
+package org.shaw.kata.lock;
 
-import org.shaw.demo.lock.impl.TestLock;
+import org.shaw.kata.lock.impl.TestLock;
 
 /**
  * 高效锁的实现

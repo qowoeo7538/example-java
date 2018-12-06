@@ -10,7 +10,10 @@ import java.util.Date;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * CompletableFuture不依赖线程池完成任务之后获取结果
+ * get(): 阻塞获取结果，实现Future的get接口，显式抛出异常.
+ * getNow(T valueIfAbsent): 立即获取执行结果，如果当前任务未执行完成，则返回valueIfAbsent.
+ * join(): 执行完成后返回执行结果，或者抛出unchecked异常.
+ * get(long timeout, TimeUnit unit): 在有限时间内获取数据
  */
 public class CompletableFutureDemo {
 

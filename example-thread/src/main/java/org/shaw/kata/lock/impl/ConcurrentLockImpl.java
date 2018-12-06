@@ -1,4 +1,6 @@
-package org.shaw.demo.lock.impl;
+package org.shaw.kata.lock.impl;
+
+import org.shaw.demo.lock.impl.Process;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -9,7 +11,7 @@ import java.util.concurrent.CountDownLatch;
  */
 public class ConcurrentLockImpl {
 
-    private ConcurrentMap<String, CountDownLatch> cachedLock = new ConcurrentHashMap<>();
+    private final ConcurrentMap<String, CountDownLatch> cachedLock = new ConcurrentHashMap<>();
 
     public void tryLock(String name, Process process) {
         CountDownLatch signal = cachedLock.putIfAbsent(name, new CountDownLatch(1));
