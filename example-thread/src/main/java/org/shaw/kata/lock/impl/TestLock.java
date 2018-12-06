@@ -1,4 +1,4 @@
-package org.shaw.demo.lock.impl;
+package org.shaw.kata.lock.impl;
 
 /**
  * @create: 2018-03-09
@@ -8,7 +8,7 @@ public class TestLock implements Runnable {
 
     public static int i;
 
-    private static ConcurrentLockImpl concurrentLock = new ConcurrentLockImpl();
+    private final static ConcurrentLockImpl concurrentLock = new ConcurrentLockImpl();
 
     @Override
     public void run() {
