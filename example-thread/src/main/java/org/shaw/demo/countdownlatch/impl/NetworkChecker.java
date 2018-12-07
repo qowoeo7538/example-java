@@ -9,9 +9,9 @@ import java.util.concurrent.CountDownLatch;
  * @create: 2017-11-06
  * @description:
  */
-public class NetworkHealthChecker extends BaseHealthChecker {
+public class NetworkChecker extends BaseChecker {
 
-    public NetworkHealthChecker(String name, CountDownLatch latch) {
+    public NetworkChecker(String name, CountDownLatch latch) {
         super(name, latch);
     }
 

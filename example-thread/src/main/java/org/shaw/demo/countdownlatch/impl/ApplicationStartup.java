@@ -12,22 +12,21 @@ import java.util.concurrent.CountDownLatch;
  */
 public class ApplicationStartup {
 
-    private static CountDownLatch latch;
+    private static final CountDownLatch LATCH = new CountDownLatch(3);
 
-    private static List<BaseHealthChecker> service;
+    private static final List<BaseChecker> SERVICE = new ArrayList<>(4);
 
-    public static boolean checkExternalServices() throws InterruptedException {
-        latch = new CountDownLatch(3);
-        service = new ArrayList(3);
-        service.add(new NetworkHealthChecker("一号线程", latch));
-        service.add(new NetworkHealthChecker("二号线程", latch));
-        service.add(new NetworkHealthChecker("三号线程", latch));
-        for (final BaseHealthChecker task : service) {
+    public static boolean checkServices() throws InterruptedException {
+        SERVICE.add(new NetworkChecker("一号线程", LATCH));
+        SERVICE.add(new NetworkChecker("二号线程", LATCH));
+        SERVICE.add(new NetworkChecker("三号线程", LATCH));
+        for (final BaseChecker task : SERVICE) {
+            // 每个线程任务执行完成之后通过调用 CountDownLatch.countDown() 将计数器-1。
             ExampleThreadExecutor.execute(task);
         }
-        latch.await();
-        ExampleThreadExecutor.destroy();
-        for (final BaseHealthChecker v : service) {
+        // 等待 LATCH 计数器变为0之后继续执行。
+        LATCH.await();
+        for (final BaseChecker v : SERVICE) {
             if (!v.isServiceUp()) {
                 return false;
             }
