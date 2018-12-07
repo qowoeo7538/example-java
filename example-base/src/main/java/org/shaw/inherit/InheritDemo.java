@@ -1,14 +1,28 @@
 package org.shaw.inherit;
 
-import org.shaw.inherit.impl.ExtendClass;
+import org.junit.Test;
+import org.shaw.inherit.impl.BaseClass;
+import org.shaw.inherit.impl.ExtendClass1;
+import org.shaw.inherit.impl.ExtendClass2;
 
 /**
  * @create: 2017-11-15
  * @description:
  */
 public class InheritDemo {
-    public static void main(String[] args) {
-        ExtendClass extendClass = new ExtendClass();
+
+    @Test
+    public void inheritTest() {
+        BaseClass class1 = new ExtendClass1();
+        class1.something();
+
+        BaseClass class2 = new ExtendClass2();
+        class2.something();
+
+        ExtendClass1 extendClass = new ExtendClass1();
         extendClass.something();
+
+        ExtendClass2 extendClass2 = new ExtendClass2();
+        extendClass2.something();
     }
 }
