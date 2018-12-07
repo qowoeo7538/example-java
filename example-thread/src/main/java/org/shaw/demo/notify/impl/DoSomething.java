@@ -1,4 +1,4 @@
-package org.shaw.demo.lock.impl;
+package org.shaw.demo.notify.impl;
 
 import java.util.concurrent.TimeUnit;
 
@@ -6,11 +6,9 @@ import java.util.concurrent.TimeUnit;
  * @create: 2017-11-20
  * @description:
  */
-public class NotifyAllTest implements Runnable {
+public class DoSomething implements Runnable {
 
-    private final static String THREAD_NAME = "Thread-0";
-
-    public NotifyAllTest(String name) {
+    public DoSomething(String name) {
         Thread.currentThread().setName(name);
     }
 
@@ -21,12 +19,8 @@ public class NotifyAllTest implements Runnable {
         try {
             concurrencyThrottleSupportTest.beforeAccess();
             System.out.println(Thread.currentThread().getName() + "任务运行中");
-            if (THREAD_NAME.equals(Thread.currentThread().getName())) {
-                TimeUnit.SECONDS.sleep(10);
-            } else {
-                TimeUnit.SECONDS.sleep(5);
-            }
-            concurrencyThrottleSupportTest.afterAccessNotifyAll();
+            TimeUnit.SECONDS.sleep(10);
+            concurrencyThrottleSupportTest.afterAccess();
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }

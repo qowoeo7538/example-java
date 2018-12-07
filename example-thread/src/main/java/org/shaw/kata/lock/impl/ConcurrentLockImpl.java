@@ -1,7 +1,5 @@
 package org.shaw.kata.lock.impl;
 
-import org.shaw.demo.lock.impl.Process;
-
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.CountDownLatch;

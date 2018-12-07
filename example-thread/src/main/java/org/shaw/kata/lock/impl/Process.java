@@ -1,4 +1,4 @@
-package org.shaw.demo.lock.impl;
+package org.shaw.kata.lock.impl;
 
 @FunctionalInterface
 public interface Process {

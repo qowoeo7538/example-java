@@ -1,17 +1,23 @@
-package org.shaw.demo.lock.impl;
+package org.shaw.demo.notify.impl;
 
 /**
  * 关于Spring源码中的并发量控制测试
  */
 public class ConcurrencyThrottleSupportTest {
 
-    /** 并发量设置 */
+    /**
+     * 并发量设置
+     */
     private int concurrencyLimit = 5;
 
-    /** 锁对象 */
-    private transient Object monitor = new Object();
+    /**
+     * 锁对象
+     */
+    private transient final Object monitor = new Object();
 
-    /** 实际已经运行的并发数 */
+    /**
+     * 实际已经运行的并发数
+     */
     private int concurrencyCount = 0;
 
     /**
