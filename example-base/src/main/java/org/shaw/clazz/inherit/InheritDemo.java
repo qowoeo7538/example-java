@@ -1,9 +1,9 @@
-package org.shaw.inherit;
+package org.shaw.clazz.inherit;
 
 import org.junit.Test;
-import org.shaw.inherit.impl.BaseClass;
-import org.shaw.inherit.impl.ExtendClass1;
-import org.shaw.inherit.impl.ExtendClass2;
+import org.shaw.clazz.inherit.impl.BaseClass;
+import org.shaw.clazz.inherit.impl.ExtendClass1;
+import org.shaw.clazz.inherit.impl.ExtendClass2;
 
 /**
  * @create: 2017-11-15

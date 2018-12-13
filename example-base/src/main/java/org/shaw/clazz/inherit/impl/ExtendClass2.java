@@ -1,4 +1,4 @@
-package org.shaw.inherit.impl;
+package org.shaw.clazz.inherit.impl;
 
 public class ExtendClass2 extends BaseClass {
 

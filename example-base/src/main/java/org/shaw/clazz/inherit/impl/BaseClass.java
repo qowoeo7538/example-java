@@ -1,4 +1,4 @@
-package org.shaw.inherit.impl;
+package org.shaw.clazz.inherit.impl;
 
 /**
  * @create: 2017-11-15

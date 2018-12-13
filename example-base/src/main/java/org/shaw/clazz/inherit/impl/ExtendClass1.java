@@ -1,6 +1,4 @@
-package org.shaw.inherit.impl;
-
-import org.junit.Test;
+package org.shaw.clazz.inherit.impl;
 
 /**
  * @create: 2017-11-15

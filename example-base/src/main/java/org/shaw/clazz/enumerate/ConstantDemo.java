@@ -1,4 +1,4 @@
-package org.shaw.enumerate;
+package org.shaw.clazz.enumerate;
 
 /**
  * 常量的定义

@@ -1,4 +1,4 @@
-package org.shaw.enumerate;
+package org.shaw.clazz.enumerate;
 
 /**
  * map形式的枚举
