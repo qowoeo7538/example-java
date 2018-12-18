@@ -1,4 +1,4 @@
-package org.shaw.generic.impl;
+package org.shaw.kata.generic.impl;
 
 /**
  * 集合的泛型，编译之后泛型将不存在，可以通过反射绕过编译。

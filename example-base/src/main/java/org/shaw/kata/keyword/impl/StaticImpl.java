@@ -1,4 +1,4 @@
-package org.shaw.keyword.impl;
+package org.shaw.kata.keyword.impl;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

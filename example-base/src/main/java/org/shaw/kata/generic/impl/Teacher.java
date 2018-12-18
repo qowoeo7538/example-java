@@ -1,4 +1,4 @@
-package org.shaw.generic.impl;
+package org.shaw.kata.generic.impl;
 
 public class Teacher<T, U> implements Person<T> {
 

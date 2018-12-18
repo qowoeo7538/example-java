@@ -1,4 +1,4 @@
-package org.shaw.api.String;
+package org.shaw.demo.string;
 
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;

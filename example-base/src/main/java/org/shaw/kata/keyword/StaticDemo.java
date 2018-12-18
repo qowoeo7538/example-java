@@ -1,7 +1,7 @@
-package org.shaw.keyword;
+package org.shaw.kata.keyword;
 
-import org.shaw.keyword.impl.StaticAttributeTest;
-import org.shaw.keyword.impl.StaticImpl;
+import org.shaw.kata.keyword.impl.StaticAttributeTest;
+import org.shaw.kata.keyword.impl.StaticImpl;
 
 /**
  * @create: 2017-11-15

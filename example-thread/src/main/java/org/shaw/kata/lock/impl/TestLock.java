@@ -6,14 +6,14 @@ package org.shaw.kata.lock.impl;
  */
 public class TestLock implements Runnable {
 
-    public static int i;
+    public int i;
 
-    private final static ConcurrentLockImpl concurrentLock = new ConcurrentLockImpl();
+    private static final  ConcurrentLockImpl concurrentLock = new ConcurrentLockImpl();
 
     @Override
     public void run() {
         for (int j = 0; j < 1000; j++) {
-            concurrentLock.tryLock("testLock", () -> {
+            concurrentLock.lock("testLock", () -> {
                 i++;
                 System.out.println(i);
             });
