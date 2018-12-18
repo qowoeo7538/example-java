@@ -11,15 +11,10 @@ import org.shaw.kata.lock.impl.TestLock;
  */
 public class FutexKata {
 
-    public static void main(String[] args) {
-        for (int i = 0; i < 10; i++) {
-            new Thread(new TestLock()).start();
-
-        }
-    }
+    private final int index = 0;
 
     @Test
-    public void lockImpl(){
+    public void lockTest() {
         for (int i = 0; i < 10; i++) {
             ExampleThreadExecutor.execute(new TestLock());
         }
