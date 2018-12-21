@@ -1,6 +1,6 @@
-package org.shaw.permission;
+package org.shaw.kata.permission;
 
-import org.shaw.permission.impl.FileAccess;
+import org.shaw.kata.permission.impl.FileAccess;
 
 /**
  * AccessController 作用:
@@ -13,11 +13,13 @@ import org.shaw.permission.impl.FileAccess;
  * 2) 调用程序访问另一个有该权限域里程序的方法, 并且此方法标记为有访问 "privileged" 即被授予权限;
  * 3) 调用程序所调用（直接或间接）的后续对象都有上述权限即被授予权限;
  */
-public class AccessControllerDemo {
+public class AccessControllerKata {
+
     public static void main(String[] args) {
         // 打开系统安全权限检查开关(默认拥有所有权限)
         System.setSecurityManager(new SecurityManager());
         // 根据安全策略创建 temp1.txt 文件
         FileAccess.doPrivilegedAction("temp1.txt");
     }
+
 }

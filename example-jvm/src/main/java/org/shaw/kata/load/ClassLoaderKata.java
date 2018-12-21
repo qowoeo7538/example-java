@@ -1,6 +1,7 @@
-package org.shaw.load;
+package org.shaw.kata.load;
 
-import org.shaw.load.impl.MyClassLoader;
+import org.junit.Test;
+import org.shaw.kata.load.impl.MyClassLoader;
 
 /**
  * class loader 是一个负责加载 classes 的对象
@@ -19,19 +20,28 @@ import org.shaw.load.impl.MyClassLoader;
  * 那么就调用resolveClass(Class) 方法来处理类。 ClassLoader 的子类最好覆盖 findClass(String) 而不是这个方法。
  * 除非被重写，这个方法默认在整个装载过程中都是同步的（线程安全的）。
  */
-public class ClassLoaderDemo {
-    public static void main(String[] args) throws Exception {
-        // 验证类加载器与类加载器间的父子关系
-        classLoaderRelation();
+public class ClassLoaderKata {
 
+    /**
+     * 默认类加载器
+     */
+    @Test
+    public void defaultClassLoader() throws Exception {
         // 使用MyClassLoader的类加载器加载本类(默认加载器:sun.misc.Launcher$AppClassLoader)
-        Object obj1 = ClassLoaderDemo.class.getClassLoader().loadClass("org.shaw.load.impl.MyClassLoader").newInstance();
+        Object obj1 = ClassLoaderKata.class.getClassLoader().loadClass("org.shaw.kata.load.impl.MyClassLoader").getConstructor().newInstance();
         System.out.println("默认类加载器：" + obj1.getClass().getClassLoader());
+    }
 
-        // 自定义类加载器加载
+    /**
+     * 使用自定义类加载器加载类
+     *
+     * @throws Exception
+     */
+    @Test
+    public void userClassLoader() throws Exception {
         MyClassLoader myClassLoader = new MyClassLoader("C:\\Users\\john\\Desktop\\");
         Class<?> c = Class.forName("org.shaw.annotation.User", true, myClassLoader);
-        Object object = c.newInstance();
+        Object object = c.getConstructor().newInstance();
         System.out.println(object.getClass());
         System.out.println(object.getClass().getClassLoader());
     }
@@ -39,7 +49,8 @@ public class ClassLoaderDemo {
     /**
      * 验证类加载器与类加载器间的父子关系
      */
-    public static void classLoaderRelation() {
+    @Test
+    public void classLoaderRelation() {
         // 获取系统/应用类的加载器
         ClassLoader appClassLoader = ClassLoader.getSystemClassLoader();
         System.out.println("系统/应用类加载器：" + appClassLoader);

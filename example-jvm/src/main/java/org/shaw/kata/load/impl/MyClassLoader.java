@@ -1,4 +1,4 @@
-package org.shaw.load.impl;
+package org.shaw.kata.load.impl;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

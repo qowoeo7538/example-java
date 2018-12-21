@@ -1,7 +1,7 @@
-package org.shaw.gc;
+package org.shaw.kata.gc;
 
 import org.junit.Test;
-import org.shaw.gc.impl.Book;
+import org.shaw.kata.gc.impl.Book;
 
 /**
  * finalize机制可能会导致性能问题，死锁和线程挂起。
@@ -13,7 +13,7 @@ import org.shaw.gc.impl.Book;
  * <p>
  * finalize() 方法在 JDK9 被弃用
  */
-public class FinalizeDemo {
+public class FinalizeKata {
 
     /**
      * 使用 finalize() 检查对象。
