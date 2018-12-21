@@ -1,4 +1,4 @@
-package org.shaw.kata.permission.impl;
+package org.shaw.permission.impl;
 
 import java.io.File;
 import java.io.IOException;

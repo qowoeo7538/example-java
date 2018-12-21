@@ -1,7 +1,7 @@
-package org.shaw.kata.load;
+package org.shaw.load;
 
 import org.junit.Test;
-import org.shaw.kata.load.impl.MyClassLoader;
+import org.shaw.load.impl.MyClassLoader;
 
 /**
  * class loader 是一个负责加载 classes 的对象
@@ -20,7 +20,7 @@ import org.shaw.kata.load.impl.MyClassLoader;
  * 那么就调用resolveClass(Class) 方法来处理类。 ClassLoader 的子类最好覆盖 findClass(String) 而不是这个方法。
  * 除非被重写，这个方法默认在整个装载过程中都是同步的（线程安全的）。
  */
-public class ClassLoaderKata {
+public class ClassLoaderDemo {
 
     /**
      * 默认类加载器
@@ -28,7 +28,7 @@ public class ClassLoaderKata {
     @Test
     public void defaultClassLoader() throws Exception {
         // 使用MyClassLoader的类加载器加载本类(默认加载器:sun.misc.Launcher$AppClassLoader)
-        Object obj1 = ClassLoaderKata.class.getClassLoader().loadClass("org.shaw.kata.load.impl.MyClassLoader").getConstructor().newInstance();
+        Object obj1 = ClassLoaderDemo.class.getClassLoader().loadClass("org.shaw.load.impl.MyClassLoader").getConstructor().newInstance();
         System.out.println("默认类加载器：" + obj1.getClass().getClassLoader());
     }
 

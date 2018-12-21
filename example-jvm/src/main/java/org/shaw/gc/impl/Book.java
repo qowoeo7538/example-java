@@ -1,4 +1,4 @@
-package org.shaw.kata.gc.impl;
+package org.shaw.gc.impl;
 
 public class Book {
 

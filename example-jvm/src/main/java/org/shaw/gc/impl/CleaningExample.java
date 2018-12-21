@@ -1,4 +1,4 @@
-package org.shaw.kata.gc.impl;
+package org.shaw.gc.impl;
 
 
 import java.lang.ref.Cleaner;
@@ -11,7 +11,7 @@ import java.lang.ref.Cleaner;
  */
 public class CleaningExample implements AutoCloseable {
 
-    private static final Cleaner cleaner = Cleaner.create();
+    private static final Cleaner CLEANER = Cleaner.create();
 
     private final State state;
 
@@ -19,7 +19,7 @@ public class CleaningExample implements AutoCloseable {
 
     public CleaningExample() {
         this.state = new State();
-        this.cleanable = cleaner.register(this, state);
+        this.cleanable = CLEANER.register(this, state);
     }
 
     static class State implements Runnable {

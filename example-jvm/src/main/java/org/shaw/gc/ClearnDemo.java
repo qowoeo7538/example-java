@@ -1,9 +1,9 @@
-package org.shaw.kata.gc;
+package org.shaw.gc;
 
 import org.junit.Test;
-import org.shaw.kata.gc.impl.CleaningExample;
+import org.shaw.gc.impl.CleaningExample;
 
-public class ClearnKata {
+public class ClearnDemo {
 
     /**
      * 每次创建对象时，都会打印init;回收对象时，都会打印clean.
