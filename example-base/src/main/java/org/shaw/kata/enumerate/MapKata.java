@@ -1,9 +1,9 @@
-package org.shaw.kata.clazz.enumerate;
+package org.shaw.kata.enumerate;
 
 /**
  * map形式的枚举
  */
-public enum MapDemo {
+public enum MapKata {
     GET("GET", "GET请求"),
     HEAD("HEAD", "HEAD请求"),
     POST("POST", "POST请求"),
@@ -16,7 +16,7 @@ public enum MapDemo {
     private final String key;
     private final String value;
 
-    MapDemo(String key, String value) {
+    MapKata(String key, String value) {
         this.key = key;
         this.value = value;
     }

@@ -1,9 +1,9 @@
-package org.shaw.kata.clazz.enumerate;
+package org.shaw.kata.enumerate;
 
 /**
  * 常量的定义
  */
-public enum ConstantDemo {
+public enum ConstantKata {
     SUCCESS("Y"),
     FAIL("N"),
     AUDIT_SUCCESS("1"),
@@ -11,7 +11,7 @@ public enum ConstantDemo {
 
     private final String state;
 
-    ConstantDemo(String state) {
+    ConstantKata(String state) {
         this.state = state;
     }
 

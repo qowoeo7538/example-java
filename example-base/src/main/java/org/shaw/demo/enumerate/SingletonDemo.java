@@ -1,4 +1,4 @@
-package org.shaw.kata.clazz.enumerate;
+package org.shaw.demo.enumerate;
 
 public enum SingletonDemo {
     /**

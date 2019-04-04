@@ -1,7 +1,6 @@
 package org.shaw.demo.enumerate;
 
 import org.junit.Test;
-import org.shaw.kata.clazz.enumerate.SingletonDemo;
 
 /**
  * Created by joy on 17-6-11.
