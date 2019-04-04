@@ -6,7 +6,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 /**
- * Created by joy on 17-1-25.
+ * 应用创建销毁监听
  */
 @WebListener
 public class MyServletContextListener implements ServletContextListener {

@@ -1,8 +1,8 @@
-package org.shaw.run.stack;
+package org.shaw.stack;
 
 import org.junit.Test;
-import org.shaw.run.stack.impl.AStackContent;
-import org.shaw.run.stack.impl.BStackContent;
+import org.shaw.stack.impl.AStackContent;
+import org.shaw.stack.impl.BStackContent;
 
 /**
  * 运行Stack信息

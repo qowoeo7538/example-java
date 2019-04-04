@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
 /**
- * Created by joy on 17-1-25.
+ * 会话创建销毁监听
  */
 @WebListener
 public class MyHttpSessionListener implements HttpSessionListener {

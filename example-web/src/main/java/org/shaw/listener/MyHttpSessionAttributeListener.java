@@ -5,7 +5,7 @@ import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 
 /**
- * Created by joy on 17-1-25.
+ * 会话属性监听
  */
 @WebListener
 public class MyHttpSessionAttributeListener implements HttpSessionAttributeListener {

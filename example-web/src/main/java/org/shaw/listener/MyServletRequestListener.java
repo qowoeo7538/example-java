@@ -6,7 +6,7 @@ import javax.servlet.ServletRequestListener;
 import javax.servlet.annotation.WebListener;
 
 /**
- * Created by joy on 17-1-25.
+ * 请求初始化销毁监听
  */
 @WebListener
 public class MyServletRequestListener implements ServletRequestListener {

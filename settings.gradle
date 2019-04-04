@@ -1,6 +1,5 @@
 rootProject.name = 'example'
 
-include 'example-advance'
 include 'example-base'
 include 'example-core'
 include 'example-web'

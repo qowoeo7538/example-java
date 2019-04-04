@@ -5,7 +5,7 @@ import javax.servlet.ServletRequestAttributeListener;
 import javax.servlet.annotation.WebListener;
 
 /**
- * Created by joy on 17-1-25.
+ * 请求属性监听
  */
 @WebListener
 public class MyServletRequestAttributeListener implements ServletRequestAttributeListener{

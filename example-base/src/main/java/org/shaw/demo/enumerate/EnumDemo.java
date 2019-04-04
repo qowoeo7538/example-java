@@ -17,12 +17,14 @@ public class EnumDemo {
 
         System.out.println("=================================");
         System.out.println("枚举元素个数： " + SingletonDemo.values().length);
+        System.out.print("枚举元素信息：");
         for (SingletonDemo e : SingletonDemo.values()) {
-            System.out.println(e);
+            System.out.print(e+" ");
         }
+        System.out.println();
         System.out.println("=================================");
         //枚举已经实现compareTo接口
-        System.out.println(SingletonDemo.spring.compareTo(SingletonDemo.winter));
+        System.out.println("比较指定枚举的顺序： " + SingletonDemo.spring.compareTo(SingletonDemo.winter));
         System.out.println(SingletonDemo.getBest());
     }
 
