@@ -1,7 +1,9 @@
 # AOP
 
-- [静态AOP](#静态AOP)
-- [动态AOP](#动态AOP)
+- [1.静态AOP](#1.静态AOP)
+- [2.动态AOP](#2.动态AOP)
+
+[TOC]
 
 ## 1. 静态AOP
 <pre>
