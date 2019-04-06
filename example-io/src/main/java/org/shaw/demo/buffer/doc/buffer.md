@@ -1,3 +1,23 @@
+# buffer
+[TOC]
+
+## 目录
+- [使用步骤](#使用步骤)
+- [API](#API)
+  - [buffer分配](#buffer分配)
+  - [写数据](#写数据)
+  - [读数据](#读数据)
+  - [重置位置](#重置位置)
+    - [flip()](#flip())
+    - [rewind()](#rewind())
+  - [清除方法](#清除方法)
+    - [clear()](#clear())
+    - [compact()](#compact())
+  - [比较](#比较)
+    - [equals()](#equals())
+    - [compareTo](#compareTo)
+- [注意](#注意)
+
 ## 使用步骤
 当向buffer写入数据时，buffer会记录下写了多少数据。一旦要读取数据，需要通过flip()方法将Buffer从写模式切换到读模式。
 在读模式下，可以读取之前写入到buffer的所有数据。
