@@ -1,7 +1,12 @@
 # 引用
 
-## 引用类型
-- 强引用（Strong Reference）
-- 软引用（Soft Reference）
-- 弱引用（Weak Reference）
-- 虚引用（Phantom Reference）
+[TOC]
+
+## 目录
+- [引用类型](#1引用类型)
+
+## 1.引用类型
+- 强引用（Strong Reference）: 只要强引用还存在，垃圾收集器永远不会回收掉引用对象。
+- 软引用（Soft Reference）:通过 SoftReference 类实现。有用但并非必需的对象。软引用关联的对象，在系统发生内存溢出异常之前，将会把这些对象列进回收范围之中进行第二次回收。
+- 弱引用（Weak Reference）:通过 WeakReference 类实现。非必需的对象。弱引用关联的对象只能生存到下一次垃圾收集发生之前，当垃圾收集器工作时，无论当前内存是否足够，都将回收掉只被弱引用关联的对象。
+- 虚引用（Phantom Reference）:通过 PhantomReference 类实现。一个对象是否有虚引用的存在，完全不会对其生存时间构成影响，也无法通过虚引用来取得一个实例对象。虚引用的唯一目的就是能在这个对象被收集器回收时收到一个系统通知。

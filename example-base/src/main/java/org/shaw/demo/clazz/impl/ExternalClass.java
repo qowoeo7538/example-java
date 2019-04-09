@@ -1,4 +1,4 @@
-package org.shaw.kata.clazz.inner.impl;
+package org.shaw.demo.clazz.impl;
 
 public class ExternalClass {
 
