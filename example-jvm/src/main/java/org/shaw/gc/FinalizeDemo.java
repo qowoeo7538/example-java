@@ -2,6 +2,7 @@ package org.shaw.gc;
 
 import org.junit.Test;
 import org.shaw.gc.impl.Book;
+import org.shaw.gc.impl.FinalizeEscapeGC;
 
 /**
  * finalize机制可能会导致性能问题，死锁和线程挂起。
@@ -27,6 +28,36 @@ public class FinalizeDemo {
         new Book(true);
         // Force garbage collection & finalization:
         System.gc();
+    }
+
+    /**
+     * 通过 finalize 重新关联引用，逃脱GC回收。
+     * @since 9
+     */
+    @Test
+    public void escapeGC() throws Throwable {
+        FinalizeEscapeGC.SAVE_HOOK = new FinalizeEscapeGC();
+        // 对象第一次成功拯救自己
+        FinalizeEscapeGC.SAVE_HOOK = null;
+        System.gc();
+        // 因为finalize方法优先级很低，所以暂停等待它
+        Thread.sleep(500);
+        if (FinalizeEscapeGC.SAVE_HOOK != null) {
+            FinalizeEscapeGC.SAVE_HOOK.isAlive();
+        } else {
+            System.out.println("no,i am dead :(");
+        }
+        // =====================================
+        // 这次逃脱失败了，因为finalize方法只会被系统自动调用一次。
+        FinalizeEscapeGC.SAVE_HOOK = null;
+        System.gc();
+        // 因为finalize方法优先级很低，所以暂停等待它
+        Thread.sleep(500);
+        if (FinalizeEscapeGC.SAVE_HOOK != null) {
+            FinalizeEscapeGC.SAVE_HOOK.isAlive();
+        } else {
+            System.out.println("no,i am dead :(");
+        }
     }
 
 }
