@@ -1,7 +1,7 @@
 ## SyncDemo 线程安全
 
 ### 1. 流程
-![](image/sync.jpeg)
+![](media/sync.jpeg)
 
 ### 2. 安全等级
 1. 不可变
