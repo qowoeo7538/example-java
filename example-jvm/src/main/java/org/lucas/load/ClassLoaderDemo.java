@@ -40,7 +40,7 @@ public class ClassLoaderDemo {
     @Test
     public void userClassLoader() throws Exception {
         MyClassLoader myClassLoader = new MyClassLoader("C:\\Users\\john\\Desktop\\");
-        Class<?> c = Class.forName("org.shaw.annotation.User", true, myClassLoader);
+        Class<?> c = Class.forName("org.lucas.annotation.User", true, myClassLoader);
         Object object = c.getConstructor().newInstance();
         System.out.println(object.getClass());
         System.out.println(object.getClass().getClassLoader());

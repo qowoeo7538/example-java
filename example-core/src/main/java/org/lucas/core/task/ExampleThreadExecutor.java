@@ -1,7 +1,7 @@
 package org.lucas.core.task;
 
-import org.shaw.core.Constants;
-import org.shaw.task.ThreadPoolTaskExecutor;
+import org.lucas.core.Constants;
+import org.lucas.task.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;

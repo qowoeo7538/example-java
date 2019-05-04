@@ -1,6 +1,6 @@
 package org.lucas.demo.bytes;
 
-import org.shaw.util.StreamUtils;
+import org.lucas.util.StreamUtils;
 
 import java.io.File;
 import java.io.IOException;

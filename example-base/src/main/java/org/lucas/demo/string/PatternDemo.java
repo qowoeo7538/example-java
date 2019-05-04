@@ -10,7 +10,7 @@ public class PatternDemo {
 
     private static final Pattern PACKAGE_PATTERN = Pattern.compile("package\\s+([$_a-zA-Z][$_a-zA-Z0-9\\.]*);");
 
-    private static final String STR = "package org.shaw.lang.string; class java.util.regex.Matcher";
+    private static final String STR = "package org.lucas.lang.string; class java.util.regex.Matcher";
 
     public static void main(String[] args) {
         regularPattern(PACKAGE_PATTERN, STR);

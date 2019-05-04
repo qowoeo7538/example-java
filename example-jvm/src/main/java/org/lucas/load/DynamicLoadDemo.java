@@ -18,7 +18,7 @@ public class DynamicLoadDemo {
     public void dynamicLoad() throws Exception {
         // new是对象的静态加载，编译时就会加载;
         OfficeBetter officeBetter = new OfficeBetter();
-        OfficeBetter.load("org.shaw.load.dynamic.impl.Word");
+        OfficeBetter.load("org.lucas.load.dynamic.impl.Word");
     }
 
 }

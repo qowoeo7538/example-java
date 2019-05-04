@@ -28,7 +28,7 @@ configure(allprojects) { project ->
     apply plugin: "propdeps"
     apply plugin: "java"
 
-    group = 'org.shaw'
+    group = 'org.lucas'
     version = '1.0-SNAPSHOT'
 
     ext {

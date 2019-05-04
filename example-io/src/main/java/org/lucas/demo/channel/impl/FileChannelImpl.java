@@ -1,6 +1,6 @@
 package org.lucas.demo.channel.impl;
 
-import org.shaw.util.StreamUtils;
+import org.lucas.util.StreamUtils;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;

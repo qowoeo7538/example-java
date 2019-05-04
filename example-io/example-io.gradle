@@ -2,5 +2,5 @@ description = "Example IO"
 
 dependencies{
     compile(project(":example-core"))
-    compileOnly("org.shaw:component-common:1.0-SNAPSHOT")
+    compileOnly("org.lucas:component-common:1.0-SNAPSHOT")
 }

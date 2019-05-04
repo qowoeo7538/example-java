@@ -2,7 +2,7 @@ package org.lucas.demo.future;
 
 import org.junit.Test;
 import org.lucas.core.task.ExampleThreadExecutor;
-import org.shaw.task.ThreadPoolTaskExecutor;
+import org.lucas.task.ThreadPoolTaskExecutor;
 import org.lucas.util.DataProducerHelper;
 
 import java.text.SimpleDateFormat;

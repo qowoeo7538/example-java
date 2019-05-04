@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 public class StreamBufferDemo {
 
-    private final static String SOURCE = "/home/shaw/桌面/in.sh";
+    private final static String SOURCE = "/home/lucas/桌面/in.sh";
 
     private final static String TARGET = "/home/shaw/桌面/wwwwwww.sh";
 
