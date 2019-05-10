@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../Jquery/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript">
+        /**
+         * 因为JS是单线程，while这段代码没有执行完，所以插入在后面的代码便永远不会执行。
+         * JS通过timer根据你设定的时间“准确”地找到代码的插入点。当队列“正常”地执行到插入点时，就触发timer callback，来实现异步。
+         */
+        function fn() {
+            setTimeout(function () {
+                alert('can you see me?');
+            }, 1000);
+            while (true) { }
+        }
+
+        onload = fn();
+    </script>
+</head>
+<body>
+<a href="javascript:void(0);" onclick="">方法触发</a>
+</body>
+</html>

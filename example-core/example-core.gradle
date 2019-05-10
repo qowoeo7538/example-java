@@ -3,6 +3,6 @@ description = "Example Core"
 dependencies {
     compile("org.springframework:spring-core")
     compile("org.springframework:spring-context")
-    compile("org.lucas:component-common:1.0-SNAPSHOT")
-    compile("org.lucas:component-thread:1.0-SNAPSHOT")
+    compile("org.lucas:component-common:1.0")
+    compile("org.lucas:component-thread:1.0")
 }

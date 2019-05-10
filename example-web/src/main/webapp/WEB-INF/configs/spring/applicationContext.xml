@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <import resource="classpath:/applicationContext-service.xml"/>
+
+    <!-- <context:annotation-config /> -->
+
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/plain;charset=UTF-8</value>
+                        <value>text/json;charset=UTF-8</value>
+                        <value>text/html;charset=UTF-8</value>
+                        <value>text/xml;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <context:component-scan base-package="com.myweb">
+        <!-- use-default-filters="false" 不是用默认扫描器（base-package无效），全部由子标签决定 -->
+        <!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" /> -->
+    </context:component-scan>
+
+    <!-- @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON) 整个应用中，只创建bean的一个实例。 -->
+    <!-- <bean id="SpringContextUtil" class="com.myweb.context.SpringContextUtil" scope="singleton"/> -->
+
+</beans>
