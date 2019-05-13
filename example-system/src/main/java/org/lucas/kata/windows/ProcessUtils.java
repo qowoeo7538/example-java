@@ -1,4 +1,4 @@
-package org.lucas.windows.util;
+package org.lucas.kata.windows;
 
 import java.io.BufferedReader;
 import java.io.IOException;

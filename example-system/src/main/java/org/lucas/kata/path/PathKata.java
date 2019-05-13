@@ -1,14 +1,8 @@
-package org.lucas.base.path;
+package org.lucas.kata.path;
 
-import java.io.IOException;
+import org.junit.Test;
 
-public class PathDemo {
-    public static void main(String[] args) throws IOException {
-        // 获取路径
-        getPath();
-        // 根据路径加载资源
-        // loadSource();
-    }
+public class PathKata {
 
     /**
      * 1) "." 会自动转成以 "/" 分割路径
@@ -16,28 +10,30 @@ public class PathDemo {
      * 3) 如果不以 "/" 开头则加载当前目录下的资源
      * 4) 从 classpath 加载资源，且开头不能是 "/" 其后按照 "/" 分割的路径（相对路径）
      */
-    private static void getPath() {
+    @Test
+    public void getPath() {
         // 获取当前项目路径
         System.out.println(System.getProperty("user.dir"));
 
         // 获取当前编译文件路径
-        System.out.println(PathDemo.class.getResource(""));
+        System.out.println(PathKata.class.getResource(""));
         // 获取当前编译目录
-        System.out.println(PathDemo.class.getResource("/"));
+        System.out.println(PathKata.class.getResource("/"));
 
         // 获取当前编译目录（path开头不能是 "/" 且其后按照 "/" 分割的格式）
-        System.out.println(PathDemo.class.getClassLoader().getResource(""));
+        System.out.println(PathKata.class.getClassLoader().getResource(""));
 
         // 获取当前项目路径（path开头不能是 "/" 且其后按照 "/" 分割的格式）
         System.out.println(ClassLoader.getSystemResource(""));
     }
 
-    private static void loadSource() {
+    @Test
+    public void loadSource() {
         // 从classpath下加载资源
-        PathDemo.class.getResource("/org/lucas/base/path/PathDemo.class");
+        System.out.println(PathKata.class.getResource("/org/lucas/kata/path/PathDemo.class"));
         // 从当前目录下加载资源
-        PathDemo.class.getResource("PathDemo.class");
+        System.out.println(PathKata.class.getResource("PathDemo.class"));
         // 从classpath下加载资源
-        PathDemo.class.getClassLoader().getResource("org/lucas/base/path/PathDemo.class");
+        System.out.println(PathKata.class.getClassLoader().getResource("org/lucas/kata/path/PathDemo.class"));
     }
 }
