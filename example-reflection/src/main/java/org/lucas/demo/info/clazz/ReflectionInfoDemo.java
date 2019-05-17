@@ -1,5 +1,6 @@
 package org.lucas.demo.info.clazz;
 
+import org.junit.Test;
 import org.lucas.demo.info.clazz.impl.Column;
 import org.lucas.demo.info.clazz.impl.InheritedAnnotation;
 import org.lucas.demo.info.clazz.impl.Table;
@@ -16,65 +17,44 @@ import java.util.Map;
 /**
  * 通过反射获取类信息
  */
-public class ClassInfoDemo {
-
-    public static void main(String[] args) throws Exception {
-        // 打印类的信息
-        System.out.println("===========" + "打印类的信息" + "===========");
-        classMessage(new User());
-
-        // 打印类的构造函数的信息
-        System.out.println("===========" + "打印类的构造函数的信息" + "===========");
-        constructorMessage(new User());
-
-        // 打印类的成员变量的信息
-        System.out.println("===========" + "打印类的成员变量的信息" + "===========");
-        fieldMessage(new User("张三", "40"));
-
-        // 打印类的成员函数信息
-        System.out.println("===========" + "打印类的成员函数信息" + "===========");
-        methodMessage(new User("张三", "40"));
-
-        // 打印类的注解信息
-        System.out.println("===========" + "打印类的注解信息" + "===========");
-        getClassAnnotationMessage(new User());
-
-        // 打印成员属性的注解信息
-        System.out.println("===========" + "打印成员属性的注解信息" + "===========");
-        getFieldAnnotationMessage(new User());
-
-        // 打印类的注解信息
-        System.out.println("===========" + "打印类的注解信息" + "===========");
-        annotationMessage(new User(), Table.class);
-    }
+public class ReflectionInfoDemo {
 
     /**
-     * 打印类的信息
-     *
-     * @param obj 该对象所属类的信息
+     * 打印类的全名
      */
-    private static void classMessage(Object obj) {
-        Class objClass = obj.getClass();
+    @Test
+    public void classInfo() {
+        final User user = new User();
+        Class objClass = user.getClass();
         System.out.println(objClass.getName());
+        // 获取类全名
+        System.out.println("============" + "获取类全名" + "============");
+        System.out.println(User.class.getName());
+        System.out.println(User.UserInfoInternal.USER_INFO_INTERNAL);
+        // 获取底层类的简称
+        System.out.println("============" + "获取底层类的简称" + "============");
+        System.out.println(getShortName(ReflectionInfoDemo.class));
+        System.out.println(getShortName(User.UserInfoInternal.class));
+        // 部分基本类类型
+        System.out.println("============" + "部分基本类类型" + "============");
+        commonClassType();
     }
 
     /**
      * 打印对象的构造函数的信息
-     *
-     * @param obj
+     * <p>
+     * 构造函数也是对象
+     * java.lang. Constructor中封装了构造函数的信息
+     * getConstructors获取所有的public的构造函数
+     * getDeclaredConstructors得到所有的构造函数
      */
-    private static void constructorMessage(Object obj) {
-        Class objClass = obj.getClass();
-        /**
-         * 构造函数也是对象
-         * java.lang. Constructor中封装了构造函数的信息
-         * getConstructors获取所有的public的构造函数
-         * getDeclaredConstructors得到所有的构造函数
-         */
+    @Test
+    public void constructorInfo() {
+        final User user = new User();
+        Class objClass = user.getClass();
         Constructor[] constructors = objClass.getDeclaredConstructors();
         for (Constructor constructor : constructors) {
             System.out.print(constructor.getName() + "(");
-
             // 获取构造函数的参数列表
             Class[] ParameterTypes = constructor.getParameterTypes();
             for (Class ParameterType : ParameterTypes) {
@@ -86,18 +66,17 @@ public class ClassInfoDemo {
 
     /**
      * 获取成员变量的信息
-     *
-     * @param obj
+     * <p>
+     * 成员变量也是对象
+     * java.lang.reflect.Field
+     * Field类封装了关于成员变量的操作
+     * getFields()方法获取的是所有的public的成员变量的信息
+     * getDeclaredFields获取的是该类自己声明的成员变量的信息
      */
-    private static void fieldMessage(Object obj) throws Exception {
-        Class objClass = obj.getClass();
-        /**
-         * 成员变量也是对象
-         * java.lang.reflect.Field
-         * Field类封装了关于成员变量的操作
-         * getFields()方法获取的是所有的public的成员变量的信息
-         * getDeclaredFields获取的是该类自己声明的成员变量的信息
-         */
+    @Test
+    public void fieldInfo() throws IllegalAccessException {
+        final User user = new User("张三", "40");
+        Class objClass = user.getClass();
         Field[] fields = objClass.getDeclaredFields();
         for (Field field : fields) {
             //得到成员变量的类型的类类型
@@ -107,18 +86,18 @@ public class ClassInfoDemo {
             //得到成员变量的名称
             String filedName = field.getName();
             //field.get(obj) 获取该属性在对象中的值
-            Object value = field.get(obj);
+            Object value = field.get(user);
             System.out.println(fieldClass.getSimpleName() + ":" + filedName + "=" + value);
         }
     }
 
     /**
      * 打印成员函数信息
-     *
-     * @param obj
      */
-    private static void methodMessage(Object obj) {
-        Class objClass = obj.getClass();
+    @Test
+    public void methodInfo() {
+        User user = new User("张三", "40");
+        Class objClass = user.getClass();
         /**
          * Method类，方法对象
          * 一个成员方法就是一个Method对象
@@ -160,11 +139,11 @@ public class ClassInfoDemo {
 
     /**
      * 获取类的注解信息
-     *
-     * @param obj
      */
-    private static void getClassAnnotationMessage(Object obj) {
-        Class<?> objClass = obj.getClass();
+    @Test
+    public void getClassAnnotationInfo() {
+        User user = new User();
+        Class<?> objClass = user.getClass();
         if (!objClass.isAnnotationPresent(InheritedAnnotation.class)) {
             System.out.println("该对象不含" + InheritedAnnotation.class + "注解");
         }
@@ -178,8 +157,10 @@ public class ClassInfoDemo {
     /**
      * 获取成员属性注解信息
      */
-    private static void getFieldAnnotationMessage(Object obj) {
-        Class<?> objClass = obj.getClass();
+    @Test
+    public void getFieldAnnotationInfo() {
+        User user = new User();
+        Class<?> objClass = user.getClass();
         Field[] fields = objClass.getDeclaredFields();
         for (Field field : fields) {
             field.setAccessible(true);
@@ -193,12 +174,14 @@ public class ClassInfoDemo {
     /**
      * TODO 获取所有注解信息
      *
-     * @param obj
-     * @param annotationClass
-     * @param <A>
      * @throws Exception
      */
-    private static <A extends Annotation> void annotationMessage(Object obj, Class<A>... annotationClass) {
+    @Test
+    public void annotationInfo() {
+        annotationInfo(new User(), Table.class);
+    }
+
+    private <A extends Annotation> void annotationInfo(User obj, Class<A>... annotationClass) {
         Class<?> objClass = obj.getClass();
         if (annotationClass != null && annotationClass.length != 0) {
             for (Class<A> clazz : annotationClass) {
@@ -216,6 +199,48 @@ public class ClassInfoDemo {
                 System.out.println("注解名：" + annotation.getClass().getSimpleName() + ",注解包含的值：" + values.toString());
             }
         }
+    }
+
+    /**
+     * 返回源代码中给出的底层类的简称;
+     *
+     * @param clzz 类类型对象
+     * @return 类型简称(去包名)
+     */
+    private static String getShortName(Class<?> clzz) {
+        String className = clzz.getTypeName();
+        int lastDotIndex = className.lastIndexOf('.');
+        int nameEndIndex = className.indexOf("$$");
+        if (nameEndIndex == -1) {
+            nameEndIndex = className.length();
+        }
+        String shortName = className.substring(lastDotIndex + 1, nameEndIndex);
+        shortName = shortName.replace('$', '.');
+        return shortName;
+    }
+
+    /**
+     * 基本类类型
+     */
+    private static void commonClassType() {
+        /**
+         * 输出 Class 对象所表示的实体名称
+         * 类里的关键字都会有自己的类类型
+         *
+         * 类类型(class) ===> 类的字节码
+         */
+        System.out.println(String[].class.getName());
+        System.out.println(String[].class.getCanonicalName());
+        System.out.println(Short.class.getName());
+        System.out.println(Short.class.getCanonicalName());
+        System.out.println(short[].class.getName());
+        System.out.println(short[].class.getCanonicalName());
+        System.out.println(short.class.getName());
+        System.out.println(short.class.getCanonicalName());
+        System.out.println(Void.class.getName());
+        System.out.println(Void.class.getCanonicalName());
+        System.out.println(void.class.getName());
+        System.out.println(void.class.getCanonicalName());
     }
 
     /**
