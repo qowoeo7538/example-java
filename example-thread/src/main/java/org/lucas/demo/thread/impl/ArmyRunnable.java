@@ -9,7 +9,7 @@ public class ArmyRunnable implements Runnable {
     /**
      * 通过该属性控制任务是否终止
      *
-     * volatile：每次写这个变量时会将该变量工作内存的值写入主内存中。读取时，会将主内存中的变量读取到工作内存中
+     * volatile：
      * 1）当结果依赖当前的值，如 keepRunning++ ，keepRunning+=5，不能使用。
      * 2）该变量在不变式中有其它volatile变量不能使用。
      */
