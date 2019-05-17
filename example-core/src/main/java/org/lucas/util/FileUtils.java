@@ -1,7 +1,6 @@
 package org.lucas.util;
 
-import org.lucas.io.support.CopyFile;
-import org.lucas.util.ExceptionUtils;
+import org.lucas.io.support.SegmentCopyFile;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,7 +12,7 @@ import java.io.FileOutputStream;
 public abstract class FileUtils {
 
     public static void copyFile(String src, String copySrc) {
-        CopyFile copyFile = new CopyFile(src, copySrc, 10);
+        SegmentCopyFile copyFile = new SegmentCopyFile(src, copySrc, 10);
         try {
             copyFile.copyFile();
         } catch (Exception e) {
