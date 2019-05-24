@@ -3,7 +3,7 @@ package org.lucas.jol;
 import org.junit.Test;
 import org.lucas.jol.impl.ContendedObjcet;
 import org.lucas.jol.impl.EmptyObject;
-import org.lucas.jol.impl.Value;
+import org.lucas.jol.impl.ValueObject;
 import org.openjdk.jol.info.ClassLayout;
 import org.openjdk.jol.vm.VM;
 
@@ -14,14 +14,14 @@ import org.openjdk.jol.vm.VM;
 public class JolDemo {
 
     @Test
-    public void emptyObjectSize(){
+    public void emptyObjectSize() {
         final EmptyObject a = new EmptyObject();
         final ClassLayout layout = ClassLayout.parseInstance(a);
         printLayoutInfo(layout);
     }
 
     @Test
-    public void arrayObjectSize(){
+    public void arrayObjectSize() {
         final EmptyObject[] arrayObject = new EmptyObject[6];
         final ClassLayout layout = ClassLayout.parseInstance(arrayObject);
         printLayoutInfo(layout);
@@ -31,20 +31,20 @@ public class JolDemo {
      * -XX:-RestrictContended
      */
     @Test
-    public void contendedObjectSize(){
+    public void contendedObjectSize() {
         final ContendedObjcet Object = new ContendedObjcet();
         final ClassLayout layout = ClassLayout.parseInstance(Object);
         printLayoutInfo(layout);
     }
 
     @Test
-    public void manualPad(){
-        final Value value = new Value();
+    public void manualPad() {
+        final ValueObject value = new ValueObject();
         final ClassLayout layout = ClassLayout.parseInstance(value);
         printLayoutInfo(layout);
     }
 
-    private static void printLayoutInfo(final ClassLayout layout){
+    private static void printLayoutInfo(final ClassLayout layout) {
         System.out.println(VM.current().details());
         System.out.println("Printable:\n" + layout.toPrintable());
         System.out.println("headerSize: " + layout.headerSize());
