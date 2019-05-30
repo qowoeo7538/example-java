@@ -1,7 +1,7 @@
 package org.lucas.jol;
 
 import org.junit.Test;
-import org.lucas.jol.impl.ContendedObjcet;
+import org.lucas.jol.impl.ContendedObject;
 import org.lucas.jol.impl.EmptyObject;
 import org.lucas.jol.impl.ValueObject;
 import org.openjdk.jol.info.ClassLayout;
@@ -31,8 +31,8 @@ public class JolDemo {
      * -XX:-RestrictContended
      */
     @Test
-    public void contendedObjectSize() {
-        final ContendedObjcet Object = new ContendedObjcet();
+    public void contendedObjectSize() throws Exception {
+        final ContendedObject Object = new ContendedObject();
         final ClassLayout layout = ClassLayout.parseInstance(Object);
         printLayoutInfo(layout);
     }
