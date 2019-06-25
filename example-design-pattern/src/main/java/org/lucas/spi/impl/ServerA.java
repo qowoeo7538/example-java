@@ -12,11 +12,7 @@ public class ServerA implements IServer {
      */
     @Override
     public boolean isSupported(String serverName) {
-        if (SERVER_NAME.equalsIgnoreCase(serverName)) {
-            return true;
-        } else {
-            return false;
-        }
+        return SERVER_NAME.equalsIgnoreCase(serverName);
     }
 
     @Override
