@@ -1,6 +1,6 @@
 package org.lucas.example.design.pattern.listener;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.lucas.core.Constants;
 import org.lucas.task.ThreadPoolTaskExecutor;
 import org.lucas.example.core.util.DataProducerHelper;

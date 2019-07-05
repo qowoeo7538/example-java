@@ -1,7 +1,7 @@
 package org.lucas.example.base.kata.generic;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.lucas.example.base.kata.generic.impl.Student;
 import org.lucas.example.base.kata.generic.impl.Student1;
 import org.lucas.example.base.kata.generic.impl.Person;

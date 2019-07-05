@@ -1,7 +1,7 @@
 package org.lucas.example.io.kata.server.impl;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.lucas.example.io.kata.nio.server.impl.Message;
 import org.lucas.example.io.kata.nio.server.impl.MessageBuffer;
 

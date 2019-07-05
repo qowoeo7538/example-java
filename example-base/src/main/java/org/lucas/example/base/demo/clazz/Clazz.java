@@ -1,6 +1,6 @@
 package org.lucas.example.base.demo.clazz;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.lucas.example.base.demo.clazz.impl.BaseClass;
 import org.lucas.example.base.demo.clazz.impl.Children;
 import org.lucas.example.base.demo.clazz.impl.ExtendClass1;

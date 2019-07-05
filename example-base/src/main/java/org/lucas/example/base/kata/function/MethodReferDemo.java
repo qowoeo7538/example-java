@@ -1,7 +1,7 @@
 package org.lucas.example.base.kata.function;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.lucas.example.base.kata.function.impl.Function;
 import org.lucas.example.base.kata.function.impl.Function2;
 import org.lucas.example.base.kata.function.impl.FunctionRefer;

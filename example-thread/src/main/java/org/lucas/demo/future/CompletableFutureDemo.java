@@ -1,6 +1,6 @@
 package org.lucas.demo.future;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.lucas.example.core.task.ExampleThreadExecutor;
 import org.lucas.task.ThreadPoolTaskExecutor;
 import org.lucas.example.core.util.DataProducerHelper;

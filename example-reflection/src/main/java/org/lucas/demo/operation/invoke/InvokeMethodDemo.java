@@ -1,6 +1,6 @@
 package org.lucas.demo.operation.invoke;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Method;
 

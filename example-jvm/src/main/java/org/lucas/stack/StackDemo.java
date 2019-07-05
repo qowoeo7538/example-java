@@ -1,6 +1,6 @@
 package org.lucas.stack;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.lucas.stack.impl.AStackContent;
 import org.lucas.stack.impl.BStackContent;
 

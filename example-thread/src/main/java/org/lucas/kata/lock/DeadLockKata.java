@@ -1,6 +1,6 @@
 package org.lucas.kata.lock;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.lucas.example.core.task.ExampleThreadExecutor;
 
 public class DeadLockKata {

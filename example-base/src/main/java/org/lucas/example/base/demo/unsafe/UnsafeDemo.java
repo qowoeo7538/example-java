@@ -1,6 +1,6 @@
 package org.lucas.example.base.demo.unsafe;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.lucas.example.base.demo.unsafe.impl.Value;
 import org.lucas.util.UnsafeUtils;
 import sun.misc.Unsafe;

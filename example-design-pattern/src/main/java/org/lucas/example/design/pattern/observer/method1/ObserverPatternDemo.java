@@ -1,7 +1,7 @@
 package org.lucas.example.design.pattern.observer.method1;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.lucas.example.design.pattern.observer.method1.impl.Watched;
 import org.lucas.example.design.pattern.observer.method1.impl.Watcher;
 

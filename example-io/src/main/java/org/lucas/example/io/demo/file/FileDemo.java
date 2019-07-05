@@ -1,6 +1,6 @@
 package org.lucas.example.io.demo.file;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.lucas.example.io.demo.file.impl.DirOperation;
 
 import java.io.File;

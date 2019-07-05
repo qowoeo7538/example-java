@@ -1,6 +1,6 @@
 package org.lucas.demo.fj;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.lucas.demo.fj.impl.ComputeTask;
 
 import java.util.concurrent.ExecutionException;

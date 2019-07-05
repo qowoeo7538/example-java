@@ -1,7 +1,7 @@
 package org.lucas.demo.countdownlatch;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.lucas.demo.countdownlatch.impl.ApplicationStartup;
 
 /**

@@ -1,6 +1,6 @@
 package org.lucas.demo.info.clazz;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.lucas.demo.info.clazz.impl.Column;
 import org.lucas.demo.info.clazz.impl.InheritedAnnotation;
 import org.lucas.demo.info.clazz.impl.Table;

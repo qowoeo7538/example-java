@@ -1,6 +1,6 @@
 package org.lucas.demo.struct;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.lucas.demo.struct.impl.Consumer;
 import org.lucas.demo.struct.impl.Producer;
 import org.lucas.example.core.task.ExampleThreadExecutor;

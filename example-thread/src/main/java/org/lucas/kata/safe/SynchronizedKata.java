@@ -1,6 +1,6 @@
 package org.lucas.kata.safe;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.lucas.kata.safe.impl.TestSync;
 import org.lucas.example.core.util.ThreadTestUtils;
 

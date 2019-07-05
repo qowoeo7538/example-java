@@ -1,6 +1,6 @@
 package org.lucas.demo.phaser;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.lucas.demo.phaser.impl.Task1;
 import org.lucas.demo.phaser.impl.Task2;
 import org.lucas.demo.phaser.impl.Task3;

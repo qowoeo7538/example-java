@@ -1,6 +1,6 @@
 package org.lucas.reference;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.lang.ref.PhantomReference;
 import java.lang.ref.ReferenceQueue;

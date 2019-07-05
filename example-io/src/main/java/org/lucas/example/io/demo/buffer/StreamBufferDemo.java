@@ -1,6 +1,6 @@
 package org.lucas.example.io.demo.buffer;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.lucas.example.io.demo.buffer.impl.CopyFile;
 
 import java.io.IOException;

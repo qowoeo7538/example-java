@@ -1,6 +1,6 @@
 package org.lucas.jol;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.lucas.jol.impl.ContendedObject;
 import org.lucas.jol.impl.EmptyObject;
 import org.lucas.jol.impl.ValueObject;

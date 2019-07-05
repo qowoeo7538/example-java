@@ -1,6 +1,7 @@
 package org.lucas.example.base.demo.enumerate;
 
 import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Created by joy on 17-6-11.
