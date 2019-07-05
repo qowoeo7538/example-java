@@ -1,7 +1,8 @@
 package org.lucas.example.jvm.gc;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.jvm.gc.impl.*;
+import org.lucas.example.jvm.gc.impl.Book;
+import org.lucas.example.jvm.gc.impl.FinalizeEscapeGC;
 
 /**
  * finalize机制可能会导致性能问题，死锁和线程挂起。
