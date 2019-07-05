@@ -1,6 +1,7 @@
 package org.lucas.example.io.demo.bytes;
 
-import org.lucas.util.StreamUtils;
+import org.lucas.component.common.util.StreamUtils;
+import org.lucas.component.common.util.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -60,7 +61,7 @@ public class RandomAccessFileDemo {
         }
         long pointer;
         try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw")) {
-            byte[] bytes = StreamUtils.getChartoBytes(c, encode);
+            byte[] bytes = StreamUtils.getCharToByte(c, encode);
             randomAccessFile.write(bytes);
             pointer = randomAccessFile.getFilePointer();
         }

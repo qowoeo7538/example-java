@@ -1,8 +1,9 @@
 package org.lucas.example.design.pattern.listener;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.core.Constants;
-import org.lucas.task.ThreadPoolTaskExecutor;
+import org.lucas.component.common.core.Constants;
+import org.lucas.component.thread.task.ThreadPoolTaskExecutor;
+
 import org.lucas.example.core.util.DataProducerHelper;
 import org.springframework.core.task.support.TaskExecutorAdapter;
 import org.springframework.util.concurrent.ListenableFuture;

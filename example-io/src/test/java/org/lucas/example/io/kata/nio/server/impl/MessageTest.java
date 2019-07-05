@@ -1,4 +1,4 @@
-package org.lucas.example.io.kata.server.impl;
+package org.lucas.example.io.kata.nio.server.impl;
 
 import org.junit.jupiter.api.Test;
 import org.lucas.example.io.kata.nio.server.impl.MessageBuffer;
