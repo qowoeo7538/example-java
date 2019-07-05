@@ -1,4 +1,4 @@
-package org.lucas.listener;
+package org.lucas.example.web.listener;
 
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionAttributeListener;

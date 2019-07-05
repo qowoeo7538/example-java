@@ -1,4 +1,4 @@
-package org.lucas.servlet;
+package org.lucas.example.web.servlet;
 
 import javax.servlet.AsyncContext;
 import javax.servlet.ServletException;

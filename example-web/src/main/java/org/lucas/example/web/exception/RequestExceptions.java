@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2005-2012 springside.org.cn
  */
-package org.lucas.exception;
+package org.lucas.example.web.exception;
 
 import javax.servlet.http.HttpServletRequest;
 

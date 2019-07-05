@@ -1,4 +1,4 @@
-package org.lucas.filter;
+package org.lucas.example.web.filter;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

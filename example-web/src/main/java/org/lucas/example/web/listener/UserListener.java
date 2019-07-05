@@ -1,4 +1,4 @@
-package org.lucas.listener;
+package org.lucas.example.web.listener;
 
 import javax.servlet.http.HttpSessionActivationListener;
 import javax.servlet.http.HttpSessionBindingEvent;

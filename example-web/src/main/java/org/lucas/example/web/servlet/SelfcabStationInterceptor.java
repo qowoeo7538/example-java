@@ -1,4 +1,4 @@
-package org.lucas.servlet;
+package org.lucas.example.web.servlet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
