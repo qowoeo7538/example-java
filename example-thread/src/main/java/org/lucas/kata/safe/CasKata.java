@@ -1,7 +1,7 @@
 package org.lucas.kata.safe;
 
 import org.junit.Test;
-import org.lucas.core.task.ExampleThreadExecutor;
+import org.lucas.example.core.task.ExampleThreadExecutor;
 import org.lucas.kata.safe.impl.CasThread;
 
 import java.util.concurrent.atomic.AtomicInteger;

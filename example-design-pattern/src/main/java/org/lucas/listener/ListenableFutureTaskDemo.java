@@ -3,7 +3,7 @@ package org.lucas.listener;
 import org.junit.Test;
 import org.lucas.core.Constants;
 import org.lucas.task.ThreadPoolTaskExecutor;
-import org.lucas.util.DataProducerHelper;
+import org.lucas.example.core.util.DataProducerHelper;
 import org.springframework.core.task.support.TaskExecutorAdapter;
 import org.springframework.util.concurrent.ListenableFuture;
 

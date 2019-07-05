@@ -1,7 +1,7 @@
 package org.lucas.demo.future;
 
 import org.junit.Test;
-import org.lucas.core.task.ExampleThreadExecutor;
+import org.lucas.example.core.task.ExampleThreadExecutor;
 import org.lucas.demo.future.impl.CalculateService;
 
 import java.util.concurrent.FutureTask;

@@ -1,9 +1,9 @@
 package org.lucas.demo.future;
 
 import org.junit.Test;
-import org.lucas.core.task.ExampleThreadExecutor;
+import org.lucas.example.core.task.ExampleThreadExecutor;
 import org.lucas.task.ThreadPoolTaskExecutor;
-import org.lucas.util.DataProducerHelper;
+import org.lucas.example.core.util.DataProducerHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -1,3 +1,4 @@
+/*
 module org.lucas.example.core {
     // 依赖模块
     requires component.common;
@@ -8,4 +9,4 @@ module org.lucas.example.core {
     exports org.lucas.core.task;
     exports org.lucas.util;
     exports org.lucas.uuid;
-}
+}*/

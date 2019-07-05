@@ -1,7 +1,7 @@
 package org.lucas.kata.lock;
 
 import org.junit.Test;
-import org.lucas.core.task.ExampleThreadExecutor;
+import org.lucas.example.core.task.ExampleThreadExecutor;
 import org.lucas.kata.lock.impl.ReentrantLockThread;
 
 import java.util.concurrent.locks.ReentrantLock;

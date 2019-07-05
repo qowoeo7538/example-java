@@ -2,7 +2,7 @@ package org.lucas.kata.safe;
 
 import org.junit.Test;
 import org.lucas.kata.safe.impl.TestSync;
-import org.lucas.util.ThreadTestUtils;
+import org.lucas.example.core.util.ThreadTestUtils;
 
 /**
  * 线程的几个状态:new,runnable(Thread.start()),running,blocking(Thread.Sleep())

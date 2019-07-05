@@ -2,7 +2,7 @@ package org.lucas.demo.cyclicbarrier;
 
 import org.lucas.demo.cyclicbarrier.impl.PriorThread;
 import org.lucas.demo.cyclicbarrier.impl.BarrierThread;
-import org.lucas.core.task.ExampleThreadExecutor;
+import org.lucas.example.core.task.ExampleThreadExecutor;
 
 import java.util.concurrent.CyclicBarrier;
 

@@ -2,7 +2,7 @@ package org.lucas.kata.transport;
 
 import org.lucas.kata.transport.impl.NioClient;
 import org.lucas.kata.transport.impl.NioService;
-import org.lucas.core.task.ExampleThreadExecutor;
+import org.lucas.example.core.task.ExampleThreadExecutor;
 
 /**
  * @create: 2017-12-15

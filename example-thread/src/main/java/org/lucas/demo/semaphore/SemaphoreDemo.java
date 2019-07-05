@@ -1,7 +1,7 @@
 package org.lucas.demo.semaphore;
 
-import org.lucas.core.task.ExampleThreadExecutor;
-import org.lucas.util.DataProducerHelper;
+import org.lucas.example.core.task.ExampleThreadExecutor;
+import org.lucas.example.core.util.DataProducerHelper;
 
 import java.util.concurrent.Semaphore;
 

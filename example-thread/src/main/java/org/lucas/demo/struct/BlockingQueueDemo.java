@@ -3,7 +3,7 @@ package org.lucas.demo.struct;
 import org.junit.Test;
 import org.lucas.demo.struct.impl.Consumer;
 import org.lucas.demo.struct.impl.Producer;
-import org.lucas.core.task.ExampleThreadExecutor;
+import org.lucas.example.core.task.ExampleThreadExecutor;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;

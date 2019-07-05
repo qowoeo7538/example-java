@@ -1,7 +1,7 @@
 package org.lucas.kata.lock;
 
 import org.junit.Test;
-import org.lucas.core.task.ExampleThreadExecutor;
+import org.lucas.example.core.task.ExampleThreadExecutor;
 
 public class DeadLockKata {
 
