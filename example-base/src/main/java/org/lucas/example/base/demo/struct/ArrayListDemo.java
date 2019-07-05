@@ -3,7 +3,6 @@ package org.lucas.example.base.demo.struct;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,7 +17,7 @@ public class ArrayListDemo {
      * {@link Iterator#hasNext()} 会进行检查 {@link ArrayList.Itr#expectedModCount} 和
      * {@link java.util.AbstractList#modCount} 是否相等，否则抛出 {@code ConcurrentModificationException} 异常.
      */
-    @Test(expected = ConcurrentModificationException.class)
+    @Test
     public void iteratorAndRemove() {
         List<String> list = new ArrayList<>();
         list.add("a");

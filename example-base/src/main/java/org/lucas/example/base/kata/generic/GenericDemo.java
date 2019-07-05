@@ -1,12 +1,12 @@
 package org.lucas.example.base.kata.generic;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.lucas.example.base.kata.generic.impl.GenericTest;
+import org.lucas.example.base.kata.generic.impl.Person;
 import org.lucas.example.base.kata.generic.impl.Student;
 import org.lucas.example.base.kata.generic.impl.Student1;
-import org.lucas.example.base.kata.generic.impl.Person;
 import org.lucas.example.base.kata.generic.impl.Teacher;
-import org.lucas.example.base.kata.generic.impl.GenericTest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,13 +36,13 @@ public class GenericDemo {
 
         List<? extends Person> extends1 = new ArrayList<>();
         List<? extends Person> extends2 = new ArrayList<>();
-        Assert.assertTrue(extends1.getClass() == extends2.getClass());
+        Assertions.assertEquals(extends1.getClass(), extends2.getClass());
 
         List<? super Student> super1 = new ArrayList<>();
         List<? super Teacher> super2 = new ArrayList<>();
-        Assert.assertTrue(super1.getClass() == super2.getClass());
+        Assertions.assertEquals(super1.getClass(), super2.getClass());
 
-        Assert.assertTrue(extends1.getClass() == super1.getClass());
+        Assertions.assertEquals(extends1.getClass(), super1.getClass());
     }
 
     /**
@@ -50,7 +50,7 @@ public class GenericDemo {
      */
     @Test
     public void genericArrayTest() {
-        Assert.assertEquals(10, GenericTest.createArray("", 10).length);
+        Assertions.assertEquals(10, GenericTest.createArray("", 10).length);
     }
 
     /**
@@ -78,7 +78,7 @@ public class GenericDemo {
             list.indexOf(new Student());
 
             // 当元素在此 List 中存在时，编译器能够确定他是Person的子类，所以能够安全获得
-            Assert.assertNull(list.get(0));
+            Assertions.assertNull(list.get(0));
         }
 
         {
@@ -101,7 +101,7 @@ public class GenericDemo {
 
             // 对于 super，get方法返回的是Object，因为编译器不能确定列表中的是Student的哪个子类，所以只能返回Object
             Object student1 = list.get(0);
-            Assert.assertNotNull(student1);
+            Assertions.assertNotNull(student1);
         }
     }
 

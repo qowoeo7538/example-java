@@ -1,6 +1,6 @@
 package org.lucas.example.base.kata.function;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.lucas.example.base.kata.function.impl.Function;
 import org.lucas.example.base.kata.function.impl.Function2;
@@ -30,7 +30,7 @@ public class MethodReferDemo {
     @Test
     public void staticReferTest() {
         Function<Integer, Integer> function = FunctionRefer::add;
-        Assert.assertTrue(1 + 2 == function.apply(1, 2));
+        Assertions.assertEquals(1 + 2, function.apply(1, 2));
     }
 
     /**
@@ -52,7 +52,7 @@ public class MethodReferDemo {
          * };
          */
         Predicate<String> isKnown = knownNames::contains;
-        Assert.assertTrue(isKnown.test("ttt"));
+        Assertions.assertTrue(isKnown.test("ttt"));
     }
 
 

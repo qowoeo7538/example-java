@@ -2,7 +2,7 @@ package org.lucas.example.base.demo.unsafe;
 
 import org.junit.jupiter.api.Test;
 import org.lucas.example.base.demo.unsafe.impl.Value;
-import org.lucas.util.UnsafeUtils;
+import org.springframework.objenesis.instantiator.util.UnsafeUtils;
 import sun.misc.Unsafe;
 
 /**
