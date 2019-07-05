@@ -1,6 +1,7 @@
 package org.lucas.example.core.util;
 
-import org.lucas.io.support.SegmentCopyFile;
+import org.lucas.component.common.io.support.SegmentCopyFile;
+import org.lucas.component.common.util.ExceptionUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
