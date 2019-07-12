@@ -1,6 +1,6 @@
 package org.lucas.example.core.task;
 
-import org.lucas.component.common.core.Constants;
+import org.lucas.component.common.core.constants.SystemConstants;
 import org.lucas.component.thread.task.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.Callable;
@@ -9,8 +9,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 public class ExampleThreadExecutor {
 
-    private static final int DEFAULT_CORE_POOL_SIZE = Constants.CORE_SIZE + 1;
-    private static final int DEFAULT_MAX_POOL_SIZE = 2 * Constants.CORE_SIZE + 1;
+    private static final int DEFAULT_CORE_POOL_SIZE = SystemConstants.CORE_SIZE + 1;
+    private static final int DEFAULT_MAX_POOL_SIZE = 2 * SystemConstants.CORE_SIZE + 1;
     private static final int DEFAULT_KEEP_ALIVE_SECONDS = 60;
     private static final int DEFAULT_QUEUE_CAPACITY = Integer.MAX_VALUE - DEFAULT_MAX_POOL_SIZE;
 

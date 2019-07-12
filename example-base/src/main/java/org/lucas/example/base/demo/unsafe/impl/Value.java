@@ -11,4 +11,9 @@ public class Value {
      */
     public volatile long value;
 
+    /**
+     * 保证该值在每次使用的时候都进行检查.
+     */
+    public volatile String name = "dog1";
+
 }
