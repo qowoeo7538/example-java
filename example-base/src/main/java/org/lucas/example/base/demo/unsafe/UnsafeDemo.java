@@ -31,7 +31,7 @@ public class UnsafeDemo {
     }
 
     /**
-     * 原子性修改对象属性值
+     * 原子性修改对象属性值,变量需要保证可见性
      */
     @Test
     public void fieldUpdater() {
