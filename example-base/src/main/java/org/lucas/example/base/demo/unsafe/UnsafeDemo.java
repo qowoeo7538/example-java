@@ -16,8 +16,8 @@ public class UnsafeDemo {
     private static final Unsafe THE_UNSAFE = UnsafeUtils.getUnsafe();
 
     /**
-     * 通过 {@code Unsafe} 修改对象值,该方法并不能保证修改
-     * 值被其它线程立马发现。
+     * 通过 {@code Unsafe} putOrderedXXX 修改对象值,在此写入与任何以前的存储之间设置 Store/Store 屏障，
+     * 但不保证写入的值后续会立即被其它线程发现。
      * <p>
      * 优化被 {@code volatile} 修饰字段的不必要的内存屏障。
      */
@@ -28,6 +28,7 @@ public class UnsafeDemo {
         // 获取属性的偏移量
         long valueOffset = THE_UNSAFE.objectFieldOffset(Value.class.getDeclaredField("value"));
         // var1: 修改属性的对象 var2: 属性偏移量 var3: 修改的值
+        // 插入StoreStore内存屏障。
         THE_UNSAFE.putOrderedLong(value, valueOffset, 10);
         System.out.println("后:" + value.value);
     }
