@@ -17,7 +17,9 @@ public class UnsafeDemo {
 
     /**
      * 通过 {@code Unsafe} 修改对象值,该方法并不能保证修改
-     * 值被其它线程立马发现,只有在 field 被 {@code volatile} 修饰才使用
+     * 值被其它线程立马发现。
+     * <p>
+     * 优化被 {@code volatile} 修饰字段的不必要的内存屏障。
      */
     @Test
     public void putOrderedLong() throws NoSuchFieldException {
@@ -38,7 +40,7 @@ public class UnsafeDemo {
         AtomicReferenceFieldUpdater updater = AtomicReferenceFieldUpdater.newUpdater(Value.class, String.class, "name");
         Value value = new Value();
         System.out.println(updater.get(value));
-        updater.compareAndSet(value, value.name, "test");
-        System.out.println(updater.get(value));
+        while (!updater.compareAndSet(value, value.name, "test"))
+            System.out.println(updater.get(value));
     }
 }
