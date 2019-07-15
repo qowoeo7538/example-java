@@ -37,8 +37,8 @@ public class UnsafeDemo {
     public void fieldUpdater() {
         AtomicReferenceFieldUpdater updater = AtomicReferenceFieldUpdater.newUpdater(Value.class, String.class, "name");
         Value value = new Value();
-        System.out.println(value.name);
+        System.out.println(updater.get(value));
         updater.compareAndSet(value, value.name, "test");
-        System.out.println(value.name);
+        System.out.println(updater.get(value));
     }
 }
