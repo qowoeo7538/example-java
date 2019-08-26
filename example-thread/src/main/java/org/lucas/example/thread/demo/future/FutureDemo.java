@@ -39,9 +39,10 @@ public class FutureDemo {
         FutureTask<Boolean> futureTask = new FutureTask<>(new ExceptionService());
         ExampleThreadExecutor.submit(futureTask);
         try {
-            Boolean result = futureTask.get();
+            futureTask.get();
+            Assertions.fail();
         } catch (final Exception e) {
-            Assertions.assertEquals("org.opentest4j.AssertionFailedError: 任务异常！", e.getMessage());
+            Assertions.assertEquals("java.lang.RuntimeException: 任务异常！", e.getMessage());
         }
         ExampleThreadExecutor.destroy();
     }
