@@ -1,8 +1,10 @@
 package org.lucas.example.thread.demo.future;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.lucas.example.core.task.ExampleThreadExecutor;
 import org.lucas.example.thread.demo.future.impl.CalculateService;
+import org.lucas.example.thread.demo.future.impl.ExceptionService;
 
 import java.util.concurrent.FutureTask;
 
@@ -29,7 +31,18 @@ public class FutureDemo {
                 break;
             }
         }
+        ExampleThreadExecutor.destroy();
+    }
 
+    @Test
+    public void exceptionFutureTest() throws Exception {
+        FutureTask<Boolean> futureTask = new FutureTask<>(new ExceptionService());
+        ExampleThreadExecutor.submit(futureTask);
+        try {
+            Boolean result = futureTask.get();
+        } catch (final Exception e) {
+            Assertions.assertEquals("org.opentest4j.AssertionFailedError: 任务异常！", e.getMessage());
+        }
         ExampleThreadExecutor.destroy();
     }
 }
