@@ -21,9 +21,9 @@
     <properties>
         <java.version>11</java.version>
         <servlet.version>4.0.1</servlet.version>
-        <springBoot.version>2.1.8.RELEASE</springBoot.version>
+        <spring-boot.version>2.1.8.RELEASE</spring-boot.version>
         <javassist.version>3.22.0-GA</javassist.version>
-        <unitJupiter.version>5.5.0</unitJupiter.version>
+        <unit-jupiter.version>5.5.0</unit-jupiter.version>
         <mockito.version>2.12.0</mockito.version>
         <hamcrest.version>1.3</hamcrest.version>
         <servlet.version>3.1.0</servlet.version>
@@ -42,7 +42,7 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-api</artifactId>
-                <version>${unitJupiter.version}</version>
+                <version>${unit-jupiter.version}</version>
             </dependency>
 
             <dependency>
@@ -66,7 +66,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-parent</artifactId>
-                <version>${springBoot.version}</version>
+                <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

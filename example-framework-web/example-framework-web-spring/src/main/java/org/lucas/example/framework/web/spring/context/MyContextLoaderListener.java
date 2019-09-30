@@ -1,4 +1,4 @@
-package org.lucas.example.web.context;
+package org.lucas.example.framework.web.spring.context;
 
 import org.springframework.web.context.ContextLoaderListener;
 
