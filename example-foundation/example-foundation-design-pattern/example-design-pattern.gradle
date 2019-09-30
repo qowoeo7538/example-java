@@ -1,5 +1,0 @@
-description = "Example Design Pattern"
-
-dependencies{
-    compile(project(":example-core"))
-}

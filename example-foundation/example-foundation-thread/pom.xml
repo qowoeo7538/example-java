@@ -14,8 +14,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>org.lucas</groupId>
+            <artifactId>example-foundation-core</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 </project>

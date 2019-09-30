@@ -14,8 +14,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>org.lucas</groupId>
+            <artifactId>component-common</artifactId>
         </dependency>
         <dependency>
             <groupId>org.lucas</groupId>

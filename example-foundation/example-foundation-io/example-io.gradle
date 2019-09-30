@@ -1,6 +1,0 @@
-description = "Example IO"
-
-dependencies{
-    compile(project(":example-core"))
-    compileOnly("org.lucas:component-common:1.0")
-}

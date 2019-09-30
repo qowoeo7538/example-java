@@ -13,8 +13,25 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.lucas</groupId>
+            <artifactId>component-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.lucas</groupId>
+            <artifactId>component-common</artifactId>
+            <version>${component.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.lucas</groupId>
+            <artifactId>component-thread</artifactId>
         </dependency>
     </dependencies>
 </project>

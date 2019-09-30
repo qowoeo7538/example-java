@@ -1,6 +1,0 @@
-description = "Example JVM"
-
-dependencies {
-    implementation(project(":example-core"))
-    implementation("org.openjdk.jol:jol-core:0.9")
-}
