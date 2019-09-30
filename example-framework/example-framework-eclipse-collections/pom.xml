@@ -31,5 +31,10 @@
             <artifactId>eclipse-collections-testutils</artifactId>
             <version>${eclipse-collections.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.lucas</groupId>
+            <artifactId>component-thread</artifactId>
+            <version>${component.version}</version>
+        </dependency>
     </dependencies>
 </project>

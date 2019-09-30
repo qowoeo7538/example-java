@@ -33,7 +33,7 @@ import org.eclipse.collections.impl.list.mutable.MultiReaderFastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
-import org.lucas.task.ThreadPoolTaskExecutor;
+import org.lucas.component.thread.task.ThreadPoolTaskExecutor;
 
 import java.util.Collections;
 import java.util.Iterator;
