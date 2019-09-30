@@ -14,6 +14,7 @@
 
     <modules>
         <module>example-foundation</module>
+        <module>example-framework</module>
     </modules>
 
     <properties>

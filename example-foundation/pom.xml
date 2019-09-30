@@ -21,6 +21,6 @@
         <module>example-foundation-reflection</module>
         <module>example-foundation-system</module>
         <module>example-foundation-thread</module>
-        <module>example-web</module>
+        <module>example-foundation-web</module>
     </modules>
 </project>
