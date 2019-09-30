@@ -2,8 +2,8 @@ package org.lucas.example.thread.demo.future;
 
 import org.junit.jupiter.api.Test;
 import org.lucas.component.thread.task.ThreadPoolTaskExecutor;
-import org.lucas.example.core.task.ExampleThreadExecutor;
-import org.lucas.example.core.util.DataProducerHelper;
+import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
+import org.lucas.example.foundation.core.util.DataProducerHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

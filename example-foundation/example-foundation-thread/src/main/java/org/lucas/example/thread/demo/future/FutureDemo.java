@@ -2,7 +2,7 @@ package org.lucas.example.thread.demo.future;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.lucas.example.core.task.ExampleThreadExecutor;
+import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
 import org.lucas.example.thread.demo.future.impl.CalculateService;
 import org.lucas.example.thread.demo.future.impl.ExceptionService;
 

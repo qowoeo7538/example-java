@@ -1,7 +1,7 @@
 package org.lucas.example.thread.demo.notify;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.core.task.ExampleThreadExecutor;
+import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
 import org.lucas.example.thread.demo.notify.impl.DoSomething;
 import org.lucas.example.thread.demo.notify.impl.NotifyAllTest;
 

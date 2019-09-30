@@ -1,6 +1,6 @@
 package org.lucas.example.thread.demo.countdownlatch.impl;
 
-import org.lucas.example.core.task.ExampleThreadExecutor;
+import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
 
 import java.util.ArrayList;
 import java.util.List;

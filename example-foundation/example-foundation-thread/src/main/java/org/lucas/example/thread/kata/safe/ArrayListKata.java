@@ -1,7 +1,7 @@
 package org.lucas.example.thread.kata.safe;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.core.task.ExampleThreadExecutor;
+import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
 
 import java.util.ArrayList;
 import java.util.List;

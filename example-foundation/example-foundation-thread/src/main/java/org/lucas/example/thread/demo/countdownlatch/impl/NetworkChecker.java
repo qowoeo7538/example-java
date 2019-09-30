@@ -1,6 +1,6 @@
 package org.lucas.example.thread.demo.countdownlatch.impl;
 
-import org.lucas.example.core.util.DataProducerHelper;
+import org.lucas.example.foundation.core.util.DataProducerHelper;
 
 import java.util.Date;
 import java.util.concurrent.CountDownLatch;
