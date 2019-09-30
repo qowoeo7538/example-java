@@ -1,7 +1,6 @@
 package org.lucas.example.core.util;
 
 import java.security.SecureRandom;
-import java.util.Random;
 
 /**
  * 测试数据生产

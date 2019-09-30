@@ -62,8 +62,8 @@ configure(moduleProjects) { subproject ->
 
     [compileJava, compileTestJava].each() {
         it.options.encoding = 'UTF-8'
-        it.sourceCompatibility = 11
-        it.targetCompatibility = 11
+        it.sourceCompatibility = 8
+        it.targetCompatibility = 8
     }
 
     compileTestJava {

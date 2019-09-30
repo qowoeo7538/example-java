@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.lucas</groupId>
+    <artifactId>example-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>Example Project</name>
+    <description>example project</description>
+
+    <modules>
+        <module>example-base</module>
+        <module>example-core</module>
+        <module>example-design-pattern</module>
+        <module>example-io</module>
+        <module>example-jni</module>
+        <module>example-jvm</module>
+        <module>example-reflection</module>
+        <module>example-system</module>
+        <module>example-thread</module>
+        <module>example-web</module>
+        <module>example-foundation</module>
+    </modules>
+
+    <properties>
+        <java.version>11</java.version>
+        <servlet.version>4.0.1</servlet.version>
+        <spring.version>5.0.1.RELEASE</spring.version>
+        <javassist.version>3.22.0-GA</javassist.version>
+        <unitJupiter.version>5.5.0</unitJupiter.version>
+        <mockito.version>2.12.0</mockito.version>
+        <hamcrest.version>1.3</hamcrest.version>
+        <servlet.version>3.1.0</servlet.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${servlet.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
