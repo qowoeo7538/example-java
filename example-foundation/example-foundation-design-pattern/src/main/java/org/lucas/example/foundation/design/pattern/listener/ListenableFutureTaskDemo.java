@@ -1,9 +1,8 @@
 package org.lucas.example.foundation.design.pattern.listener;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.component.common.core.Constants;
+import org.lucas.component.common.core.constants.SystemConstants;
 import org.lucas.component.thread.task.ThreadPoolTaskExecutor;
-
 import org.lucas.example.foundation.core.util.DataProducerHelper;
 import org.springframework.core.task.support.TaskExecutorAdapter;
 import org.springframework.util.concurrent.ListenableFuture;
@@ -19,8 +18,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class ListenableFutureTaskDemo {
 
-    private static final int DEFAULT_CORE_POOL_SIZE = Constants.CORE_SIZE + 1;
-    private static final int DEFAULT_MAX_POOL_SIZE = 2 * Constants.CORE_SIZE + 1;
+    private static final int DEFAULT_CORE_POOL_SIZE = SystemConstants.CORE_SIZE + 1;
+    private static final int DEFAULT_MAX_POOL_SIZE = 2 * SystemConstants.CORE_SIZE + 1;
     private static final int DEFAULT_KEEP_ALIVE_SECONDS = 60;
     private static final int DEFAULT_QUEUE_CAPACITY = Integer.MAX_VALUE - DEFAULT_MAX_POOL_SIZE;
 
@@ -32,6 +31,7 @@ public class ListenableFutureTaskDemo {
 
     @Test
     public void listenableFutureTask() {
+
         final TaskExecutorAdapter taskExecutorAdapter = new TaskExecutorAdapter(threadPoolExecutor);
         try {
             final ListenableFuture listenableFuture = taskExecutorAdapter.submitListenable(() -> {
