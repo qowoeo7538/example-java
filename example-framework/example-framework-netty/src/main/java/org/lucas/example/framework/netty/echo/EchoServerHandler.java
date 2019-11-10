@@ -1,4 +1,4 @@
-package org.lucas.echo;
+package org.lucas.example.framework.netty.echo;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;

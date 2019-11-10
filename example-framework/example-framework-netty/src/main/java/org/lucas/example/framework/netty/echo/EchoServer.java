@@ -1,4 +1,4 @@
-package org.lucas.time;
+package org.lucas.example.framework.netty.echo;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -13,11 +13,11 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
  * @create: 2018-01-30
  * @description:
  */
-public class TimeServer {
+public class EchoServer {
 
     private int port;
 
-    public TimeServer(int port) {
+    public EchoServer(int port) {
         this.port = port;
     }
 
@@ -28,7 +28,7 @@ public class TimeServer {
         } else {
             port = 8080;
         }
-        new TimeServer(port).run();
+        new EchoServer(port).run();
     }
 
     public void run() throws Exception {
@@ -55,7 +55,7 @@ public class TimeServer {
                         @Override
                         public void initChannel(SocketChannel ch) throws Exception {
                             // 添加一个 DiscardServerHandler 处理类
-                            ch.pipeline().addLast(new TimeServerHandler());
+                            ch.pipeline().addLast(new EchoServerHandler());
                         }
                     })
                     /**
