@@ -12,7 +12,7 @@
     <artifactId>example-framework-eclipse-collections</artifactId>
 
     <properties>
-        <eclipse-collections.version>9.2.0</eclipse-collections.version>
+        <eclipse-collections.version>10.0.0</eclipse-collections.version>
     </properties>
 
     <dependencies>

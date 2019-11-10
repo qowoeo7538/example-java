@@ -11,7 +11,7 @@ public class LongListDemo {
     @Test
     public void process() {
         Long startTime = System.currentTimeMillis();
-        LongList list = LongLists.mutable.ofAll(LongStream.range(0, 1000_0000));
+        LongList list = LongLists.mutable.withAll(LongStream.range(0, 1000_0000));
         list.each(i -> i = +1);
         list.select(i -> i % 3 == 0);
         System.out.println(System.currentTimeMillis() - startTime);
