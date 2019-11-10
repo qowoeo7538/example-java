@@ -1,4 +1,4 @@
-package org.lucas.companykata;
+package org.lucas.example.framework.eclipse.collections.companykata;
 
 import org.eclipse.collections.api.block.predicate.Predicate;
 

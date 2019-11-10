@@ -12,5 +12,8 @@
 
     <artifactId>example-middleware-redis</artifactId>
 
+    <dependencies>
+        
+    </dependencies>
 
 </project>

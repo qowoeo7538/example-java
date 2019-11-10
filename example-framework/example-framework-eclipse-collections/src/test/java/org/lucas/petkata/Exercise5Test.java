@@ -18,6 +18,9 @@ import org.eclipse.collections.impl.factory.primitive.IntSets;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
+import org.lucas.example.framework.eclipse.collections.ptekata.Person;
+import org.lucas.example.framework.eclipse.collections.ptekata.Pet;
+import org.lucas.example.framework.eclipse.collections.ptekata.PetType;
 
 public class Exercise5Test extends PetDomainForKata {
     @Test

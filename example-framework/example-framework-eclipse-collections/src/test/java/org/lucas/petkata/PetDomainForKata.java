@@ -13,6 +13,8 @@ package org.lucas.petkata;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.factory.Lists;
 import org.junit.Before;
+import org.lucas.example.framework.eclipse.collections.ptekata.Person;
+import org.lucas.example.framework.eclipse.collections.ptekata.PetType;
 
 public abstract class PetDomainForKata
 {

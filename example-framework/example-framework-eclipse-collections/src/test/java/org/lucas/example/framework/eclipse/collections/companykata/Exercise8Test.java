@@ -8,7 +8,7 @@
  * http://www.eclipse.org/org/documents/edl-v10.php.
  */
 
-package org.lucas.companykata;
+package org.lucas.example.framework.eclipse.collections.companykata;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;

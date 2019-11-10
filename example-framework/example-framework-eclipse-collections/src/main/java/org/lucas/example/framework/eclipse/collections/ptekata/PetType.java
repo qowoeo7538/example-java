@@ -8,9 +8,8 @@
  * http://www.eclipse.org/org/documents/edl-v10.php.
  */
 
-package org.lucas.petkata;
+package org.lucas.example.framework.eclipse.collections.ptekata;
 
-public enum PetType
-{
+public enum PetType {
     CAT, DOG, HAMSTER, TURTLE, BIRD, SNAKE
 }

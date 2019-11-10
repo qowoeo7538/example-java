@@ -1,4 +1,4 @@
-package org.lucas.companykata;
+package org.lucas.example.framework.eclipse.collections.companykata;
 
 /**
  * @create: 2018-07-06

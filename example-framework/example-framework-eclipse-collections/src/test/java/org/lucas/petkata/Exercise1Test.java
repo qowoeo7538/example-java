@@ -17,6 +17,9 @@ import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
+import org.lucas.example.framework.eclipse.collections.ptekata.Person;
+import org.lucas.example.framework.eclipse.collections.ptekata.Pet;
+import org.lucas.example.framework.eclipse.collections.ptekata.PetType;
 
 /**
  * In the slides leading up to this exercise you should have learned about the following APIs.
