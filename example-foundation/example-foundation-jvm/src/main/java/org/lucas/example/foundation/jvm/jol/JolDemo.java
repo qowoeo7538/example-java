@@ -31,7 +31,7 @@ public class JolDemo {
      * -XX:-RestrictContended
      */
     @Test
-    public void contendedObjectSize() throws Exception {
+    public void contendedObjectSize() {
         final ContendedObject Object = new ContendedObject();
         final ClassLayout layout = ClassLayout.parseInstance(Object);
         printLayoutInfo(layout);
