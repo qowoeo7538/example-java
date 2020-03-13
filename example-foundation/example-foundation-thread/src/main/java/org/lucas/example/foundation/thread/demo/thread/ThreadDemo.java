@@ -1,5 +1,7 @@
 package org.lucas.example.foundation.thread.demo.thread;
 
+import org.junit.jupiter.api.Test;
+import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
 import org.lucas.example.foundation.thread.demo.thread.impl.Stage;
 
 /**
@@ -11,8 +13,25 @@ import org.lucas.example.foundation.thread.demo.thread.impl.Stage;
  * 单线程遵循as-if-serial,多线程并不一定遵循;
  */
 public class ThreadDemo {
-    public static void main(String[] args) {
+
+    @Test
+    public void demoThread() {
         Thread stageThread = new Stage();
-        new Thread(stageThread::run).start();
+        ExampleThreadExecutor.submit(stageThread);
+        ExampleThreadExecutor.destroy();
+    }
+
+
+    @Test
+    public void demoOnSpinWait() {
+        new Thread(() -> {
+            int b = 1000000;
+            long begin = System.currentTimeMillis();
+            System.out.println(Thread.currentThread().getName() + " 开始执行");
+            while (b-- > 0) {
+                Thread.onSpinWait();
+            }
+            System.out.println(Thread.currentThread().getName() + " 执行完毕 " + (System.currentTimeMillis() - begin));
+        }, "b").start();
     }
 }
