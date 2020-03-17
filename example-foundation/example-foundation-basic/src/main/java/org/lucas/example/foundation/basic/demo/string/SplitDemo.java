@@ -1,5 +1,7 @@
 package org.lucas.example.foundation.basic.demo.string;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
@@ -15,23 +17,17 @@ public class SplitDemo {
 
     private final static Pattern NAME_SEPARATOR = Pattern.compile("\\s*[,]+\\s*");
 
-    public static void main(String[] args) {
-        System.out.println("=============== Tokenizer将字符串进行分隔 ===============");
-        stringTokenizerSplit(DEMO_STR, DELIM, false);
-
-        System.out.println("=============== 正则将字符串进行分隔 ===============");
-        patternSplit(DEMO_STR, NAME_SEPARATOR);
-    }
-
     /**
-     * 将字符串进行分隔
-     *
-     * @param str          字符串
-     * @param delim        分隔符 (默认空格、制表符('\t')、换行符('\n')、回车符('\r'))
-     * @param returnDelims 是否返回分隔符 默认 {@code false}
+     * 将字符产进行分割
      */
-    private static void stringTokenizerSplit(String str, String delim, boolean returnDelims) {
-        StringTokenizer st = new StringTokenizer(str, delim, returnDelims);
+    @Test
+    public void demoSplit() {
+        /**
+         * @param str
+         * @param delim        分隔符 (默认空格、制表符('\t')、换行符('\n')、回车符('\r'))
+         * @param returnDelims 是否返回分隔符 默认 {@code false}
+         */
+        StringTokenizer st = new StringTokenizer(DEMO_STR, DELIM, false);
         // 判断是否还有分隔符。
         while (st.hasMoreTokens()) {
             // 获取从当前位置到下一个分隔符的字符串。
@@ -39,8 +35,12 @@ public class SplitDemo {
         }
     }
 
-    private static void patternSplit(String str, Pattern pattern) {
-        String[] strings = pattern.split(str);
+    /**
+     * 正则将字符串分割
+     */
+    @Test
+    public void demoPatternSplit(){
+        String[] strings = NAME_SEPARATOR.split(DEMO_STR);
         for (int i = 0, length = strings.length; i < length; i++) {
             System.out.println(strings[i]);
         }
