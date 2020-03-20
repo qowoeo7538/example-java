@@ -15,5 +15,6 @@
         <module>example-framework-eclipse-collections</module>
         <module>example-framework-netty</module>
         <module>example-framework-spring</module>
+        <module>example-framework-lucene</module>
     </modules>
 </project>
