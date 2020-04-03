@@ -8,6 +8,7 @@ import org.lucas.example.foundation.core.util.DataProducerHelper;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.locks.LockSupport;
 
 /**
  * get(): 阻塞获取结果，实现Future的get接口，显式抛出异常.

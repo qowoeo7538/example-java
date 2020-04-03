@@ -4,6 +4,7 @@ import org.lucas.component.common.core.constants.SystemConstants;
 import org.lucas.component.thread.task.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -18,7 +19,10 @@ public class ExampleThreadExecutor {
             new ThreadPoolTaskExecutor(DEFAULT_CORE_POOL_SIZE,
                     DEFAULT_MAX_POOL_SIZE,
                     DEFAULT_KEEP_ALIVE_SECONDS,
-                    DEFAULT_QUEUE_CAPACITY);
+                    DEFAULT_QUEUE_CAPACITY,
+                    Executors.defaultThreadFactory(),
+                    // 当线程池满了,使用调用线程执行
+                    new ThreadPoolExecutor.CallerRunsPolicy());
 
     /**
      * 是否需要所有任务完成.
