@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.basic.demo.unsafe.impl;
+package org.lucas.example.foundation.thread.kata.safe.impl;
 
 /**
  * @Author: shaw
