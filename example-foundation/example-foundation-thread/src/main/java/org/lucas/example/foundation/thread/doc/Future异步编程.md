@@ -13,15 +13,53 @@
 - boolean isCancelled() : 如果任务在执行完毕前被取消了，则该方法返回true，否则返回 false。
 
 ## 2 FutureTask
-任务状态:
+
+### 2.1 参数含义:
+
+- Callable<V> callable : 返回值的可执行任务.
+- Object outcome : 任务返回结果. 可以通过 get() 方法来获取该结果。另外，outcome 这里没有没有被修饰为 volatile，是因为变量 state 已经被 volatile 修饰了，这里是借用 volatile 的内存语义来保证写入 outcome 时会把值刷新到主内存，读取时会从主内存读取，从而避免多线程下内存不可见问题.
+- Thread runner : 运行该任务的线程，这个是在 FutureTask 的 run 方法内使用 CAS 函数设置的。
+- WaitNode waiters : 用 Treiber stack 实现的无锁栈，栈顶元素用 waiters 代表。栈用来记录所有等待任务结果的线程节点.
+- long stateOffset : state 变量的偏移地址, 实现 CAS 操作.
+- long runnerOffset : runner 变量的偏移地址, 实现 CAS 操作.
+- long waitersOffset : waiters 变量的偏移地址, 实现 CAS 操作.
+
+### 2.2 任务状态:
+
 任务状态初始化为 NEW；当通过 set、setException、cancel 函数设置任务结果时，任务会转换为 终止状态；在任务完成过程中，任务状态可能会变为 COMPLETING（当结果被使用 set 方法设置 时）， 也可能会经过 INTERRUPTING 状态（ 当使用 cancel( true) 方法取消任务并中断任务 时）。当任务被中断后，任务状态为 INTERRUPTED；当任务被取消后，任务状态为 CANCELLED；当任务 正常终止时，任务状态为 NORMAL；当任务执行异常后，任务状态会变为 EXCEPTIONAL。
 
 - NEW → COMPLETING → NORMAL： 正常终流程转换。
 - NEW → COMPLETING → EXCEPTIONAL： 执行过程中发生异常流程转换。
 - NEW → CANCELLED： 任务还没开始就被取消。
-- ·NEW → INTERRUPTING → INTERRUPTED： 任务被中断。
+- NEW → INTERRUPTING → INTERRUPTED： 任务被中断。
+
+### 2.3 源码解析
+
+#### 2.3.1 构造方法
+
+```java
+    public FutureTask(Callable<V> callable) {
+        if (callable == null)
+            throw new NullPointerException();
+        this.callable = callable;
+        // 写入 state 的值可以保证 callable 的写入也会被刷入主内存
+        // 以避免多线程下内存不可见问题。
+        this.state = NEW;
+    }
+```
+
+#### 2.3.2 FutureTask#run()
+
+该方法是任务的执行体，线程是调用该方法来具体运行任务的，如果任务没有被取消，则该方法会运行任务，并且将结果设置到 outcome 变量中.
+
+```java
+
+```
+
+
 
 ## 3 CompletableFuture
+
 底层使用ForkJoin,将任务分为多个子数据集，而每个子集，都可以独立处理，最后将每个子任务的结果汇集起来。
 
 特点：
