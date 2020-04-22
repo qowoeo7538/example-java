@@ -1,6 +1,7 @@
 package org.lucas.example.foundation.thread.demo.future.completable;
 
 import org.junit.jupiter.api.Test;
+import org.lucas.component.thread.task.ThreadPoolTaskExecutor;
 import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
 
 import java.util.concurrent.CompletableFuture;
@@ -29,6 +30,14 @@ public class ExceptionFutureDemo {
             future.completeExceptionally(new RuntimeException("exception"));
         });
         System.out.println(future.exceptionally(t -> t.toString()).get());
+    }
+
+    @Test
+    public void demoCombineException() throws InterruptedException, ExecutionException {
+        CompletableFuture future = CompletableFuture.supplyAsync(() -> {
+            throw new RuntimeException("occur exception");
+        }).thenCombineAsync(CompletableFuture.supplyAsync(() -> "second"), (x, y) -> y + ":" + x, new ThreadPoolTaskExecutor());
+        System.out.println(future.get());
     }
 
 }

@@ -282,20 +282,42 @@
 
 ## 3 CompletableFuture
 
-CompletableFuture 可以显式地设置计算结果和状态以便让任务结束的 Future，并且其可以作为一个 CompletionStage（计算阶段），当它的计算完成时可以触发一个函数或者行为；当多个线程企图调用同一个 CompletableFuture 的 complete、cancel 方式时只有一个线程会成功。CompletableFuture 除了含有可以直接操作任务状态和结果的方法外，还实现了 CompletionStage 接口的一些方法，这些方法遵循：
+1. CompletableFuture 可以显式地设置计算结果和状态以便让任务结束的 Future，并且其可以作为一个 CompletionStage（计算阶段），当它的计算完成时可以触发一个函数或者行为；当多个线程企图调用同一个 CompletableFuture 的 complete、cancel 方式时只有一个线程会成功。CompletableFuture 除了含有可以直接操作任务状态和结果的方法外，还实现了 CompletionStage 接口的一些方法，这些方法遵循：
 
 - 当 CompletableFuture 任务完成后，同步使用任务执行线程来执行依赖任务结果的函数或者行为
 - 所有异步的方法在没有显式指定 Executor 参数的情形下都是复用 ForkJoinPool.commonPool() 线程池来执行。
 - 所有 CompletionStage 方法的实现都是相互独立的，以便一个方法的行为不会因为重载了其他方法而受影响。
 
-一个 CompletableFuture 任务可能有一些依赖其计算结果的行为方法，这些行为方法被收集到一个无锁基于 CAS 操作来链接起来的链表组成的栈中；当 CompletableFuture 的计算任务完成后，会自动弹出栈中的行为方法并执行。由于是栈结构，在同一个 CompletableFuture 对象上行为注册的顺序与行为执行的顺序是相反的。
+2. 一个 CompletableFuture 任务可能有一些依赖其计算结果的行为方法，这些行为方法被收集到一个无锁基于 CAS 操作来链接起来的链表组成的栈中；当 CompletableFuture 的计算任务完成后，会自动弹出栈中的行为方法并执行。由于是栈结构，在同一个 CompletableFuture 对象上行为注册的顺序与行为执行的顺序是相反的。
 
-底层默认情况使用的是整个 JVM 唯一的 ForkJoinPool.commonPool, 将任务分为多个子数据集，而每个子集，都可以独立处理，最后将每个子任务的结果汇集起来。
+3. 底层默认情况使用的是整个 JVM 唯一的 ForkJoinPool.commonPool, 将任务分为多个子数据集，而每个子集，都可以独立处理，最后将每个子任务的结果汇集起来。
 
-特点：
+4. 特点：
+
 - 可以合并两个相互独立的异步计算的结果。
 - 可以等待异步任务的所有任务都完成或者其中一个任务完成就返回结果。
 - 任务完成后调用回调方法.
 - 任务完成的结果可以用于下一个任务。
 - 任务完成时发出通知.
 - 提供原生的异常处理api.
+
+### 3.1 原理
+
+#### 3.1.1 参数
+- result：存放任务执行的结果，如果不为 null，则标识任务已经执行完成。而计算任务本身也可能需要返回null值，所以使用 AltResult 来包装计算任务返回 null 的情况(ex等于 null 的时候)，AltResult也被用来存放当任务执行出现异常时候的异常信息（ex不为 null 的时候）
+- stack：
+
+#### 3.1.2 CompletionStage
+
+1. CompletableFuture 实现了 CompletionStage 接口，一个 CompletionStage 代表着一个异步计算节点，当另外一个 CompletionStage 计算节点完成后，当前 CompletionStage 会执行或者计算一个值；一个节点在计算终止时完成，可能反过来触发其他依赖其结果的节点开始计算。
+2. 一个节点（CompletionStage）的计算执行可以被表述为一个函数、消费者、可执行的Runable（例如使用apply、accept、run方法），具体取决于这个节点是否需要参数或者产生结果。
+
+```java
+        stage.thenApply(x -> square(x))// 计算平方和 
+                .thenAccept(x -> System.out.print(x))// 输出计算结果 
+                .thenRun(() -> System.out.println());// 然后执行异步任务
+```
+
+3. CompletionStage 节点可以使用3种模式来执行：默认执行、默认异步执行（使用async后缀的方法）和用户自定义的线程执行器执行（通过传递一个Executor方式）。
+4. 一个节点的执行可以通过一到两个节点的执行完成来触发。一个节点依赖的其他节点通常使用then前缀的方法来进行组织。
+
