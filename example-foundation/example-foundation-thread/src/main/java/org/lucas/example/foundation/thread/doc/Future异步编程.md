@@ -305,7 +305,8 @@
 
 #### 3.1.1 参数
 - result：存放任务执行的结果，如果不为 null，则标识任务已经执行完成。而计算任务本身也可能需要返回null值，所以使用 AltResult 来包装计算任务返回 null 的情况(ex等于 null 的时候)，AltResult也被用来存放当任务执行出现异常时候的异常信息（ex不为 null 的时候）
-- stack：
+- stack：当前任务执行完毕后要触发的一系列行为的入口，由于一个任务执行后可以触发多个行为，所以所有行为被组织成一个链表结构，并且使用 Treiber stack实现了无锁基于CAS的链式栈，其中stack存放栈顶行为节点。
+- asyncPool：异步任务的线程池。
 
 #### 3.1.2 CompletionStage
 
@@ -320,4 +321,100 @@
 
 3. CompletionStage 节点可以使用3种模式来执行：默认执行、默认异步执行（使用async后缀的方法）和用户自定义的线程执行器执行（通过传递一个Executor方式）。
 4. 一个节点的执行可以通过一到两个节点的执行完成来触发。一个节点依赖的其他节点通常使用then前缀的方法来进行组织。
+
+### 3.2 方法介绍
+
+#### 3.2.1 CompletableFuture<Void> runAsync( Runnable runnable) 
+
+该方法返回一个新的 CompletableFuture 对象，其结果值会在给定的runnable行为使用 ForkJoinPool.commonPool()异步执行完毕后被设置为 null。
+
+```java
+    static CompletableFuture<Void> asyncRunStage(Executor e, Runnable f) {
+        // 1.任务判空
+        if (f == null) {
+            throw new NullPointerException();
+        }
+        // 2.创建一个 Future 对象
+        CompletableFuture<Void> d = new CompletableFuture<Void>();
+        // 3.将f和d包装后投入到线程池。
+        e.execute(new CompletableFuture.AsyncRun(d, f));
+        // 4.当前线程不阻塞，立即返回创建的 Future 对象
+        return d;
+    }
+
+    static final class AsyncRun extends ForkJoinTask<Void>
+            implements Runnable, CompletableFuture.AsynchronousCompletionTask {
+        CompletableFuture<Void> dep;
+        Runnable fn;
+
+        /**
+         * 初始化 Future 和任务 Runnable；
+         *
+         * @param dep Future
+         * @param fn  Runnable
+         */
+        AsyncRun(CompletableFuture<Void> dep, Runnable fn) {
+            this.dep = dep;
+            this.fn = fn;
+        }
+
+        public void run() {
+            CompletableFuture<Void> d;
+            Runnable f;
+            if ((d = dep) != null && (f = fn) != null) {
+                dep = null;
+                fn = null;
+                // 5.如果 Future 的 result == null 说明任务没有完成
+                if (d.result == null) {
+                    try {
+                        // 5.1 执行任务
+                        f.run();
+                        // 5.2 设置 Future 的结果为 null，这时候其他因调用 future 的 get() 方法而被阻塞的线程就会从get()处返回 null。
+                        d.completeNull();
+                    } catch (Throwable ex) {
+                        d.completeThrowable(ex);
+                    }
+                }
+                // 6.弹出当前 Future 中 stack 栈里面是否有依赖其结果的行为，如果有则从栈中弹出来，并执行。
+                d.postComplete();
+            }
+        }
+    }
+```
+
+#### 3.2.2 CompletableFuture<U> supplyAsync( Supplier< U> supplier) 
+
+返回一个新的 CompletableFuture 对象，其结果值为入参supplier行为执行的结果。
+
+```java
+    static final class AsyncSupply<T> extends ForkJoinTask<Void>
+            implements Runnable, CompletableFuture.AsynchronousCompletionTask {
+
+        CompletableFuture<T> dep; Supplier<T> fn;
+
+        AsyncSupply(CompletableFuture<T> dep, Supplier<T> fn) {
+            this.dep = dep; this.fn = fn;
+        }
+
+        public void run() {
+            CompletableFuture<T> d; Supplier<T> f;
+            if ((d = dep) != null && (f = fn) != null) {
+                dep = null;
+                fn = null;
+                // 1.如果 Future 的 result == null 说明任务没有完成
+                if (d.result == null) {
+                    try {
+                        // 1.1 f.get() 执行任务，并获取结果
+                        // 1.2 把 f.get() 的结果设置到 Future 对象。
+                        d.completeValue(f.get());
+                    } catch (Throwable ex) {
+                        d.completeThrowable(ex);
+                    }
+                }
+                // 6.弹出当前 Future 中 stack 栈里面是否有依赖其结果的行为，如果有则从栈中弹出来，并执行。
+                d.postComplete();
+            }
+        }
+    }
+```
 

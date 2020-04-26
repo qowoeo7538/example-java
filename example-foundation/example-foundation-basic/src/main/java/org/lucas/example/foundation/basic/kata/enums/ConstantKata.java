@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.basic.kata.enumerate;
+package org.lucas.example.foundation.basic.kata.enums;
 
 /**
  * 常量的定义

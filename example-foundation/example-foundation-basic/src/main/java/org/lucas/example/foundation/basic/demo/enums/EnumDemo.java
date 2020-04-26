@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.basic.demo.enumerate;
+package org.lucas.example.foundation.basic.demo.enums;
 
 import org.junit.jupiter.api.Test;
 

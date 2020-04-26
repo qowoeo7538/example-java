@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.basic.kata.enumerate;
+package org.lucas.example.foundation.basic.kata.enums;
 
 /**
  * map形式的枚举
