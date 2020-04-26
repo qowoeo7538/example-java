@@ -12,19 +12,16 @@
     <artifactId>example-framework-lucene</artifactId>
 
     <properties>
-        <lucene.version>8.4.1</lucene.version>
-    </properties>
 
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-core</artifactId>
-            <version>${lucene.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-analyzers-common</artifactId>
-            <version>${lucene.version}</version>
         </dependency>
     </dependencies>
 
