@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+    <!-- 开启 @Async 注解 -->
+    <task:annotation-driven/>
+
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <!-- 1. 核心线程个数 -->
+        <property name="corePoolSize" value="5"/>
+        <!-- 2. 最大线程个数 -->
+        <property name="maxPoolSize" value="10"/>
+        <!-- 3. 超过核心线程个数的线程空闲多久被回收 -->
+        <property name="keepAliveSeconds" value="60"/>
+        <!-- 4. 缓存队列大小 -->
+        <property name="queueCapacity" value="20"/>
+        <!-- 关闭执行器时不等待正在执行的任务执行完毕就中断执行任务的线程 -->
+        <property name="waitForTasksToCompleteOnShutdown" value="true"/>
+        <!-- 5. 拒绝策略 -->
+        <property name="rejectedExecutionHandler">
+            <bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy"/>
+        </property>
+    </bean>
+
+</beans>
