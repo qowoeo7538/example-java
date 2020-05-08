@@ -5,7 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
-    <!-- 开启 @Async 注解 -->
+    <!-- 开启 @Async 注解,或通过 @EnableAsync 开启。 -->
     <task:annotation-driven/>
 
     <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
@@ -23,6 +23,10 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.spri
         <property name="rejectedExecutionHandler">
             <bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy"/>
         </property>
+    </bean>
+
+    <bean id="asyncExecutor" class="org.lucas.example.framework.spring.thread.impl.AsyncExecutor">
+        <property name="taskExecutor" ref="taskExecutor"/>
     </bean>
 
 </beans>
