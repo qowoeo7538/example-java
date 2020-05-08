@@ -2,12 +2,16 @@ package org.lucas.example.framework.spring.thread.impl;
 
 import org.springframework.core.task.TaskExecutor;
 
+import java.util.concurrent.locks.LockSupport;
+
 public class AsyncExecutor {
 
     /**
      * 线程池执行器
      */
     private TaskExecutor taskExecutor;
+
+
 
 
     private class MessagePrinterTask implements Runnable {
