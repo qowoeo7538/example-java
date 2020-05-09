@@ -7,9 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.locks.LockSupport;
-
 @SpringJUnitConfig(locations = {"classpath:thread/applicationContext-thread.xml"})
 public class ThreadPoolTaskExecutorDemo {
 
@@ -40,17 +37,8 @@ public class ThreadPoolTaskExecutorDemo {
         AsyncAnnotationExecutor asyncExecutor = ctx.getBean(AsyncAnnotationExecutor.class);
         System.out.println(Thread.currentThread().getName() + " begin ");
         // 使用 spring 线程池执行，默认使用 SimpleAsyncTaskExecutor 执行。
-        CompletableFuture<String> resultFuture = asyncExecutor.doSomething();
-        Thread mainThread = Thread.currentThread();
-        resultFuture.whenCompleteAsync((t, u) -> {
-            if (null == u) {
-                System.out.println(Thread.currentThread().getName() + " " + t);
-            } else {
-                System.out.println("error:" + u.getLocalizedMessage());
-            }
-            LockSupport.unpark(mainThread);
-        });
-        LockSupport.park(mainThread);
+        asyncExecutor.callException();
+        Thread.sleep(500);
         System.out.println(Thread.currentThread().getName() + " end ");
     }
 

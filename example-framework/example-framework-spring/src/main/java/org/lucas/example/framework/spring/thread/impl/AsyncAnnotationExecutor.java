@@ -1,9 +1,13 @@
 package org.lucas.example.framework.spring.thread.impl;
 
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
+import java.util.function.Supplier;
 
 // @EnableAsync
 @Component
@@ -46,4 +50,43 @@ public class AsyncAnnotationExecutor {
         // 3. 返回结果
         return result;
     }
+
+    @Async("defaultExecutor")
+    public void callException() {
+        throw new RuntimeException("模拟异常");
+    }
 }
+
+/**
+ * AsyncAnnotationExecutor 使用 @Async 代理后的
+ * 默认 SimpleAsyncTaskExecutor 实现。
+ */
+class AsyncAnnotationExecutorProxy {
+
+    private AsyncAnnotationExecutor asyncTask;
+
+    private TaskExecutor executor = new SimpleAsyncTaskExecutor();
+
+    public AsyncAnnotationExecutor getAsyncTask() {
+        return asyncTask;
+    }
+
+    public void setAsyncAnnotationExecutor(AsyncAnnotationExecutor asyncTask) {
+        this.asyncTask = asyncTask;
+    }
+
+    public CompletableFuture<String> doSomething() {
+        return CompletableFuture.supplyAsync(new Supplier<String>() {
+            @Override
+            public String get() {
+                try {
+                    return asyncTask.doSomething().get();
+                } catch (Throwable e) {
+                    throw new CompletionException(e);
+                }
+            }
+        }, executor);
+    }
+}
+
+
