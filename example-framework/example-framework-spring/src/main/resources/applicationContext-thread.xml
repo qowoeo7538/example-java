@@ -5,6 +5,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
+    <!-- 创建默认的业务线程池 -->
+    <!--<task:executor id="defaultExecutor" pool-size="5"/>-->
+
     <!-- 开启 @Async 注解,或通过 @EnableAsync 开启。 -->
     <task:annotation-driven/>
 
@@ -28,6 +31,8 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.spri
     <bean id="asyncExecutor" class="org.lucas.example.framework.spring.thread.impl.AsyncExecutor">
         <property name="taskExecutor" ref="taskExecutor"/>
     </bean>
+
+    <bean id="asyncAnnotationExecutor" class="org.lucas.example.framework.spring.thread.impl.AsyncAnnotationExecutor"/>
 
     <import resource="classpath:applicationContext-util.xml"/>
 
