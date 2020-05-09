@@ -18,7 +18,7 @@ import java.util.concurrent.CompletableFuture;
  * thenApplyAsync()：获取上一个任务的执行结果进行执行，并返回执行结果。
  * thenAcceptAsync()：注册一个任务，会在前一个操作完成后根据结果继续执行，但无返回值。
  * thenRunAsync()：与 thenAcceptAsync 不同，并不使用前一个操作的计算的结果进行下次执行。
- * whenComplete()：设置回调函数，当异步任务执行完毕后进行回调，不会阻塞调用线程：
+ * whenCompleteAsync()：设置回调函数，当异步任务执行完毕后进行回调，不会阻塞调用线程：
  * <p>
  * 结果方法：
  * get(): 阻塞获取结果，实现Future的get接口，显式抛出异常.
@@ -67,7 +67,7 @@ public class CompletableFutureDemo {
                     return null;
                 })
                 // 设置回调函数，当异步任务执行完毕后进行回调，不会阻塞调用线程：
-                .whenComplete((t, u) -> System.out.println("complete, exception:" + u))
+                .whenCompleteAsync((t, u) -> System.out.println("complete, exception:" + u), new ThreadPoolTaskExecutor())
                 // 挂起当前线程，等待异步任务执行完毕.
                 .join();
     }
