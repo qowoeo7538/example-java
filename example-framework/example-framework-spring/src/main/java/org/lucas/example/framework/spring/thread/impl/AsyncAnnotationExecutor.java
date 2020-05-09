@@ -1,10 +1,16 @@
 package org.lucas.example.framework.spring.thread.impl;
 
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Component;
 
+// @EnableAsync
+@Component
 public class AsyncAnnotationExecutor {
 
-    @Async
+    /**
+     * 指定线程池异步执行
+     */
+    @Async("defaultExecutor")
     public void printMessages() {
         for (int i = 0; i < 6; i++) {
             try {

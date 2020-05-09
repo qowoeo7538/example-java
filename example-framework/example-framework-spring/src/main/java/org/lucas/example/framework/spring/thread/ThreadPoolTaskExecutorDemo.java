@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-@SpringJUnitConfig(locations = {"classpath:applicationContext-thread.xml"})
+@SpringJUnitConfig(locations = {"classpath:thread/applicationContext-thread.xml"})
 public class ThreadPoolTaskExecutorDemo {
 
     @Autowired
