@@ -96,9 +96,8 @@ public class CompletableFutureDemo {
                 e.printStackTrace();
             }
             return "hello world";
-        })
-                // 任务B 。任务A，执行完毕后，激活异步任务B执行，这种方式激活的异步任务B是可以拿到任务A的执行结果
-                .thenAcceptAsync(System.out::println, new ThreadPoolTaskExecutor()).join();
+            // 任务B 。任务A，执行完毕后，激活异步任务B执行，这种方式激活的异步任务B是可以拿到任务A的执行结果
+        }).thenAcceptAsync(System.out::println, new ThreadPoolTaskExecutor()).join();
     }
 
     @Test

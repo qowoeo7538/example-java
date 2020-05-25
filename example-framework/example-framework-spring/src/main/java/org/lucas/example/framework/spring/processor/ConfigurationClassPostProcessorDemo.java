@@ -1,5 +1,8 @@
 package org.lucas.example.framework.spring.processor;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ConfigurationClassPostProcessor;
+
 /**
  * ConfigurationClassPostProcessor 用来解析注解类，并把其注册到 Spring 容器中的，其可以
  * 解析标注 @Configuration、@Component、@ComponentScan、@Import、@ImportResource 等的 Bean。
@@ -7,4 +10,9 @@ package org.lucas.example.framework.spring.processor;
  * Spring 容器会默认把 ConfigurationClassPostProcessor 处理器注入 Spring 容器。
  */
 public class ConfigurationClassPostProcessorDemo {
+
+    @Autowired
+    private ConfigurationClassPostProcessor ccpp;
+
+
 }
