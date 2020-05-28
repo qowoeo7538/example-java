@@ -1,10 +1,10 @@
-package org.lucas.example.framework.spring.inject.impl;
+package org.lucas.example.framework.spring.demo.inject.impl;
 
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-public class ThreadPoolTaskExecutorImport implements ImportSelector {
+public class BeanImportSelector implements ImportSelector {
 
     /**
      * @param importingClassMetadata 表示当前被 @Import 注解给标注的所有注解信息

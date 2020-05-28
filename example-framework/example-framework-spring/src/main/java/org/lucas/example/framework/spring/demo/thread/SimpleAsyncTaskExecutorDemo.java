@@ -1,4 +1,4 @@
-package org.lucas.example.framework.spring.thread;
+package org.lucas.example.framework.spring.demo.thread;
 
 /**
  * 这种 TaskExecutor 接口的实现不会复用线程，对应每个请求会新创建一个对应的线程来执行。

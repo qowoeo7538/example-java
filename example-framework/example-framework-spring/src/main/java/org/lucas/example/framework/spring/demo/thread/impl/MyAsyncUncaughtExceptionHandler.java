@@ -1,4 +1,4 @@
-package org.lucas.example.framework.spring.thread.impl;
+package org.lucas.example.framework.spring.demo.thread.impl;
 
 import org.junit.platform.commons.util.ExceptionUtils;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;

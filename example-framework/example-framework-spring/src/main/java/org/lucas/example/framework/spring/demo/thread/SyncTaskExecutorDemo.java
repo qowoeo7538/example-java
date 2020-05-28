@@ -1,4 +1,4 @@
-package org.lucas.example.framework.spring.thread;
+package org.lucas.example.framework.spring.demo.thread;
 
 /**
  * 这种 TaskExecutor 接口的实现不会异步地执行提交的任务，而是会同步使用调用线程来执行，

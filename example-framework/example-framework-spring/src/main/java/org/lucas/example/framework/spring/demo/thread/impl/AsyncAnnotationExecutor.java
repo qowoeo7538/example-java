@@ -1,4 +1,4 @@
-package org.lucas.example.framework.spring.thread.impl;
+package org.lucas.example.framework.spring.demo.thread.impl;
 
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.core.task.TaskExecutor;

@@ -1,4 +1,4 @@
-package org.lucas.example.framework.spring.processor;
+package org.lucas.example.framework.spring.demo.processor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ConfigurationClassPostProcessor;

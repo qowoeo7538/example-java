@@ -1,4 +1,4 @@
-package org.lucas.example.framework.spring.thread;
+package org.lucas.example.framework.spring.demo.thread;
 
 /**
  * 该实现使用单个java.util.Timer对象作为其内部异步线程来执行任务。它与

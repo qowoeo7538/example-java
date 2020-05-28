@@ -1,4 +1,4 @@
-package org.lucas.example.framework.spring.thread;
+package org.lucas.example.framework.spring.demo.thread;
 
 /**
  * 实际上是 Quartz 的 SimpleThreadPool 的子类，它监听 Spring 的生命周期回调。

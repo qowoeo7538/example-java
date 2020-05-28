@@ -1,4 +1,4 @@
-package org.lucas.example.framework.spring.util;
+package org.lucas.example.framework.spring.common.util;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
