@@ -1,5 +1,6 @@
 package org.lucas.example.framework.spring.demo.inject.impl;
 
+import org.lucas.example.framework.spring.common.bean.Student;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -12,7 +13,7 @@ public class BeanImportSelector implements ImportSelector {
      */
     @Override
     public String[] selectImports(AnnotationMetadata importingClassMetadata) {
-        return new String[]{ThreadPoolTaskExecutor.class.getName()};
+        return new String[]{Student.class.getName()};
     }
 
 }

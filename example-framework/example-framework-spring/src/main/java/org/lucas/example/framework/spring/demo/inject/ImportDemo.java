@@ -1,6 +1,7 @@
 package org.lucas.example.framework.spring.demo.inject;
 
 import org.junit.jupiter.api.Test;
+import org.lucas.example.framework.spring.common.bean.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -28,8 +29,8 @@ public class ImportDemo {
      */
     @Test
     public void demoImportSelector() {
-        ThreadPoolTaskExecutor executor = ctx.getBean(ThreadPoolTaskExecutor.class);
-        System.out.println(executor);
+        Student student = ctx.getBean(Student.class);
+        System.out.println(student);
     }
 
     /**
