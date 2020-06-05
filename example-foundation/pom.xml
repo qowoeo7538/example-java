@@ -12,6 +12,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>example-foundation-action</module>
         <module>example-foundation-basic</module>
         <module>example-foundation-core</module>
         <module>example-foundation-design-pattern</module>
