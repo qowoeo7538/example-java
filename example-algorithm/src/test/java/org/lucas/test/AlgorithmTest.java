@@ -1,10 +1,7 @@
 package org.lucas.test;
 
-import java.util.BitSet;
 import java.util.Deque;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 
 public class AlgorithmTest {
 
