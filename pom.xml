@@ -32,7 +32,7 @@
         <jsr305.version>3.0.2</jsr305.version>
         <jol.version>0.9</jol.version>
         <component.version>1.0</component.version>
-        <eclipse-collections.version>10.0.0</eclipse-collections.version>
+        <eclipse-collections.version>10.2.0</eclipse-collections.version>
         <lucene.version>8.4.1</lucene.version>
         <netty.version>4.1.41.Final</netty.version>
         <rxjava.version>2.2.19</rxjava.version>

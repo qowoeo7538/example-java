@@ -8,15 +8,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>example-framework</artifactId>
-    <packaging>pom</packaging>
 
-    <modules>
-        <module>example-framework-eclipse-collections</module>
-        <module>example-framework-netty</module>
-        <module>example-framework-spring</module>
-        <module>example-framework-lucene</module>
-        <module>example-framework-reactive</module>
-    </modules>
+    <artifactId>example-framework-reactive-reactor</artifactId>
+
 
 </project>
