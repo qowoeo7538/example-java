@@ -1,6 +1,8 @@
 package org.lucas.example.framework.rxjava.demo;
 
 import io.reactivex.Flowable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
 import org.junit.jupiter.api.Test;
 import org.lucas.example.framework.rxjava.common.action.RpcCall;
@@ -11,6 +13,7 @@ import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * <p>
@@ -144,6 +147,27 @@ public class RxJavaDemo {
         //3.打印耗时
         System.out.println("cost:" + (System.currentTimeMillis() - start));
         Thread.sleep(3000);
+    }
+
+    /**
+     * 延迟操作
+     */
+    @Test
+    public void demoDefer() {
+        AtomicInteger count = new AtomicInteger();
+
+        //1 产生1~10的数据流
+        Observable.range(1, 10)
+                //2 每发射一个元素后让计数器值增加1
+                .doOnNext(ignored -> count.incrementAndGet())
+                // 3 忽略发射的元素
+                .ignoreElements()
+                // 4 原始流结束后开启一个 Single 的流
+                // 4.1 如果不使用 Single.defer，则会在原始数据流尚未运行还在编译时计算打印0.
+                // 所以需要使用 Single.defer 等到原始的流完毕后再执行。
+                .andThen(Single.defer(() -> Single.just(count.get())))
+                // 5 订阅新的流
+                .subscribe(System.out::println);
     }
 
 }
