@@ -4,106 +4,102 @@ import org.junit.jupiter.api.Test;
 import org.lucas.example.framework.reactor.common.action.RpcCall;
 import org.lucas.example.framework.reactor.common.entity.Person;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
+import reactor.test.StepVerifier;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * <p>
  * 流转换
- * Flux.fromArray：
- * Mono.just
- * Flux.just
- *
- * <p>
- * 线程切换
- * subscribeOn：将发射元素的逻辑切换到IO线程池执行.
- * publishOn：将观察到的元素处理的逻辑切换为其它线程
- *
- * <p>
- * 数据转换
- * filter：过滤。
- * map：数据映射转换。
+ * Flux.fromArray：   将数组转换为数据流。
+ * Flux.fromIterable：将集合转换成数据流
+ * Flux.fromStream：  将 jdk stream 转换成数据流。
+ * Flux.just：        只支持一个元素发射。
+ * Mono.just：        只支持一个元素发射，推荐使用这个，从语义上就原生包含着元素个数的信息。
+ * Mono.justOrEmpty： 如果数据值为空，则创建一个空数据流
  *
  * <p>
  * 订阅消费
- * subscribe：订阅消费
- * blockingSubscribe：等待所有的观察对象处理完成，并完成订阅消费
+ * subscribe()：                                                                                                                                                       订阅并触发数据流
+ * subscribe(Consumer<? super T> consumer)：                                                                                                                           订阅并指定对正常数据元素如何处理
+ * subscribe(Consumer<? super T> consumer, Consumer<? super Throwable> errorConsumer)：                                                                                订阅并定义对正常数据元素和错误信号的处理
+ * subscribe(Consumer<? super T> consumer, Consumer<? super Throwable> errorConsumer, Runnable completeConsumer)：                                                     订阅并定义对正常数据元素、错误信号和完成信号的处理
+ * subscribe(Consumer<? super T> consumer, Consumer<? super Throwable> errorConsumer, Runnable completeConsumer, Consumer<? super Subscription> subscriptionConsumer)：订阅并定义对正常数据元素、错误信号和完成信号的处理，以及订阅发生时的处理逻辑
+ * blockingSubscribe：                                                                                                                                                 等待所有的观察对象处理完成，并完成订阅消费
+ *
+ * <p>
+ * StepVerifier 验证调试
+ * create：        创建数据流
+ * expectNext：    期望的数据元素
+ * expectComplete：元素是否为完成信号
  */
 public class ReactorDemo {
 
     @Test
-    public void demoReactor() {
-        List<Person> people = Person.makeList();
-        // 1.1 将列表转换为 Flowable 流对象
-        Flux.fromArray(people.toArray(new Person[0]))
-                // 1.2 过滤
-                .filter(person -> person.getAge() >= 10)
-                // 1.3 数据映射转换
-                .map(Person::getName)
-                // 1.4 订阅消费（如果没有这行代码，上述2，3并不会执行）
-                .subscribe(System.out::println);
+    public void testFlux() {
+        Integer[] array = new Integer[]{1, 2, 3, 4, 5, 6};
+        Flux.fromArray(array);
+        List<Integer> list = Arrays.asList(array);
+        Flux.fromIterable(list);
+        Stream<Integer> stream = list.stream();
+        Flux.fromStream(stream);
+
+        // 只有完成信号的空数据流
+        Flux.just();
+        Flux.empty();
+        Mono.empty();
+        Mono.justOrEmpty(Optional.empty());
+        // 只有错误信号的数据流
+        Flux.error(new Exception("some error"));
+        Mono.error(new Exception("some error"));
     }
 
     /**
-     * 切换线程（顺序执行）
-     *
-     * @throws InterruptedException
+     * 如果数据流没有订阅，将不会触发执行。
      */
     @Test
-    public void demoSwitchThread() throws InterruptedException {
-        long start = System.currentTimeMillis();
-        // 1
-        Flux.just("hello", "world")
-                // 1.1 其后续的操作将会在切换的线程上执行
-                .publishOn(Schedulers.single())
-                // 1.2 订阅消费
-                .subscribe(t -> {
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                            }
-                            System.out.println(Thread.currentThread().getName() + " " + t);
-                        }
-                        // 1.3 异常处理
-                        , Throwable::printStackTrace);
-        // 2
-        System.out.println(" cost:" + (System.currentTimeMillis() - start));
-        // 3.
-        Thread.currentThread().join();
-    }
-
-    /**
-     * 异步调用
-     *
-     * <p>
-     * 由于 flatMap 的执行流程是异步的，所以整个流程都是并发的。
-     *
-     * @throws Exception
-     */
-    @Test
-    public void demoAsyncRun() throws InterruptedException {
-        // 1 生成 ip 列表
-        List<String> ipList = new ArrayList<>();
-        for (int i = 1; i <= 10; ++i) {
-            ipList.add(" 192. 168. 0." + i);
+    public void demoSubscribe() {
+        {
+            // 完成信号
+            Flux.just(1, 2, 3, 4, 5, 6).subscribe(
+                    System.out::println,
+                    System.err::println,
+                    () -> System.out.println("Completed!"));
         }
-        // 2. 并发调用
-        Flux.fromArray(ipList.toArray(new String[0]))
-                .flatMap(ip ->
-                        // 2.1 将每个 ip 作为数据源使用just方法转换成 Flowable 流对象。
-                        Flux.just(ip)
-                                // 2.2 将发射元素的逻辑切换到IO线程池执行。
-                                .subscribeOn(Schedulers.elastic())
-                                // 2.3 映射结果
-                                .map(v -> RpcCall.request(v, v))
-                )
-                // 2.4 订阅消费
-                .subscribe();
-
-        Thread.sleep(3000);
+        {
+            // 错误信号
+            Mono.error(new Exception("some error")).subscribe(
+                    System.out::println,
+                    System.err::println,
+                    () -> System.out.println("Completed!")
+            );
+        }
     }
 
+    /**
+     * 验证测试
+     */
+    @Test
+    public void demoVerifier() {
+        {
+            StepVerifier.create(Flux.just(1, 2, 3, 4, 5, 6))
+                    // 期望的数据元素
+                    .expectNext(1, 2, 3, 4, 5, 6)
+                    // 元素是否为完成信号
+                    .expectComplete()
+                    .verify();
+        }
+        {
+            StepVerifier.create(Mono.error(new Exception("some error")))
+                    .expectErrorMessage("some error")
+                    .verify();
+        }
+    }
 
 }
