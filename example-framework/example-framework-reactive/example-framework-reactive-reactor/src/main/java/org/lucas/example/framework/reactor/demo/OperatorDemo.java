@@ -16,11 +16,40 @@ import java.util.concurrent.TimeUnit;
  * <p>
  * 数据流操作
  * map：                                                                  数据元素进行转换/映射，得到一个新元素
- * filter：                                                               过滤。
  * flatMap：                                                              将每个数据元素转换/映射为一个流，然后将这些流合并为一个大的数据流，流的合并是异步的，并非是严格按照原始序列的顺序
  * zip(Publisher<? extends T1> source1, Publisher<? extends T2> source2)：将多个流一对一的合并起来。
  * zip(Mono<? extends T1> p1, Mono<? extends T2> p2)：                    将多个流一对一的合并起来。
  * zipWith：                                                              将多个流一对一的合并起来。
+ *
+ * <p>
+ * 过滤/挑选
+ * filter：过滤。
+ * take
+ * first
+ * last
+ * sample
+ * skip
+ * limitRequest
+ *
+ * <p>
+ * 数据流转换
+ * when
+ * and/or
+ * concat：          合并多个数据流，返回元素时首先返回接收到的第一个 Publisher 数据流，才开始返回第二个Publisher流中的元素，依次类推... 如果发生异常，Flux流会立刻异常终止。
+ * concatDelayError：和 concat 的方法功能相同，concatDelayError 会等待所有的流处理完成之后，再将异常传播下去。。
+ * merge：           和 concat 的方法功能相同，区别是哪个 Publisher 中先有数据生成，就立刻返回。如果发生异常，会立刻抛出异常并终止。
+ * mergeSequential： 和 merge 的方法功能相同，同时有数据生成时，优先输出排在前面的流。
+ * collect
+ * count
+ * repeat
+ *
+ * <p>
+ * 无副作用
+ * doOnNext
+ * doOnError
+ * doOncomplete
+ * doOnSubscribe
+ * doOnCancel
  *
  * <p>
  * 延迟：
@@ -97,6 +126,46 @@ public class OperatorDemo {
                 Flux.interval(Duration.ofMillis(200)))
                 .subscribe(t -> System.out.println(t.getT1()), null, countDownLatch::countDown);
         countDownLatch.await(10, TimeUnit.SECONDS);
+    }
+
+    @Test
+    public void demoConcat() {
+        Flux<Integer> source1 = Flux.just(1, 2, 3, 4, 5);
+        Flux<Integer> source2 = Flux.just(6, 7, 8, 9, 10);
+
+        Flux<Integer> concated = Flux.concat(source1, source2);
+        concated.subscribe(System.out::println, System.out::println);
+    }
+
+    @Test
+    public void demoConcatDelayError() {
+        Flux<Integer> sourceWithErrorNumFormat = Flux.just("1", "2", "3", "4", "Five").map(
+                str -> Integer.parseInt(str)
+        );
+        Flux<Integer> source = Flux.just("5", "6", "7", "8", "9").map(
+                str -> Integer.parseInt(str)
+        );
+
+        Flux<Integer> concated = Flux.concatDelayError(sourceWithErrorNumFormat, source);
+        concated.subscribe(System.out::println, System.out::println);
+    }
+
+    @Test
+    public void demoMerge() throws InterruptedException {
+        Flux<Long> flux1 = Flux.interval(Duration.ofSeconds(1), Duration.ofSeconds(1));
+        Flux<Long> flux2 = Flux.interval(Duration.ofSeconds(2), Duration.ofSeconds(1));
+        Flux<Long> mergedFlux = Flux.merge(flux1, flux2);
+        mergedFlux.subscribe(System.out::println);
+        Thread.sleep(5000);
+    }
+
+    @Test
+    public void demoMergeSequential() throws InterruptedException {
+        Flux<Long> flux1 = Flux.interval(Duration.ofSeconds(1), Duration.ofSeconds(1));
+        Flux<Long> flux2 = Flux.interval(Duration.ofSeconds(2), Duration.ofSeconds(1));
+        Flux<Long> mergedFlux = Flux.mergeSequential(flux1, flux2);
+        mergedFlux.subscribe(System.out::println);
+        Thread.sleep(10000);
     }
 
 }

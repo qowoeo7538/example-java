@@ -26,11 +26,7 @@ import java.util.stream.Stream;
  * Flux.generate：        以编程方式创建一个的 Flux,通过 consumer 回调逐一生成信号；generate 中 next 只能调1次
  * Flux.defer：           使用 defer 构造出的 Flux 流，每次调用 subscribe 方法时，都会调用 Supplier 获取 Publisher 实例作为输入。
  * Flux.interval：        周期性生成从0开始的的 Long。周期从 delay 之后启动，每隔 period 时间返回一个加1后的 Long，正常情况下，Flux将永远不会完成。
- * Flux.concat：          合并多个数据流，返回元素时首先返回接收到的第一个 Publisher 数据流，才开始返回第二个Publisher流中的元素，依次类推... 如果发生异常，Flux流会立刻异常终止。
- * Flux.concatDelayError：和 concat 的方法功能相同，concatDelayError 会等待所有的流处理完成之后，再将异常传播下去。。
- * Flux.merge：           和 concat 的方法功能相同，区别是哪个 Publisher 中先有数据生成，就立刻返回。如果发生异常，会立刻抛出异常并终止。
- * Flux.mergeSequential： 和 merge 的方法功能相同，同时有数据生成时，优先输出排在前面的流。
- * Flux.range：           发出一个count递增整数的序列，在start（包含）和 start + count（排除）之间的整数。
+ * Flux.range：           发出一个 count 递增整数的序列，在start（包含）和 start + count（排除）之间的整数。
  * Flux.just：            只支持一个元素发射。
  * Mono.just：            只支持一个元素发射，推荐使用这个，从语义上就原生包含着元素个数的信息。
  * Mono.justOrEmpty：     如果数据值为空，则创建一个空数据流
@@ -100,46 +96,6 @@ public class ReactorDemo {
             // 发送完成信号。
             t.complete();
         }).subscribe(System.out::println);
-    }
-
-    @Test
-    public void demoConcat() {
-        Flux<Integer> source1 = Flux.just(1, 2, 3, 4, 5);
-        Flux<Integer> source2 = Flux.just(6, 7, 8, 9, 10);
-
-        Flux<Integer> concated = Flux.concat(source1, source2);
-        concated.subscribe(System.out::println, System.out::println);
-    }
-
-    @Test
-    public void demoConcatDelayError() {
-        Flux<Integer> sourceWithErrorNumFormat = Flux.just("1", "2", "3", "4", "Five").map(
-                str -> Integer.parseInt(str)
-        );
-        Flux<Integer> source = Flux.just("5", "6", "7", "8", "9").map(
-                str -> Integer.parseInt(str)
-        );
-
-        Flux<Integer> concated = Flux.concatDelayError(sourceWithErrorNumFormat, source);
-        concated.subscribe(System.out::println, System.out::println);
-    }
-
-    @Test
-    public void demoMerge() throws InterruptedException {
-        Flux<Long> flux1 = Flux.interval(Duration.ofSeconds(1), Duration.ofSeconds(1));
-        Flux<Long> flux2 = Flux.interval(Duration.ofSeconds(2), Duration.ofSeconds(1));
-        Flux<Long> mergedFlux = Flux.merge(flux1, flux2);
-        mergedFlux.subscribe(System.out::println);
-        Thread.sleep(5000);
-    }
-
-    @Test
-    public void demoMergeSequential() throws InterruptedException {
-        Flux<Long> flux1 = Flux.interval(Duration.ofSeconds(1), Duration.ofSeconds(1));
-        Flux<Long> flux2 = Flux.interval(Duration.ofSeconds(2), Duration.ofSeconds(1));
-        Flux<Long> mergedFlux = Flux.mergeSequential(flux1, flux2);
-        mergedFlux.subscribe(System.out::println);
-        Thread.sleep(10000);
     }
 
     @Test
