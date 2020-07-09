@@ -6,19 +6,30 @@ import org.lucas.example.framework.reactor.common.entity.Person;
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 /**
- * 数据操作
- * map：    数据元素进行转换/映射，得到一个新元素
- * filter： 过滤。
- * flatMap：将每个数据元素转换/映射为一个流，然后将这些流合并为一个大的数据流，流的合并是异步的，并非是严格按照原始序列的顺序
+ * <p>
+ * 数据流操作
+ * map：                                                                  数据元素进行转换/映射，得到一个新元素
+ * filter：                                                               过滤。
+ * flatMap：                                                              将每个数据元素转换/映射为一个流，然后将这些流合并为一个大的数据流，流的合并是异步的，并非是严格按照原始序列的顺序
+ * zip(Publisher<? extends T1> source1, Publisher<? extends T2> source2)：将多个流一对一的合并起来。
+ * zip(Mono<? extends T1> p1, Mono<? extends T2> p2)：                    将多个流一对一的合并起来。
+ * zipWith：                                                              将多个流一对一的合并起来。
+ *
+ * <p>
+ * 延迟：
+ * delayElements：延迟发射元素
  */
 public class OperatorDemo {
 
     @Test
-    public void demoMap() {
+    public void demoMapAndFilter() {
         List<Person> people = Person.makeList();
         // 1.1 将列表转换为 Flowable 流对象
         Flux.fromIterable(people)
@@ -30,8 +41,22 @@ public class OperatorDemo {
                 .subscribe(System.out::println);
     }
 
+    @Test
+    public void demoFlatMap() throws Exception {
+        Flux.just("flux", "mono")
+                // 1 对于每一个字符串s，将其拆分为包含一个字符的字符串流
+                .flatMap(s -> Flux.fromArray(s.split("\\s*"))
+                        // 2 对每个元素延迟100ms
+                        .delayElements(Duration.ofMillis(100)))
+                // 3 对每个元素进行打印（注:doOnNext方法是“偷窥式”的方法，不会消费数据流）
+                .doOnNext(System.out::println)
+                .subscribe();
+        TimeUnit.SECONDS.sleep(2);
+    }
+
     /**
-     * 异步调用
+     * 通常用于每个元素又会引入数据流的情况，比如我们有一串url数据流，
+     * 需要请求每个url并收集response数据
      *
      * <p>
      * 由于 flatMap 的执行流程是异步的，所以整个流程都是并发的。
@@ -39,7 +64,7 @@ public class OperatorDemo {
      * @throws Exception
      */
     @Test
-    public void demoFlatMap() throws InterruptedException {
+    public void demoFlatMap1() throws InterruptedException {
         // 1 生成 ip 列表
         List<String> ipList = new ArrayList<>();
         for (int i = 1; i <= 10; ++i) {
@@ -59,6 +84,19 @@ public class OperatorDemo {
                 .subscribe();
 
         Thread.sleep(3000);
+    }
+
+    @Test
+    public void demoZip() throws InterruptedException {
+        String desc = "Zip two sources together, that is to say wait for all the sources to emit one element and combine these elements once into a Tuple2.";
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+        Flux.zip(Flux.fromArray(desc.split("\\s+")),
+                // 3 声明一个每200ms发出一个元素的数据流；
+                // 因为zip操作是一对一的，故而将其与字符串流zip之后，
+                // 字符串流也将具有同样的速度；
+                Flux.interval(Duration.ofMillis(200)))
+                .subscribe(t -> System.out.println(t.getT1()), null, countDownLatch::countDown);
+        countDownLatch.await(10, TimeUnit.SECONDS);
     }
 
 }
