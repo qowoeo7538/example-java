@@ -47,10 +47,10 @@ import java.util.stream.Stream;
  * expectComplete： 元素是否为完成信号
  * expectNextCount：验证发射元素个数
  */
-public class ReactorDemo {
+public class FluxDemo {
 
     @Test
-    public void demoFlux() throws InterruptedException {
+    public void demoFlux() {
         {
             Integer[] array = new Integer[]{1, 2, 3, 4, 5, 6};
             Flux.fromArray(array);
@@ -83,7 +83,7 @@ public class ReactorDemo {
     }
 
     @Test
-    public void demoRange(){
+    public void demoRange() {
         Flux.range(0, 100).subscribe(System.out::println);
     }
 
