@@ -41,6 +41,10 @@ import java.util.stream.Stream;
  * blockingSubscribe：                                                                                                                                                 等待所有的观察对象处理完成，并完成订阅消费
  *
  * <p>
+ * 转换
+ * toStream()：转换成 jdk stream.
+ *
+ * <p>
  * StepVerifier 验证调试
  * create：         创建数据流
  * expectNext：     期望的数据元素

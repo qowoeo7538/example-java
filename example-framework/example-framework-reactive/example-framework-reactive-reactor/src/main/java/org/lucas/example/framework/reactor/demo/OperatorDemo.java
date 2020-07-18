@@ -17,9 +17,9 @@ import java.util.concurrent.TimeUnit;
  * 数据流操作
  * map：                                                                  数据元素进行转换/映射，得到一个新元素
  * flatMap：                                                              将每个数据元素转换/映射为一个流，然后将这些流合并为一个大的数据流，流的合并是异步的，并非是严格按照原始序列的顺序
- * zip(Publisher<? extends T1> source1, Publisher<? extends T2> source2)：将多个流一对一的合并起来。
- * zip(Mono<? extends T1> p1, Mono<? extends T2> p2)：                    将多个流一对一的合并起来。
- * zipWith：                                                              将多个流一对一的合并起来。
+ * zip(Publisher<? extends T1> source1, Publisher<? extends T2> source2)：将多个流按照一对一的方式进行合并起来。
+ * zip(Mono<? extends T1> p1, Mono<? extends T2> p2)：                    将多个流按照一对一的方式进行合并起来。
+ * zipWith：                                                              将多个流按照一对一的方式进行合并起来。
  *
  * <p>
  * 延迟：
@@ -90,12 +90,25 @@ public class OperatorDemo {
         String desc = "Zip two sources together, that is to say wait for all the sources to emit one element and combine these elements once into a Tuple2.";
         CountDownLatch countDownLatch = new CountDownLatch(1);
         Flux.zip(Flux.fromArray(desc.split("\\s+")),
-                // 3 声明一个每200ms发出一个元素的数据流；
+                // 声明一个每200ms发出一个元素的数据流；
                 // 因为zip操作是一对一的，故而将其与字符串流zip之后，
                 // 字符串流也将具有同样的速度；
                 Flux.interval(Duration.ofMillis(200)))
                 .subscribe(t -> System.out.println(t.getT1()), null, countDownLatch::countDown);
         countDownLatch.await(10, TimeUnit.SECONDS);
+    }
+
+    @Test
+    public void demoZipWith() {
+        Flux.just("a", "b")
+                .zipWith(Flux.just("c", "d"))
+                .subscribe(System.out::println);
+
+        System.out.println("================");
+
+        Flux.just("a", "b")
+                .zipWith(Flux.just("c", "d"), (s1, s2) -> String.format("%s-%s", s1, s2))
+                .subscribe(System.out::println);
     }
 
     @Test
@@ -120,22 +133,6 @@ public class OperatorDemo {
         concated.subscribe(System.out::println, System.out::println);
     }
 
-    @Test
-    public void demoMerge() throws InterruptedException {
-        Flux<Long> flux1 = Flux.interval(Duration.ofSeconds(1), Duration.ofSeconds(1));
-        Flux<Long> flux2 = Flux.interval(Duration.ofSeconds(2), Duration.ofSeconds(1));
-        Flux<Long> mergedFlux = Flux.merge(flux1, flux2);
-        mergedFlux.subscribe(System.out::println);
-        Thread.sleep(5000);
-    }
 
-    @Test
-    public void demoMergeSequential() throws InterruptedException {
-        Flux<Long> flux1 = Flux.interval(Duration.ofSeconds(1), Duration.ofSeconds(1));
-        Flux<Long> flux2 = Flux.interval(Duration.ofSeconds(2), Duration.ofSeconds(1));
-        Flux<Long> mergedFlux = Flux.mergeSequential(flux1, flux2);
-        mergedFlux.subscribe(System.out::println);
-        Thread.sleep(10000);
-    }
 
 }
