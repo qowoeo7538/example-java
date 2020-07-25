@@ -31,10 +31,10 @@ public class AsyncServlet extends HttpServlet {
     /**
      * 自定义线程池
      */
-    private final static int AVALIABLE_PROCESSORS = Runtime.getRuntime().availableProcessors();
+    private final static int AVAILABLE_PROCESSORS = Runtime.getRuntime().availableProcessors();
 
-    private final static ThreadPoolExecutor POOL_EXECUTOR = new ThreadPoolExecutor(AVALIABLE_PROCESSORS,
-            AVALIABLE_PROCESSORS * 2, 1,
+    private final static ThreadPoolExecutor POOL_EXECUTOR = new ThreadPoolExecutor(AVAILABLE_PROCESSORS,
+            AVAILABLE_PROCESSORS * 2, 1,
             TimeUnit.MINUTES, new LinkedBlockingQueue<>(5), new ThreadPoolExecutor.CallerRunsPolicy());
 
     @Override
