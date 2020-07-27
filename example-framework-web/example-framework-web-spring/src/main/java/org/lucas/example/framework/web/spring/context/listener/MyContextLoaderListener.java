@@ -1,4 +1,4 @@
-package org.lucas.example.framework.web.spring.context;
+package org.lucas.example.framework.web.spring.context.listener;
 
 import org.springframework.web.context.ContextLoaderListener;
 
@@ -8,7 +8,6 @@ import javax.servlet.ServletContextEvent;
 /**
  * Created by joy on 17-4-22.
  */
-
 public class MyContextLoaderListener extends ContextLoaderListener {
     @Override
     public void contextInitialized(ServletContextEvent event) {
