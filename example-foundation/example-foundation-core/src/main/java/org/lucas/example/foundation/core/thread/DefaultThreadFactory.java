@@ -1,12 +1,8 @@
-package org.lucas.example.framework.web.spring.core;
+package org.lucas.example.foundation.core.thread;
 
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * @author maijunsheng
- * @version 创建时间：2013-6-6
- */
 public class DefaultThreadFactory implements ThreadFactory {
 
     private static final AtomicInteger poolNumber = new AtomicInteger(1);
