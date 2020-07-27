@@ -50,10 +50,20 @@ public class StandardThreadExecutor extends ThreadPoolExecutor {
 
     public static final int DEFAULT_MIN_THREADS = 20;
     public static final int DEFAULT_MAX_THREADS = 200;
-    public static final int DEFAULT_MAX_IDLE_TIME = 60 * 1000; // 1 minutes
+    /**
+     * 1 minutes
+     */
+    public static final int DEFAULT_MAX_IDLE_TIME = 60 * 1000;
 
-    protected AtomicInteger submittedTasksCount;    // 正在处理的任务数
-    private int maxSubmittedTaskCount;                // 最大允许同时处理的任务数
+    /**
+     * 正在处理的任务数
+     */
+    protected AtomicInteger submittedTasksCount;
+
+    /**
+     * 最大允许同时处理的任务数
+     */
+    private int maxSubmittedTaskCount;
 
     public StandardThreadExecutor() {
         this(DEFAULT_MIN_THREADS, DEFAULT_MAX_THREADS);
@@ -95,6 +105,7 @@ public class StandardThreadExecutor extends ThreadPoolExecutor {
         maxSubmittedTaskCount = queueCapacity + maxThreads;
     }
 
+    @Override
     public void execute(Runnable command) {
         int count = submittedTasksCount.incrementAndGet();
 
@@ -125,6 +136,7 @@ public class StandardThreadExecutor extends ThreadPoolExecutor {
         return maxSubmittedTaskCount;
     }
 
+    @Override
     protected void afterExecute(Runnable r, Throwable t) {
         submittedTasksCount.decrementAndGet();
     }
@@ -151,7 +163,6 @@ class ExecutorQueue extends LinkedTransferQueue<Runnable> {
         this.threadPoolExecutor = threadPoolExecutor;
     }
 
-    // 注：代码来源于 tomcat
     public boolean force(Runnable o) {
         if (threadPoolExecutor.isShutdown()) {
             throw new RejectedExecutionException("Executor not running, can't force a command into the queue");
@@ -160,7 +171,7 @@ class ExecutorQueue extends LinkedTransferQueue<Runnable> {
         return super.offer(o);
     }
 
-    // 注：tomcat的代码进行一些小变更
+    @Override
     public boolean offer(Runnable o) {
         int poolSize = threadPoolExecutor.getPoolSize();
 
