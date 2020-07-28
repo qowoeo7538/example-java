@@ -1,40 +1,27 @@
 package org.lucas.example.framework.web.spring.config;
 
+import org.lucas.component.thread.task.ThreadPoolTaskExecutor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-
-import java.util.concurrent.Executor;
-import java.util.concurrent.ThreadPoolExecutor;
 
 @Configuration
 @EnableAsync
 public class ThreadConfig {
 
-    private Integer coreSize = 32;
-
-    private Integer maxSize = 64;
-
     private Integer queueCapacity = 128;
 
     @Bean
     @Primary
-    public ThreadPoolTaskExecutor defaultExecutor() {
+    public ThreadPoolTaskExecutor standardThreadExecutor() {
         ThreadPoolTaskExecutor threadPool = new ThreadPoolTaskExecutor();
-        threadPool.setCorePoolSize(coreSize);
-        threadPool.setMaxPoolSize(maxSize);
-        threadPool.setQueueCapacity(queueCapacity);
-        threadPool.setThreadNamePrefix("default-");
-        threadPool.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
-        threadPool.initialize();
         return threadPool;
     }
 
-    @Bean("serializeExecutor")
-    public ThreadPoolTaskExecutor serializeExecutor() {
-        ThreadPoolTaskExecutor threadPool = new ThreadPoolTaskExecutor();
+    @Bean("threadPoolTaskExecutor")
+    public org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor threadPoolTaskExecutor() {
+        org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor threadPool = new org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor();
         threadPool.setCorePoolSize(2);
         threadPool.setMaxPoolSize(2);
         threadPool.setQueueCapacity(queueCapacity);
