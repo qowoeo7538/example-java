@@ -1,8 +1,22 @@
 package org.lucas.example.framework.web.springflux.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.web.embedded.undertow.UndertowWebServer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.support.GenericApplicationContext;
+import org.springframework.http.server.reactive.HttpHandler;
+import org.springframework.http.server.reactive.ReactorHttpHandlerAdapter;
+import org.springframework.http.server.reactive.TomcatHttpHandlerAdapter;
+import org.springframework.web.reactive.function.server.ServerResponse;
+import org.springframework.web.server.adapter.WebHttpHandlerBuilder;
+import reactor.netty.http.server.HttpServer;
+
+import javax.servlet.Servlet;
+import java.io.File;
 
 
 /**
