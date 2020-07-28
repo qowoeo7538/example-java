@@ -15,7 +15,11 @@ public class PersonHandler {
 
     @GetMapping("/listPerson")
     public Flux<String> listPerson() {
-        return Flux.just("zhangsan", "lisi", "wanglaowu");
+        return Flux.just("zhangsan", "lisi", "wanglaowu")
+                .map(t -> {
+                    System.out.println(Thread.currentThread().getName());
+                    return t;
+                });
     }
 
 }
