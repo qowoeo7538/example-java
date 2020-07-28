@@ -12,5 +12,26 @@
     <artifactId>example-framework-web-springflux</artifactId>
     <packaging>jar</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-netty</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- spring 通过 HttpHandler 将不同HTTP服务器API是成为的最小抽象，
+        而且 WebFlux 底层基础设施是基于其进行编程的，所以不同类型的服务器只需
+        要添加一个适配器来适配HttpHandler即可，主要服务器与其对应的适配器,当
+        使用 undertow 时，直接使用 undertow API，而不使用 Servlet API.-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

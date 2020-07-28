@@ -1,4 +1,4 @@
-package org.lucas.example.framework.web.spring.config;
+package org.lucas.example.framework.web.springflux.config;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -13,8 +13,8 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @EnableConfigurationProperties(AppConfig.class)
-@ComponentScan(value = "org.lucas.example.framework.web.spring")
-public class ServiceConfig {
+@ComponentScan(value = "org.lucas.example.framework.web.springflux")
+public class WebFluxConfig {
 
 
 }

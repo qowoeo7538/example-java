@@ -1,6 +1,6 @@
 package org.lucas.example.framework.web.spring;
 
-import org.lucas.example.framework.web.spring.config.ServiceConfig;
+import org.lucas.example.framework.web.spring.config.WebConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
@@ -9,10 +9,10 @@ import java.util.Arrays;
 /**
  * 应用启动引导类
  */
-public class ApplicationStartup {
+public class WebApplicationStartup {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext ctx = SpringApplication.run(ServiceConfig.class, args);
+        ConfigurableApplicationContext ctx = SpringApplication.run(WebConfig.class, args);
         System.out.println("----------------- spring beans ------------------------\n");
         System.out.println(iocInfo(ctx));
         System.out.println("------------------ end -----------------------");
