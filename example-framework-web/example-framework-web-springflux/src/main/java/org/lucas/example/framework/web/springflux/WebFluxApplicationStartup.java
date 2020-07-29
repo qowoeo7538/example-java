@@ -1,6 +1,6 @@
 package org.lucas.example.framework.web.springflux;
 
-import org.lucas.example.framework.web.springflux.config.WebFluxConfig;
+import org.lucas.example.framework.web.springflux.config.ServerConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class WebFluxApplicationStartup {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext ctx = SpringApplication.run(WebFluxConfig.class, args);
+        ConfigurableApplicationContext ctx = SpringApplication.run(ServerConfig.class, args);
         System.out.println("----------------- spring beans ------------------------\n");
         System.out.println(iocInfo(ctx));
         System.out.println("------------------ end -----------------------");

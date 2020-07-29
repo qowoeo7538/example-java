@@ -28,7 +28,7 @@ import java.io.File;
 @SpringBootApplication
 @EnableConfigurationProperties(AppConfig.class)
 @ComponentScan(value = "org.lucas.example.framework.web.springflux")
-public class WebFluxConfig {
+public class ServerConfig {
 
 
 }

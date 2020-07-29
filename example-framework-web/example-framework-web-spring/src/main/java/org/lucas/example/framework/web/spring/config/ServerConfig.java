@@ -14,7 +14,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EnableConfigurationProperties(AppConfig.class)
 @ComponentScan(value = "org.lucas.example.framework.web.spring")
-public class WebConfig {
+public class ServerConfig {
 
 
 }

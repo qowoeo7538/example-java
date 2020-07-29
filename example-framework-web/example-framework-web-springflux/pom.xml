@@ -32,6 +32,26 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-undertow</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.collections</groupId>
+            <artifactId>eclipse-collections-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.collections</groupId>
+            <artifactId>eclipse-collections</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.lucas</groupId>
+            <artifactId>component-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.lucas</groupId>
+            <artifactId>component-thread</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
