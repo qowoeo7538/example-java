@@ -1,14 +1,20 @@
 package org.lucas.example.framework.reactor.demo;
 
 import org.junit.jupiter.api.Test;
+import org.lucas.example.framework.reactor.common.entity.Person;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
-
 public class ReactorTests {
+
+    @Test
+    public void testDemo() {
+        Flux.fromIterable(Person.makeList())
+                .concatMap(mapper -> Mono.just(mapper))
+                .toStream().forEach(v-> System.out.println(v));
+
+    }
 
     /**
      * 测试 publishOn/subscribeOn
@@ -21,7 +27,5 @@ public class ReactorTests {
                 .subscribeOn(Schedulers.newElastic("myElastic"))
                 .blockLast();
     }
-
-
 
 }
