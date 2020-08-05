@@ -13,6 +13,7 @@
     <description>example project</description>
 
     <modules>
+        <module>example-action</module>
         <module>example-algorithm</module>
         <module>example-foundation</module>
         <module>example-framework</module>

@@ -11,9 +11,11 @@ public class ReactorTests {
     @Test
     public void testDemo() {
         Flux.fromIterable(Person.makeList())
-                .concatMap(mapper -> Mono.just(mapper))
-                .toStream().forEach(v-> System.out.println(v));
-
+                .concatMap(mapper -> Mono.empty())
+                // 仅获取第一个发射项
+                .next()
+                .switchIfEmpty(Mono.just(11))
+                .subscribe(v -> System.out.println(v));
     }
 
     /**

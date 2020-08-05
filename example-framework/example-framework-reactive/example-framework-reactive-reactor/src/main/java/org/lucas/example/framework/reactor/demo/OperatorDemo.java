@@ -17,9 +17,14 @@ import java.util.concurrent.TimeUnit;
  * 数据流操作
  * map：                                                                  数据元素进行转换/映射，得到一个新元素
  * flatMap：                                                              将每个数据元素转换/映射为一个流，然后将这些流合并为一个大的数据流，流的合并是异步的，并非是严格按照原始序列的顺序
+ * concatMap：                                                            将每个数据元素转换/映射为一个流，然后将这些流合并为一个大的数据流，流的合并是同步的，按照原始序列的顺序
+ * <p>
  * zip(Publisher<? extends T1> source1, Publisher<? extends T2> source2)：将多个流按照一对一的方式进行合并起来。
  * zip(Mono<? extends T1> p1, Mono<? extends T2> p2)：                    将多个流按照一对一的方式进行合并起来。
  * zipWith：                                                              将多个流按照一对一的方式进行合并起来。
+ *
+ * 条件操作符
+ * switchIfEmpty：返回一个 Mono，如果源 Publisher 为空，则会发出源 Publisher 发出的项或备用 Publisher 的项
  *
  * <p>
  * 延迟：
@@ -86,6 +91,15 @@ public class OperatorDemo {
     }
 
     @Test
+    public void demoConcatMap() {
+        Flux<String> stringFlux1 = Flux.just("a", "b", "c", "d", "e", "f", "g", "h", "i");
+        Flux<Flux<String>> stringFlux2 = stringFlux1.window(2);
+        stringFlux2.concatMap(flux1 -> flux1.map(word -> word.toUpperCase())
+                .delayElements(Duration.ofMillis(200)))
+                .toStream().forEach(t -> System.out.println(t));
+    }
+
+    @Test
     public void demoZip() throws InterruptedException {
         String desc = "Zip two sources together, that is to say wait for all the sources to emit one element and combine these elements once into a Tuple2.";
         CountDownLatch countDownLatch = new CountDownLatch(1);
@@ -132,7 +146,6 @@ public class OperatorDemo {
         Flux<Integer> concated = Flux.concatDelayError(sourceWithErrorNumFormat, source);
         concated.subscribe(System.out::println, System.out::println);
     }
-
 
 
 }
