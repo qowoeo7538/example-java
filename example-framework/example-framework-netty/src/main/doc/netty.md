@@ -32,7 +32,7 @@ Reactor线程模型：
 
 > Channel与EventLoop的关系：在Netty中，NioEventLoop是EventLoop的一个实现，每个NioEventLoop中会管理自己的一个selector选择器和监控选择器就绪事件的线程；每个Channel在整个生命周期中固定关联到某一个NioEventLoop；但是，每个NioEventLoop中可以关联多个Channel。
 
-### ByteBuf
+### 1.3 ByteBuf
 ![](images/ByteBuf-structure.png)
 ByteBuf是一个存储字节的容器，有读索引和写索引对整段字节缓存进行读写，支持get/set，支持对其中每一个字节进行读写
 
@@ -43,16 +43,22 @@ ByteBuf是一个存储字节的容器，有读索引和写索引对整段字节�
    2. DirectBuffer 在 -XX:MaxDirectMemorySize=xxM大小限制下, 使用 Heap 之外的内存, GC对此”无能为力”,也就意味着规避了在高负载下频繁的GC过程对应用线程的中断影响.
 3. Composite Buffer 复合缓冲区: 相当于多个不同ByteBuf的视图，是netty提供的。
 
-### Bootstrap
+### 1.4 Bootstrap
 Bootstrap 是 Netty 提供的一个工厂类, 负责为客户端和服务端应用程序创建通道, 完成 Netty 的客户端或服务器端的 Netty 初始化.
 ![](images/Bootstrap.png)
 
-### NioSocketChannel 初始化过程
+### 1.5 NioSocketChannel 初始化过程
 Netty 中, Channel 是一个 Socket 的抽象, 提供了关于 Socket 状态(是否是连接还是断开) 以及对 Socket 的读写等操作. 每当 Netty 建立了一个连接后, 都会有一个对应的 Channel 实例.
 
 ## 2 线程模型
 
 ![](images/线程模型.png)
+
+每个NioSocketChannel对应的读写事件都是在与其对应的NioEventLoop管理的单线程内执行的，不存在并发，所以无须加锁处理。
+
+另外当从NioSocketChannel中读取数据时，并不是使用业务线程来阻塞等待，而是等NioEventLoop中的IO轮询线程发现Selector上有数据就绪时，通过事件通知方式来通知我们业务数据已经就绪，可以来读取并处理了。
+
+发起请求后请求会马上返回，而不会阻塞我们的业务调用线程；如果我们想要获取请求的响应结果，也不需要业务调用线程使用阻塞的方式来等待，而是当响应结果出来时使用IO线程异步通知业务，由此可知，在整个请求–响应过程中，业务线程不会由于阻塞等待而不能干其他事情。
 
 ### 2.1 服务端
 
@@ -90,6 +96,7 @@ Netty之所以说是异步非阻塞网络框架，是因为通过NioSocketChanne
 6. 消息发送队列的上限保护、链路中断时缓存中待发送消息回调通知业务、增加错误码、异常日志打印抑制、I/O线程健康度检测等
 
 ## 5 注意
+
 1. Netty 里所有的操作都是异步的
 ```java
     // 下面的代码中在消息被发送之前可能会先关闭连接。
@@ -99,3 +106,57 @@ Netty之所以说是异步非阻塞网络框架，是因为通过NioSocketChanne
 ```
 
 2. 一旦引入内存池机制，对象的生命周期将由内存池负责管理，这通常是个全局引用，如果不显式释放JVM是不会回收这部分内存的.
+
+## 6 问题
+
+1. 完成TCP三次握手的套接字应该注册到worker线程池中的哪一个NioEventLoop的Selector上？
+
+   关于NioEventLoop的分配，Netty默认使用的是PowerOfTwoEventExecutorChooser，其代码如下：
+
+   ```java
+       private final class PowerOfTwoEventExecutorChooser implements EventExecutorChooser {
+           @Override
+           public EventExecutor next() {
+               return children[childIndex.getAndIncrement() & children.length - 1];
+           }
+       }
+   ```
+
+   可知是采用轮询取模的方式来进行分配。
+
+2. 如果NioEventLoop中的线程负责监听注册到Selector上的所有连接的读写事件和处理队列里面的消息，那么会不会导致由于处理队列里面任务耗时太长导致来不及处理连接的读写事件?
+
+   Netty默认是采用时间均分策略来避免某一方处于饥饿状态，可以参见NioEventLoop的run方法内的代码片段：
+
+   ```java
+   // 1 开始记录处理时间
+   final long ioStartTime = System.nanoTime();
+   try {
+       //1.1 处理所有注册到当前 NioEventLoop 的 Selector 上的所有
+       // 连接套接字的读写事件
+       processSelectedKeys();
+   } finally {
+       // 1.2 计算连接套接字处理耗时，ioRatio 默认为 50，统计其耗时
+       final long ioTime = System.nanoTime() - ioStartTime;
+       // 1.3 运行队列里面任务
+       // 由于默认情况下ioRatio为50，所以代码1.3尝试使用与
+       // 代码1.2执行相同的时间来运行队列里面的任务，也就是处
+       // 理套接字读写事件与运行队列里面任务是使用时间片轮转方式轮询执行。
+       runAllTasks(ioTime * (100 - ioRatio) / ioRatio);
+   }
+   ```
+
+   
+
+3. 多个套接字注册到同一个NioEventLoop的Selector上，使用单线程轮询处理每个套接字上的事件，如果某一个套接字网络请求比较频繁，轮询线程是不是会一直处理该套接字的请求，而使其他套接字请求得不到及时处理。
+
+   NioEventLoop的processSelectedKeysOptimized方法，该方法内会轮询注册到自己的Selector上的所有连接套接字的读写事件：
+
+   ```java
+   
+   ```
+
+   
+
+
+
