@@ -72,22 +72,32 @@ Netty 中, Channel 是一个 Socket 的抽象, 提供了关于 Socket 状态(是
 
 Netty之所以说是异步非阻塞网络框架，是因为通过NioSocketChannel的write系列方法向连接里面写入数据时是非阻塞的，是可以马上返回的（即使调用写入的线程是我们的业务线程）。这是Netty通过在ChannelPipeline中判断调用NioSocketChannel的write的调用线程是不是其对应的NioEventLoop中的线程来实现的。
 
+## 3 粘包和TCP半包
 
-## 3 高HA
+- 粘包：发送的数据包大小比TCP发送缓存容量小，并且假设TCP缓存可以存放多个包，那么客户端和服务端的一次通信就可能传递了多个包，这时候服务端从接收缓存就可能一下读取了多个包。
+- 半包：在客户端发送数据时，实际是把数据写入TCP发送缓存里面的，如果发送的包的大小比TCP发送缓存的容量大，那么这个数据包就会被分成多个包，通过socket多次发送到服务端。而服务端获取数据是从接收缓存里面获取的，假设服务端第一次从接收缓存里面获取的数据是整个包的一部分，这时候就产生了半包现象，半包不是说只收到了全包的一半，而是说只收到了全包的一部分。
 
-### 3.1 netty 缓冲区的上限保护机制
+解决方案：
+
+- 应用层设计协议时，把协议包分为header和body（header里面记录body长度，当服务端从接收缓冲区读取数据后，如果发现数据大小小于包的长度则说明出现了半包，这时候就回退读取缓存的指针，等待下次读事件到来时再次测试。如果发现数据大小大于包长度则看大小是否是包长度的整数倍，如果是则循环读取多个包，否则就是出现了多个整包+半包（粘包）。
+- 是在多个包之间添加分隔符，使用分隔符来判断一个包的结束。如每个包中间使用“|”作为分隔符，此时每个包的大小可以不固定，当服务器端读取时，若遇到分隔符就知道当前包结束了，但是包的消息体内不能含有分隔符，Netty中提供了DelimiterBasedFrameDecoder用来实现该功能。
+- 包定长，就是每个包大小固定长度。这种方案时每个包的大小必须一致，Netty中提供了FixedLengthFrameDecoder来实现该功能。
+
+## 4 高HA
+
+### 4.1 netty 缓冲区的上限保护机制
 1. 在内存分配的时候指定缓冲区长度上限.
 2. 在对缓冲区进行写入操作的时候，如果缓冲区容量不足需要扩展，首先对最大容量进行判断，如果扩展后的容量超过上限，则拒绝扩展;
 3. 在解码的时候，对消息长度进行判断，如果超过最大容量上限，则抛出解码异常，拒绝分配内存。
 
-### 3.2 Netty 流量整形
+### 4.2 Netty 流量整形
 一个典型应用是基于下游网络结点的TP指标来控制本地流量的输出。流量整形与流量监管的主要区别在于，流量整形对流量监管中需要丢弃的报文进行缓存——通常是将它们放入缓冲区或队列内，也称流量整形（Traffic Shaping，简称TS）。当令牌桶有足够的令牌时，再均匀的向外发送这些被缓存的报文。流量整形与流量监管的另一区别是，整形可能会增加延迟，而监管几乎不引入额外的延迟。
 
 ![](images/traffic.png)
 1. 全局流量整形的作用范围是进程级的，无论你创建了多少个Channel，它的作用域针对所有的Channel。
 2. 单链路流量整形与全局流量整形的最大区别就是它以单个链路为作用域，可以对不同的链路设置不同的整形策略，整形参数与全局流量整形相同。
 
-## 4 优化
+## 5 优化
 1. 使用 Netty 4的内存池，减少高峰期 ByteBuf 频繁创建和销毁导致的GC频率和时间；
 2. 在程序中充分利用 Netty 提供的“零拷贝”特性，减少额外的内存拷贝，例如使用CompositeByteBuf而不是分别为Head和Body各创建一个ByteBuf对象；
 3. TCP参数的优化，设置合理的Send和Receive Buffer，通常建议值为64K - 128K；
@@ -95,7 +105,7 @@ Netty之所以说是异步非阻塞网络框架，是因为通过NioSocketChanne
 5. 无锁化串行开发理念：遵循Netty 4的线程模型优化理念，防止增加线程竞争。
 6. 消息发送队列的上限保护、链路中断时缓存中待发送消息回调通知业务、增加错误码、异常日志打印抑制、I/O线程健康度检测等
 
-## 5 注意
+## 6 注意
 
 1. Netty 里所有的操作都是异步的
 ```java
@@ -107,7 +117,7 @@ Netty之所以说是异步非阻塞网络框架，是因为通过NioSocketChanne
 
 2. 一旦引入内存池机制，对象的生命周期将由内存池负责管理，这通常是个全局引用，如果不显式释放JVM是不会回收这部分内存的.
 
-## 6 问题
+## 7 问题
 
 1. 完成TCP三次握手的套接字应该注册到worker线程池中的哪一个NioEventLoop的Selector上？
 
@@ -153,9 +163,108 @@ Netty之所以说是异步非阻塞网络框架，是因为通过NioSocketChanne
    NioEventLoop的processSelectedKeysOptimized方法，该方法内会轮询注册到自己的Selector上的所有连接套接字的读写事件：
 
    ```java
+       /**
+        * processSelectedKeysOptimized内会轮询处理所有套接字的读写事件，
+     * 具体是调用 processSelectedKey 处理每个 NioSocketChannel 的读写事件，
+        */
+       private void processSelectedKeysOptimized() {
+           //3 轮询处理所有套接字的读写事件
+           for (int i = 0; i < selectedKeys.size; ++i) {
+               final SelectionKey k = selectedKeys.keys[i];
+               selectedKeys.keys[i] = null;
+               final Object a = k.attachment();
+               // 如果是 AbstractNioChannel 子类实例
+               if (a instanceof AbstractNioChannel) {
+                   // 处理每个 NioSocketChannel 的读写事件
+                   processSelectedKey(k, (AbstractNioChannel) a);
+               } else {
+                   @SuppressWarnings("unchecked")
+                   NioTask<SelectableChannel> task = (NioTask<SelectableChannel>) a;
+                   processSelectedKey(k, task);
+               }
+               if (needsToSelectAgain) {
+                   selectedKeys.reset(i + 1);
+                   selectAgain();
+                   i = -1;
+               }
+           }
+       }
    
+       /**
+        * 如果是读事件或者套接字接收事件则会调用AbstractNioByteChannel的read方法读取数据
+        */
+       private void processSelectedKey(SelectionKey k, AbstractNioChannel ch) {
+           final AbstractNioChannel.NioUnsafe unsafe = ch.unsafe();
+                   ...
+                   //AbstractNioByteChannel 的 read 方法
+                   if ((readyOps & (SelectionKey.OP_ READ | SelectionKey.OP_ ACCEPT)) !=0 || readyOps == 0){
+                       unsafe.read();
+                   }
+           } catch(CancelledKeyException ignored){
+               unsafe.close(unsafe.voidPromise());
+           }
+       }
+       public final void read() {
+           ...
+           try {
+               // 4 循环读取套接字中的数据
+               do {
+                   byteBuf = allocHandle.allocate(allocator);
+                   allocHandle.lastBytesRead(doReadBytes(byteBuf));
+                   if (allocHandle.lastBytesRead() <= 0) {
+                       byteBuf.release();
+                       byteBuf = null;
+                       close = allocHandle.lastBytesRead() < 0;
+                       if (close) {
+                           readPending = false;
+                       }
+                       break;
+                   }
+                   // 4.1 增加读取的包数量,每当从套接字读取一批数据就让读取的消息数量加一
+                   allocHandle.incMessagesRead(1);
+                   readPending = false;
+                   pipeline.fireChannelRead(byteBuf);
+                   byteBuf = null;
+                   // 4.2 判断是否继续读取
+               } while (allocHandle.continueReading());
+               allocHandle.readComplete();
+               pipeline.fireChannelReadComplete();
+               if (close) {
+                   closeOnRead(pipeline);
+               }
+           } catch (Throwable t) {
+               handleReadException(pipeline, byteBuf, t, close, allocHandle);
+           } finally {
+               ...
+           }
+       }
+   
+       /**
+        * 每当从套接字读取一批数据就让读取的消息数量加一
+        */
+       public final void incMessagesRead(int amt) {
+           totalMessages += amt;
+       }
+   
+       /**
+        * 判断是否继续读取
+        */
+       public boolean continueReading() {
+           return continueReading(defaultMaybeMoreSupplier);
+       }
+   
+       public boolean continueReading(UncheckedBooleanSupplier maybeMoreDataSupplier) {
+           return config.isAutoRead() && (!respectMaybeMoreData || maybeMoreDataSupplier.get())
+                   // 最大读取消息个数
+                   // 默认情况下 maxMessagePerRead = 16，所以对应 NioEventLoop 管理的每
+                   // 个 NioSocketChannel 中的数据，在一次事件循环内最多连续读取16次数据，
+                   // 并不会一直读取，这就有效避免了其他 NioSocketChannel 的请求事件得不到及
+                   // 时处理的情况。
+                   && totalMessages < maxMessagePerRead
+                   && totalBytesRead > 0;
+       }
    ```
-
+   
    
 
 
