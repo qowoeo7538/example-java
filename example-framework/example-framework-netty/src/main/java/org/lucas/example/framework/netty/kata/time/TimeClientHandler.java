@@ -1,4 +1,4 @@
-package org.lucas.example.framework.netty.time;
+package org.lucas.example.framework.netty.kata.time;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;

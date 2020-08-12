@@ -1,4 +1,4 @@
-package org.lucas.example.framework.netty.time;
+package org.lucas.example.framework.netty.kata.time;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
