@@ -1,4 +1,4 @@
-package org.lucas.demo;
+package org.lucas.demo.consumer;
 
 import org.apache.dubbo.common.constants.CommonConstants;
 import org.apache.dubbo.config.ApplicationConfig;

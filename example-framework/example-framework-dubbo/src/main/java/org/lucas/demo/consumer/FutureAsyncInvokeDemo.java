@@ -1,4 +1,4 @@
-package org.lucas.demo;
+package org.lucas.demo.consumer;
 
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ReferenceConfig;
@@ -8,7 +8,7 @@ import org.lucas.common.service.GreetingService;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ConsumerForCompletableFutureDemo {
+public class FutureAsyncInvokeDemo {
 
     public static void main(String[] args) throws InterruptedException {
         // 1 创建服务引用对象实例
