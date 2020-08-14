@@ -11,7 +11,7 @@ import org.lucas.common.pojo.InvokeTarget;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-public class GenericInvokeDemo {
+public class GenericAsyncInvokeDemo {
 
     /**
      * 消费组
