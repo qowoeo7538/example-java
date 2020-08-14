@@ -1,13 +1,12 @@
 package org.lucas.demo;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.apache.dubbo.common.constants.CommonConstants;
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.config.RegistryConfig;
 import org.apache.dubbo.rpc.RpcContext;
 import org.apache.dubbo.rpc.service.GenericService;
+import org.lucas.common.pojo.InvokeTarget;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -15,19 +14,9 @@ import java.util.concurrent.ExecutionException;
 public class GenericInvokeDemo {
 
     /**
-     * 请求接口
-     */
-    private static final String INTERFACE_NAME = "com.sibu.mall.toolkit.service.AppClientService";
-
-    /**
-     * 请求方法
-     */
-    private static final String METHOD_NAME = "getShareTypeByApp";
-
-    /**
      * 消费组
      */
-    private static final String GROUP = "sibu.mall.toolkit.lucas";
+    private static final String GROUP = "sibu.mall.toolkit.dev";
 
     /**
      * 版本
@@ -39,19 +28,14 @@ public class GenericInvokeDemo {
      */
     private static final String REGISTRY_ADDRESS = "zookeeper://zk-zookeeper-0.zk-zookeeper-headless.dev-base.svc.cluster.dev:2181?backup=zk-zookeeper-1.zk-zookeeper-headless.dev-base.svc.cluster.dev:2181,zk-zookeeper-2.zk-zookeeper-headless.dev-base.svc.cluster.dev:2181";
 
-    /**
-     * 方法参数类型
-     */
-    private static final String[] METHOD_PARAM_TYPES = new String[]{"com.sibu.mall.toolkit.request.AppInfoRequest"};
-
-    /**
-     * 方法参数
-     */
-    private static Object[] METHOD_PARAMS;
-
     public static void main(String[] args) throws InterruptedException, ExecutionException {
-        Gson gson = new GsonBuilder().create();
-        METHOD_PARAMS = new Object[]{gson.fromJson("{\"appId\":\"20005f0ece2d75704f00013b5e4a\"}", Object.class)};
+        // 0 构建请求目标
+        InvokeTarget target = InvokeTarget.builder()
+                .interfaceName("com.sibu.mall.toolkit.service.AppClientService")
+                .methodName("getShareTypeByApp")
+                .methodParamType("com.sibu.mall.toolkit.request.AppInfoRequest")
+                .methodParamToJson("{\"appId\":\"20005f0ece2d75704f00013b5e4a\"}", Object.class)
+                .build();
         // 1 创建服务引用对象实例
         ReferenceConfig<GenericService> referenceConfig = new ReferenceConfig<>();
         // 2 设置应用程序信息
@@ -59,7 +43,7 @@ public class GenericInvokeDemo {
         // 3 设置服务注册中心
         referenceConfig.setRegistry(new RegistryConfig(REGISTRY_ADDRESS));
         // 4 设置服务接口
-        referenceConfig.setInterface(INTERFACE_NAME);
+        referenceConfig.setInterface(target.getInterfaceName());
         // 5 设置超时时间
         referenceConfig.setTimeout(5000);
         // 6 设置服务分组与版本
@@ -73,7 +57,7 @@ public class GenericInvokeDemo {
         GenericService genericService = referenceConfig.get();
 
         // 10 异步执行,并设置回调
-        genericService.$invoke(METHOD_NAME, METHOD_PARAM_TYPES, METHOD_PARAMS);
+        genericService.$invoke(target.getMethodName(), target.getMethodParamTypes(), target.getMethodParams());
         CompletableFuture<Object> future1 = RpcContext.getContext().getCompletableFuture();
         future1.whenComplete((v, t) -> {
             if (t != null) {
