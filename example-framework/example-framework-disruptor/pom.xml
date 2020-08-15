@@ -12,5 +12,12 @@
 
     <artifactId>example-framework-disruptor</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.lmax</groupId>
+            <artifactId>disruptor</artifactId>
+            <version>${disruptor.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>

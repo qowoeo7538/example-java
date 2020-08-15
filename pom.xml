@@ -39,6 +39,7 @@
         <rxjava.version>2.2.19</rxjava.version>
         <reactor.version>Dysprosium-SR9</reactor.version>
         <zk.version>3.6.1</zk.version>
+        <disruptor.version>3.4.2</disruptor.version>
     </properties>
 
     <dependencyManagement>
