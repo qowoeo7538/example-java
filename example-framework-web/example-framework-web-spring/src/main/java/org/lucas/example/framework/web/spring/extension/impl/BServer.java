@@ -13,9 +13,8 @@ public class BServer implements IServer {
         return UUID;
     }
 
-    public String callTradeServiceWork(String url) {
-        System.out.println("GWForceCloseServer.callTradeServiceWork");
-        return null;
+    public String callB(String url) {
+        return "BServer#callB";
     }
 
 }

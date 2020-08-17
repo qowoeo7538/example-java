@@ -23,6 +23,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
         <servlet.version>4.0.1</servlet.version>
         <spring-boot.version>2.3.2.RELEASE</spring-boot.version>
@@ -40,6 +41,7 @@
         <reactor.version>Dysprosium-SR9</reactor.version>
         <zk.version>3.6.1</zk.version>
         <disruptor.version>3.4.2</disruptor.version>
+        <rocketmq.version>4.7.1</rocketmq.version>
     </properties>
 
     <dependencyManagement>
