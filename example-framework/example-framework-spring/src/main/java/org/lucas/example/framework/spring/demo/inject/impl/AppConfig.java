@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig {
 
     @Bean("teacher")
-    public Teacher getTeacher(){
+    public Teacher getTeacher() {
         return new Teacher();
     }
 
