@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
 import java.util.concurrent.Callable;
 
 /**
- *
+ * 异步 Controller.
  */
 @RestController
 @RequestMapping("/async")

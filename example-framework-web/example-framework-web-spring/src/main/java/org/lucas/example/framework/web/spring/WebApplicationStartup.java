@@ -12,6 +12,8 @@ import java.util.Arrays;
 public class WebApplicationStartup {
 
     public static void main(String[] args) {
+        // primarySource：配置类
+        // args...：命令行参数
         ConfigurableApplicationContext ctx = SpringApplication.run(ServerConfig.class, args);
         System.out.println("----------------- spring beans ------------------------\n");
         System.out.println(iocInfo(ctx));
