@@ -12,6 +12,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>example-framework-akka</module>
         <module>example-framework-disruptor</module>
         <module>example-framework-dubbo</module>
         <module>example-framework-eclipse-collections</module>
