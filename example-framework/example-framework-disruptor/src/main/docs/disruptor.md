@@ -22,10 +22,10 @@
 
 ## 2 处理流程
 
-![](images/流程图.png)
+![](media/流程图.png)
 
 Producer向Disruptor的RingBuffer中写入事件，消费者JournalConsumer和ReplicationConsumer（EventHandler）使用多播方式同时消费RingBuffer中的每一个元素，两者都有各自的SequenceBarrier用来控制当前可消费RingBuffer中的哪一个事件，并且当不存在可用事件时如何处理。消费者ApplicationConsumer则是等JournalConsumer和ReplicationConsumer对同一个元素处理完毕后，再处理该元素。
 
-![](images/流程图(1).png)
+![](media/流程图(1).png)
 
 每个消费者持有自己的当前消费序号，由于是环形buffer，因而生产者写入事件时要看序号最小的消费者序号，以避免覆盖还没有被消费的事件，另外Consumer3只能消费已经被Consumer1、Consumer2都处理过的事件。

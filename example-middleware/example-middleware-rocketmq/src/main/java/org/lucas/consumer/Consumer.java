@@ -6,6 +6,7 @@ import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.MessageExt;
+import org.apache.rocketmq.common.protocol.heartbeat.SubscriptionData;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
 
 import java.io.UnsupportedEncodingException;
@@ -23,7 +24,7 @@ public class Consumer {
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
 
         // 4 订阅TopicTest topic下所有tag
-        consumer.subscribe("TopicTest", "*");
+        consumer.subscribe("TopicTest",  SubscriptionData.SUB_ALL);
         // 5 注册回调，进行消息处理。
         consumer.registerMessageListener((List<MessageExt>  msgs, ConsumeConcurrentlyContext context) -> {
             for (MessageExt msg : msgs) {
