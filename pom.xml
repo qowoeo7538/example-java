@@ -40,6 +40,7 @@
         <reactor.version>Dysprosium-SR9</reactor.version>
         <zk.version>3.6.1</zk.version>
         <disruptor.version>3.4.2</disruptor.version>
+        <rocketmq.version>4.7.1</rocketmq.version>
     </properties>
 
     <dependencyManagement>
