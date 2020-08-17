@@ -3,19 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>example-parent</artifactId>
+        <artifactId>example-middleware</artifactId>
         <groupId>org.lucas</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>example-middleware</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>example-middleware-rocketmq</artifactId>
+    <packaging>jar</packaging>
 
-    <modules>
-        <module>example-middleware-redis</module>
-        <module>example-middleware-rocketmq</module>
-        <module>example-middleware-zk</module>
-    </modules>
 
 </project>
