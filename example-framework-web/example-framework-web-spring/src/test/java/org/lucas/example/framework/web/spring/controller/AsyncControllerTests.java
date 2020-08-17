@@ -35,6 +35,5 @@ public class AsyncControllerTests {
                 .andExpect(status().isOk())
                 // 期望内容包含 "deferredResult ok."
                 .andExpect(content().string(containsString("deferredResult ok.")));
-
     }
 }
