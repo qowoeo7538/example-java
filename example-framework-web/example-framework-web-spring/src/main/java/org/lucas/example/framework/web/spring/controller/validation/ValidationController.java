@@ -37,7 +37,7 @@ public class ValidationController {
     }
 
     @GetMapping("/order")
-    public String validationOrder(OrderOV request) {
+    public String validationOrder(@Valid OrderOV request) {
         return "validation ok.";
     }
 
