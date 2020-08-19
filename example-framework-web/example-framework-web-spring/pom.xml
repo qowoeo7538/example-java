@@ -18,10 +18,18 @@
             <groupId>org.eclipse.collections</groupId>
             <artifactId>eclipse-collections-api</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.eclipse.collections</groupId>
             <artifactId>eclipse-collections</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
         </dependency>
 
         <dependency>
@@ -39,11 +47,11 @@
             <groupId>org.lucas</groupId>
             <artifactId>component-common</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.lucas</groupId>
             <artifactId>component-thread</artifactId>
         </dependency>
+
     </dependencies>
 
     <build>
