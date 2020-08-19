@@ -7,10 +7,10 @@ import com.typesafe.config.ConfigFactory;
 public class Server {
 
     public static void main(String[] args) {
-        // 1 创建 actor 系统，并加载 application.conf
-        ActorSystem system = ActorSystem.create("AkkaRemoteServer", ConfigFactory.load());
+        // 1 创建 actor 系统，并加载 application-server.conf
+        ActorSystem system = ActorSystem.create("AkkaRemoteServer", ConfigFactory.load("application-server.conf"));
         // 2 创建 CalculatorActor.
-        system.actorOf(Props.create(CalculatorActor.class), "CalculatorActorRefProvider");
+        system.actorOf(Props.create(CalculatorActor.class), "CalculatorActor");
     }
 
 }

@@ -8,7 +8,7 @@ import com.typesafe.config.ConfigFactory;
 public class Client {
 	public static void main(String[] args) {
 		// 1. 创建Actor系统，会加载application.conf文件
-		ActorSystem system = ActorSystem.create("AkkaRemoteClient", ConfigFactory.load());
+		ActorSystem system = ActorSystem.create("AkkaRemoteClient", ConfigFactory.load("application-client.conf"));
 
 		// 2. 创建Actor
 		ActorRef client = system.actorOf(Props.create(ClientActor.class));

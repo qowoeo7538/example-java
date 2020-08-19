@@ -5,7 +5,7 @@ import akka.actor.Props;
 import akka.actor.UntypedAbstractActor;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
-import org.lucas.akka.demo.common.domain.Messages;
+import org.lucas.example.framework.akka.common.domain.Messages;
 
 public class ClientActor extends UntypedAbstractActor {
     private LoggingAdapter log = Logging.getLogger(getContext().system(), this);

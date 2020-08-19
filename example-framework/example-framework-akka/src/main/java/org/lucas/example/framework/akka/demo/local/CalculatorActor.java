@@ -3,7 +3,7 @@ package org.lucas.example.framework.akka.demo.local;
 import akka.actor.UntypedAbstractActor;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
-import org.lucas.akka.demo.common.domain.Messages;
+import org.lucas.example.framework.akka.common.domain.Messages;
 
 public class CalculatorActor extends UntypedAbstractActor {
 
