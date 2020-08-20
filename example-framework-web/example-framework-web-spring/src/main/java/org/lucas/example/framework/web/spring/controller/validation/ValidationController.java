@@ -1,7 +1,7 @@
 package org.lucas.example.framework.web.spring.controller.validation;
 
 import org.lucas.component.thread.task.ThreadPoolTaskExecutor;
-import org.lucas.example.framework.web.spring.vo.OrderOV;
+import org.lucas.example.framework.web.spring.define.vo.OrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
 
 import javax.validation.Valid;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/validation")
@@ -21,7 +20,7 @@ public class ValidationController {
     private ThreadPoolTaskExecutor executor;
 
     @PostMapping("/order")
-    public DeferredResult<String> validationAsyncOrder(@Valid OrderOV request,Errors error) {
+    public DeferredResult<String> validationAsyncOrder(@Valid OrderVO request, Errors error) {
 
         DeferredResult<String> deferredResult = new DeferredResult<>();
         executor.execute(() -> {
@@ -43,7 +42,7 @@ public class ValidationController {
     }
 
     @GetMapping("/order")
-    public String validationOrder(@Valid OrderOV request, Errors error) {
+    public String validationOrder(@Valid OrderVO request, Errors error) {
         if (error.hasErrors()) {
             return "validation error.";
         }

@@ -1,4 +1,4 @@
-package org.lucas.example.framework.web.spring.vo;
+package org.lucas.example.framework.web.spring.define.vo;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 
@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-public class OrderOV {
+public class OrderVO {
 
     @NotBlank(message = "Name is required")
     private String name;
