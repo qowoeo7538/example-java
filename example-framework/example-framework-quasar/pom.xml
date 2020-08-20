@@ -12,20 +12,34 @@
     <artifactId>example-framework-quasar</artifactId>
     <packaging>jar</packaging>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>co.paralleluniverse</groupId>
+            <artifactId>quasar-core</artifactId>
+            <version>${quasar.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>co.paralleluniverse</groupId>
+            <artifactId>quasar-actors</artifactId>
+            <version>${quasar.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>co.paralleluniverse</groupId>
+            <artifactId>quasar-reactive-streams</artifactId>
+            <version>${quasar.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>co.paralleluniverse</groupId>
+            <artifactId>quasar-disruptor</artifactId>
+            <version>${quasar.version}</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
-            <plugin>
-                <groupId>com.vlkan</groupId>
-                <artifactId>quasar-maven-plugin</artifactId>
-                <version>0.7.9</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>instrument</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+
         </plugins>
     </build>
 
