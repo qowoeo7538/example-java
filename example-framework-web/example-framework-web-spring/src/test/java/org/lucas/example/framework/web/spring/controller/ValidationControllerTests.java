@@ -30,7 +30,7 @@ public class ValidationControllerTests extends BaseSpringMvcTest {
         valueMap.add("name", "zhangsan");
         valueMap.add("ccNumber", "132456");
         valueMap.add("ccExpiration", "12/12");
-        valueMap.add("ccCVV","544");
+        valueMap.add("ccCVV","234");
 
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/validation/order")

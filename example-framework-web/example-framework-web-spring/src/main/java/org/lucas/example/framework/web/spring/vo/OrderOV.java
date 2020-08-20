@@ -4,12 +4,18 @@ import org.hibernate.validator.constraints.CreditCardNumber;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 public class OrderOV {
 
     @NotBlank(message = "Name is required")
     private String name;
+
+    @NotNull
+    @Size(min=5, message="userName must be at least 5 characters long")
+    private String userName;
 
     @CreditCardNumber(message = "Not a valid credit card number")
     private String ccNumber;
@@ -27,6 +33,14 @@ public class OrderOV {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getCcNumber() {
