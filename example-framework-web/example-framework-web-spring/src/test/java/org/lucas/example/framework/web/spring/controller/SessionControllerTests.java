@@ -12,7 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class SessionControllerTests extends BaseSpringMvcTest {
 
     @Test
-    public void testSessionController() throws Exception {
+    public void testGetUser() throws Exception {
         MockHttpServletRequestBuilder sessionSetRequest = MockMvcRequestBuilders.post("/session")
                 .session(session);
 
@@ -21,6 +21,21 @@ public class SessionControllerTests extends BaseSpringMvcTest {
                 .andExpect(content().string(containsString("index")));
 
         MockHttpServletRequestBuilder sessionGetRequest = MockMvcRequestBuilders.get("/session")
+                .session(session);
+
+        mockMvc.perform(sessionGetRequest).andExpect(status().isOk());
+    }
+
+    @Test
+    public void testGetOrder() throws Exception {
+        MockHttpServletRequestBuilder sessionSetRequest = MockMvcRequestBuilders.post("/session")
+                .session(session);
+
+        mockMvc.perform(sessionSetRequest)
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("index")));
+
+        MockHttpServletRequestBuilder sessionGetRequest = MockMvcRequestBuilders.get("/order")
                 .session(session);
 
         mockMvc.perform(sessionGetRequest).andExpect(status().isOk());
