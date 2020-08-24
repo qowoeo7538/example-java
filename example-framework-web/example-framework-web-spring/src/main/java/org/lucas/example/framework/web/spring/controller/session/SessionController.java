@@ -2,7 +2,6 @@ package org.lucas.example.framework.web.spring.controller.session;
 
 import org.lucas.example.framework.web.spring.define.entity.User;
 import org.lucas.example.framework.web.spring.define.vo.OrderVO;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,13 +13,16 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import java.util.UUID;
 
 /**
- * 注解 SessionAttributes：将model的属性存储到 session 中
+ * 注解 @SessionAttributes：将model的属性存储到 session 中
  */
 @RestController
 @RequestMapping("/session")
 @SessionAttributes("user")
 public class SessionController {
 
+    /**
+     * 注解 @ModelAttribute：注解的方法会在此controller每个方法执行前被执行
+     */
     @ModelAttribute(name = "user")
     public User user() {
         User user = new User();
