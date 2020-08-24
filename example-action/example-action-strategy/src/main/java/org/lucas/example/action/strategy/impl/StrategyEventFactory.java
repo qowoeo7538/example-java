@@ -1,13 +1,13 @@
 package org.lucas.example.action.strategy.impl;
 
 import com.lmax.disruptor.EventFactory;
-import org.lucas.example.action.strategy.impl.event.StrategyEvent;
+import net.bytebuddy.matcher.FilterableList;
 
-public class StrategyEventFactory implements EventFactory<StrategyEvent> {
+public class StrategyEventFactory implements EventFactory<FilterableList.Empty> {
 
     @Override
-    public StrategyEvent newInstance() {
-        return new StrategyEvent();
+    public FilterableList.Empty newInstance() {
+        return new FilterableList.Empty();
     }
 
 }
