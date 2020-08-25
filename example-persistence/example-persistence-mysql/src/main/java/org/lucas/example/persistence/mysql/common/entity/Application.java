@@ -1,4 +1,4 @@
-package org.lucas.example.persistence.mysql.spring.entity;
+package org.lucas.example.persistence.mysql.common.entity;
 
 public class Application {
 
