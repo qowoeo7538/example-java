@@ -47,11 +47,17 @@
         <akka.version>2.6.8</akka.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
         <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
-        <quasar.version>0.8.0</quasar.version>
+        <mysql-connector.version>8.0.21</mysql-connector.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>com.lmax</groupId>
