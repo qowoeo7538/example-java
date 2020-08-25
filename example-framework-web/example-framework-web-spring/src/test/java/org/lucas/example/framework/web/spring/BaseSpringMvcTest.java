@@ -24,9 +24,4 @@ public abstract class BaseSpringMvcTest {
 
     protected MockHttpSession session;
 
-    @Before
-    public void setUp() {
-        session = new MockHttpSession();
-    }
-
 }

@@ -2,10 +2,13 @@ package org.lucas.example.framework.web.spring.controller.session;
 
 import org.lucas.example.framework.web.spring.define.entity.User;
 import org.lucas.example.framework.web.spring.define.vo.OrderVO;
+import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -13,7 +16,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import java.util.UUID;
 
 /**
- * 注解 @SessionAttributes：将model的属性存储到 session 中
+ * 注解 @SessionAttributes：将model的属性存储到 session 中,如果方法体没有标注@SessionAttributes("xxx")，那么scope为request，如果标注了，那么 scope为session
+ *
+ * 注解 @ModelAttribute：注解的方法会在此controller每个方法执行前被执行
  */
 @RestController
 @RequestMapping("/session")
@@ -21,7 +26,7 @@ import java.util.UUID;
 public class SessionController {
 
     /**
-     * 注解 @ModelAttribute：注解的方法会在此controller每个方法执行前被执行
+     * Model 由返回类型隐含表示，Model 属性对象就是方法的返回值。
      */
     @ModelAttribute(name = "user")
     public User user() {
@@ -30,11 +35,13 @@ public class SessionController {
         return user;
     }
 
-    @ModelAttribute(name = "order")
-    public OrderVO order() {
-        OrderVO order = new OrderVO();
-        order.setCcNumber(UUID.randomUUID().toString());
-        return new OrderVO();
+    @ModelAttribute
+    public void order(@RequestParam(required = false) String order, Model model) {
+        if (StringUtils.hasLength(order)) {
+            OrderVO orderVO = new OrderVO();
+            orderVO.setCcNumber(UUID.randomUUID().toString().replace("-",""));
+            model.addAttribute("order", orderVO);
+        }
     }
 
     @PostMapping
@@ -51,4 +58,10 @@ public class SessionController {
     public String getOrder(@ModelAttribute("order") OrderVO order) {
         return order.getCcNumber();
     }
+
+    @GetMapping("/model")
+    public String getParam(Model model) {
+        return (String) model.getAttribute("model");
+    }
+
 }
