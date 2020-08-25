@@ -18,7 +18,9 @@
         <module>example-foundation</module>
         <module>example-framework</module>
         <module>example-framework-web</module>
+        <module>example-kotlin</module>
         <module>example-middleware</module>
+        <module>example-persistence</module>
     </modules>
 
     <properties>

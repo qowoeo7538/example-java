@@ -8,18 +8,9 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>example-framework</artifactId>
+
+    <artifactId>example-persistence</artifactId>
     <packaging>pom</packaging>
 
-    <modules>
-        <module>example-framework-akka</module>
-        <module>example-framework-disruptor</module>
-        <module>example-framework-dubbo</module>
-        <module>example-framework-eclipse-collections</module>
-        <module>example-framework-lucene</module>
-        <module>example-framework-netty</module>
-        <module>example-framework-reactive</module>
-        <module>example-framework-spring</module>
-    </modules>
 
 </project>
