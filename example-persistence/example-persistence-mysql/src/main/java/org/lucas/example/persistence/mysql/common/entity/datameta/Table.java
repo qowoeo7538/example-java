@@ -1,4 +1,4 @@
-package org.lucas.example.persistence.mysql.common.entity;
+package org.lucas.example.persistence.mysql.common.entity.datameta;
 
 public class Table {
 

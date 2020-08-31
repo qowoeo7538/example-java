@@ -1,11 +1,11 @@
 package org.lucas.example.persistence.mysql.common.util;
 
 import org.eclipse.collections.api.factory.Lists;
-import org.lucas.example.persistence.mysql.common.entity.Table;
+import org.lucas.example.persistence.mysql.common.entity.datameta.Column;
+import org.lucas.example.persistence.mysql.common.entity.datameta.Table;
 import org.springframework.util.CollectionUtils;
 
 import javax.sql.DataSource;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -27,22 +27,6 @@ public abstract class DatabaseMetaDataUtil {
      */
     public static String MULTIPLE_WILDCARD = "%";
 
-    public static void main(String[] args) throws SQLException, IOException {
-        List<Table> tables = getTableInfo("mall_message", DataSourceUtil.getHikariDataSource());
-        for (Table table : tables) {
-            System.out.println(table);
-        }
-    }
-
-    public static List<String> getColumnInfo(List<String> databases, DataSource dataSource) throws SQLException {
-        List<String> result = new ArrayList<>();
-        ResultSet databaseResult = null;
-        try (Connection connection = dataSource.getConnection()) {
-            DatabaseMetaData databaseMetaData = connection.getMetaData();
-            databaseMetaData.getColumns()
-        }
-    }
-
     /**
      * 获取所有库名
      */
@@ -63,10 +47,27 @@ public abstract class DatabaseMetaDataUtil {
         return result;
     }
 
+    /**
+     * 获取表信息
+     *
+     * @param database   库
+     * @param dataSource 数据源
+     * @return 表信息
+     * @throws SQLException
+     */
     public static List<Table> getTableInfo(String database, DataSource dataSource) throws SQLException {
         return getTableInfo(Lists.mutable.of(database), null, dataSource);
     }
 
+    /**
+     * 获取表信息
+     *
+     * @param databases  库
+     * @param types      表类型
+     * @param dataSource 数据源
+     * @return 表信息
+     * @throws SQLException
+     */
     public static List<Table> getTableInfo(List<String> databases, List<String> types, DataSource dataSource) throws SQLException {
         List<Table> result = new ArrayList<>();
         for (String database : databases) {
@@ -103,43 +104,55 @@ public abstract class DatabaseMetaDataUtil {
         return result;
     }
 
-    public static final String TABLE_NAME = "t_application";
-
-    public static void generateBean() throws IOException, SQLException {
-        DataSource dataSource = DataSourceUtil.getHikariDataSource();
-        ResultSet tableResult = null;
+    /**
+     * 获取字段信息
+     *
+     * @param database   库
+     * @param tableName  表
+     * @param dataSource 数据源
+     * @return 字段信息
+     * @throws SQLException
+     */
+    public static List<Column> getColumnInfo(String database, String tableName, DataSource dataSource) throws SQLException {
+        List<Column> result = new ArrayList<>();
+        ResultSet columnResult = null;
         try (Connection connection = dataSource.getConnection()) {
             DatabaseMetaData databaseMetaData = connection.getMetaData();
-            tableResult = databaseMetaData.getTables(null, MULTIPLE_WILDCARD, TABLE_NAME, new String[]{"TABLE"});
-            while (tableResult.next()) {
-                ResultSet columnsResult = databaseMetaData.getColumns(null, MULTIPLE_WILDCARD, TABLE_NAME, MULTIPLE_WILDCARD);
-                while (columnsResult.next()) {
-                    String columnName = columnsResult.getString("COLUMN_NAME");
-                    String columnType = columnsResult.getString("TYPE_NAME").toLowerCase();
-                    String remarks = columnsResult.getString("REMARKS");
-                    String fieldTye;
-                    switch (columnType) {
-                        case "varchar":
-                            fieldTye = "String";
-                            break;
-                        case "int":
-                            fieldTye = "int";
-                            break;
-                        default:
-                            fieldTye = "String";
-                    }
-                    System.out.println("columnName:" + columnName);
-                    System.out.println("columnType:" + columnType);
-                    System.out.println("remarks:" + remarks);
-                    System.out.println("fieldTye:" + fieldTye);
-                }
+            columnResult = databaseMetaData.getColumns(database, MULTIPLE_WILDCARD, tableName, MULTIPLE_WILDCARD);
+            while (columnResult.next()) {
+                Column column = new Column();
+                column.setTableCat(columnResult.getString(Column.Property.TABLE_CAT));
+                column.setTableSchem(columnResult.getString(Column.Property.TABLE_SCHEM));
+                column.setTableName(columnResult.getString(Column.Property.TABLE_NAME));
+                column.setColumnName(columnResult.getString(Column.Property.COLUMN_NAME));
+                column.setDataType(columnResult.getString(Column.Property.DATA_TYPE));
+                column.setTypeName(columnResult.getString(Column.Property.TYPE_NAME));
+                column.setColumnSize(columnResult.getString(Column.Property.COLUMN_SIZE));
+                column.setBufferLength(columnResult.getString(Column.Property.BUFFER_LENGTH));
+                column.setDecimalDigits(columnResult.getString(Column.Property.DECIMAL_DIGITS));
+                column.setNumPrecRadix(columnResult.getString(Column.Property.NUM_PREC_RADIX));
+                column.setNullable(columnResult.getString(Column.Property.NULLABLE));
+                column.setRemarks(columnResult.getString(Column.Property.REMARKS));
+                column.setColumnDef(columnResult.getString(Column.Property.COLUMN_DEF));
+                column.setSqlDataType(columnResult.getString(Column.Property.SQL_DATA_TYPE));
+                column.setSqlDatetimeSub(columnResult.getString(Column.Property.SQL_DATETIME_SUB));
+                column.setCharOctetLength(columnResult.getString(Column.Property.CHAR_OCTET_LENGTH));
+                column.setOrdinalPosition(columnResult.getString(Column.Property.ORDINAL_POSITION));
+                column.setIsNullable(columnResult.getString(Column.Property.IS_NULLABLE));
+                column.setScopeCatalog(columnResult.getString(Column.Property.SCOPE_CATALOG));
+                column.setScopeSchema(columnResult.getString(Column.Property.SCOPE_SCHEMA));
+                column.setScopeTable(columnResult.getString(Column.Property.SCOPE_TABLE));
+                column.setSourceDataType(columnResult.getString(Column.Property.SOURCE_DATA_TYPE));
+                column.setIsAutoincrement(columnResult.getString(Column.Property.IS_AUTOINCREMENT));
+                column.setIsGeneratedcolumn(columnResult.getString(Column.Property.IS_GENERATEDCOLUMN));
+                result.add(column);
             }
         } finally {
-            if (Objects.nonNull(tableResult)) {
-                tableResult.close();
+            if (Objects.nonNull(columnResult)) {
+                columnResult.close();
             }
         }
+        return result;
     }
-
 
 }
