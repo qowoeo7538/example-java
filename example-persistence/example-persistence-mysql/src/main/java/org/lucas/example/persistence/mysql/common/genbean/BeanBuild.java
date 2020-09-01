@@ -1,4 +1,4 @@
-package org.lucas.example.persistence.mysql.common.util.genbean;
+package org.lucas.example.persistence.mysql.common.genbean;
 
 import javassist.CannotCompileException;
 import javassist.ClassPool;
@@ -10,9 +10,7 @@ import javassist.LoaderClassPath;
 import javassist.NotFoundException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class BeanBuild {
 
@@ -39,7 +37,7 @@ public class BeanBuild {
     /**
      * 字段属性
      */
-    private List<String> fields = new ArrayList<>();
+    private List<BeanField> fields = new ArrayList<>();
 
     /**
      * 方法
@@ -63,14 +61,15 @@ public class BeanBuild {
         }
 
         // 添加属性
-        for (String field : fields) {
-            ctClass.addField(CtField.make(field, ctClass));
+        for (BeanField field : fields) {
+            ctClass.addField(CtField.make(field.toCode(), ctClass));
         }
 
         // 添加方法
         for (String method : methods) {
             ctClass.addMethod(CtNewMethod.make(method, ctClass));
         }
+
         return ctClass;
     }
 
@@ -106,11 +105,11 @@ public class BeanBuild {
         this.constructors = constructors;
     }
 
-    public List<String> getFields() {
+    public List<BeanField> getFields() {
         return fields;
     }
 
-    public void setFields(List<String> fields) {
+    public void setFields(List<BeanField> fields) {
         this.fields = fields;
     }
 
