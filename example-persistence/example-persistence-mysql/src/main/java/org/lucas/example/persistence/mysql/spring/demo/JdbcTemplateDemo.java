@@ -1,4 +1,4 @@
-package org.lucas.example.persistence.mysql.spring.service;
+package org.lucas.example.persistence.mysql.spring.demo;
 
 import org.eclipse.collections.api.factory.Maps;
 import org.junit.Test;
@@ -15,8 +15,20 @@ import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ApplicationConfig.class)
-public class ApplicationService {
+public class JdbcTemplateDemo {
 
+    @Autowired
+    private JdbcTemplate jdbc;
 
+    @Test
+    public void testFindOne() {
+        RowMapper<Map<String, String>> rowMapper = (ResultSet rs, int rowNum) -> {
+            Map<String, String> map = Maps.mutable.with();
+            map.put("title", rs.getString("title"));
+            return map;
+        };
+        Map<String, String> map = jdbc.queryForObject("SELECT * FROM t_application WHERE id = ?", rowMapper, 1);
+        System.out.println(map);
+    }
 
 }
