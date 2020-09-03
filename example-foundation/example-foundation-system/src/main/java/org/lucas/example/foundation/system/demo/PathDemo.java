@@ -1,8 +1,8 @@
-package org.lucas.example.foundation.system.kata.path;
+package org.lucas.example.foundation.system.demo;
 
 import org.junit.jupiter.api.Test;
 
-public class PathKata {
+public class PathDemo {
 
     /**
      * 1) "." 会自动转成以 "/" 分割路径
@@ -16,12 +16,12 @@ public class PathKata {
         System.out.println(System.getProperty("user.dir"));
 
         // 获取当前编译文件路径
-        System.out.println(PathKata.class.getResource(""));
+        System.out.println(PathDemo.class.getResource(""));
         // 获取当前编译目录
-        System.out.println(PathKata.class.getResource("/"));
+        System.out.println(PathDemo.class.getResource("/"));
 
         // 获取当前编译目录（path开头不能是 "/" 且其后按照 "/" 分割的格式）
-        System.out.println(PathKata.class.getClassLoader().getResource(""));
+        System.out.println(PathDemo.class.getClassLoader().getResource(""));
 
         // 获取当前项目路径（path开头不能是 "/" 且其后按照 "/" 分割的格式）
         System.out.println(ClassLoader.getSystemResource(""));
@@ -30,10 +30,10 @@ public class PathKata {
     @Test
     public void loadSource() {
         // 从classpath下加载资源
-        System.out.println(PathKata.class.getResource("/org/lucas/example/foundation/system/kata/path/PathDemo.class"));
+        System.out.println(PathDemo.class.getResource("/org/lucas/example/foundation/system/kata/path/PathDemo.class"));
         // 从当前目录下加载资源
-        System.out.println(PathKata.class.getResource("PathDemo.class"));
+        System.out.println(PathDemo.class.getResource("PathDemo.class"));
         // 从classpath下加载资源
-        System.out.println(PathKata.class.getClassLoader().getResource("org/lucas/example/foundation/system/kata/path/PathDemo.class"));
+        System.out.println(PathDemo.class.getClassLoader().getResource("org/lucas/example/foundation/system/kata/path/PathDemo.class"));
     }
 }

@@ -1,5 +1,7 @@
 package org.lucas.example.persistence.mysql.common.genbean;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -39,7 +41,7 @@ public class BeanGenerator {
     private void generateComment(String comment) {
         beanCodeBuffer.append("/**\r\n");
         beanCodeBuffer.append(wrapComment(" * " + comment + "\r\n", 80, false));
-        beanCodeBuffer.append("\r\n */\r\n");
+        beanCodeBuffer.append(" */\r\n");
     }
 
     /**
@@ -118,8 +120,14 @@ public class BeanGenerator {
         commentBuffer.setLength(0);
         commentBuffer.append(comment);
         int i = 0;
-        while (i + numChars < commentBuffer.length() && (i = commentBuffer.lastIndexOf(" ", i + numChars)) != -1) {
-            commentBuffer.replace(i, i + 1, "\n\t * \t");
+        if (isTable) {
+            while (i + numChars < commentBuffer.length() && (i = commentBuffer.lastIndexOf(" ", i + numChars)) != -1) {
+                commentBuffer.replace(i, i + 1, "\n\t * \t");
+            }
+        } else {
+            while (i + numChars < commentBuffer.length() && (i = commentBuffer.lastIndexOf(" ", i + numChars)) != -1) {
+                commentBuffer.replace(i, i + 1, "\n * ");
+            }
         }
         return commentBuffer.toString();
     }
@@ -162,6 +170,7 @@ public class BeanGenerator {
             return "Pogrešni tip!";
         }
         generatePackage(pack);
+        beanCodeBuffer.append("\r\n");
         generateComment(comment);
         beanCodeBuffer.append("public class " + info.getName() + " {\r\n");
         generateFields(properties);
@@ -177,6 +186,9 @@ public class BeanGenerator {
 
     public static class BeanBuilder {
 
+        private static final String PROJECT_PATH = System.getProperty("user.dir") + File.separator
+                + "src" + File.separator + "main" + File.separator + "java" + File.separator;
+
         private String pack;
 
         private String name = "";
@@ -189,6 +201,15 @@ public class BeanGenerator {
 
         public String build() {
             return new BeanGenerator().generateBean(this);
+        }
+
+        public void write() throws Exception {
+            String code = new BeanGenerator().generateBean(this);
+            String path = PROJECT_PATH + this.pack.replace(".", File.separator) + File.separator;
+            File javaFile = new File(path + this.name + ".java");
+            try (FileOutputStream outputStream = new FileOutputStream(javaFile)) {
+                outputStream.write(code.getBytes());
+            }
         }
 
         public BeanBuilder pack(String pack) {
