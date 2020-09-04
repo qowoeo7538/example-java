@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.ResultSet;
+import java.util.List;
 import java.util.Map;
 
 @RunWith(SpringRunner.class)
@@ -20,8 +21,27 @@ public class JdbcTemplateDemo {
     @Autowired
     private JdbcTemplate jdbc;
 
+    /**
+     * 查询所有数据
+     */
     @Test
-    public void testFindOne() {
+    public void testQuery() {
+        // 将结果集中的每行数据映射为一个对象
+        RowMapper<Map<String, String>> rowMapper = (ResultSet rs, int rowNum) -> {
+            Map<String, String> map = Maps.mutable.with();
+            map.put("title", rs.getString("title"));
+            return map;
+        };
+        List<Map<String, String>> rowList = jdbc.query("SELECT * FROM t_application", rowMapper);
+        System.out.println(rowList);
+    }
+
+    /**
+     * 查询单条数据
+     */
+    @Test
+    public void testQueryForObject() {
+        // 将结果集中的每行数据映射为一个对象
         RowMapper<Map<String, String>> rowMapper = (ResultSet rs, int rowNum) -> {
             Map<String, String> map = Maps.mutable.with();
             map.put("title", rs.getString("title"));
