@@ -46,11 +46,10 @@ public class SessionControllerTests extends BaseSpringMvcTest {
     public void testGetModel() throws Exception {
         session = new MockHttpSession();
         MockHttpServletRequestBuilder sessionGetRequest = MockMvcRequestBuilders
-                .get("/session/model")
-                .param("param", "123")
+                .get("/session/complete")
                 .session(session);
         mockMvc.perform(sessionGetRequest).andExpect(status().isOk())
-                .andExpect(content().string(containsString("123")));
+                .andExpect(content().string(containsString("ok")));
     }
 
 }

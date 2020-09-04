@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.UUID;
 
 /**
  * 注解 @SessionAttributes：将model的属性存储到 session 中,如果方法体没有标注@SessionAttributes("xxx")，那么scope为request，如果标注了，那么 scope为session
- *
+ * <p>
  * 注解 @ModelAttribute：注解的方法会在此controller每个方法执行前被执行
  */
 @RestController
@@ -39,7 +40,7 @@ public class SessionController {
     public void order(@RequestParam(required = false) String order, Model model) {
         if (StringUtils.hasLength(order)) {
             OrderVO orderVO = new OrderVO();
-            orderVO.setCcNumber(UUID.randomUUID().toString().replace("-",""));
+            orderVO.setCcNumber(UUID.randomUUID().toString().replace("-", ""));
             model.addAttribute("order", orderVO);
         }
     }
@@ -59,9 +60,18 @@ public class SessionController {
         return order.getCcNumber();
     }
 
-    @GetMapping("/model")
-    public String getParam(Model model) {
-        return (String) model.getAttribute("model");
+    /**
+     * session 重置
+     *
+     * @param model
+     * @param sessionStatus
+     * @return
+     */
+    @GetMapping("/complete")
+    public String getParam(Model model, SessionStatus sessionStatus) {
+        // session 重置
+        sessionStatus.setComplete();
+        return "ok";
     }
 
 }
