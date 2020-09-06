@@ -12,7 +12,7 @@ public class BeanGeneratorTests {
 
     @Test
     public void testGenerateBean() throws Exception {
-        List<Column> columns = DatabaseMetaDataUtil.getColumnInfo("mall_message", "t_application", DataSourceUtil.getHikariDataSource());
+        List<Column> columns = DatabaseMetaDataUtil.getColumnInfo("discover_page", "discover_live_permission", DataSourceUtil.getHikariDataSource());
 
         List<Property> props = new ArrayList<>();
         for (Column column : columns) {
@@ -24,7 +24,7 @@ public class BeanGeneratorTests {
         }
 
         BeanGenerator.builder()
-                .name("Application")
+                .name("discoverLivePermission")
                 .pack("org.lucas.example.persistence.mysql.common.entity")
                 .properties(props)
                 .write();

@@ -1,0 +1,1 @@
+-- 数据库 schema 定义，spring boot 启动时将会执行该文件 SQL
