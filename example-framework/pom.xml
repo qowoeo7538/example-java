@@ -19,6 +19,7 @@
         <module>example-framework-lucene</module>
         <module>example-framework-netty</module>
         <module>example-framework-reactive</module>
+        <module>example-framework-security</module>
         <module>example-framework-spring</module>
     </modules>
 
