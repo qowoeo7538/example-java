@@ -5,42 +5,46 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
+import java.time.LocalDateTime;
 
 /**
- * 注解 @ManyToMany(targetEntity = class) 表明多对多关系
+ * 注解 @ManyToMany(targetEntity = class)：表明多对多关系
+ * <p>
+ * 注解 @Table：如果没有该注解，默认通过类名转换
  */
-@Entity(name = "discover_live_permission")
-public class AutoIdCommonEntiyt {
+@Entity
+@Table(name = "discover_live_permission")
+public class AutoIdCommonEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "publish_name")
     private String column0;
-
 
     @Column(name = "publish_type")
     private String column1;
 
     @Column(name = "create_time")
-    private String column2;
-
-    @Column(name = "update_time")
-    private String column3;
+    private LocalDateTime column2;
 
     @Column(name = "create_user_id")
-    private String column4;
+    private String column3;
 
     @Column(name = "update_user_id")
-    private String column5;
+    private String column4;
 
-    public Integer getId() {
+    @Column(name = "update_time")
+    private LocalDateTime updateTime;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -52,14 +56,6 @@ public class AutoIdCommonEntiyt {
         this.column0 = column0;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public String getColumn1() {
         return column1;
     }
@@ -68,11 +64,11 @@ public class AutoIdCommonEntiyt {
         this.column1 = column1;
     }
 
-    public String getColumn2() {
+    public LocalDateTime getColumn2() {
         return column2;
     }
 
-    public void setColumn2(String column2) {
+    public void setColumn2(LocalDateTime column2) {
         this.column2 = column2;
     }
 
@@ -92,18 +88,17 @@ public class AutoIdCommonEntiyt {
         this.column4 = column4;
     }
 
-    public String getColumn5() {
-        return column5;
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
     }
 
-    public void setColumn5(String column5) {
-        this.column5 = column5;
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
     }
 
-    private String status;
-
-    public static enum Status {
-
+    @PrePersist
+    public void updateTime() {
+        this.updateTime = LocalDateTime.now();
     }
 
 }
