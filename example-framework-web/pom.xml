@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
+        <module>example-framework-web-security</module>
         <module>example-framework-web-spring</module>
         <module>example-framework-web-vertx</module>
         <module>example-framework-web-springflux</module>
