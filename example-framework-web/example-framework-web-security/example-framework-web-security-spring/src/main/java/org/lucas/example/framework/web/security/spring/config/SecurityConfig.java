@@ -33,14 +33,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 内存方式验证用户信息
         // memoryAuthentication(auth);
         // JDBC 方式验证用户信息
-        jdbcAuthentication(auth);
+        // jdbcAuthentication(auth);
     }
 
     /**
      * JDBC 方式验证用户信息
      */
     private void jdbcAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication().dataSource(dataSource);
+        auth.jdbcAuthentication().dataSource(dataSource)
+                .passwordEncoder(this.passwordEncoder())
+                .usersByUsernameQuery("");
     }
 
     /**
