@@ -40,9 +40,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * JDBC 方式验证用户信息
      */
     private void jdbcAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         auth.jdbcAuthentication().dataSource(dataSource)
-                .passwordEncoder(this.passwordEncoder())
-                .usersByUsernameQuery("");
+                .passwordEncoder(passwordEncoder)
+                .usersByUsernameQuery("select username, password, enabled from users where username = ?")
+                .authoritiesByUsernameQuery("select username,authority from authorities where username = ?")
+                .groupAuthoritiesByUsername("select g.id, g.group_name, ga.authority from groups g, group_members gm, group_authorities ga where gm.username = ? and g.id = ga.group_id and g.id = gm.group_id");
     }
 
     /**
@@ -50,22 +53,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     private void memoryAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         // 指定用户信息
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         auth.inMemoryAuthentication()
-                .passwordEncoder(this.passwordEncoder())
+                .passwordEncoder(passwordEncoder)
                 .withUser("admin")
-                .password(passwordEncoder().encode("admin"))
+                .password(passwordEncoder.encode("admin"))
                 .authorities("ADMIN_ROLE")
                 .and()
                 .withUser("user")
-                .password(passwordEncoder().encode("user"))
+                .password(passwordEncoder.encode("user"))
                 .authorities("USER_ROLE");
-    }
-
-    /**
-     * 密码编码
-     */
-    private PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 
 }
