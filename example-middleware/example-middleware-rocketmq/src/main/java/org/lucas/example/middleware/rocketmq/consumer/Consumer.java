@@ -17,7 +17,7 @@ public class Consumer {
     public static void main(String[] args) throws  MQClientException {
         // 1 创建消费实例，同一个消费集群的消费实例名称应该一样。
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("my-consumer-group");
-        // 配置 NameServer 地址
+        // 2 配置 NameServer 地址
         consumer.setNamesrvAddr("127.0.0.1:9876");
         // 3 消费属性配置
         // CONSUME_FROM_FIRST_OFFSET：消费实例从第一个偏移量开始消费。
@@ -25,7 +25,7 @@ public class Consumer {
 
         // 4 订阅TopicTest topic下所有tag
         consumer.subscribe("TopicTest",  SubscriptionData.SUB_ALL);
-        // 5 注册回调，进行消息处理。
+        // 5 注册回调，当 "TopicTest" 主题下面有消息需要消费时的处理。
         consumer.registerMessageListener((List<MessageExt>  msgs, ConsumeConcurrentlyContext context) -> {
             for (MessageExt msg : msgs) {
                 String body = "";
