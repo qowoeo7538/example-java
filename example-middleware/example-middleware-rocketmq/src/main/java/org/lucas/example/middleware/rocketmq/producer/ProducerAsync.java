@@ -27,14 +27,26 @@ public class ProducerAsync {
                 Message msg = new Message("TopicTest" /* Topic */, "TagA" /* Tag */, i + "",
                         ("Hello RocketMQ " + i).getBytes(RemotingHelper.DEFAULT_CHARSET) /* Message body */
                 );
-                // 4.2 异步发送消息,不需要阻塞，等消息投递后，底层IO线程会回调 Callback 进行通知。
+                // 4.2 异步发送消息,不需要阻塞。
+                // 消息发送任务会被在线程池内异步执行，异步发送任务内首先会创建 ResponseFuture 对象，然后切换
+                // 到IO线程来具体发送请求，等IO线程将请求发送到TCP发送到Buffer后，IO线程会设置 ResponseFuture
+                // 对象的值，然后 ResponseFuture 中保存的 CallBack 的执行切换到线程池来执行。
                 producer.send(msg, new SendCallback() {
 
+                    /**
+                     * 等消息真的投递到Broker后，底层IO线程会回调 Callback 进行通知。
+                     *
+                     * @param sendResult 投递结果
+                     */
                     @Override
                     public void onSuccess(SendResult sendResult) {
                         System.out.printf("onSuccess:%s%n", sendResult);
                     }
 
+                    /**
+                     * 失败回调
+                     * @param e 异常信息。
+                     */
                     @Override
                     public void onException(Throwable e) {
                         System.out.printf("onException:%s%n", e);
@@ -43,7 +55,7 @@ public class ProducerAsync {
             } catch (final MQClientException | RemotingException | InterruptedException e) {
                 System.out.println("消息发送失败！。");
                 e.printStackTrace();
-            }catch (final Exception e){
+            } catch (final Exception e) {
                 e.printStackTrace();
             }
         }

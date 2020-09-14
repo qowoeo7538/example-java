@@ -21,7 +21,6 @@ public class ValidationController {
 
     @PostMapping("/order")
     public DeferredResult<String> validationAsyncOrder(@Valid OrderVO request, Errors error) {
-
         DeferredResult<String> deferredResult = new DeferredResult<>();
         executor.execute(() -> {
             try {
