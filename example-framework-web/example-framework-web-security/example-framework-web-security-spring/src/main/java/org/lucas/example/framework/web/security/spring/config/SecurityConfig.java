@@ -3,6 +3,7 @@ package org.lucas.example.framework.web.security.spring.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configurers.ldap.LdapAuthenticationProviderConfigurer;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,7 +18,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
-    /*@Override
+    /*
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 // 无权限访问
@@ -34,6 +36,36 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // memoryAuthentication(auth);
         // JDBC 方式验证用户信息
         // jdbcAuthentication(auth);
+    }
+
+    /**
+     * ldap 方式验证用户信息
+     */
+    private void ldapAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+        LdapAuthenticationProviderConfigurer<AuthenticationManagerBuilder> ldapProvider = auth.ldapAuthentication();
+        ldapProvider.contextSource()
+                // 1 远程 ldap 服务器
+                // .url("ldap://127.0.0.1:389/dc=lucas,dc=com");
+                // 2.1 内嵌 ldap 服务器
+                .root("dc=lucas,dc=com");
+                // 2.2 指定加载 LDIF 文件路径
+                // .ldif("classpath:user.ldif");
+
+        ldapProvider
+                // 指定用户基础查询，声明从people单元下查询
+                .userSearchBase("ou=people")
+                // 用户过滤条件
+                .userSearchFilter("(uid={0})")
+                // 指定组基础查询，声明从groups单元下查询
+                .groupSearchBase("ou=groups")
+                // 组过滤条件
+                .groupSearchFilter("member={0}")
+                // 将密码发送到 LDAP 服务器进行对比。（可选）
+                .passwordCompare()
+                // 进行加密，需要 LDAP 的密码也设置为加密
+                .passwordEncoder(new BCryptPasswordEncoder())
+                // 设置密码属性
+                .passwordAttribute("passcode");
     }
 
     /**
