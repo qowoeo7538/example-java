@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.thread.kata.lock.impl;
+package org.lucas.example.foundation.thread.kata.safe.impl;
 
 /**
  * @create: 2018-03-09

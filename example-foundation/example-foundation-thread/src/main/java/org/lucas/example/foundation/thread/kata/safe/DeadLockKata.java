@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.thread.kata.lock;
+package org.lucas.example.foundation.thread.kata.safe;
 
 import org.junit.jupiter.api.Test;
 import org.lucas.example.foundation.core.task.ExampleThreadExecutor;

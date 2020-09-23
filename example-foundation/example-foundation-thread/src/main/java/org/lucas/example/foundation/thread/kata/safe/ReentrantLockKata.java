@@ -1,8 +1,8 @@
-package org.lucas.example.foundation.thread.kata.lock;
+package org.lucas.example.foundation.thread.kata.safe;
 
 import org.junit.jupiter.api.Test;
 import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
-import org.lucas.example.foundation.thread.kata.lock.impl.ReentrantLockThread;
+import org.lucas.example.foundation.thread.kata.safe.impl.ReentrantLockThread;
 
 import java.util.concurrent.locks.ReentrantLock;
 

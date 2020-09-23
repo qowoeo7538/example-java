@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.thread.kata.lock.impl;
+package org.lucas.example.foundation.thread.kata.safe.impl;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;

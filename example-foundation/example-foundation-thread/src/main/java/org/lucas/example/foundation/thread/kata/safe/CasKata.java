@@ -14,7 +14,7 @@ public class CasKata {
     private static final AtomicInteger COUNT = new AtomicInteger(0);
 
     @Test
-    public void casTest(){
+    public void testCas(){
         for (int j = 0; j < 100; j++) {
             ExampleThreadExecutor.execute(new CasThread(COUNT));
         }

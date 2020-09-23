@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.thread.kata.safe;
+package org.lucas.example.foundation.thread.demo.unsafe;
 
 import org.junit.jupiter.api.Test;
 import org.lucas.example.foundation.thread.kata.safe.impl.Value;
@@ -22,7 +22,7 @@ public class UnsafeDemo {
      * 优化被 {@code volatile} 修饰字段的不必要的内存屏障。
      */
     @Test
-    public void putOrderedLong() throws NoSuchFieldException {
+    public void demoOrderedLong() throws NoSuchFieldException {
         final Value value = new Value();
         System.out.println("前:" + value.value);
         // 获取属性的偏移量
@@ -37,7 +37,7 @@ public class UnsafeDemo {
      * 原子性修改对象属性值,变量需要保证可见性
      */
     @Test
-    public void fieldUpdater() {
+    public void demoFieldUpdater() {
         AtomicReferenceFieldUpdater<Value, String> updater = AtomicReferenceFieldUpdater.newUpdater(Value.class, String.class, "name");
         Value value = new Value();
         System.out.println(updater.get(value));
