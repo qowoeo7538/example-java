@@ -14,14 +14,15 @@
     <modules>
         <module>example-foundation-action</module>
         <module>example-foundation-basic</module>
+        <module>example-foundation-bytecode</module>
         <module>example-foundation-core</module>
         <module>example-foundation-design-pattern</module>
-        <module>example-foundation-io</module>
         <module>example-foundation-jni</module>
         <module>example-foundation-jvm</module>
         <module>example-foundation-reflection</module>
         <module>example-foundation-system</module>
         <module>example-foundation-thread</module>
         <module>example-foundation-web</module>
+        <module>example-foundation-io</module>
     </modules>
 </project>

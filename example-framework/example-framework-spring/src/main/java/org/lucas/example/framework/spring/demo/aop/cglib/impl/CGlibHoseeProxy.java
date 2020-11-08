@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.reflection.kata.cglib.impl;
+package org.lucas.example.framework.spring.demo.aop.cglib.impl;
 
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
