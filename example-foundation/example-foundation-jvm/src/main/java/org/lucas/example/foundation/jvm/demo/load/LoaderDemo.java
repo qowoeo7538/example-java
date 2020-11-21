@@ -2,8 +2,12 @@ package org.lucas.example.foundation.jvm.demo.load;
 
 import org.junit.jupiter.api.Test;
 import org.lucas.example.foundation.jvm.demo.load.impl.MyClassLoader;
+import org.lucas.example.foundation.jvm.demo.load.impl.OfficeBetter;
+import org.lucas.example.foundation.jvm.demo.load.impl.Word;
 
 /**
+ * 类加载器
+ *
  * class loader 是一个负责加载 classes 的对象
  * ClassLoader 类是一个抽象类，需要给出类的二进制名称，class loader 尝试定位或者产生一个 class 的数据,一个典型的策略是把二进制名字转换成文件名然后到文件系统中找到该文件。
  * 通过继承java.lang.ClassLoader类的方式实现自己的类加载器，以满足一些特殊的需求。
@@ -20,7 +24,7 @@ import org.lucas.example.foundation.jvm.demo.load.impl.MyClassLoader;
  * 那么就调用resolveClass(Class) 方法来处理类。 ClassLoader 的子类最好覆盖 findClass(String) 而不是这个方法。
  * 除非被重写，这个方法默认在整个装载过程中都是同步的（线程安全的）。
  */
-public class ClassLoaderDemo {
+public class LoaderDemo {
 
     /**
      * 默认类加载器
@@ -28,7 +32,7 @@ public class ClassLoaderDemo {
     @Test
     public void defaultClassLoader() throws Exception {
         // 使用MyClassLoader的类加载器加载本类(默认加载器:sun.misc.Launcher$AppClassLoader)
-        Object obj1 = ClassLoaderDemo.class.getClassLoader().loadClass("org.lucas.example.foundation.jvm.demo.load.impl.MyClassLoader").getConstructor().newInstance();
+        Object obj1 = LoaderDemo.class.getClassLoader().loadClass("org.lucas.example.foundation.jvm.demo.load.impl.MyClassLoader").getConstructor().newInstance();
         System.out.println("默认类加载器：" + obj1.getClass().getClassLoader());
     }
 
@@ -63,4 +67,5 @@ public class ClassLoaderDemo {
         //获取扩展类加载器的父类加载器，但因根类加载器并不用JAVA实现的所以不能获取
         System.out.println("扩展类的父类加载器：" + extcClassLoader.getParent());
     }
+
 }
