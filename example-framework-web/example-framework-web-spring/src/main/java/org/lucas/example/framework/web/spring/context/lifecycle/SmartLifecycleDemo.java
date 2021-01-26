@@ -4,7 +4,7 @@ import org.springframework.context.SmartLifecycle;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TestSmartLifecycle implements SmartLifecycle {
+public class SmartLifecycleDemo implements SmartLifecycle {
 
     private boolean isRunning = false;
 

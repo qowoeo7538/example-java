@@ -12,15 +12,15 @@ public class Singleton {
     private Singleton() {
         synchronized (Singleton.class) {
             // 初始化的时候进行一次判断,防止反射序列化
-            if (initialized == false) {
-                initialized = !initialized;
+            if (!initialized) {
+                initialized = true;
             } else {
                 throw new RuntimeException("单例被破坏");
             }
         }
     }
 
-    static class SingletonHolder {
+    private static class SingletonHolder {
         private static final Singleton INSTANCE = new Singleton();
     }
 
