@@ -15,8 +15,7 @@ public class ThreadConfig {
     @Bean
     @Primary
     public ThreadPoolTaskExecutor standardThreadExecutor() {
-        ThreadPoolTaskExecutor threadPool = new ThreadPoolTaskExecutor();
-        return threadPool;
+        return new ThreadPoolTaskExecutor();
     }
 
     @Bean("threadPoolTaskExecutor")
