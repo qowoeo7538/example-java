@@ -1,6 +1,5 @@
 package org.lucas.example.framework.web.spring;
 
-import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.lucas.example.framework.web.spring.config.ServerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
