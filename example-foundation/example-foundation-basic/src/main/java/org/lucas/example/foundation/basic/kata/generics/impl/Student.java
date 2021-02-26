@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.basic.kata.generic.impl;
+package org.lucas.example.foundation.basic.kata.generics.impl;
 
 /**
  * 集合的泛型，编译之后泛型将不存在，可以通过反射绕过编译。

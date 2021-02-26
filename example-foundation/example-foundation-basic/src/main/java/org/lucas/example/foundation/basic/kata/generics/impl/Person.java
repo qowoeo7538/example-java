@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.basic.kata.generic.impl;
+package org.lucas.example.foundation.basic.kata.generics.impl;
 
 /**
  * 泛型接口
