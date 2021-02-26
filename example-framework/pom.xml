@@ -20,6 +20,7 @@
         <module>example-framework-netty</module>
         <module>example-framework-reactive</module>
         <module>example-framework-spring</module>
+        <module>example-framework-util</module>
     </modules>
 
 </project>

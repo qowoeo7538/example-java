@@ -4,6 +4,7 @@ import org.apache.dubbo.common.constants.CommonConstants;
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.config.RegistryConfig;
+import org.apache.dubbo.config.utils.ReferenceConfigCache;
 import org.apache.dubbo.rpc.RpcContext;
 import org.apache.dubbo.rpc.service.GenericService;
 import org.lucas.example.framework.dubbo.demo.common.pojo.InvokeTarget;
@@ -36,6 +37,7 @@ public class GenericAsyncInvokeDemo {
                 .methodParamType("com.sibu.mall.toolkit.request.AppInfoRequest")
                 .methodParamToJson("{\"appId\":\"20005f0ece2d75704f00013b5e4a\"}", Object.class)
                 .build();
+
         // 1 创建服务引用对象实例
         ReferenceConfig<GenericService> referenceConfig = new ReferenceConfig<>();
         // 2 设置应用程序信息
@@ -54,7 +56,9 @@ public class GenericAsyncInvokeDemo {
         // 8 设置泛化调用
         referenceConfig.setGeneric(CommonConstants.GENERIC_SERIALIZATION_DEFAULT);
         // 9 引用服务
-        GenericService genericService = referenceConfig.get();
+        ReferenceConfigCache cache = ReferenceConfigCache.getCache();
+        GenericService genericService = cache.get(referenceConfig);
+
 
         // 10 异步执行,并设置回调
         genericService.$invoke(target.getMethodName(), target.getMethodParamTypes(), target.getMethodParams());

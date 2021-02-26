@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * @create: 2017-11-21
@@ -46,6 +47,27 @@ public class LambdaDemo {
         int sum = list.stream()
                 .mapToInt(List::size)
                 .sum();
+    }
+
+    @Test
+    public void testFlatMap() {
+        List<List<String>> eggs = new ArrayList<>();
+        List<String> egg1 = new ArrayList<>();
+        egg1.add("鸡蛋_1_1");
+        egg1.add("鸡蛋_1_2");
+        egg1.add("鸡蛋_1_3");
+        egg1.add("鸡蛋_1_4");
+        egg1.add("鸡蛋_1_5");
+        List<String> egg2 = new ArrayList<>();
+        egg1.add("鸡蛋_2_1");
+        egg1.add("鸡蛋_2_2");
+        egg1.add("鸡蛋_2_3");
+        egg1.add("鸡蛋_2_4");
+        egg1.add("鸡蛋_2_5");
+        eggs.add(egg2);
+        eggs.add(egg1);
+        List<String> list = eggs.stream().flatMap(t -> t.stream().map(y -> y.replace("鸡", "煎"))).collect(Collectors.toList());
+        System.out.println(list);
     }
 
 }

@@ -25,7 +25,7 @@ public class GrettingProviderFutureAsyncDemo implements GrettingServiceAsync {
      * 创建业务自定义线程池
      */
     private final ThreadPoolExecutor bizThreadpool = new ThreadPoolExecutor(8, 16, 1, TimeUnit.MINUTES,
-            new SynchronousQueue(), new NamedThreadFactory("biz-thread-pool"),
+            new SynchronousQueue<>(), new NamedThreadFactory("biz-thread-pool"),
             new ThreadPoolExecutor.CallerRunsPolicy());
 
     @Override
