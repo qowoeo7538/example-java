@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.basic.demo.collect;
+package org.lucas.example.foundation.basic.demo.struct;
 
 import org.junit.jupiter.api.Test;
 
