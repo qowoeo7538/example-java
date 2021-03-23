@@ -9,6 +9,9 @@ import java.util.LinkedList;
  */
 public class LinkedListDemo {
 
+    /**
+     * 从队首获取元素，同时获取的这个元素将从原队列删除,调用该方法会发生异常
+     */
     @Test
     public void popTest() {
         LinkedList<Integer> list = new LinkedList<>();
@@ -22,6 +25,9 @@ public class LinkedListDemo {
         System.out.println(list.pop());
     }
 
+    /**
+     * 返从队首获取元素，同时获取的这个元素将从原队列删除,调用该方法会返回null
+     */
     @Test
     public void pollTest() {
         LinkedList<Integer> list = new LinkedList<>();
