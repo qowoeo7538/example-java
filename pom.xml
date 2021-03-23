@@ -38,7 +38,7 @@
         <component.version>1.0</component.version>
         <eclipse-collections.version>10.2.0</eclipse-collections.version>
         <lucene.version>8.4.1</lucene.version>
-        <netty.version>4.1.51.Final</netty.version>
+        <netty.version>4.1.60.Final</netty.version>
         <rxjava.version>2.2.19</rxjava.version>
         <reactor.version>Dysprosium-SR9</reactor.version>
         <zk.version>3.6.1</zk.version>

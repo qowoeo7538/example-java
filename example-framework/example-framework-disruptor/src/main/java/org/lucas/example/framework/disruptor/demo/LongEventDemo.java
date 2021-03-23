@@ -29,6 +29,9 @@ public class LongEventDemo {
 
         // 4 注册消费者，同一个元素被 JournalConsumer 和 ReplicationConsumer 消费后，
         // ApplicationConsumer 才可以消费对应的元素。
+        // handleEventsWith(): 同一消息被不同handler独立消费。 此时handler处理是无序的。
+        // handleEventsWithWorkerPool(): 对于同一条消息不重复消费；如果JournalConsumer消费了消息m，则ReplicationConsumer、ApplicationConsumer不再消费消息m。
+        // handleEventsWith().then(): 依赖串行
         disruptor.handleEventsWith(new JournalConsumer(), new ReplicationConsumer()).then(new ApplicationConsumer());
 
         // 5 启动 disruptor 线程运行
