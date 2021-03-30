@@ -2,6 +2,7 @@ package org.lucas.example.foundation.thread.demo.thread;
 
 import org.junit.jupiter.api.Test;
 import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
+import org.lucas.example.foundation.thread.demo.thread.impl.MyThread;
 import org.lucas.example.foundation.thread.demo.thread.impl.Stage;
 
 /**
@@ -28,10 +29,25 @@ public class ThreadDemo {
             int b = 1000000;
             long begin = System.currentTimeMillis();
             System.out.println(Thread.currentThread().getName() + " 开始执行");
+            // 让出CPU资源，使用Thread.onSpinWait();比Thread.sleep(0);性能要好。
             while (b-- > 0) {
                 Thread.onSpinWait();
             }
             System.out.println(Thread.currentThread().getName() + " 执行完毕 " + (System.currentTimeMillis() - begin));
         }, "b").start();
+    }
+
+    /**
+     * 线程状态测试
+     *
+     * @throws Exception
+     */
+    @Test
+    public void threadState() throws Exception {
+        MyThread myThread = new MyThread("my");
+        System.out.println("1.线程名称：" + myThread.getName() + "，线程状态:" + myThread.getState());
+        myThread.start();
+        myThread.join();
+        System.out.println("2.线程名称：" + myThread.getName() + "，线程状态:" + myThread.getState());
     }
 }

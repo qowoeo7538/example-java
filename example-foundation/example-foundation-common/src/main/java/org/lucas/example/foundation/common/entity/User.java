@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.reflection.demo.info.clazz.impl;
+package org.lucas.example.foundation.common.entity;
 
 @Table(value = "user")
 public class User extends BaseEntity {

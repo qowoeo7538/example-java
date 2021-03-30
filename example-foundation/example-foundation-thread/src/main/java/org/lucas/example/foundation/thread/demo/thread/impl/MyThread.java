@@ -12,6 +12,7 @@ public class MyThread extends Thread {
      */
     public MyThread(String name) {
         super(name);
+        System.out.println("constructor-----线程名称：" + getName() + ",状态：" + getState());
     }
 
     /**
@@ -26,6 +27,7 @@ public class MyThread extends Thread {
 
     @Override
     public void run() {
+        System.out.println("run-----线程名称：" + getName() + ",状态：" + getState());
         for (int i = 0; i < 20; i++) {
             System.out.println(getName() + " 线程的i变量" + i);
         }
