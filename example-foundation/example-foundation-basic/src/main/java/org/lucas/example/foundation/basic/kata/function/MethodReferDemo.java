@@ -2,9 +2,9 @@ package org.lucas.example.foundation.basic.kata.function;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.lucas.example.foundation.basic.kata.function.impl.Function;
-import org.lucas.example.foundation.basic.kata.function.impl.Function2;
-import org.lucas.example.foundation.basic.kata.function.impl.FunctionRefer;
+import org.lucas.example.foundation.basic.kata.function.support.Function;
+import org.lucas.example.foundation.basic.kata.function.support.Function2;
+import org.lucas.example.foundation.basic.kata.function.support.FunctionRefer;
 
 import java.util.HashSet;
 import java.util.Set;

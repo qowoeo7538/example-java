@@ -1,8 +1,8 @@
 package org.lucas.example.foundation.design.pattern.observer.method2;
 
-import org.lucas.example.foundation.design.pattern.observer.method2.impl.ConcreteObserver1;
-import org.lucas.example.foundation.design.pattern.observer.method2.impl.ConcreteSubject1;
-import org.lucas.example.foundation.design.pattern.observer.method2.impl.Observer1;
+import org.lucas.example.foundation.design.pattern.observer.method2.support.ConcreteObserver1;
+import org.lucas.example.foundation.design.pattern.observer.method2.support.ConcreteSubject1;
+import org.lucas.example.foundation.design.pattern.observer.method2.support.Observer1;
 
 /**
  * @create: 2017-11-07

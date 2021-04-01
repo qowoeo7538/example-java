@@ -9,6 +9,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 创建对象
+ */
 public class CreateObjectDemo {
 
     /**

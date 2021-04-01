@@ -11,6 +11,9 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 获取注解信息
+ */
 public class GetAnnotationInfoDemo {
 
     /**

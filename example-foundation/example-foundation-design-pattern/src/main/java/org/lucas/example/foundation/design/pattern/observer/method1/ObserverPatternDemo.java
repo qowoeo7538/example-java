@@ -2,8 +2,8 @@ package org.lucas.example.foundation.design.pattern.observer.method1;
 
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.foundation.design.pattern.observer.method1.impl.Watched;
-import org.lucas.example.foundation.design.pattern.observer.method1.impl.Watcher;
+import org.lucas.example.foundation.design.pattern.observer.method1.support.Watched;
+import org.lucas.example.foundation.design.pattern.observer.method1.support.Watcher;
 
 /**
  * <p>

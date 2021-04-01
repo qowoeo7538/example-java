@@ -1,12 +1,12 @@
 package org.lucas.example.foundation.basic.demo.clazz;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.foundation.basic.demo.clazz.impl.BaseClass;
-import org.lucas.example.foundation.basic.demo.clazz.impl.Children;
-import org.lucas.example.foundation.basic.demo.clazz.impl.ExtendClass1;
-import org.lucas.example.foundation.basic.demo.clazz.impl.ExtendClass2;
-import org.lucas.example.foundation.basic.demo.clazz.impl.ExternalClass;
-import org.lucas.example.foundation.basic.demo.clazz.impl.Parent;
+import org.lucas.example.foundation.basic.demo.clazz.support.BaseClass;
+import org.lucas.example.foundation.basic.demo.clazz.support.Children;
+import org.lucas.example.foundation.basic.demo.clazz.support.ExtendClass1;
+import org.lucas.example.foundation.basic.demo.clazz.support.ExtendClass2;
+import org.lucas.example.foundation.basic.demo.clazz.support.ExternalClass;
+import org.lucas.example.foundation.basic.demo.clazz.support.Parent;
 
 public class Clazz {
 

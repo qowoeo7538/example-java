@@ -1,7 +1,7 @@
 package org.lucas.example.foundation.design.pattern.spi;
 
-import org.lucas.example.foundation.design.pattern.spi.impl.ExtensionFactory;
-import org.lucas.example.foundation.design.pattern.spi.impl.IServer;
+import org.lucas.example.foundation.design.pattern.spi.support.ExtensionFactory;
+import org.lucas.example.foundation.design.pattern.spi.support.IServer;
 
 /**
  *

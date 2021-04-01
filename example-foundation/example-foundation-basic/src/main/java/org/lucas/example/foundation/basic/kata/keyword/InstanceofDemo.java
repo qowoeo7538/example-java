@@ -1,7 +1,7 @@
 package org.lucas.example.foundation.basic.kata.keyword;
 
-import org.lucas.example.foundation.basic.kata.keyword.impl.Animal;
-import org.lucas.example.foundation.basic.kata.keyword.impl.Cat;
+import org.lucas.example.foundation.basic.kata.keyword.support.Animal;
+import org.lucas.example.foundation.basic.kata.keyword.support.Cat;
 
 /**
  * 是否是子类及本类

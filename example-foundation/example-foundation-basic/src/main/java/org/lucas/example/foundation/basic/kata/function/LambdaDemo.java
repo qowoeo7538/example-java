@@ -1,7 +1,7 @@
 package org.lucas.example.foundation.basic.kata.function;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.foundation.basic.kata.function.impl.ItResult;
+import org.lucas.example.foundation.basic.kata.function.support.ItResult;
 
 import java.util.ArrayList;
 import java.util.HashMap;

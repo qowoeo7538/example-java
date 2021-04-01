@@ -1,7 +1,7 @@
 package org.lucas.example.foundation.basic.kata.keyword;
 
-import org.lucas.example.foundation.basic.kata.keyword.impl.StaticAttributeTest;
-import org.lucas.example.foundation.basic.kata.keyword.impl.StaticImpl;
+import org.lucas.example.foundation.basic.kata.keyword.support.StaticAttributeTest;
+import org.lucas.example.foundation.basic.kata.keyword.support.StaticImpl;
 
 /**
  * @create: 2017-11-15

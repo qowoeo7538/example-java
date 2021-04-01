@@ -2,11 +2,11 @@ package org.lucas.example.foundation.basic.kata.generics;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.lucas.example.foundation.basic.kata.generics.impl.GenericTest;
-import org.lucas.example.foundation.basic.kata.generics.impl.Person;
-import org.lucas.example.foundation.basic.kata.generics.impl.Student;
-import org.lucas.example.foundation.basic.kata.generics.impl.Student1;
-import org.lucas.example.foundation.basic.kata.generics.impl.Teacher;
+import org.lucas.example.foundation.basic.kata.generics.support.GenericTest;
+import org.lucas.example.foundation.basic.kata.generics.support.Person;
+import org.lucas.example.foundation.basic.kata.generics.support.Student;
+import org.lucas.example.foundation.basic.kata.generics.support.Student1;
+import org.lucas.example.foundation.basic.kata.generics.support.Teacher;
 
 import java.util.ArrayList;
 import java.util.List;
