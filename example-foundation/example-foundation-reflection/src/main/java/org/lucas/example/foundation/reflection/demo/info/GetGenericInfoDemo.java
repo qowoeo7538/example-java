@@ -15,8 +15,8 @@ public class GetGenericInfoDemo {
 
     /**
      * 方法中通过map.getClass()是永远无法获取的
-     * 类，是属性和方法的集合，类上泛型的定义，本质是供属性和方法的定义和使用
-     * map的泛型的真实类型，可通过属性和方法获取
+     * 类，是属性和方法的集合，类上泛型的定义，本质是供属性/方法/子类的定义和使用
+     * map的泛型的真实类型，可通过属性/方法/子类获取
      */
     @Test
     public void getClassGenericType() {
@@ -30,7 +30,7 @@ public class GetGenericInfoDemo {
         // 1 BaseDAO的匿名子类
         BaseDAO<User> dao = new BaseDAO<>() {
         };
-        // 2 获得带有泛型的父类
+        // 2 获得带有泛型的父类BaseDAO
         Type genericSuperType = dao.getClass().getGenericSuperclass();
         if (genericSuperType instanceof ParameterizedType) {
             // 3 ParameterizedType参数化类型，即泛型
