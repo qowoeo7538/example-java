@@ -14,21 +14,18 @@ public class GetGenericInfoDemo {
 
     @Test
     public void getSuperclassGenericType() {
-        // BaseDAO 的匿名子类
+        // 1 BaseDAO的匿名子类
         BaseDAO<User> dao = new BaseDAO<>() {
         };
-        System.out.println(getGenericClassByIndex(dao.getClass().getGenericSuperclass(), 0));
-    }
-
-    private static Type getGenericClassByIndex(Type genericType, int index) {
-        Type clazz = null;
-        // find parameterized type
-        if (genericType instanceof ParameterizedType) {
-            ParameterizedType t = (ParameterizedType) genericType;
+        // 2 获得带有泛型的父类
+        Type genericSuperType = dao.getClass().getGenericSuperclass();
+        if (genericSuperType instanceof ParameterizedType) {
+            // 3 ParameterizedType参数化类型，即泛型
+            ParameterizedType t = (ParameterizedType) genericSuperType;
+            // 4 getActualTypeArguments获取参数化类型的数组，泛型可能有多个
             Type[] types = t.getActualTypeArguments();
-            clazz = types[index];
+            System.out.println(types[0]);
         }
-        return clazz;
     }
 
 }
