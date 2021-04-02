@@ -2,9 +2,9 @@ package org.lucas.example.foundation.thread.demo.future.completable;
 
 import org.junit.jupiter.api.Test;
 import org.lucas.component.thread.task.ThreadPoolTaskExecutor;
-import org.lucas.example.foundation.thread.demo.future.completable.impl.Discount;
-import org.lucas.example.foundation.thread.demo.future.completable.impl.Quote;
-import org.lucas.example.foundation.thread.demo.future.completable.impl.Shop;
+import org.lucas.example.foundation.thread.demo.future.completable.support.Discount;
+import org.lucas.example.foundation.thread.demo.future.completable.support.Quote;
+import org.lucas.example.foundation.thread.demo.future.completable.support.Shop;
 
 import java.util.Arrays;
 import java.util.List;

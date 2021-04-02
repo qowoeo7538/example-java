@@ -2,8 +2,8 @@ package org.lucas.example.foundation.thread.demo.thread;
 
 import org.junit.jupiter.api.Test;
 import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
-import org.lucas.example.foundation.thread.demo.thread.impl.MyThread;
-import org.lucas.example.foundation.thread.demo.thread.impl.Stage;
+import org.lucas.example.foundation.thread.demo.thread.support.MyThread;
+import org.lucas.example.foundation.thread.demo.thread.support.Stage;
 
 /**
  * 重排序：

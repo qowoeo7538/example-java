@@ -1,7 +1,7 @@
 package org.lucas.example.foundation.jvm.demo.gc;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.foundation.jvm.demo.gc.impl.CleaningExample;
+import org.lucas.example.foundation.jvm.demo.gc.support.CleaningExample;
 
 public class ClearnDemo {
 

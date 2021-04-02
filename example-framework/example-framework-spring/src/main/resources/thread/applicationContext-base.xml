@@ -7,13 +7,13 @@
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
     <!-- 扫描 bean 的包路径 -->
-    <context:component-scan base-package="org.lucas.example.framework.spring.demo.thread.impl"/>
+    <context:component-scan base-package="org.lucas.example.framework.spring.demo.thread.support"/>
 
     <!-- 开启 @Async 注解,或通过 @EnableAsync 开启。 -->
     <task:annotation-driven exception-handler="myAsyncUncaughtExceptionHandler"/>
 
     <!-- 异常处理类。 -->
     <bean id="myAsyncUncaughtExceptionHandler"
-          class="org.lucas.example.framework.spring.demo.thread.impl.MyAsyncUncaughtExceptionHandler"/>
+          class="org.lucas.example.framework.spring.demo.thread.support.MyAsyncUncaughtExceptionHandler"/>
 
 </beans>

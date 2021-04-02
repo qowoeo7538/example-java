@@ -1,7 +1,7 @@
 package org.lucas.example.foundation.thread.kata.safe;
 
-import org.lucas.example.foundation.thread.kata.safe.impl.EnergyTransferTask;
-import org.lucas.example.foundation.thread.kata.safe.impl.EnergySystem;
+import org.lucas.example.foundation.thread.kata.safe.support.EnergyTransferTask;
+import org.lucas.example.foundation.thread.kata.safe.support.EnergySystem;
 
 /**
  *

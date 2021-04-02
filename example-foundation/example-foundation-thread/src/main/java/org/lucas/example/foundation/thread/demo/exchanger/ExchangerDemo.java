@@ -1,6 +1,6 @@
 package org.lucas.example.foundation.thread.demo.exchanger;
 
-import org.lucas.example.foundation.thread.demo.exchanger.impl.ExchangerImpl;
+import org.lucas.example.foundation.thread.demo.exchanger.support.ExchangerImpl;
 import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
 
 import java.util.concurrent.Exchanger;

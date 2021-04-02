@@ -1,6 +1,6 @@
 package org.lucas.example.foundation.io.demo.channel;
 
-import org.lucas.example.foundation.io.demo.channel.impl.FileChannelImpl;
+import org.lucas.example.foundation.io.demo.channel.support.FileChannelImpl;
 
 /**
  * FileChannel 从文件中读写数据。

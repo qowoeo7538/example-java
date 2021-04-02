@@ -1,7 +1,7 @@
 package org.lucas.example.foundation.io.demo.bytes;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.foundation.io.demo.bytes.impl.DataStream;
+import org.lucas.example.foundation.io.demo.bytes.support.DataStream;
 
 import java.io.IOException;
 

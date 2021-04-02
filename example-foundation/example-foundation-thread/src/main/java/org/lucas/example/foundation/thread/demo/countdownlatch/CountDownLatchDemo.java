@@ -2,7 +2,7 @@ package org.lucas.example.foundation.thread.demo.countdownlatch;
 
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.foundation.thread.demo.countdownlatch.impl.ApplicationStartup;
+import org.lucas.example.foundation.thread.demo.countdownlatch.support.ApplicationStartup;
 
 /**
  * 完成一组正在其他线程中执行的操作之前，它允许一个或多个线程一直等待。

@@ -1,8 +1,8 @@
 package org.lucas.example.foundation.jvm.demo.stack;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.foundation.jvm.demo.stack.impl.AStackContent;
-import org.lucas.example.foundation.jvm.demo.stack.impl.BStackContent;
+import org.lucas.example.foundation.jvm.demo.stack.support.AStackContent;
+import org.lucas.example.foundation.jvm.demo.stack.support.BStackContent;
 
 /**
  * 运行Stack信息

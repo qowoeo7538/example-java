@@ -1,7 +1,7 @@
 package org.lucas.example.middleware.zk.kata.curator;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.middleware.zk.kata.curator.impl.CuratorZookeeperClient;
+import org.lucas.example.middleware.zk.kata.curator.support.CuratorZookeeperClient;
 
 public class ZookeeperClientKata {
 

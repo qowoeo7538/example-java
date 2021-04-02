@@ -1,6 +1,6 @@
 package org.lucas.example.foundation.thread.demo.thread;
 
-import org.lucas.example.foundation.thread.demo.thread.impl.MyThread;
+import org.lucas.example.foundation.thread.demo.thread.support.MyThread;
 
 /**
  * 线程组

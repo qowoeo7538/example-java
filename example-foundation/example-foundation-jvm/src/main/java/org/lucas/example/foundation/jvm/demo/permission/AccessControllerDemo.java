@@ -1,6 +1,6 @@
 package org.lucas.example.foundation.jvm.demo.permission;
 
-import org.lucas.example.foundation.jvm.demo.permission.impl.FileAccess;
+import org.lucas.example.foundation.jvm.demo.permission.support.FileAccess;
 
 /**
  * AccessController 作用:

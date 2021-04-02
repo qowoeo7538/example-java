@@ -1,7 +1,7 @@
 package org.lucas.example.foundation.thread.demo.future.completable;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.foundation.thread.demo.future.completable.impl.Shop;
+import org.lucas.example.foundation.thread.demo.future.completable.support.Shop;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;

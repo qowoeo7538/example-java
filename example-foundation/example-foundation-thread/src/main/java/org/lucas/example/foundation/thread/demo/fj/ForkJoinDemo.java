@@ -1,7 +1,7 @@
 package org.lucas.example.foundation.thread.demo.fj;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.foundation.thread.demo.fj.impl.ComputeTask;
+import org.lucas.example.foundation.thread.demo.fj.support.ComputeTask;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;

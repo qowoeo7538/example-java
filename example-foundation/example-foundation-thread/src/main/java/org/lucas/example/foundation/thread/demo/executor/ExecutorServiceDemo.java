@@ -1,6 +1,6 @@
 package org.lucas.example.foundation.thread.demo.executor;
 
-import org.lucas.example.foundation.thread.demo.executor.impl.ServiceTask;
+import org.lucas.example.foundation.thread.demo.executor.support.ServiceTask;
 
 import java.util.ArrayList;
 import java.util.List;

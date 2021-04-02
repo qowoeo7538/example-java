@@ -1,9 +1,7 @@
 package org.lucas.example.foundation.jvm.demo.load;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.foundation.jvm.demo.load.impl.MyClassLoader;
-import org.lucas.example.foundation.jvm.demo.load.impl.OfficeBetter;
-import org.lucas.example.foundation.jvm.demo.load.impl.Word;
+import org.lucas.example.foundation.jvm.demo.load.support.MyClassLoader;
 
 /**
  * 类加载器
@@ -32,7 +30,7 @@ public class LoaderDemo {
     @Test
     public void defaultClassLoader() throws Exception {
         // 使用MyClassLoader的类加载器加载本类(默认加载器:sun.misc.Launcher$AppClassLoader)
-        Object obj1 = LoaderDemo.class.getClassLoader().loadClass("org.lucas.example.foundation.jvm.demo.load.impl.MyClassLoader").getConstructor().newInstance();
+        Object obj1 = LoaderDemo.class.getClassLoader().loadClass("org.lucas.example.foundation.jvm.demo.load.support.MyClassLoader").getConstructor().newInstance();
         System.out.println("默认类加载器：" + obj1.getClass().getClassLoader());
     }
 

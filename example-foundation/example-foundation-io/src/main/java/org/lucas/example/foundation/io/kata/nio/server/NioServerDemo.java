@@ -1,7 +1,7 @@
 package org.lucas.example.foundation.io.kata.nio.server;
 
-import org.lucas.example.foundation.io.kata.nio.server.impl.IMessageProcessor;
-import org.lucas.example.foundation.io.kata.nio.server.impl.Message;
+import org.lucas.example.foundation.io.kata.nio.server.support.IMessageProcessor;
+import org.lucas.example.foundation.io.kata.nio.server.support.Message;
 
 import java.io.UnsupportedEncodingException;
 

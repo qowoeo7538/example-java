@@ -3,8 +3,8 @@ package org.lucas.example.foundation.thread.demo.future;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
-import org.lucas.example.foundation.thread.demo.future.impl.CalculateService;
-import org.lucas.example.foundation.thread.demo.future.impl.ExceptionService;
+import org.lucas.example.foundation.thread.demo.future.support.CalculateService;
+import org.lucas.example.foundation.thread.demo.future.support.ExceptionService;
 
 import java.util.concurrent.FutureTask;
 

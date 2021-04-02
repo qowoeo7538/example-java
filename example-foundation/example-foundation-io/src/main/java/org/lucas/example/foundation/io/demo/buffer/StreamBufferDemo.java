@@ -1,7 +1,7 @@
 package org.lucas.example.foundation.io.demo.buffer;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.foundation.io.demo.buffer.impl.CopyFile;
+import org.lucas.example.foundation.io.demo.buffer.support.CopyFile;
 
 import java.io.IOException;
 

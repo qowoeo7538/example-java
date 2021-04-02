@@ -1,8 +1,8 @@
 package org.lucas.example.foundation.jvm.demo.gc;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.foundation.jvm.demo.gc.impl.Book;
-import org.lucas.example.foundation.jvm.demo.gc.impl.FinalizeEscapeGC;
+import org.lucas.example.foundation.jvm.demo.gc.support.Book;
+import org.lucas.example.foundation.jvm.demo.gc.support.FinalizeEscapeGC;
 
 /**
  * finalize机制可能会导致性能问题，死锁和线程挂起。

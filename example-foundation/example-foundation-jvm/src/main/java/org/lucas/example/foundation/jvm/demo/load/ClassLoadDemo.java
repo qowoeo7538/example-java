@@ -1,8 +1,8 @@
 package org.lucas.example.foundation.jvm.demo.load;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.foundation.jvm.demo.load.impl.OfficeBetter;
-import org.lucas.example.foundation.jvm.demo.load.impl.Word;
+import org.lucas.example.foundation.jvm.demo.load.support.OfficeBetter;
+import org.lucas.example.foundation.jvm.demo.load.support.Word;
 
 public class ClassLoadDemo {
 

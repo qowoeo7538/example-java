@@ -1,7 +1,7 @@
 package org.lucas.example.foundation.io.kata.transport;
 
-import org.lucas.example.foundation.io.kata.transport.impl.TransferToClient;
-import org.lucas.example.foundation.io.kata.transport.impl.TransferToServer;
+import org.lucas.example.foundation.io.kata.transport.support.TransferToClient;
+import org.lucas.example.foundation.io.kata.transport.support.TransferToServer;
 
 import java.io.IOException;
 

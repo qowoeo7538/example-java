@@ -1,7 +1,7 @@
 package org.lucas.example.foundation.io.demo.bytes;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.foundation.io.demo.bytes.impl.CopyFileKata;
+import org.lucas.example.foundation.io.demo.bytes.support.CopyFileKata;
 
 import java.io.FileInputStream;
 import java.io.IOException;

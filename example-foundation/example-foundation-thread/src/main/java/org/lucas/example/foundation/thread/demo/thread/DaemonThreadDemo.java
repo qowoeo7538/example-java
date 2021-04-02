@@ -1,6 +1,6 @@
 package org.lucas.example.foundation.thread.demo.thread;
 
-import org.lucas.example.foundation.thread.demo.thread.impl.MainThread;
+import org.lucas.example.foundation.thread.demo.thread.support.MainThread;
 
 import java.util.Scanner;
 

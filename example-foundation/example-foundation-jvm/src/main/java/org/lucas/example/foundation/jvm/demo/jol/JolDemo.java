@@ -1,9 +1,9 @@
 package org.lucas.example.foundation.jvm.demo.jol;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.foundation.jvm.demo.jol.impl.ContendedObject;
-import org.lucas.example.foundation.jvm.demo.jol.impl.EmptyObject;
-import org.lucas.example.foundation.jvm.demo.jol.impl.ValueObject;
+import org.lucas.example.foundation.jvm.demo.jol.support.ContendedObject;
+import org.lucas.example.foundation.jvm.demo.jol.support.EmptyObject;
+import org.lucas.example.foundation.jvm.demo.jol.support.ValueObject;
 import org.openjdk.jol.info.ClassLayout;
 import org.openjdk.jol.vm.VM;
 

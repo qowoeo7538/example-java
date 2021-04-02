@@ -1,7 +1,7 @@
 package org.lucas.example.foundation.io.demo.file;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.foundation.io.demo.file.impl.DirOperation;
+import org.lucas.example.foundation.io.demo.file.support.DirOperation;
 
 import java.io.File;
 import java.io.IOException;

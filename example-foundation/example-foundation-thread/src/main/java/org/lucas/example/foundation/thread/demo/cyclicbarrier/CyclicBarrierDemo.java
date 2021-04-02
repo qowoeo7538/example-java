@@ -1,7 +1,7 @@
 package org.lucas.example.foundation.thread.demo.cyclicbarrier;
 
-import org.lucas.example.foundation.thread.demo.cyclicbarrier.impl.BarrierThread;
-import org.lucas.example.foundation.thread.demo.cyclicbarrier.impl.PriorThread;
+import org.lucas.example.foundation.thread.demo.cyclicbarrier.support.BarrierThread;
+import org.lucas.example.foundation.thread.demo.cyclicbarrier.support.PriorThread;
 import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
 
 import java.util.concurrent.CyclicBarrier;

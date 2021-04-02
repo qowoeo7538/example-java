@@ -2,7 +2,7 @@ package org.lucas.example.foundation.thread.kata.safe;
 
 import org.junit.jupiter.api.Test;
 import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
-import org.lucas.example.foundation.thread.kata.safe.impl.TestLock;
+import org.lucas.example.foundation.thread.kata.safe.support.TestLock;
 
 /**
  * 锁的一种实现

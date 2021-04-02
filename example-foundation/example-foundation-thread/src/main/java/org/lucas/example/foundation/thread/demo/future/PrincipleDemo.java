@@ -1,7 +1,7 @@
 package org.lucas.example.foundation.thread.demo.future;
 
-import org.lucas.example.foundation.thread.demo.future.impl.FutureClient;
-import org.lucas.example.foundation.thread.demo.future.impl.Data;
+import org.lucas.example.foundation.thread.demo.future.support.FutureClient;
+import org.lucas.example.foundation.thread.demo.future.support.Data;
 
 /**
  * @create: 2017-11-13

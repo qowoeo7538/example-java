@@ -1,10 +1,10 @@
 package org.lucas.example.foundation.thread.demo.phaser;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.foundation.thread.demo.phaser.impl.Task1;
-import org.lucas.example.foundation.thread.demo.phaser.impl.Task2;
-import org.lucas.example.foundation.thread.demo.phaser.impl.Task3;
-import org.lucas.example.foundation.thread.demo.phaser.impl.Worker;
+import org.lucas.example.foundation.thread.demo.phaser.support.Task1;
+import org.lucas.example.foundation.thread.demo.phaser.support.Task2;
+import org.lucas.example.foundation.thread.demo.phaser.support.Task3;
+import org.lucas.example.foundation.thread.demo.phaser.support.Worker;
 import org.lucas.example.foundation.core.util.ThreadTestUtils;
 
 import java.util.Scanner;

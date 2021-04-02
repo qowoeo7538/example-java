@@ -1,7 +1,7 @@
 package org.lucas.example.foundation.io.kata.transport;
 
-import org.lucas.example.foundation.io.kata.transport.impl.NioService;
-import org.lucas.example.foundation.io.kata.transport.impl.NioClient;
+import org.lucas.example.foundation.io.kata.transport.support.NioService;
+import org.lucas.example.foundation.io.kata.transport.support.NioClient;
 import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
 
 /**

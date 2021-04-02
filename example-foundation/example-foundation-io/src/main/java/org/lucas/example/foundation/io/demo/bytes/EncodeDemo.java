@@ -1,8 +1,8 @@
 package org.lucas.example.foundation.io.demo.bytes;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.foundation.io.demo.bytes.impl.EncodeTest;
-import org.lucas.example.foundation.io.demo.bytes.impl.CharsetName;
+import org.lucas.example.foundation.io.demo.bytes.support.EncodeTest;
+import org.lucas.example.foundation.io.demo.bytes.support.CharsetName;
 
 /**
  * Created by joy on 17-2-2.
