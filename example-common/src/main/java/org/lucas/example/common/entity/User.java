@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.common.entity;
+package org.lucas.example.common.entity;
 
 @Table(value = "user")
 public class User extends BaseEntity {

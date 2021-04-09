@@ -20,7 +20,7 @@
 
         <dependency>
             <groupId>org.lucas</groupId>
-            <artifactId>example-foundation-common</artifactId>
+            <artifactId>example-common</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 

@@ -1,10 +1,10 @@
 package org.lucas.example.foundation.reflection.demo.info;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.foundation.common.entity.Column;
-import org.lucas.example.foundation.common.entity.InheritedAnnotation;
-import org.lucas.example.foundation.common.entity.Table;
-import org.lucas.example.foundation.common.entity.User;
+import org.lucas.example.common.entity.Column;
+import org.lucas.example.common.entity.InheritedAnnotation;
+import org.lucas.example.common.entity.Table;
+import org.lucas.example.common.entity.User;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;

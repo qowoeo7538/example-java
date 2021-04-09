@@ -1,6 +1,10 @@
-package org.lucas.example.foundation.common.entity;
+package org.lucas.example.common.entity;
 
-import java.lang.annotation.*;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 //阐述了某个被标注的类的子类继承该注解
 @Inherited

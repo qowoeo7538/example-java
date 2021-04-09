@@ -24,6 +24,5 @@
         <module>example-foundation-thread</module>
         <module>example-foundation-web</module>
         <module>example-foundation-io</module>
-        <module>example-foundation-common</module>
     </modules>
 </project>

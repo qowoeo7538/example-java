@@ -1,7 +1,7 @@
 package org.lucas.example.framework.web.spring.controller.validation;
 
 import org.lucas.component.thread.task.ThreadPoolTaskExecutor;
-import org.lucas.example.framework.web.spring.define.vo.OrderVO;
+import org.lucas.example.common.vo.OrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;

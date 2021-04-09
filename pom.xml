@@ -21,6 +21,7 @@
         <module>example-kotlin</module>
         <module>example-middleware</module>
         <module>example-persistence</module>
+        <module>example-common</module>
     </modules>
 
     <properties>

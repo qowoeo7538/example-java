@@ -1,13 +1,13 @@
 package org.lucas.example.framework.web.spring.cache;
 
-import org.lucas.example.framework.web.spring.define.entity.User;
+import org.lucas.example.common.entity.User;
 
 public class CaffeineCache {
 
     public User getUser() {
         User user = new User();
         user.setUserName("张三");
-        user.setNumber("40");
+        user.setPassword("123456");
         return user;
     }
 

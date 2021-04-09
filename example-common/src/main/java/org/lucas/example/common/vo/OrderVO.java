@@ -1,4 +1,4 @@
-package org.lucas.example.framework.web.spring.define.vo;
+package org.lucas.example.common.vo;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 
