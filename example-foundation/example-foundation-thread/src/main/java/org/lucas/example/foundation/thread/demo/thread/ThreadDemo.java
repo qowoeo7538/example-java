@@ -38,7 +38,7 @@ public class ThreadDemo {
     }
 
     /**
-     * 线程状态测试
+     * 线程yield()/状态测试
      *
      * @throws Exception
      */
