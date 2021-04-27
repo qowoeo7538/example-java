@@ -1,6 +1,7 @@
 package org.lucas.example.framework.web.spring.controller;
 
 import org.junit.Test;
+import org.junit.jupiter.api.Order;
 import org.lucas.example.framework.web.spring.BaseSpringMvcTest;
 
 import static org.hamcrest.Matchers.containsString;
@@ -12,6 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class AsyncControllerTests extends BaseSpringMvcTest {
 
     @Test
+    @Order(1) // 执行顺序
     public void testDeferredResult() throws Exception {
         // 异步 mock 结果
         mockMvc.perform(asyncDispatch(mockMvc.perform(get("/async/deferredResult")).andReturn()))
