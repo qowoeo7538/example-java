@@ -1,6 +1,6 @@
 package org.lucas.example.foundation.io.kata.transport.support;
 
-import org.lucas.util.StreamUtils;
+import org.lucas.component.common.util.StreamHelper;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -31,7 +31,7 @@ public class NioClient {
             InetSocketAddress listener = new InetSocketAddress(hostname, port);
             socketChannel.connect(listener);
             while (true) {
-                StreamUtils.channelRead(fileChannel, (buffer) -> {
+                StreamHelper.channelRead(fileChannel, (buffer) -> {
                     try {
                         socketChannel.write(buffer);
                     } catch (IOException e) {
@@ -39,7 +39,7 @@ public class NioClient {
                     }
                 });
 
-                StreamUtils.channelRead(socketChannel, (buffer) -> {
+                StreamHelper.channelRead(socketChannel, (buffer) -> {
                     System.out.print((char) buffer.get());
                 });
             }

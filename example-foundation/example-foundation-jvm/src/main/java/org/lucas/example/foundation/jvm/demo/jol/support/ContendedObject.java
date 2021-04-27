@@ -1,11 +1,11 @@
 package org.lucas.example.foundation.jvm.demo.jol.support;
 
-import jdk.internal.vm.annotation.Contended;
+// import jdk.internal.vm.annotation.Contended;
 
 
 public class ContendedObject {
 
-    @Contended
+    // @Contended
     protected volatile long value;
 
 }

@@ -1,6 +1,6 @@
 package org.lucas.example.foundation.io.kata.transport.support;
 
-import org.lucas.util.StreamUtils;
+import org.lucas.component.common.util.StreamHelper;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -61,7 +61,7 @@ public class NioService {
                         // socketChannel.read(readBuff);
                         // readBuff.flip();
                         // System.out.println(new String(readBuff.array()));
-                        StreamUtils.channelRead(socketChannel, (buffer) -> {
+                        StreamHelper.channelRead(socketChannel, (buffer) -> {
                             System.out.print((char) buffer.get());
                         });
                         key.interestOps(SelectionKey.OP_WRITE);
