@@ -1,5 +1,9 @@
 package org.lucas.example.common.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
 @Table(value = "user")
 public class User extends BaseEntity {
 
@@ -8,6 +12,9 @@ public class User extends BaseEntity {
 
     @Column("password")
     private String password;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date birthday;
 
     public User() {
         System.out.println("无参构造函数");

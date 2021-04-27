@@ -1,5 +1,6 @@
 package org.lucas.example.foundation.thread.demo.thread;
 
+import org.junit.jupiter.api.Test;
 import org.lucas.component.thread.task.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.ExecutionException;
@@ -11,8 +12,9 @@ public class InterruptedThreadDemo {
 
     public static ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
 
-    public static void main(String[] args) throws TimeoutException, InterruptedException {
-        runWithTimeout(() -> {
+    @Test
+    public void runWithTimeout() throws TimeoutException, InterruptedException {
+        Future<?> future = executor.submit(() -> {
             try {
                 System.out.println("开始任务");
                 for (int i = 0; i < 1000000; i++) {
@@ -24,14 +26,9 @@ public class InterruptedThreadDemo {
                 Thread.currentThread().interrupt();
             }
             System.out.println("完成");
-        }, 1L, TimeUnit.MICROSECONDS);
-    }
-
-    public static void runWithTimeout(final Runnable runnable, final long timeoutDuration, final TimeUnit timeoutUnit)
-            throws TimeoutException, InterruptedException {
-        Future<?> future = executor.submit(runnable);
+        });
         try {
-            future.get(timeoutDuration, timeoutUnit);
+            future.get(1L, TimeUnit.MICROSECONDS);
         } catch (InterruptedException | TimeoutException e) {
             future.cancel(true);
             throw e;

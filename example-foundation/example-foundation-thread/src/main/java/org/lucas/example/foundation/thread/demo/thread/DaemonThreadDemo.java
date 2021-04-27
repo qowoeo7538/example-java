@@ -1,5 +1,6 @@
 package org.lucas.example.foundation.thread.demo.thread;
 
+import org.junit.jupiter.api.Test;
 import org.lucas.example.foundation.thread.demo.thread.support.MainThread;
 
 import java.util.Scanner;
@@ -18,4 +19,10 @@ public class DaemonThreadDemo {
             mainThread.keepRunning = false;
         }
     }
+
+    @Test
+    public void demoDaemonTread(){
+
+    }
+
 }

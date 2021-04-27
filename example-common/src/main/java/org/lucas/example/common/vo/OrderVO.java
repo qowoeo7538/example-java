@@ -14,7 +14,7 @@ public class OrderVO {
     private String name;
 
     @NotNull
-    @Size(min=5, message="userName must be at least 5 characters long")
+    @Size(min = 5, message = "userName must be at least 5 characters long")
     private String userName;
 
     @CreditCardNumber(message = "Not a valid credit card number")

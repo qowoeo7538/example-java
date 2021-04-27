@@ -24,6 +24,6 @@ public class MainThread extends Thread {
         while (keepRunning){
             Thread.yield();
         }
-        System.out.println("退出主线程"+Thread.currentThread().getId());
+        System.out.println("退出线程"+Thread.currentThread().getId());
     }
 }

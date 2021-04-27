@@ -37,7 +37,7 @@
         <jsr305.version>3.0.2</jsr305.version>
         <jol.version>0.9</jol.version>
         <component.version>1.0</component.version>
-        <eclipse-collections.version>10.2.0</eclipse-collections.version>
+        <eclipse-collections.version>10.4.0</eclipse-collections.version>
         <lucene.version>8.4.1</lucene.version>
         <netty.version>4.1.60.Final</netty.version>
         <rxjava.version>2.2.19</rxjava.version>
@@ -55,6 +55,24 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.eclipse.collections</groupId>
+                <artifactId>eclipse-collections-api</artifactId>
+                <version>${eclipse-collections.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.eclipse.collections</groupId>
+                <artifactId>eclipse-collections</artifactId>
+                <version>${eclipse-collections.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.eclipse.collections</groupId>
+                <artifactId>eclipse-collections-testutils</artifactId>
+                <version>${eclipse-collections.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
@@ -115,24 +133,6 @@
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
                 <version>${servlet.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.eclipse.collections</groupId>
-                <artifactId>eclipse-collections-api</artifactId>
-                <version>${eclipse-collections.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.eclipse.collections</groupId>
-                <artifactId>eclipse-collections</artifactId>
-                <version>${eclipse-collections.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.eclipse.collections</groupId>
-                <artifactId>eclipse-collections-testutils</artifactId>
-                <version>${eclipse-collections.version}</version>
             </dependency>
 
             <dependency>
@@ -212,6 +212,21 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.eclipse.collections</groupId>
+            <artifactId>eclipse-collections-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.collections</groupId>
+            <artifactId>eclipse-collections</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.collections</groupId>
+            <artifactId>eclipse-collections-testutils</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
