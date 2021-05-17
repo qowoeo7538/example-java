@@ -3,10 +3,12 @@ package org.lucas.example.framework.web.spring.context.lifecycle;
 import org.springframework.context.SmartLifecycle;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 @Component
 public class SmartLifecycleDemo implements SmartLifecycle {
 
-    private boolean isRunning = false;
+    private final AtomicBoolean running = new AtomicBoolean(false);
 
     /**
      * 1）主要在该方法中启动任务或者其他异步服务，比如开启MQ接收消息,Web服务器。
@@ -16,10 +18,10 @@ public class SmartLifecycleDemo implements SmartLifecycle {
      */
     @Override
     public void start() {
-        System.out.println("start");
-
-        // 执行完其他业务后，可以修改 isRunning = true
-        isRunning = true;
+        // 修改 isRunning = true
+        if (this.running.compareAndSet(false, true)) {
+            System.out.println("start");
+        }
     }
 
     /**
@@ -46,7 +48,9 @@ public class SmartLifecycleDemo implements SmartLifecycle {
 
     @Override
     public void stop() {
-        System.out.println("stop()");
+        if (this.running.compareAndSet(true, false)) {
+            System.out.println("stop()");
+        }
     }
 
     /**
@@ -65,8 +69,6 @@ public class SmartLifecycleDemo implements SmartLifecycle {
         // </bean>
         stop();
         callback.run();
-
-        isRunning = false;
     }
 
     /**
@@ -75,6 +77,6 @@ public class SmartLifecycleDemo implements SmartLifecycle {
      */
     @Override
     public boolean isRunning() {
-        return isRunning;
+        return this.running.get();
     }
 }
