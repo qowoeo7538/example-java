@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.thread.kata.reentrant.support;
+package org.lucas.example.foundation.thread.demo.lock.support;
 
 public class Child extends Parent{
 
