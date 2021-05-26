@@ -1,8 +1,8 @@
 package org.lucas.example.foundation.thread.demo.lock;
 
 import org.junit.Test;
-import org.lucas.example.foundation.thread.demo.lock.support.ClassLock;
 import org.lucas.example.foundation.thread.demo.lock.support.ObjectLock;
+import org.lucas.example.foundation.thread.demo.lock.support.SynchronizedExceptionDemo;
 
 import static org.lucas.example.foundation.thread.demo.lock.support.ClassLock.add;
 
@@ -29,22 +29,12 @@ public class SynchronizedDemo {
     public void testObjectLock() throws Exception {
         final ObjectLock thread1 = new ObjectLock();
         final ObjectLock thread2 = new ObjectLock();
-        Thread t1 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // 1 同一个对象、同一把锁
-                // 内部类无法访问非final对象
-                thread1.add();
-            }
-        }, "thread1");
+        var t1 = new Thread(() -> thread1.add(), "thread1");
 
-        Thread t2 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //1、同一个对象、同一把锁
-                //thread1.add();
-                thread2.add();
-            }
+        var t2 = new Thread(() -> {
+            //1、同一个对象、同一把锁
+            //thread1.add();
+            thread2.add();
         }, "thread2");
 
         t1.start();
@@ -54,26 +44,21 @@ public class SynchronizedDemo {
         t2.join();
     }
 
+    /**
+     * 类锁
+     */
     @Test
     public void testClassLock() throws Exception {
-        final ClassLock thread1 = new ClassLock();
-        final ClassLock thread2 = new ClassLock();
-        Thread t1 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // 1 同一个对象、同一把锁
-                // 内部类无法访问非final对象
-                add();
-            }
+        Thread t1 = new Thread(() -> {
+            // 1 同一个对象、同一把锁
+            // 内部类无法访问非final对象
+            add();
         }, "thread1");
 
-        Thread t2 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //1、同一个对象、同一把锁
-                //thread1.add();
-                add();
-            }
+        Thread t2 = new Thread(() -> {
+            //1、同一个对象、同一把锁
+            //thread1.add();
+            add();
         }, "thread2");
 
         t1.start();
@@ -81,6 +66,25 @@ public class SynchronizedDemo {
 
         t1.join();
         t2.join();
+    }
+
+    /***
+     *
+     * 抛出异常会对锁进行释放
+     */
+    @Test
+    public void demoSynchronizedException() throws Exception {
+        final SynchronizedExceptionDemo synchronizedException = new SynchronizedExceptionDemo();
+        Thread t1 = new Thread(synchronizedException::run, "t1");
+        t1.start();
+        //保证t1线程先执行
+        Thread.sleep(1000);
+        Thread t2 = new Thread(synchronizedException::get, "t2");
+        t2.start();
+
+        t1.join();
+        t2.join();
+
     }
 
 }
