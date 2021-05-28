@@ -4,7 +4,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ServletModelAttributeMethodProcessor;
 
-public class CustomAttributeMethodProcessor   extends ServletModelAttributeMethodProcessor {
+public class CustomAttributeMethodProcessor extends ServletModelAttributeMethodProcessor {
 
     public CustomAttributeMethodProcessor() {
         super(true);
@@ -19,7 +19,8 @@ public class CustomAttributeMethodProcessor   extends ServletModelAttributeMetho
     }
 
     /**
-     * 绑定moduleId
+     * 参数处理
+     *
      * @param binder
      */
     private void bindModuleId(WebDataBinder binder) {

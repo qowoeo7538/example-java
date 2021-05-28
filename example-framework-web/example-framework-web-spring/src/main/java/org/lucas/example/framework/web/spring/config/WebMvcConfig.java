@@ -6,11 +6,13 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class WebMvcConfig implements WebMvcConfigurer {
 
     /**
@@ -18,7 +20,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
      */
     @Override
     public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
-        ThreadPoolTaskExecutor threadPool = new ThreadPoolTaskExecutor();
+        var threadPool = new ThreadPoolTaskExecutor();
         threadPool.setCorePoolSize(8);
         threadPool.setMaxPoolSize(64);
         threadPool.setQueueCapacity(64);
@@ -36,6 +38,15 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
     /**
+     * 添加拦截器
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        WebMvcConfigurer.super.addInterceptors(registry);
+        // registry.addInterceptor(tokenInterceptor).addPathPatterns("/auth/**");
+    }
+
+    /**
      * 自定义异常处理，异常之后的回调
      *
      * @param resolvers
@@ -44,4 +55,18 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
 
     }
+
+    /**
+     * 跨域配置
+     */
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry
+                .addMapping("/**")
+                .allowedOrigins("*")
+                .allowCredentials(true)
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .maxAge(3600);
+    }
+
 }
