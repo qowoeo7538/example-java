@@ -1,6 +1,7 @@
 package org.lucas.example.foundation.basic.demo.clazz.support;
 
 public class Children extends Parent {
+
     public static int t = childrenStaticMethod2();
 
     static {

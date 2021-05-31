@@ -1,6 +1,7 @@
 package org.lucas.example.foundation.basic.demo.clazz.support;
 
 public class Parent {
+
     public static int t = parentStaticMethod2();
 
     static {
@@ -14,6 +15,7 @@ public class Parent {
     public Parent() {
         System.out.println("父类构造方法");
     }
+
     public static int parentStaticMethod() {
         System.out.println("父类静态方法");
         return 0;
