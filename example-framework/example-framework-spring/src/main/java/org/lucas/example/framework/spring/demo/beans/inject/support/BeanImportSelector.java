@@ -1,6 +1,6 @@
-package org.lucas.example.framework.spring.demo.inject.support;
+package org.lucas.example.framework.spring.demo.beans.inject.support;
 
-import org.lucas.example.framework.spring.common.bean.Student;
+import org.lucas.example.common.entity.Student;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
 

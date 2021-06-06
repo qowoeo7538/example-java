@@ -1,6 +1,6 @@
 package org.lucas.example.framework.spring.demo.cache.support;
 
-import org.lucas.example.framework.spring.common.bean.Student;
+import org.lucas.example.common.entity.Student;
 
 public class CaffeineCacheImpl {
 

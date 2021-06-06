@@ -1,4 +1,4 @@
-package org.lucas.example.framework.spring.common.bean;
+package org.lucas.example.common.entity;
 
 public class Teacher implements Comparable {
     int no;

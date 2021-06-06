@@ -1,4 +1,4 @@
-package org.lucas.example.common.entity;
+package org.lucas.example.common.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;

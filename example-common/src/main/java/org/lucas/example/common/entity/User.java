@@ -1,5 +1,7 @@
 package org.lucas.example.common.entity;
 
+import org.lucas.example.common.annotation.Column;
+import org.lucas.example.common.annotation.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -17,13 +19,13 @@ public class User extends BaseEntity {
     private Date birthday;
 
     public User() {
-        System.out.println("无参构造函数");
+        System.out.println("[" + this + "]无参构造函数");
     }
 
     public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
-        System.out.println("有参构造函数");
+        System.out.println("[" + this + "]有参构造函数");
     }
 
     public String getUserName() {

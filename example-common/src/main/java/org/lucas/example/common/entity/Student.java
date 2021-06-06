@@ -1,4 +1,4 @@
-package org.lucas.example.framework.spring.common.bean;
+package org.lucas.example.common.entity;
 
 public class Student {
     private String name;

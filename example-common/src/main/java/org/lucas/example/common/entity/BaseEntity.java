@@ -1,5 +1,8 @@
 package org.lucas.example.common.entity;
 
+import org.lucas.example.common.annotation.Column;
+import org.lucas.example.common.annotation.InheritedAnnotation;
+
 import java.util.Date;
 
 @InheritedAnnotation("base")
