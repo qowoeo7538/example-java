@@ -5,5 +5,5 @@ import org.springframework.context.annotation.Import;
 
 @Import({BeanImportSelector.class})
 @Configuration
-public class AnnotationImportConfig {
+public class AnnotationImportSelectorConfig {
 }

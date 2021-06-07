@@ -1,8 +1,7 @@
 package org.lucas.example.framework.spring.demo.beans.inject;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.common.entity.Student;
-import org.lucas.example.framework.spring.demo.beans.inject.support.InjectObjectConfig;
+import org.lucas.example.framework.spring.demo.beans.inject.support.AnnotationBeanConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
@@ -11,8 +10,8 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
  * 注解 @Import 可以用于导入第三方包,把实例加入 spring 的 IOC 容器中
  * 使用 @bean 注解
  */
-@SpringJUnitConfig(classes = {InjectObjectConfig.class})
-public class InjectObjectDemo {
+@SpringJUnitConfig(classes = {AnnotationBeanConfig.class})
+public class AnnotationBeanDemo {
 
     @Autowired
     private GenericApplicationContext ctx;
@@ -23,15 +22,6 @@ public class InjectObjectDemo {
     @Test
     public void demoArrayModeImport() {
 
-    }
-
-    /**
-     * ImportSelector 方式
-     */
-    @Test
-    public void demoImportSelector() {
-        Student student = ctx.getBean(Student.class);
-        System.out.println(student);
     }
 
     /**
