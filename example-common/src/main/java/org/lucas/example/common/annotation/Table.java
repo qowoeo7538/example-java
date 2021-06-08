@@ -15,7 +15,9 @@ import java.lang.annotation.Target;
 // 注解保留范围
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Table {
+
     //如果只有一个成员属性，必须声明为value();
     String value();
+
 }
 
