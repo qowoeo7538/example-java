@@ -1,5 +1,6 @@
-package org.lucas.example.framework.spring.demo.beans.inject.support;
+package org.lucas.example.framework.spring.kata.beans.support;
 
+import org.lucas.example.framework.spring.demo.beans.inject.support.Packages;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
