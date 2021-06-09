@@ -30,7 +30,7 @@ public class TableClassPathScanner extends ClassPathBeanDefinitionScanner {
     public Map<String, List<RuntimeBeanReference>> doScanAndGet(String... basePackages) {
         Set<BeanDefinitionHolder> beanDefinitions = super.doScan(basePackages);
         Map<String, List<RuntimeBeanReference>> returnGroupMap = new HashMap<>(16);
-        if (!beanDefinitions.isEmpty() && !existBeanNames.isEmpty()) {
+        if (!beanDefinitions.isEmpty() || !existBeanNames.isEmpty()) {
             Map<String, Set<RuntimeBeanReference>> groupBeanMap = new HashMap<>();
             processBeanDefinitions(groupBeanMap, beanDefinitions);
             processBeanDefinitionsWithExistBeanNames(groupBeanMap, existBeanNames);
