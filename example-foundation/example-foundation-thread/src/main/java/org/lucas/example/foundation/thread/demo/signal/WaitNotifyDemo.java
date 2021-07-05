@@ -1,9 +1,9 @@
-package org.lucas.example.foundation.thread.demo.notify;
+package org.lucas.example.foundation.thread.demo.signal;
 
 import org.junit.jupiter.api.Test;
 import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
-import org.lucas.example.foundation.thread.demo.notify.support.DoSomething;
-import org.lucas.example.foundation.thread.demo.notify.support.NotifyAllTest;
+import org.lucas.example.foundation.thread.demo.signal.support.DoSomething;
+import org.lucas.example.foundation.thread.demo.signal.support.NotifyAllTest;
 
 /**
  * synchronized

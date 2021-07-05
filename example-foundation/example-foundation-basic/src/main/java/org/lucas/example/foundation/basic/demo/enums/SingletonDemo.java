@@ -6,7 +6,12 @@ public enum SingletonDemo {
      * 赋值必须是都赋值或都不赋值，不能一部分赋值一部分不赋值
      * 如果不赋值则不能写构造器，赋值编译也出错
      */
-    winter(0),
+    winter(0){
+        @Override
+        public String toString() {
+            return "冬天";
+        }
+    },
     spring("春天"),
     summer(3.14),
     fall(false);

@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.thread.demo.notify.support;
+package org.lucas.example.foundation.thread.demo.signal.support;
 
 /**
  * 关于Spring源码中的并发量控制测试

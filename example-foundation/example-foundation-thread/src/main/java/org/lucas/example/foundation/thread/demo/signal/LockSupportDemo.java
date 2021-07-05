@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.thread.demo.notify;
+package org.lucas.example.foundation.thread.demo.signal;
 
 import org.junit.jupiter.api.Test;
 

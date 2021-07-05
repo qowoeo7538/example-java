@@ -1,6 +1,6 @@
 package org.lucas.example.foundation.thread.demo.lock.support;
 
-public class SynchronizedExceptionDemo {
+public class SynchronizedException {
 
     private int i = 0;
 

@@ -1,8 +1,9 @@
 package org.lucas.example.foundation.thread.demo.lock;
 
 import org.junit.Test;
+import org.lucas.example.foundation.thread.demo.lock.support.DeadLock;
 import org.lucas.example.foundation.thread.demo.lock.support.ObjectLock;
-import org.lucas.example.foundation.thread.demo.lock.support.SynchronizedExceptionDemo;
+import org.lucas.example.foundation.thread.demo.lock.support.SynchronizedException;
 
 import static org.lucas.example.foundation.thread.demo.lock.support.ClassLock.add;
 
@@ -74,7 +75,7 @@ public class SynchronizedDemo {
      */
     @Test
     public void demoSynchronizedException() throws Exception {
-        final SynchronizedExceptionDemo synchronizedException = new SynchronizedExceptionDemo();
+        final SynchronizedException synchronizedException = new SynchronizedException();
         Thread t1 = new Thread(synchronizedException::run, "t1");
         t1.start();
         //保证t1线程先执行
@@ -84,7 +85,16 @@ public class SynchronizedDemo {
 
         t1.join();
         t2.join();
+    }
 
+    /**
+     * 死锁
+     */
+    @Test
+    public void demoDeadLock() {
+        final DeadLock demo = new DeadLock();
+        new Thread(demo::execute1, "t1").start();
+        new Thread(demo::execute2, "t2").start();
     }
 
 }
