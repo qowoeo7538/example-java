@@ -1,17 +1,14 @@
-package org.lucas.example.foundation.thread.kata.safe.support;
-
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+package org.lucas.example.foundation.thread.demo.signal.support;
 
 /**
  * @create: 2018-01-23
  * @description:
  */
 public class EnergySystem {
-    /** 可重入锁 */
-    private Lock lock = new ReentrantLock();
 
-    /** 可以通过构造函数赋值 */
+    /**
+     * 可以通过构造函数赋值
+     */
     private final double[] energyBoxes;
     private final Object lockObj = new Object();
 

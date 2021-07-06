@@ -1,8 +1,8 @@
-package org.lucas.example.foundation.thread.kata.safe;
+package org.lucas.example.foundation.thread.kata.lock;
 
 import org.junit.jupiter.api.Test;
 import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
-import org.lucas.example.foundation.thread.kata.safe.support.TestLock;
+import org.lucas.example.foundation.thread.kata.lock.support.FutexLock;
 
 /**
  * 锁的一种实现
@@ -16,7 +16,7 @@ public class FutexKata {
     @Test
     public void lockTest() {
         for (int i = 0; i < 10; i++) {
-            ExampleThreadExecutor.execute(new TestLock());
+            ExampleThreadExecutor.execute(new FutexLock());
         }
         ExampleThreadExecutor.destroy();
     }

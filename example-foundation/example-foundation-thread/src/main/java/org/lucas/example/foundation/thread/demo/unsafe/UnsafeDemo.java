@@ -1,7 +1,7 @@
 package org.lucas.example.foundation.thread.demo.unsafe;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.foundation.thread.kata.safe.support.Value;
+import org.lucas.example.foundation.thread.kata.cas.support.Value;
 import org.springframework.objenesis.instantiator.util.UnsafeUtils;
 import sun.misc.Unsafe;
 

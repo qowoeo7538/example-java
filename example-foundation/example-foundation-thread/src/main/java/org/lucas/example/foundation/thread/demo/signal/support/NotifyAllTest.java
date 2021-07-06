@@ -14,7 +14,7 @@ public class NotifyAllTest implements Runnable {
         Thread.currentThread().setName(name);
     }
 
-    private static ConcurrencyThrottleSupportTest concurrencyThrottleSupportTest = new ConcurrencyThrottleSupportTest();
+    private static ConcurrencyThrottleSupport concurrencyThrottleSupportTest = new ConcurrencyThrottleSupport();
 
     @Override
     public void run() {

@@ -1,8 +1,12 @@
 package org.lucas.example.foundation.thread.demo.lock;
 
 import org.junit.Test;
+import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
 import org.lucas.example.foundation.thread.demo.lock.support.ChangeLock;
 import org.lucas.example.foundation.thread.demo.lock.support.Child;
+import org.lucas.example.foundation.thread.demo.lock.support.ReentrantLockThread;
+
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * 可重入锁,同一线程可以再次获取同一对象的锁
@@ -39,6 +43,15 @@ public class ReentrantLockDemo {
         t2.start();
         t1.join();
         t2.join();
+    }
+
+    @Test
+    public void reentrantLockTest() {
+        final ReentrantLock lock = new ReentrantLock();
+        for (int i = 0; i < 10; i++) {
+            ExampleThreadExecutor.execute(new ReentrantLockThread(lock));
+        }
+        ExampleThreadExecutor.destroy();
     }
 
 }

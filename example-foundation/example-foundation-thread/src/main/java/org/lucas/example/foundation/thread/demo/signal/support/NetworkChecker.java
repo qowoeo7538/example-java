@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.thread.demo.countdownlatch.support;
+package org.lucas.example.foundation.thread.demo.signal.support;
 
 import org.lucas.example.foundation.core.util.DataProducerHelper;
 

@@ -1,8 +1,8 @@
-package org.lucas.example.foundation.thread.kata.safe;
+package org.lucas.example.foundation.thread.kata.cas;
 
 import org.junit.jupiter.api.Test;
 import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
-import org.lucas.example.foundation.thread.kata.safe.support.CasThread;
+import org.lucas.example.foundation.thread.kata.cas.support.CasThread;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;

@@ -3,7 +3,7 @@ package org.lucas.example.foundation.thread.demo.signal.support;
 /**
  * 关于Spring源码中的并发量控制测试
  */
-public class ConcurrencyThrottleSupportTest {
+public class ConcurrencyThrottleSupport {
 
     /**
      * 并发量设置
@@ -28,6 +28,8 @@ public class ConcurrencyThrottleSupportTest {
             synchronized (this.monitor) {
                 while (this.concurrencyCount >= this.concurrencyLimit) {
                     try {
+                        System.out.println(Thread.currentThread().getName() + "队列已满,等待其他任务唤醒");
+                        // wait操作释放锁,否则其它线程进入不了 afterAccessNotifyAll 方法
                         this.monitor.wait();
                     } catch (InterruptedException ex) {
                         Thread.currentThread().interrupt();
@@ -59,6 +61,7 @@ public class ConcurrencyThrottleSupportTest {
         if (this.concurrencyLimit >= 0) {
             synchronized (this.monitor) {
                 this.concurrencyCount--;
+                System.out.println(Thread.currentThread().getName() + "任务已完成,唤醒其它等待线程");
                 this.monitor.notify();
             }
         }

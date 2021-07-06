@@ -1,5 +1,7 @@
-package org.lucas.example.foundation.thread.kata.safe.support;
+package org.lucas.example.foundation.thread.demo.signal.support;
 
+
+import org.lucas.example.foundation.thread.demo.signal.support.EnergySystem;
 
 /**
  * @create: 2018-01-23

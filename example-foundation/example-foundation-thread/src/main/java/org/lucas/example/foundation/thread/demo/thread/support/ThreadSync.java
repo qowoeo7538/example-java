@@ -1,6 +1,6 @@
-package org.lucas.example.foundation.thread.kata.safe.support;
+package org.lucas.example.foundation.thread.demo.thread.support;
 
-public class TestSync implements Runnable {
+public class ThreadSync implements Runnable {
 
     public int b = 100;
 

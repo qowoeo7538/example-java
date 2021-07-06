@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.thread.kata.safe.support;
+package org.lucas.example.foundation.thread.kata.cas.support;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
