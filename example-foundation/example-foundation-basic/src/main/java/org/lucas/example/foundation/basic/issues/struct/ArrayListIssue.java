@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.basic.demo.struct.list;
+package org.lucas.example.foundation.basic.issues.struct;
 
 import org.junit.jupiter.api.Test;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ArrayListDemo {
+public class ArrayListIssue {
 
     /**
      * ArrayList是一个线程不安全的类，使用迭代器的时候，同时又对集合进行了修改，

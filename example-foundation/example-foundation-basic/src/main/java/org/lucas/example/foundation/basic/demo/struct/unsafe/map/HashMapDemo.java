@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.basic.demo.struct.map;
+package org.lucas.example.foundation.basic.demo.struct.unsafe.map;
 
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MapDemo {
+public class HashMapDemo {
 
     /**
      * compute：计算并更新值

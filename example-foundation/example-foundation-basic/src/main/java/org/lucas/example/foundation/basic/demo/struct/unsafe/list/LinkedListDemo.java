@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.basic.demo.struct.list;
+package org.lucas.example.foundation.basic.demo.struct.unsafe.list;
 
 import org.junit.jupiter.api.Test;
 
