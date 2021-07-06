@@ -1,16 +1,16 @@
-package org.lucas.example.foundation.design.pattern.singleton;
+package org.lucas.example.foundation.design.pattern.singleton.support;
 
 /**
  * 加载类时,其内部类并不会被加载,只有当内部类的
  * 某个静态成员(静态域、构造器、静态方法)被调用
  * 时才会加载
  */
-public class Singleton {
+public class StaticInnerClassSingleton {
 
     private static boolean initialized = false;
 
-    private Singleton() {
-        synchronized (Singleton.class) {
+    private StaticInnerClassSingleton() {
+        synchronized (StaticInnerClassSingleton.class) {
             // 初始化的时候进行一次判断,防止反射序列化
             if (!initialized) {
                 initialized = true;
@@ -21,10 +21,10 @@ public class Singleton {
     }
 
     private static class SingletonHolder {
-        private static final Singleton INSTANCE = new Singleton();
+        private static final StaticInnerClassSingleton INSTANCE = new StaticInnerClassSingleton();
     }
 
-    public static Singleton getInstance() {
+    public static StaticInnerClassSingleton getInstance() {
         return SingletonHolder.INSTANCE;
     }
 
@@ -37,4 +37,5 @@ public class Singleton {
     private Object readResolve() {
         return getInstance();
     }
+
 }
