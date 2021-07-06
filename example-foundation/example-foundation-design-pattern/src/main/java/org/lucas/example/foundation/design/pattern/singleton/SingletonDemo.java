@@ -3,6 +3,7 @@ package org.lucas.example.foundation.design.pattern.singleton;
 import org.junit.jupiter.api.Test;
 import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
 import org.lucas.example.foundation.design.pattern.singleton.support.EagerSingleton;
+import org.lucas.example.foundation.design.pattern.singleton.support.EnumSingleton;
 import org.lucas.example.foundation.design.pattern.singleton.support.LazySingleton;
 import org.lucas.example.foundation.design.pattern.singleton.support.StaticInnerClassSingleton;
 
@@ -44,6 +45,17 @@ public class SingletonDemo {
     public void demoStaticInnerClassSingleton() {
         for (int i = 0; i < 10; i++) {
             ExampleThreadExecutor.execute(() -> System.out.println(StaticInnerClassSingleton.getInstance()));
+        }
+        ExampleThreadExecutor.destroy();
+    }
+
+    /**
+     * 枚举单例
+     */
+    @Test
+    public void demoEnumSingleton() {
+        for (int i = 0; i < 10; i++) {
+            ExampleThreadExecutor.execute(() -> System.out.println(EnumSingleton.INSTANCE));
         }
         ExampleThreadExecutor.destroy();
     }
