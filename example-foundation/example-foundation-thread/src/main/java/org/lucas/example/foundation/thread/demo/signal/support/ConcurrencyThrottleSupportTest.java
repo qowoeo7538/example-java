@@ -6,11 +6,11 @@ import java.util.concurrent.TimeUnit;
  * @create: 2017-11-20
  * @description:
  */
-public class NotifyAllTest implements Runnable {
+public class ConcurrencyThrottleSupportTest implements Runnable {
 
     private final static String THREAD_NAME = "Thread-0";
 
-    public NotifyAllTest(String name) {
+    public ConcurrencyThrottleSupportTest(String name) {
         Thread.currentThread().setName(name);
     }
 
