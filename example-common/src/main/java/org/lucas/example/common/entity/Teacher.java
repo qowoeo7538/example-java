@@ -1,6 +1,6 @@
 package org.lucas.example.common.entity;
 
-public class Teacher implements Comparable {
+public class Teacher implements Comparable<Teacher> {
 
     private Integer no;
 
@@ -66,8 +66,8 @@ public class Teacher implements Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
-        Teacher t = (Teacher) o;
+    public int compareTo(Teacher o) {
+        Teacher t = o;
         if (no < t.no) {
             return -1;
         } else if (no > t.no) {

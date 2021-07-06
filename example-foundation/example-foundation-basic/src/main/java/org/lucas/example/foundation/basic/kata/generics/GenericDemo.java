@@ -2,11 +2,11 @@ package org.lucas.example.foundation.basic.kata.generics;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.lucas.example.common.entity.Person;
+import org.lucas.example.common.entity.SchoolChild;
+import org.lucas.example.common.entity.Student;
+import org.lucas.example.common.entity.Teacher;
 import org.lucas.example.foundation.basic.kata.generics.support.GenericTest;
-import org.lucas.example.foundation.basic.kata.generics.support.Person;
-import org.lucas.example.foundation.basic.kata.generics.support.Student;
-import org.lucas.example.foundation.basic.kata.generics.support.Student1;
-import org.lucas.example.foundation.basic.kata.generics.support.Teacher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +15,12 @@ public class GenericDemo {
 
     @Test
     public void genericTest() {
-        Student<String, Integer> object = new Student<>();
+        Student<String> object = new Student<>();
         object.setId("ID430");
         object.setAge(17);
         GenericTest.getMessage(object);
 
-        Student<Integer, Integer> student = new Student<>();
+        Student<Integer> student = new Student<>();
         student.setId(430);
         student.setAge(23);
         GenericTest.getMessage(student);
@@ -94,7 +94,7 @@ public class GenericDemo {
 
             // List<? super Student>表示“具有Student的父类的列表”
             List<? super Student> list = new ArrayList<>();
-            list.add(new Student1());
+            list.add(new SchoolChild());
             list.add(new Student());
             // 因为?代表Student的父类，但是编译器不知道你要添加哪种 Student 的父类，因此不能安全地添加。
             // list.add(new Child());

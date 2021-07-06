@@ -1,7 +1,7 @@
 package org.lucas.example.foundation.basic.demo.struct.concurrent.map;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.foundation.basic.kata.generics.support.Child;
+import org.lucas.example.common.entity.Student;
 import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
 
 import java.util.Collections;
@@ -36,7 +36,7 @@ public class MapDemo {
                 Long start = System.currentTimeMillis();
                 for (int i = 0; i < 1000; i++) {
                     try {
-                        map.put("k" + i % 10, new Child());
+                        map.put("k" + i % 10, new Student());
                         Thread.sleep(0);
                     } catch (InterruptedException e) {
                         e.printStackTrace();

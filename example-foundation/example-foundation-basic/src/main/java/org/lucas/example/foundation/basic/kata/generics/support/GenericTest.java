@@ -1,5 +1,7 @@
 package org.lucas.example.foundation.basic.kata.generics.support;
 
+import org.lucas.example.common.entity.Person;
+
 import java.lang.reflect.Array;
 
 public abstract class GenericTest {

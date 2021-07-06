@@ -23,4 +23,12 @@
         <module>example-framework-util</module>
     </modules>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.lucas</groupId>
+            <artifactId>example-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
 </project>

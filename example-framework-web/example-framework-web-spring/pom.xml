@@ -60,13 +60,6 @@
             <groupId>org.lucas</groupId>
             <artifactId>component-thread</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>org.lucas</groupId>
-            <artifactId>example-common</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-
     </dependencies>
 
     <build>

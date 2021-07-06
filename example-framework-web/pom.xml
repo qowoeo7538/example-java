@@ -18,4 +18,12 @@
 
     <artifactId>example-framework-web</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.lucas</groupId>
+            <artifactId>example-common</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+    </dependencies>
+
 </project>
