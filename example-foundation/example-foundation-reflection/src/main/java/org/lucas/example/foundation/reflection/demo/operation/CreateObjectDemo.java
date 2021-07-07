@@ -1,7 +1,7 @@
 package org.lucas.example.foundation.reflection.demo.operation;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.common.entity.User;
+import org.lucas.example.common.pojo.entity.User;
 import org.lucas.example.foundation.reflection.demo.operation.support.ConstructorReflectClass;
 
 import java.lang.reflect.Constructor;

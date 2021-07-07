@@ -1,6 +1,6 @@
 package org.lucas.example.foundation.basic.kata.generics.support;
 
-import org.lucas.example.common.entity.Person;
+import org.lucas.example.common.pojo.entity.Person;
 
 import java.lang.reflect.Array;
 

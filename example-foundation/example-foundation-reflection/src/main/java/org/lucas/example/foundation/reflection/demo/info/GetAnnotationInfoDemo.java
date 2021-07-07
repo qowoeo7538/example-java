@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.lucas.example.common.annotation.Column;
 import org.lucas.example.common.annotation.InheritedAnnotation;
 import org.lucas.example.common.annotation.Table;
-import org.lucas.example.common.entity.User;
+import org.lucas.example.common.pojo.entity.User;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;

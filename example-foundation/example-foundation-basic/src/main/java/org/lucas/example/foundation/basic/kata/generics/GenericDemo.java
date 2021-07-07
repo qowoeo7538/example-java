@@ -2,10 +2,10 @@ package org.lucas.example.foundation.basic.kata.generics;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.lucas.example.common.entity.Person;
-import org.lucas.example.common.entity.SchoolChild;
-import org.lucas.example.common.entity.Student;
-import org.lucas.example.common.entity.Teacher;
+import org.lucas.example.common.pojo.entity.Person;
+import org.lucas.example.common.pojo.entity.SchoolChild;
+import org.lucas.example.common.pojo.entity.Student;
+import org.lucas.example.common.pojo.entity.Teacher;
 import org.lucas.example.foundation.basic.kata.generics.support.GenericTest;
 
 import java.util.ArrayList;

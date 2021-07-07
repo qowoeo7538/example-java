@@ -1,4 +1,4 @@
-package org.lucas.example.common.vo;
+package org.lucas.example.common.pojo.vo;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 

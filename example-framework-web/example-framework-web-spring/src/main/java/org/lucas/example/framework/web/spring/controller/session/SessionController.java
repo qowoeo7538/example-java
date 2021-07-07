@@ -1,7 +1,7 @@
 package org.lucas.example.framework.web.spring.controller.session;
 
-import org.lucas.example.common.entity.User;
-import org.lucas.example.common.vo.OrderVO;
+import org.lucas.example.common.pojo.entity.User;
+import org.lucas.example.common.pojo.vo.OrderVO;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;

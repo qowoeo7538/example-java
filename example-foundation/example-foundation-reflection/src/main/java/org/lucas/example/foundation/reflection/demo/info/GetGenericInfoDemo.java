@@ -1,8 +1,8 @@
 package org.lucas.example.foundation.reflection.demo.info;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.common.entity.BaseDAO;
-import org.lucas.example.common.entity.User;
+import org.lucas.example.common.pojo.entity.BaseDAO;
+import org.lucas.example.common.pojo.entity.User;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

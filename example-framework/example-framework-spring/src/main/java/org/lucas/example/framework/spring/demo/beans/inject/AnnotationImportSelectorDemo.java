@@ -1,8 +1,8 @@
 package org.lucas.example.framework.spring.demo.beans.inject;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.common.entity.Student;
-import org.lucas.example.common.entity.User;
+import org.lucas.example.common.pojo.entity.Student;
+import org.lucas.example.common.pojo.entity.User;
 import org.lucas.example.framework.spring.demo.beans.inject.support.AnnotationImportSelectorConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.GenericApplicationContext;

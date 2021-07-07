@@ -1,4 +1,4 @@
-package org.lucas.example.common.entity;
+package org.lucas.example.common.pojo.entity;
 
 public class BaseDAO<T> {
 
