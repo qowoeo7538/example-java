@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.thread.demo.exchanger.support;
+package org.lucas.example.foundation.thread.demo.signal.support;
 
 import java.util.concurrent.Exchanger;
 import java.util.concurrent.TimeUnit;
@@ -27,6 +27,7 @@ public class ExchangerImpl {
                         TimeUnit.SECONDS.sleep(1);
                         data = i;
                         System.out.println("producer change before: " + data);
+                        // 两个对象必须在此处汇合,只有一个线程调用change方法是不会进行数据交换的
                         data = exchanger.exchange(data);
                         System.out.println("producer change after: " + data);
                     } catch (Exception e) {
@@ -53,6 +54,7 @@ public class ExchangerImpl {
                 System.out.println("consumer change before : " + data);
                 try {
                     TimeUnit.SECONDS.sleep(1);
+                    // 两个对象必须在此处汇合,只有一个线程调用change方法是不会进行数据交换的
                     data = exchanger.exchange(data);
                     System.out.println("consumer change after : " + data);
                 } catch (Exception e) {

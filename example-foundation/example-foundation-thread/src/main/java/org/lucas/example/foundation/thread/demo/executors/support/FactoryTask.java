@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.thread.demo.executor.support;
+package org.lucas.example.foundation.thread.demo.executors.support;
 
 import java.util.concurrent.TimeUnit;
 

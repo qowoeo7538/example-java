@@ -1,6 +1,6 @@
-package org.lucas.example.foundation.thread.demo.executor;
+package org.lucas.example.foundation.thread.demo.executors;
 
-import org.lucas.example.foundation.thread.demo.executor.support.ScheduledTask;
+import org.lucas.example.foundation.thread.demo.executors.support.ScheduledTask;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledThreadPoolExecutor;

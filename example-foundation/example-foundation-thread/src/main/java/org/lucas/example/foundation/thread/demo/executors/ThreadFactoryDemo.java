@@ -1,7 +1,7 @@
-package org.lucas.example.foundation.thread.demo.executor;
+package org.lucas.example.foundation.thread.demo.executors;
 
-import org.lucas.example.foundation.thread.demo.executor.support.CustomThreadFactory;
-import org.lucas.example.foundation.thread.demo.executor.support.FactoryTask;
+import org.lucas.example.foundation.thread.demo.executors.support.CustomThreadFactory;
+import org.lucas.example.foundation.thread.demo.executors.support.FactoryTask;
 
 /**
  * @create: 2017-11-08
