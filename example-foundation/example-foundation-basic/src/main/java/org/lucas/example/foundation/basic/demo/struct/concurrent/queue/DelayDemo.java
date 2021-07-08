@@ -1,22 +1,26 @@
 package org.lucas.example.foundation.basic.demo.struct.concurrent.queue;
 
+import org.junit.jupiter.api.Test;
 import org.lucas.example.common.pojo.entity.Player;
 
 import java.util.concurrent.DelayQueue;
 
 public class DelayDemo {
 
-    public void demoDelay(){
+    @Test
+    public void demoDelay() {
+        DelayQueue<Player> delayQueue = new DelayQueue<>();
+
         //用户登录,并设置退出时间
-        login(new User(1, "甲", 30000 + System.currentTimeMillis()));
-        login(new User(2, "乙", 20000 + System.currentTimeMillis()));
-        login(new User(3, "丙", 10000 + System.currentTimeMillis()));
+        login(delayQueue, new Player(1, "甲", 30000 + System.currentTimeMillis()));
+        login(delayQueue, new Player(2, "乙", 20000 + System.currentTimeMillis()));
+        login(delayQueue, new Player(3, "丙", 10000 + System.currentTimeMillis()));
 
         while (true) {
             //监控到时用户
-            demo.logout();
+            logout(delayQueue);
             //如果在线用户则退出
-            if (demo.onlineSize() == 0) {
+            if (onlineSize(delayQueue) == 0) {
                 break;
             }
         }

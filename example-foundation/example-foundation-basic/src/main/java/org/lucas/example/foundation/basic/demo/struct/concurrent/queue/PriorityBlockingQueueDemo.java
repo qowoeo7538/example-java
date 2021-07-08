@@ -158,7 +158,7 @@ public class PriorityBlockingQueueDemo {
     }
 
     @Test
-    public static void demoTake4() {
+    public void demoTake4() {
         PriorityBlockingQueue<Integer> queue = new PriorityBlockingQueue<>(3);
         queue.add(3);
         queue.add(2);
