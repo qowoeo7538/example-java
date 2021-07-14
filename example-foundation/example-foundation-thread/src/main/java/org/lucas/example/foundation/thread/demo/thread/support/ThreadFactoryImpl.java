@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.thread.demo.executors.support;
+package org.lucas.example.foundation.thread.demo.thread.support;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,7 +10,7 @@ import java.util.concurrent.ThreadFactory;
  * @create: 2017-11-08
  * @description: 自定义线程工厂
  */
-public class CustomThreadFactory implements ThreadFactory {
+public class ThreadFactoryImpl implements ThreadFactory {
 
     /**
      * 线程次数
@@ -27,7 +27,7 @@ public class CustomThreadFactory implements ThreadFactory {
      */
     private List<String> stats;
 
-    public CustomThreadFactory(String name) {
+    public ThreadFactoryImpl(String name) {
         counter = 1;
         this.name = name;
         stats = new ArrayList<>();

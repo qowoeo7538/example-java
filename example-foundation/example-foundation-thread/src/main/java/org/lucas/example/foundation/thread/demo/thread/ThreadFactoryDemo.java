@@ -1,16 +1,19 @@
-package org.lucas.example.foundation.thread.demo.executors;
+package org.lucas.example.foundation.thread.demo.thread;
 
-import org.lucas.example.foundation.thread.demo.executors.support.CustomThreadFactory;
+import org.junit.jupiter.api.Test;
 import org.lucas.example.foundation.thread.demo.executors.support.FactoryTask;
+import org.lucas.example.foundation.thread.demo.thread.support.ThreadFactoryImpl;
 
 /**
  * @create: 2017-11-08
  * @description: 自定义线程对象创建
  */
 public class ThreadFactoryDemo {
-    public static void main(String[] args) {
+
+    @Test
+    public void demo() {
         // 创建线程工厂
-        CustomThreadFactory factory = new CustomThreadFactory("CustomThreadFactory");
+        ThreadFactoryImpl factory = new ThreadFactoryImpl("CustomThreadFactory");
         // Runnable对象
         FactoryTask task = new FactoryTask();
         Thread thread;
@@ -22,4 +25,5 @@ public class ThreadFactoryDemo {
         System.out.printf("All Threads are created now\n\n");
         System.out.printf("Give me CustomThreadFactory stats:\n\n" + factory.getStats());
     }
+
 }

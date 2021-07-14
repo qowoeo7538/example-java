@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.thread.demo.fj.support;
+package org.lucas.example.foundation.thread.demo.executors.support;
 
 import java.util.concurrent.RecursiveTask;
 

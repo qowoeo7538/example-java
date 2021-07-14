@@ -4,6 +4,10 @@ public class PageTests {
 
     /*@Test
     public void testPage(){
+        //查看文件和默认编码格式
+        System.out.println(String.format("file.encoding: %s", System.getProperty("file.encoding")));
+        System.out.println(String.format("defaultCharset: %s", Charset.defaultCharset().name()));
+
         //置顶文章
         List<ArticleBO> top = getArticleListWithPool(ArticlePoolTypeEnum.TOP.getCode(), articleLookTypeList);
         //精选文章
