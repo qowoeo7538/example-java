@@ -6,7 +6,7 @@ import org.lucas.example.foundation.core.util.ThreadTestUtils;
 public class ThreadLocalDemo {
 
     /**
-     * 引用依赖:Thread Ref -> Thread -> ThreaLocalMap -> Entry -> value
+     * 引用:Thread Ref -> Thread -> ThreaLocalMap -> Entry -> value
      */
     @Test
     public void demoThreadLocal() throws Exception {
