@@ -10,7 +10,7 @@ public class ThreadLocalDemo {
      */
     @Test
     public void demoThreadLocal() throws Exception {
-        final ThreadLocal<Integer> th = new ThreadLocal<Integer>();
+        final ThreadLocal<Integer> th = new ThreadLocal<>();
 
         var t1 = new Thread(() -> {
             try {
