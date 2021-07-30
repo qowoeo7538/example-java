@@ -1,12 +1,12 @@
-package org.lucas.example.foundation.thread.demo.future.completable;
+package org.lucas.example.foundation.thread.demo.future;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.foundation.thread.demo.future.completable.support.Shop;
+import org.lucas.example.foundation.thread.demo.future.support.Shop;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-public class ExceptionFutureAction {
+public class ExceptionFutureActionDemo {
 
     @Test
     public void testAsync() {

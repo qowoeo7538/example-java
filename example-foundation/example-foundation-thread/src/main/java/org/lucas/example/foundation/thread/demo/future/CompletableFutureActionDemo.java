@@ -1,10 +1,10 @@
-package org.lucas.example.foundation.thread.demo.future.completable;
+package org.lucas.example.foundation.thread.demo.future;
 
 import org.junit.jupiter.api.Test;
 import org.lucas.component.thread.task.ThreadPoolTaskExecutor;
-import org.lucas.example.foundation.thread.demo.future.completable.support.Discount;
-import org.lucas.example.foundation.thread.demo.future.completable.support.Quote;
-import org.lucas.example.foundation.thread.demo.future.completable.support.Shop;
+import org.lucas.example.foundation.thread.demo.future.support.Discount;
+import org.lucas.example.foundation.thread.demo.future.support.Quote;
+import org.lucas.example.foundation.thread.demo.future.support.Shop;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,13 +14,13 @@ import java.util.concurrent.Future;
 
 import static java.util.stream.Collectors.toList;
 
-public class CompletableFutureAction {
+public class CompletableFutureActionDemo {
 
     /**
      * 异步计算
      */
     @Test
-    public void testAsync() {
+    public void demoAsync() {
         Shop shop = new Shop("Best Shop");
         long start = System.nanoTime();
         Future<Double> futurePrice = shop.getPriceAsync("mac book pro");
@@ -49,7 +49,7 @@ public class CompletableFutureAction {
      * 使用并行流对请求进行并行操作
      */
     @Test
-    public void testParallelStream() {
+    public void demoParallelStream() {
         long start = System.nanoTime();
         String product = "iphone666s";
         List<Shop> shops = Arrays.asList(new Shop("淘宝"),
@@ -72,7 +72,7 @@ public class CompletableFutureAction {
      * 使用 CompletableFuture 发起异步请求
      */
     @Test
-    public void testFuture() {
+    public void demoFuture() {
         long start = System.nanoTime();
         String product = "iphone666s";
         List<Shop> shops = Arrays.asList(new Shop("淘宝"),
@@ -98,7 +98,7 @@ public class CompletableFutureAction {
      * 得到折扣商店信息(已经被解析过)
      */
     @Test
-    public void testDiscountPrice() {
+    public void demoDiscountPrice() {
         long start = System.nanoTime();
         String product = "iphone666s";
         List<Shop> shops = Arrays.asList(new Shop("淘宝"),

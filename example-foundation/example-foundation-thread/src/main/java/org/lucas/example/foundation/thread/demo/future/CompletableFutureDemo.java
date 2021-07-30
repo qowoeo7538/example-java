@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.thread.demo.future.completable;
+package org.lucas.example.foundation.thread.demo.future;
 
 import org.junit.jupiter.api.Test;
 import org.lucas.component.thread.task.ThreadPoolTaskExecutor;

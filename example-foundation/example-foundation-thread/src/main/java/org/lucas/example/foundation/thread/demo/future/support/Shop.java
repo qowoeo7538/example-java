@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.thread.demo.future.completable.support;
+package org.lucas.example.foundation.thread.demo.future.support;
 
 import java.security.SecureRandom;
 import java.util.Random;

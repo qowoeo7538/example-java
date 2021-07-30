@@ -12,7 +12,7 @@ import java.util.concurrent.Future;
 public class ExecutorCompletionServiceDemo {
 
     @Test
-    public void testExecutorCompletionService() throws InterruptedException, ExecutionException {
+    public void demoExecutorCompletionService() throws InterruptedException, ExecutionException {
         CompletionService<String> service = new ExecutorCompletionService<>(new ThreadPoolTaskExecutor());
         for (int i = 0; i < 4; i++) {
             service.submit(() -> {
