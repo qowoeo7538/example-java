@@ -1,6 +1,7 @@
 package org.lucas.example.foundation.thread.demo.lock;
 
 import org.junit.Test;
+import org.lucas.example.foundation.thread.demo.lock.support.Child;
 import org.lucas.example.foundation.thread.demo.lock.support.DeadLock;
 import org.lucas.example.foundation.thread.demo.lock.support.ObjectLock;
 import org.lucas.example.foundation.thread.demo.lock.support.SynchronizedException;
@@ -85,6 +86,16 @@ public class SynchronizedDemo {
 
         t1.join();
         t2.join();
+    }
+
+    @Test
+    public void demoReentrantLock() throws Exception {
+        var thread = new Thread(() -> {
+            Child sub = new Child();
+            sub.runChild();
+        });
+        thread.start();
+        thread.join();
     }
 
     /**

@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.thread.demo.lock.support;
+package org.lucas.example.foundation.thread.demo.lock.support.reentrantlock;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
