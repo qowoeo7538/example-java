@@ -1,10 +1,9 @@
-package org.lucas.example.foundation.thread.demo.future.support;
+package org.lucas.example.foundation.thread.kata.futrue.support;
 
 /**
- * @create: 2017-11-13
- * @description:
+ * 真实任务（用户真实想得到的数据从这里获取)
  */
-public class RealData implements Data {
+public class Task implements Data {
 
     private String result;
 
@@ -13,7 +12,7 @@ public class RealData implements Data {
      *
      * @param request
      */
-    public RealData(String request) {
+    public Task(String request) {
         System.out.println("根据" + request + "进行查询:" + "SELECT " + request + " FROM table");
         try {
             Thread.sleep(5000);
@@ -25,7 +24,7 @@ public class RealData implements Data {
     }
 
     @Override
-    public String getRequest() {
+    public String getRealData() {
         return result;
     }
 }

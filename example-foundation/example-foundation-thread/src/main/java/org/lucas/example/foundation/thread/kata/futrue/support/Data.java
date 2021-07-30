@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.thread.kata.futrue;
+package org.lucas.example.foundation.thread.kata.futrue.support;
 
 /**
  * 数据接口(为了代理)

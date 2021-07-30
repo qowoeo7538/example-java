@@ -1,8 +1,8 @@
-package org.lucas.example.foundation.thread.kata.cas;
+package org.lucas.example.foundation.thread.demo.lock;
 
 import org.junit.jupiter.api.Test;
 import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
-import org.lucas.example.foundation.thread.kata.cas.support.CasThread;
+import org.lucas.example.foundation.thread.demo.lock.support.cas.CasThread;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -11,10 +11,10 @@ import java.util.concurrent.atomic.AtomicStampedReference;
 /**
  * CAS：乐观锁的一种，通过判断当前值是否符合预期值来决定是否进行修改。
  */
-class CasKata {
+class CasDemo {
 
     @Test
-    void kataCas() {
+    void demoCas() {
         final AtomicInteger count = new AtomicInteger(0);
         for (int j = 0; j < 100; j++) {
             ExampleThreadExecutor.execute(new CasThread(count));
@@ -24,7 +24,7 @@ class CasKata {
     }
 
     @Test
-    void kataABACas() {
+    void demoABACas() {
         // 主内存共享变量，初始值为1，版本号为1
         AtomicStampedReference<Integer> atomicStampedReference = new AtomicStampedReference<>(1, 1);
         ExampleThreadExecutor.execute(() -> {

@@ -1,6 +1,4 @@
-package org.lucas.example.foundation.thread.kata.futrue;
-
-import org.lucas.example.foundation.thread.demo.future.support.RealData;
+package org.lucas.example.foundation.thread.kata.futrue.support;
 
 /**
  * 真实数据的代理类, 里面包含获取真实数据的方法。
@@ -10,9 +8,9 @@ import org.lucas.example.foundation.thread.demo.future.support.RealData;
 public class FutureData implements Data {
 
     /**
-     * 数据返回对象
+     * 任务结果返回对象
      */
-    private RealData realData;
+    private Task realData;
 
     /**
      * 标记数据是否准备好
@@ -45,7 +43,7 @@ public class FutureData implements Data {
             return;
         }
         // 如果数据没有准备完毕则使用参数初始化
-        realData = new RealData().initRealData(param);
+        realData = new Task(param);
         isReady = true;
         // 进行通知
         notify();
