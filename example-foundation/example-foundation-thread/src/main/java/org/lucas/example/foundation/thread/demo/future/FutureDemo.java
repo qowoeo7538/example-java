@@ -6,7 +6,11 @@ import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
 import org.lucas.example.foundation.thread.demo.future.support.CalculateService;
 import org.lucas.example.foundation.thread.demo.future.support.ExceptionService;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * @create: 2017-11-13
@@ -47,6 +51,35 @@ class FutureDemo {
         } catch (final Exception e) {
             System.out.println("回调发生异常");
             Assertions.assertEquals("java.lang.RuntimeException: 任务异常！", e.getMessage());
+        }
+        ExampleThreadExecutor.destroy();
+    }
+
+    @Test
+    void demoTimeout() {
+        Future<?> future = ExampleThreadExecutor.submit(() -> {
+            try {
+                System.out.println("开始任务");
+                for (int i = 0; i < 1000000; i++) {
+                    Thread.yield();
+                }
+                System.out.println("无异常执行");
+            } catch (final Exception e) {
+                System.out.println("停止异常");
+                Thread.currentThread().interrupt();
+            }
+            System.out.println("完成");
+        });
+        try {
+            future.get(1L, TimeUnit.MICROSECONDS);
+        } catch (InterruptedException e) {
+            future.cancel(true);
+            Thread.currentThread().interrupt();
+            System.out.println("执行中断");
+        } catch (TimeoutException e) {
+            System.out.println("执行超时");
+        } catch (ExecutionException e) {
+            throw new AssertionError();
         }
         ExampleThreadExecutor.destroy();
     }

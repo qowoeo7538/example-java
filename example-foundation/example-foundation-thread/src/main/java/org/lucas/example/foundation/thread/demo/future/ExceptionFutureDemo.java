@@ -29,7 +29,7 @@ public class ExceptionFutureDemo {
         ExampleThreadExecutor.submit(() -> {
             future.completeExceptionally(new RuntimeException("exception"));
         });
-        System.out.println(future.exceptionally(t -> t.toString()).get());
+        System.out.println(future.exceptionally(Throwable::toString).get());
     }
 
     @Test
