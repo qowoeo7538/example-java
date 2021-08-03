@@ -75,24 +75,6 @@ class ThreadDemo {
         ThreadTestUtils.complete(work);
     }
 
-    @Test
-    void demoDaemonThread() {
-        Thread thread = new Thread(() -> {
-            while (true) {
-                System.out.println("= =!");
-            }
-        });
-
-        // 打开和关闭这个设置观察JVM进程是否终止
-        thread.setDaemon(true);
-        thread.start();
-
-        //输出线程是否为守护线程
-        System.out.println(thread.getName() + " is daemon? " + thread.isDaemon());
-        System.out.println(Thread.currentThread().getName() + " is daemon? " + Thread.currentThread().isDaemon());
-
-        System.out.println("main is over");
-    }
 
     @Test
     void demoInterrupt1() {
