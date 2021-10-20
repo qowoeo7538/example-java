@@ -1,11 +1,13 @@
 package org.lucas.example.foundation.thread.demo.lock;
 
 import org.junit.jupiter.api.Test;
+import org.lucas.example.common.pojo.dto.ValueDTO;
 import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
 import org.lucas.example.foundation.thread.demo.lock.support.cas.CasThread;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 import java.util.concurrent.atomic.AtomicStampedReference;
 
 /**
@@ -112,5 +114,18 @@ class CasDemo {
         t1.join();
 
         System.out.println("main is over");
+    }
+
+    /**
+     * 原子性修改对象属性值,变量需要保证可见性
+     */
+    @Test
+    void demoFieldUpdater() {
+        AtomicReferenceFieldUpdater<ValueDTO, String> updater = AtomicReferenceFieldUpdater.newUpdater(ValueDTO.class, String.class, "name");
+        ValueDTO value = new ValueDTO();
+        System.out.println(updater.get(value));
+        while (!updater.compareAndSet(value, value.name, "test")) {
+            System.out.println(updater.get(value));
+        }
     }
 }

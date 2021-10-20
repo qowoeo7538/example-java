@@ -1,10 +1,10 @@
-package org.lucas.example.foundation.thread.demo.lock.support.cas;
+package org.lucas.example.common.pojo.dto;
 
 /**
  * @Author: shaw
  * @Date: 2019/5/17 15:13
  */
-public class Value {
+public class ValueDTO {
 
     /**
      * 保证该值在每次使用的时候都进行检查.
