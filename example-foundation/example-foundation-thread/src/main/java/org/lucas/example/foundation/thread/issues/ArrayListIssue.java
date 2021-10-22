@@ -6,10 +6,10 @@ import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArrayListKata {
+class ArrayListIssue {
 
     @Test
-    public void concurrent() {
+    void concurrent() {
         // 初始化一个list，放入5个元素
         final List<Integer> list = new ArrayList<>();
 

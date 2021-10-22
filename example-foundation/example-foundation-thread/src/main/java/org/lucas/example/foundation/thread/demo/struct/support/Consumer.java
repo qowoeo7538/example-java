@@ -30,6 +30,7 @@ public class Consumer implements Runnable {
                 if (null != data) {
                     System.out.println("拿到数据：" + data);
                     System.out.println("正在消费数据：" + data);
+                    // 高并发CAS锁竞争
                     Thread.sleep(random.nextInt(DEFAULT_RANGE_FOR_SLEEP));
                 } else {
                     // 超过2s还没数据，认为所有生产线程都已经退出，自动退出消费线程。
