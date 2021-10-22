@@ -23,4 +23,29 @@ class GetDemo {
         System.out.println(value);
     }
 
+    /**
+     * 获取静态字段
+     */
+    @Test
+    void demoStaticFieldGetInt() throws NoSuchFieldException {
+        ValueDTO.staticValue = 11L;
+
+        // 获取静态属性
+        long offset = THE_UNSAFE.staticFieldOffset(ValueDTO.class.getDeclaredField("staticValue"));
+        long value = THE_UNSAFE.getLong(ValueDTO.class, offset);
+        System.out.println(value);
+    }
+
+    @Test
+    void demoGetIntVolatile() throws NoSuchFieldException {
+        final ValueDTO value = new ValueDTO();
+        value.volatileValue = 11;
+
+        // 获取 volatileValue 属性的内存偏移地址
+        long offset = THE_UNSAFE.objectFieldOffset(ValueDTO.class.getDeclaredField("volatileValue"));
+
+        // 获取volatile age的值
+        System.out.println("value:" + THE_UNSAFE.getIntVolatile(value, offset));
+    }
+
 }

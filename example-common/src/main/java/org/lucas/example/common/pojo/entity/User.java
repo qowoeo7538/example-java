@@ -5,6 +5,7 @@ import org.lucas.example.common.annotation.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 @Table(value = "user")
 public class User extends BaseEntity {

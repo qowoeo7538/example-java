@@ -7,7 +7,6 @@ import java.util.concurrent.TimeUnit;
 
 public class Player implements DelayedEntity {
 
-
     private int id;
 
     private String name;
