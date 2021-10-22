@@ -17,6 +17,8 @@ class CasDemo {
         final ValueDTO valueDTO = new ValueDTO();
         valueDTO.value = 11;
 
+        // 返回给定的非静态属性在它的类的存储分配中的位置(偏移地址)。不要在这个偏移量上执行任何类型的算术运算，它只是一个被传递给不安全的堆内存访问器的cookie。
+        // 注意：这个方法仅仅针对非静态属性，使用在静态属性上会抛异常。
         long offset = THE_UNSAFE.objectFieldOffset(ValueDTO.class.getDeclaredField("value"));
 
         //验证CAS方法
@@ -34,7 +36,8 @@ class CasDemo {
         long[] local = new long[]{3, 4, 5, 6};
         arrayValue.values = local;
 
-        // 1. 获取 values 字段偏移地址
+        // 返回给定的非静态属性在它的类的存储分配中的位置(偏移地址)。不要在这个偏移量上执行任何类型的算术运算，它只是一个被传递给不安全的堆内存访问器的cookie。
+        // 注意：这个方法仅仅针对非静态属性，使用在静态属性上会抛异常。
         long valueOffset = THE_UNSAFE.objectFieldOffset(ArrayValueDTO.class.getDeclaredField("values"));
 
         // 2. 设置数组

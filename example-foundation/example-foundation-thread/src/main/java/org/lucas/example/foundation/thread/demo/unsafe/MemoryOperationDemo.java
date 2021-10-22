@@ -35,11 +35,17 @@ class MemoryOperationDemo {
     void demoMemorySet() {
         long address = 0;
         try {
-            // 1. 分配8字节内存，并返回基地址
+            // 分配一块新的本地内存，通过bytes指定内存块的大小(单位是byte)，返回新开辟的内存的地址。
+            // 如果内存块的内容不被初始化，那么它们一般会变成内存垃圾。
+            // 生成的本机指针永远不会为零，并将对所有值类型进行对齐。
+            // 可以通过freeMemory方法释放内存块，或者通过reallocateMemory方法调整内存块大小。
+            // bytes值为负数或者过大会抛出IllegalArgumentException异常，如果系统拒绝分配内存会抛出OutOfMemoryError异常。
             address = THE_UNSAFE.allocateMemory(8L);
             System.out.println("首地址:" + address);
 
-            // 2. 初始化内存
+            // 将给定内存块中的所有字节设置为固定值(通常是0)。内存块的地址由对象引用o和偏移地址共同决定，如果对象引用o为null，offset就是绝对地址。
+            // 第三个参数就是内存块的大小，如果使用allocateMemory进行内存开辟的话，这里的值应该和allocateMemory的参数一致。
+            // value就是设置的固定值，一般为0(这里可以参考netty的DirectByteBuffer)。一般而言，o为null，
             THE_UNSAFE.setMemory(address, 8L, (byte) 0);
             System.out.println("设置内存地址的值:" + THE_UNSAFE.getByte(address));
 
@@ -63,6 +69,16 @@ class MemoryOperationDemo {
                 THE_UNSAFE.freeMemory(address);
             }
         }
+
+    }
+
+    /**
+     * 通过指定的内存地址address重新调整本地内存块的大小，调整后的内存块大小通过bytes指定(单位为byte)。
+     * 可以通过freeMemory方法释放内存块，或者通过reallocateMemory方法调整内存块大小。
+     * bytes值为负数或者过大会抛出IllegalArgumentException异常，如果系统拒绝分配内存会抛出OutOfMemoryError异常。
+     */
+    @Test
+    void demoReallocateMemory() {
 
     }
 
