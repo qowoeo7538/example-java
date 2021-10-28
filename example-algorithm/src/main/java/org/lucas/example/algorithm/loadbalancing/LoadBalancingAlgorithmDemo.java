@@ -1,14 +1,14 @@
 package org.lucas.example.algorithm.loadbalancing;
 
 import org.junit.jupiter.api.Test;
-import org.lucas.example.algorithm.loadbalancing.support.ExtendLoadBalancing;
 import org.lucas.example.algorithm.loadbalancing.support.LoadBalancingAlgorithm;
 import org.lucas.example.algorithm.loadbalancing.support.Node;
+import org.lucas.example.algorithm.loadbalancing.support.RecyclePeriodExtendLoadBalancing;
 
 class LoadBalancingAlgorithmDemo {
 
     @Test
-    void demoExtendLoadBalancing() {
+    void demoRecyclePeriodExtendLoadBalancing() {
         Node[] nodes = new Node[10];
         for (int i = 0, length = nodes.length; i < length; i++) {
             Node node = new Node();
@@ -17,7 +17,7 @@ class LoadBalancingAlgorithmDemo {
             nodes[i] = node;
         }
 
-        LoadBalancingAlgorithm loadBalancing = new ExtendLoadBalancing(nodes);
+        LoadBalancingAlgorithm loadBalancing = new RecyclePeriodExtendLoadBalancing(nodes);
 
         for (int i = 0, length = 100; i < length; i++) {
             System.out.println(loadBalancing.select());
