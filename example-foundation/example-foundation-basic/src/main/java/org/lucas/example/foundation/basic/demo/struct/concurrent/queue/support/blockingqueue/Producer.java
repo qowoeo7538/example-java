@@ -1,4 +1,4 @@
-package org.lucas.example.foundation.thread.demo.struct.support;
+package org.lucas.example.foundation.basic.demo.struct.concurrent.queue.support.blockingqueue;
 
 import org.lucas.example.foundation.core.util.DataProducerHelper;
 

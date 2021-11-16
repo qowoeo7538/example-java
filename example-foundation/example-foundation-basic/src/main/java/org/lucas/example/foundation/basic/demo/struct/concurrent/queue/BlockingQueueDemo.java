@@ -1,9 +1,14 @@
 package org.lucas.example.foundation.basic.demo.struct.concurrent.queue;
 
 import org.junit.jupiter.api.Test;
+import org.lucas.example.foundation.basic.demo.struct.concurrent.queue.support.blockingqueue.Consumer;
+import org.lucas.example.foundation.basic.demo.struct.concurrent.queue.support.blockingqueue.Producer;
+import org.lucas.example.foundation.core.task.ExampleThreadExecutor;
 
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -25,6 +30,37 @@ import java.util.concurrent.TimeUnit;
  * drainTo 取出queue中指定个数（或全部）的元素放入list中,并移除，当队列为空时不抛出异常
  */
 public class BlockingQueueDemo {
+
+    /**
+     * 生产者产出数据的速度大于消费者消费的速度，并且生产出来的数据累积到一定程度，
+     * 那么生产者必须暂停等待（阻塞生产者线程），以便等待消费者线程把累积的数据处理完毕，反之亦然
+     */
+    @Test
+    public void demo() {
+        // 声明一个容量为10的缓存队列
+        BlockingQueue<String> queue = new LinkedBlockingQueue<>(10);
+        Producer producer1 = new Producer(queue);
+        Producer producer2 = new Producer(queue);
+        Producer producer3 = new Producer(queue);
+        Consumer consumer = new Consumer(queue);
+        ExampleThreadExecutor.execute(producer1);
+        ExampleThreadExecutor.execute(producer2);
+        ExampleThreadExecutor.execute(producer3);
+        ExampleThreadExecutor.execute(consumer);
+        try {
+            // 执行10s
+            Thread.sleep(10 * 1000);
+            producer1.stop();
+            producer2.stop();
+            producer3.stop();
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            Thread.currentThread().interrupt();
+        } finally {
+            ExampleThreadExecutor.destroy();
+        }
+    }
 
     @Test
     public void demoAdd() {
