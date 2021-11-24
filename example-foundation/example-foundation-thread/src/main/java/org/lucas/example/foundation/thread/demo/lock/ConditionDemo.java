@@ -4,8 +4,27 @@ import org.junit.jupiter.api.Test;
 import org.lucas.example.foundation.core.util.ThreadTestUtils;
 import org.lucas.example.foundation.thread.demo.lock.support.condition.ConditionLock1;
 import org.lucas.example.foundation.thread.demo.lock.support.condition.ConditionLock2;
+import org.lucas.example.foundation.thread.demo.lock.support.condition.Runner;
+
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
 
 class ConditionDemo {
+
+    @Test
+    void demoAQS() {
+        ReentrantLock rl = new ReentrantLock();
+        Condition condition = rl.newCondition();
+        Thread t1 = new Runner(rl, condition);
+        Thread t2 = new Runner(rl, condition);
+        Thread t3 = new Runner(rl, condition);
+
+        t1.start();
+        t2.start();
+        t3.start();
+
+        ThreadTestUtils.complete(t1, t2, t3);
+    }
 
     @Test
     void demoCondition1() {

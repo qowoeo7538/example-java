@@ -14,12 +14,46 @@ import java.util.concurrent.locks.ReentrantLock;
 class ReentrantLockDemo {
 
     @Test
-    void demoReentrantLock() {
+    void demo() {
         final ReentrantLock lock = new ReentrantLock();
         for (int i = 0; i < 10; i++) {
             ExampleThreadExecutor.execute(new ReentrantLockThread(lock));
         }
         ExampleThreadExecutor.destroy();
+    }
+
+    /**
+     * 支持可重入
+     */
+    @Test
+    void demoReentrantLock() {
+        System.out.println("ReentrantLock:重入锁对比");
+        ReentrantLock rl = new ReentrantLock();
+        rl.lock();
+        System.out.println("get ReentrantLock lock1");
+        rl.lock();
+        System.out.println("get ReentrantLock lock2");
+        rl.unlock();
+    }
+
+    @Test
+    void demoAQS() throws InterruptedException {
+        ReentrantLock rl = new ReentrantLock();
+        System.out.println(Thread.currentThread().getName() + " start rl.lock");
+        rl.lock();
+        rl.lock();
+
+        Thread th = new Thread(() -> {
+            System.out.println(Thread.currentThread().getName() + " start rl.lock");
+            System.out.println("start re lock2");
+            rl.lock();
+        });
+
+        th.start();
+        th.join();
+        rl.unlock();
+        System.out.println(Thread.currentThread().getName() + " start rl.unlock");
+        System.out.println("main is over");
     }
 
     /**
